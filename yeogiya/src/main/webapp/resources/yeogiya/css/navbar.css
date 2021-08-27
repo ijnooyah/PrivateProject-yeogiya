@@ -28,12 +28,12 @@
 }
 
 .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
-	font-size: 10px;
+	font-size: 0.9rem;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     padding-left: 20px;
     padding-right: 20px;
-    font-weight: 500;
+    font-weight: 600;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -48,9 +48,9 @@
 .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu {
     border: none;
     background: #fff;
-    -webkit-box-shadow: 0px 10px 34px -20px rgb(0 0 0 / 41%);
-    -moz-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
-    box-shadow: 0px 10px 34px -20px rgb(0 0 0 / 41%);
+    -webkit-box-shadow: 10px 6px 34px -20px rgb(0 0 0 / 28%);
+    -moz-box-shadow: 010px 6px 34px -20px rgb(0 0 0 / 28%);
+    box-shadow: 10px 6px 34px -20px rgb(0 0 0 / 28%);
     border-radius: 4px;
 }
 @media (min-width: 992px)
@@ -133,4 +133,28 @@
 .dropdown-menu-right {
 	left: auto !important;
     right: 0 !important;
+	}
+	.img_cover {
+		width:2.2rem; 
+		height:2.2rem; 
+		overflow:hidden;
+	}
+	
+	.profile_img {
+		width:2.2rem; 
+		height:2.2rem; 
+		object-fit:cover;
+		border: 1.5px solid #fff;
+	}
+	
+	.dropdown_svg {
+   		margin-right: 10px;
+   		padding-top: 0.3rem;
+	}
+	
+	.navbar .navbar-divider {
+	    width: 0;
+	    border-right: 1px solid #fff;
+	    height: calc(4.375rem - 2rem);
+	    margin: auto 1rem;
 	}

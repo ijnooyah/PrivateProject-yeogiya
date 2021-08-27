@@ -3,9 +3,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<title>Header</title>
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 	
     <!-- font awsome-->
@@ -27,10 +24,9 @@
    	<style>
    	* {
 		font-family: 'Noto Sans KR', sans-serif;
-		font-weight: 300;
+		font-weight: 400;
 		/* 굵기 100, 300, 400, 500, 700 */
-		font-size: 16px;
-		color: #212529;
+		color: #2e415d;
 		margin: 0;
 	}
 	
@@ -62,7 +58,68 @@
 		background:#F2C6C2;
 	}
 	
-	.badge{
+	.gray_color {
+		color:#b0b6ce;
+	}
+	
+	.green_color {
+		color:#5F7362;
+	}
+	
+	.green_background {
+		background:#5F7362;
+	}
+	
+	.font-weight-300 {
+		font-weight:300 !important;
+	}
+	
+	.font-weight-400 {
+		font-weight:400 !important;
+	}
+	
+	.font-weight-500 {
+		font-weight:500 !important;
+	}
+	
+	.font-weight-600 {
+		font-weight:600 !important;
+	}
+	
+	.font-weight-700 {
+		font-weight:700 !important;
+	}
+	
+/* 	버튼 커스텀 */
+	.btn_pink{
+       color: #fff !important; 
+       background-color:#F2C6C2 !important;
+       border: 1px solid #F2C6C2 !important;
+    }
+    
+    .btn_outline_pink{
+        color: #F2C6C2 !important;
+        background-color: #ffffff !important;
+        border: 1px solid #F2C6C2 !important;
+    }
+    
+    .btn_pink:hover, .btn_outline_pink:hover{
+        color: #ffffff !important; 
+        background-color:#3339A6  !important;
+        border: 1px solid #3339A6  !important;
+    }
+    
+    .form-control:focus {
+	    border-color: #F2C6C2;
+	    outline: 0;
+	    box-shadow: 0 0 0 0.2rem rgb(242 198 194 / 35%);
+    }
+    .btn.focus, .btn:focus {
+	    outline: 0;
+	    box-shadow: 0 0 0 0.2rem rgb(51 57 166 / 25%);
+	}
+	
+	.alert_badge {
 		font-size: 8px;
 	    font-weight: 500;
 	    height: 15px;
@@ -72,52 +129,21 @@
 	    transform: scale(.8);
 	    transform-origin: top right;
 	    right: .25rem;
-	    margin-top: -.25rem;
-	}
-	.green_color {
-		color:#5F7362;
+/* 	    margin-top: -.25rem; */
 	}
 	
-	.green_background {
-		background:#5F7362;
-	}
-	
-	.img_cover {
-		width:2.2rem; 
-		height:2.2rem; 
-		overflow:hidden;
-	}
-	
-	.profile_img {
-		width:2.2rem; 
-		height:2.2rem; 
-		object-fit:cover;
-		border: 1.5px solid #fff;
-	}
-	
-	.dropdown_svg {
-	    top: 8;
-   		margin-right: 10px;
-	}
-	
-	.navbar .navbar-divider {
-	    width: 0;
-	    border-right: 1px solid #fff;
-	    height: calc(4.375rem - 2rem);
-	    margin: auto 1rem;
-	}
    	</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container-fluid">
+	    <div class="container">
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"> </button>
 	      
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav">
-	        	<li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
+	        	<li class="nav-item active"><a href="#" class="nav-link">메인</a></li>
 	        	<li class="nav-item dropdown dropdown_category">
-	              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Page</a>
+	              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">지역</a>
 	              <div class="dropdown-menu" aria-labelledby="dropdown04">
 	              	<a class="dropdown-item" href="#">Page 1</a>
 	                <a class="dropdown-item" href="#">Page 2</a>
@@ -125,7 +151,7 @@
 	                <a class="dropdown-item" href="#">Page 4</a>
 	             </div>
            		 </li>
-	          	 <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+	          	 <li class="nav-item"><a href="#" class="nav-link">고객센터</a></li>
 	        </ul>
 	         <ul class="nav navbar-nav ml-auto">
 				<li class="nav-item dropdown">
@@ -134,7 +160,7 @@
 							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#fff" class="bi bi-bell" viewBox="0 0 16 16" >
 							  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
 							</svg>
-						<span id="newAlertCnt" class="badge badge-pill">3</span>
+						<span id="newAlertCnt" class="badge badge-pill alert_badge">3</span>
 						</a>
 					    <div class="dropdown-menu dropdown-menu-right">
 						    <a class="dropdown-item" href="#" style="display:none">
@@ -151,7 +177,7 @@
 							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#fff" class="bi bi-envelope" viewBox="0 0 16 16">
  								<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
 							</svg>
-						<span id="newMsgCnt" class="badge badge-pill">3</span>
+						<span id="newMsgCnt" class="badge badge-pill alert_badge">3</span>
 						</a>
 					    <div class="dropdown-menu dropdown-menu-right">
 						    <a class="dropdown-item" href="#" style="display:none">
@@ -180,7 +206,7 @@
 				</li>
 				
 				<!-- 로그인 안했을 때 -->
-				<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
+<!-- 				<li class="nav-item"><a class="nav-link" href="#">로그인</a></li> -->
 			</ul>
 	      </div>
 	    </div>

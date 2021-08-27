@@ -2,11 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <style>
 	.footer{
 		background-color: #ededed;
-	    margin-top:100px;
 	    font-size:12px;
 	}
 </style>

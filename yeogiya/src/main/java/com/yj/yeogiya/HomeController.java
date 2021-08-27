@@ -25,7 +25,13 @@ public class HomeController {
 	public String home(Model model) {
 		model.addAttribute("rootPath", rootPath );
 		
-		return "home";
+		return "board/board_list";
+	}
+	
+	@RequestMapping(value = "/report", method = RequestMethod.GET)
+	public String report(Model model) {
+		
+		return "customer/report";
 	}
 	
 }
