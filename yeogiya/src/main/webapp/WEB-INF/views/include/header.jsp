@@ -18,18 +18,80 @@
    	
    	<!-- sweet alert -->
   	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-   
+   	
+	<!--summernote -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+   	
+   	<!-- my css -->
    	<!-- navbar -->
-   	<link rel="stylesheet" href="${contextPath}/resources/yeogiya/css/navbar.css">
+   	<link rel="stylesheet" href="${contextPath}/resources/css/navbar.css">
+   	
+   	<!-- 카카오 지도 -->
+   	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8902730ec3b20695d83c6d6757b1881a&libraries=services,clusterer,drawing"></script>
    	<style>
+   	
+	/* font */
    	* {
 		font-family: 'Noto Sans KR', sans-serif;
-		font-weight: 400;
+/* 		font-weight: 400; */
 		/* 굵기 100, 300, 400, 500, 700 */
-		color: #2e415d;
+/* 		color: #2e415d; */
 		margin: 0;
 	}
 	
+	@font-face {
+	    font-family: 'GmarketSans-bold';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'GmarketSans-normal';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'GmarketSans-light';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	
+	/*root */
+	:root {
+		--orange:#BF522A;
+		--blue:#3339A6;
+		--pink:#F2C6C2;
+		--gray:#b0b6ce;
+		--green:#5F7362;
+	}
+	
+	.container{
+    	max-width: 900px !important;
+	}
+	
+	@media (min-width: 768px)
+	.d-md-flex {
+	    display: -webkit-box!important;
+	    display: -ms-flexbox!important;
+	    display: flex!important;
+	}
+	
+/* 	카드 컨테이너 */
+	.container-fluid.card_container {
+		background:#f2f2f3;
+		padding:2rem 5rem !important;
+	}
+	
+	.card_container .card {
+    	margin-left: 1.3rem !important;
+   	    border-radius: .3rem !important;
+    	border:none !important;
+    	padding:0 !important;
+	}
+
+	/* 색깔 */
 	.white_color {
 		color:#fff;
 	}
@@ -109,34 +171,39 @@
         border: 1px solid #3339A6  !important;
     }
     
-    .form-control:focus {
-	    border-color: #F2C6C2;
-	    outline: 0;
-	    box-shadow: 0 0 0 0.2rem rgb(242 198 194 / 35%);
-    }
     .btn.focus, .btn:focus {
 	    outline: 0;
 	    box-shadow: 0 0 0 0.2rem rgb(51 57 166 / 25%);
 	}
-	
-	.alert_badge {
-		font-size: 8px;
-	    font-weight: 500;
-	    height: 15px;
-	    background: #3339A6;
-	    color: #fff;
-	    position: absolute;
-	    transform: scale(.8);
-	    transform-origin: top right;
-	    right: .25rem;
-/* 	    margin-top: -.25rem; */
+    
+/*     입력폼 커스텀 */
+    .form-control:focus {
+/* 	    border-color: #F2C6C2; */
+/* 	    outline: 0; */
+/* 	    box-shadow: 0 0 0 0.2rem rgb(242 198 194 / 35%); */
+		    /* border: none; */
+    border: 1px solid #ced4da;
+    /* background-color: var(--pink); */
+    outline: unset;
+    box-shadow: unset;
+    }
+
+	/* 	푸터 */
+	.footer{
+		background-color: #333333;
+	    font-size:12px;
+	    color:#fff;
 	}
 	
+	/* 	p태그 마진 리셋 */
+	p {
+	   	margin-bottom: 0;
+	}
    	</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
+	    <div class="container-fluid">
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"> </button>
 	      
 	      <div class="collapse navbar-collapse" id="ftco-nav">
@@ -192,8 +259,8 @@
 				<li class="nav-item dropdown ml-md-auto">
 					<div class="dropdown">
 						<a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-						<span class="mr-2 d-none d-lg-inline white_color small">윤지</span>
-							<img class="rounded-circle profile_img" src="${contextPath}/resources/yeogiya/temp/profile.jpg"/>
+						<span class="mr-2 d-none d-lg-inline white_color">윤지</span>
+							<img class="rounded-circle profile_img" src="${contextPath}/resources/temp/profile.jpg"/>
 						</a>
 					    <div class="dropdown-menu dropdown-menu-right">
 					      <a class="dropdown-item" href="#">마이페이지</a>
@@ -211,25 +278,5 @@
 	      </div>
 	    </div>
 	  </nav>  
-	  
-   	<!-- Bootstrap core JS-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-	<script>
-	(function($) {
-		$('nav .dropdown_category').hover(function(){
-			var $this = $(this);
-			$(this).addClass('show');
-			$(this).find('> a').attr('aria-expanded', true);
-			$(this).find('.dropdown-menu').addClass('show');
-		}, function(){
-			$(this).removeClass('show');
-			$(this).find('> a').attr('aria-expanded', false);
-			$(this).find('.dropdown-menu').removeClass('show');
-		});
-	})(jQuery);
-	</script>
-	
 </body>
 </html>

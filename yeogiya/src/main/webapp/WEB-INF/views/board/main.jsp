@@ -10,7 +10,7 @@
 	<title>main</title>
 	
 	<!-- pagination -->
-	<link rel="stylesheet" href="${contextPath}/resources/yeogiya/css/main_pagination.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/main_pagination.css">
 	<style>
 	</style>
 </head>

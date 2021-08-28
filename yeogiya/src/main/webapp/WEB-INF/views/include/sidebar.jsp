@@ -8,15 +8,13 @@
    	<style>
 	#sidebar {
 	    min-width: 15rem;
-/* 	    max-width: 270px; */
 	    background: #fff;
 	    -webkit-transition: all .3s;
 	    -o-transition: all .3s;
 	    transition: all .3s;
 	    position: relative;
 	    z-index: 0;
-	    /* border-right: 1px solid rgba(0,0,0,.05); */
-	    border-radius: .15rem;
+        border-radius: .3rem;
 	}
 	
 	.list-unstyled {
@@ -25,68 +23,66 @@
 	}
 	
 	#sidebar ul li a {
-    display: block;
-    color: #2e415d;
-/*     border-bottom: 1px solid #3339A6; */
+	    display: block;
+	    color: #2e415d;
 	}
 
-.collapse:not(.show) {
-    display: none;
-}
-#sidebar ul li>ul li {
-    font-size: 13px;
-}
-#sidebar ul li>ul li a {
-    border-bottom: 1px solid transparent;
-    color: #b0b6ce;
-    font-weight: 500;
-    font-size: 11px;
-    padding: 0.5rem 0 0.5rem 4rem;
-}
+	.collapse:not(.show) {
+	    display: none;
+	}
+	#sidebar ul li>ul li {
+	    font-size: 13px;
+	}
+	
+	#sidebar ul li>ul li a {
+	    border-bottom: 1px solid transparent;
+	    color: #b0b6ce;
+	    font-family: 'GmarketSans-normal';
+	    font-size: 11px;
+	    padding: 0.5rem 0 0.5rem 4rem;
+	}
 
-#sidebar ul li>ul li a:focus, 
-#sidebar ul li>ul li a:hover, 
-#sidebar ul li>ul li a:active, 
-#sidebar ul li>ul li a.active {
-/* 	background:#F2C6C2; */
-	color:#F2C6C2;
-}
+	#sidebar ul li>ul li a:focus, 
+	#sidebar ul li>ul li a:hover, 
+	#sidebar ul li>ul li a:active, 
+	#sidebar ul li>ul li a.active {
+		color:#F2C6C2;
+	}
 
-a[data-toggle=collapse] {
-    position: relative;
-}
+	a[data-toggle=collapse] {
+	    position: relative;
+	}
 
-ul li a:hover, ul li a:focus {
-	text-decoration: none!important;
-    outline: none!important;
-}
+	ul li a:hover, ul li a:focus {
+		text-decoration: none!important;
+	    outline: none!important;
+	}
 
-#sidebar a.district {
-	color: #2e415d;
-/*     font-size: 1.15rem; */
-    font-weight: 600;
-}
+	#sidebar a.district {
+		color: #2e415d;
+	    font-family: 'GmarketSans-bold';
+	}
 
-#sidebar a.district:hover, nav a.district:focus  {
-   text-decoration: none!important;
-   outline: none!important;
-}
+	#sidebar a.district:hover, nav a.district:focus  {
+	   text-decoration: none!important;
+	   outline: none!important;
+	}
 
-#sidebar a.city {
-   font-size: 13px;
-   font-weight: 600;
-   padding: 1rem 0 0 2rem;
-}
+	#sidebar a.city {
+	   font-size: 13px;
+	   font-family: 'GmarketSans-bold';
+	   padding: 1rem 0 0 2rem;
+	}
 
-#sidebar a.city:hover {
-	color:#F2C6C2;
-}
+	#sidebar a.city:hover {
+		color:#F2C6C2;
+	}
 
-.category_title {
-    text-align: center;
-    padding: 1rem;
-    border-bottom: 1px solid #f2c6c269;
-}
+	.category_title {
+	    text-align: center;
+	    padding: 1rem;
+	    border-bottom: 1px solid #f2c6c269;
+	}
    	</style>
 </head>
 <body>
