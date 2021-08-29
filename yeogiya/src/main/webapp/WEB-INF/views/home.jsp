@@ -7,7 +7,7 @@
 	<title>Home</title>
 </head>
 <body>
-<%@ include file="include/header.jsp" %>
+<%@ include file="common/header.jsp" %>
 <h1>
 	Hello world!  
 </h1>
@@ -55,6 +55,6 @@ ${testVo.content}
 <br>
 <br>
 <br>
-<%@ include file="include/footer.jsp" %>
+<%@ include file="common/footer.jsp" %>
 </body>
 </html>

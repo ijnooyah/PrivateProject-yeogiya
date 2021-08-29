@@ -62,7 +62,7 @@ select#district, select#city, select#sort {
 #placesList .info .gray {color:#8a8a8a;}
 #placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
 #placesList .info .tel {color: var(--blue);}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(${contextPath}/resources/temp/pin.png) no-repeat center; background-size: 35px;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(${contextPath}/resources/image/pin.png) no-repeat center; background-size: 35px;}
 /* #placesList .item .marker_1 {background-position: 0 -10px;} */
 /* #placesList .item .marker_2 {background-position: 0 -56px;} */
 /* #placesList .item .marker_3 {background-position: 0 -102px} */
@@ -90,7 +90,7 @@ select#district, select#city, select#sort {
 }
 
 /* 장소 검색버튼 */
-#searchPlace {
+#btnSearch {
    	border-radius: .2rem;
     padding: 1px 4px;
     border: 1px solid var(--pink);
@@ -113,11 +113,11 @@ select#district, select#city, select#sort {
 	</style>
 </head>
 <body>
-	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../common/header.jsp" %>
 	<div class="container mb-5">
 		<div class="row">
 			<div class="col-md-12">
-				<form action="test" method="get">
+				<form action="insertRun" method="post">
 					<div class="col-md-12">
 						<div class="row">
 							<div class="form-row">
@@ -136,27 +136,57 @@ select#district, select#city, select#sort {
 							</div>
 						</div>
 						
-						<!--지도 -->
-						<div class="map_wrap">
-						    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-						
-						    <div id="menu_wrap" class="bg_white">
-						        <div class="option">
-						            <div>
-						                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15" autocomplete="off"> 
-						                  <input type="button" id="searchPlace" onclick="searchPlaces()" value="검색">
-						            </div>
+						<!-- 카카오맵 모달 -->
+						 <!-- Button to Open the Modal -->
+						  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
+						    Open modal
+						  </button>
+
+						  <!-- The Modal -->
+						  <div class="modal fade" id="modalMap">
+						    <div class="modal-dialog modal-lg">
+						      <div class="modal-content">
+						      
+						        <!-- Modal Header -->
+						        <div class="modal-header">
+						          <h4 class="modal-title">Modal Heading</h4>
+						          <button type="button" class="close" data-dismiss="modal">&times;</button>
 						        </div>
-						        <hr>
-						        <ul id="placesList"></ul>
-						        <div id="pagination"></div>
+						        
+						        <!-- Modal body -->
+						        <div class="modal-body">
+						       		 <!--지도 -->
+									<div class="map_wrap">
+									    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+									
+									    <div id="menu_wrap" class="bg_white">
+									        <div class="option">
+									            <div>
+									                    키워드 : <input type="text" value="울산 동구" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
+									                  <input type="button" id="btnSearch" onclick="searchPlaces()" value="검색">
+									            </div>
+									        </div>
+									        <hr>
+									        <ul id="placesList"></ul>
+									        <div id="pagination"></div>
+									    </div>
+				   						<input type="hidden" id="placeName" name="placeName" value="">
+										<input type="hidden" id="latitude" name="latitude" value="">
+										<input type="hidden" id="longitude" name="longitude" value="">
+										<div id="result"></div>
+									</div>
+									<!-- 지도끝 -->
+						        </div>
+						        
+						        <!-- Modal footer -->
+						        <div class="modal-footer">
+						          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						        </div>
+						        
+						      </div>
 						    </div>
-	   						<input type="hidden" id="placeName" name="placeName" value="">
-							<input type="hidden" id="latitude" name="latitude" value="">
-							<input type="hidden" id="longitude" name="longitude" value="">
-							<div id="result"></div>
-						</div>
-						<!-- 지도끝 -->
+						  </div>						
+						
 						
 						<!-- 내용 -->
 						<div class="form-group">
@@ -174,8 +204,10 @@ select#district, select#city, select#sort {
 		</div>
 	</div>
 	<!-- container 끝 -->
-	<%@ include file="../include/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 	<script>
+	var isShown = false; 
+	
 	$(document).ready(function() {
 	    $('#summernote').summernote({
 	        width : 1110,   
@@ -184,41 +216,42 @@ select#district, select#city, select#sort {
 	        disableResizeEditor: true,
 	        spellCheck:false,
 	        toolbar: [
-				    ['fontname', ['fontname']],
-				    ['fontsize', ['fontsize']],
-				    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-				    ['color', ['forecolor','color']],
-				    ['para', ['ul', 'ol', 'paragraph']],
-				    ['height', ['height']],
-				    ['insert',['picture','link','video']],
-				  	],
-					fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-					fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-	        
-	
-	        // 이미지 업로드 이벤트가 발생했을 때 콜백함수 수행
-	        callbacks : {
-	            onImageUpload : function(files){
-	                // files : 업로드된 이미지가 배열로 저장되어 있음
-	                // editor == this : 이미지가 업로드된 섬머노트 에디터
-	                sendFile(files[0], this);
-	            }
-	        }
+			    ['fontname', ['fontname']],
+			    ['fontsize', ['fontsize']],
+			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+			    ['color', ['forecolor','color']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['height', ['height']],
+			    ['insert',['picture','link','video']],
+			  	],
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 	    });
 	    
 	    $('#summernote').summernote('fontSize', 13);
+	    
+	    // 카카오맵 잘림 현상 해결
+	    $('#modalMap').on('shown.bs.modal', function (e) {
+	    	$("#keyword").focus();
+	    	map.relayout();
+	    	
+	    	if(!isShown) {
+	    		searchPlaces();
+	    		isShown = true;
+	    	}
+	    	
+	    	// 키워드 검색창에서 엔터 칠 경우 키워드 검색하기
+	    	$("#keyword").on("keydown", function(e) {
+	    		if (e.keyCode == 13) {
+	    	        e.preventDefault();
+	    	        searchPlaces();
+	    	    }
+	    	});
+		});
 	});
-	
 	
 	//카카오 지도
 	
-	// 키워드 검색창에서 엔터 칠 경우 페이지 이동 방지
-	$("#keyword").on("keydown", () => {
-	    if (event.keyCode === 13) {
-	        event.preventDefault();
-	    }
-	})
-
 	// 마커를 담을 배열입니다
 	var markers = [];
 	
@@ -230,7 +263,7 @@ select#district, select#city, select#sort {
 	
 	// 지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
+
 	// 장소 검색 객체를 생성합니다
 	var ps = new kakao.maps.services.Places();  
 	
@@ -303,28 +336,32 @@ select#district, select#city, select#sort {
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 	        // LatLngBounds 객체에 좌표를 추가합니다
 	        bounds.extend(placePosition);
-	
+
+	            
 	        // 마커와 검색결과 항목에 mouseover 했을때
 	        // 해당 장소에 인포윈도우에 장소명을 표시합니다
 	        // mouseout 했을 때는 인포윈도우를 닫습니다
 	        (function(marker, place) {
 	        	var title = place.place_name;
 	        	
+	        	// 마커에 클릭 이벤트 설정
 	            kakao.maps.event.addListener(marker, 'click', (function(placePosition) {
-// 	                displayInfowindow(marker, title);
+	                
 	                return function() {
-	                    // 좌표정보를 파싱하기 위해 hidden input에 값 지정
-	                    $("#latitude").val(placePosition.La);
-	                    $("#longitude").val(placePosition.Ma);
-	                    $("#placeName").val(title);
-	                    // #result 영역에 좌표정보 출력
-	                    var resultDiv = document.getElementById('result');
-	                    resultDiv.innerHTML = '선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다';
-	                    console.log('선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다');
 	                    console.log(place.address_name);
 	                }
+	                
 	            })(placePosition));
 				
+	            // 검색결과에 클릭 이벤트 설정
+	            itemEl.onclick =  (function(placePosition) {
+
+	            	return function() {
+	                    console.log(place.address_name);
+	                }
+	            	
+	            })(placePosition);
+	        	
 	            kakao.maps.event.addListener(marker, 'mouseover', function() {
 	                displayInfowindow(marker, title);
 	            });
@@ -332,25 +369,11 @@ select#district, select#city, select#sort {
 	            itemEl.onmouseover =  function () {
 	                displayInfowindow(marker, title);
 	            };
+	            
 	            kakao.maps.event.addListener(marker, 'mouseout', function() {
 	                infowindow.close();
 	            });
-	
-	            itemEl.onclick =  (function(placePosition) {
-// 	                displayInfowindow(marker, title);
-	                return function() {
-	                    // 좌표정보를 파싱하기 위해 hidden input에 값 지정
-	                    $("#latitude").val(placePosition.La);
-	                    $("#longitude").val(placePosition.Ma);
-	                    $("#placeName").val(title);
-	                    // #result 영역에 좌표정보 출력
-	                    var resultDiv = document.getElementById('result');
-	                    resultDiv.innerHTML = '선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다';
-	                    console.log('선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다');
-	                    console.log(place.address_name);
-	                }
-	            })(placePosition);
-	
+	            
 	            itemEl.onmouseout =  function () {
 	                infowindow.close();
 	            };
@@ -394,7 +417,7 @@ select#district, select#city, select#sort {
 	
 	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 	function addMarker(position, idx, title) {
-	    var imageSrc = '${contextPath}/resources/temp/marker.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+	    var imageSrc = '${contextPath}/resources/image/marker.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
 	        imageSize = new kakao.maps.Size(29, 42),  // 마커 이미지의 크기
 	        imgOptions =  {
 // 	            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
@@ -467,6 +490,8 @@ select#district, select#city, select#sort {
 	        el.removeChild (el.lastChild);
 	    }
 	}	
+	 
+
 	</script>
 </body>
 </html>

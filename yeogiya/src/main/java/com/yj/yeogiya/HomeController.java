@@ -30,6 +30,14 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) {
+		model.addAttribute("rootPath", rootPath );
+		
+		return "home";
+	}
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("rootPath", rootPath );
@@ -37,22 +45,21 @@ public class HomeController {
 		return "board/boardList";
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		model.addAttribute("rootPath", rootPath );
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public String insert(Model model) {
 		
 		return "board/boardInsert";
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test(TestVo testVo) {
+	@RequestMapping(value = "/insertRun", method = RequestMethod.GET)
+	public String insertRun(TestVo testVo) {
 		testDao.insert(testVo);
 		
-		return "home";
+		return "redirect:/board/boardList";
 	}
 	
-	@RequestMapping(value = "/test/{test_no}", method = RequestMethod.GET)
-	public String report(Model model, @PathVariable("test_no") int test_no) {
+	@RequestMapping(value = "/content/{test_no}", method = RequestMethod.GET)
+	public String content(Model model, @PathVariable("test_no") int test_no) {
 		TestVo testVo = testDao.select(test_no);
 		System.out.println(testVo);
 		model.addAttribute("testVo", testVo);

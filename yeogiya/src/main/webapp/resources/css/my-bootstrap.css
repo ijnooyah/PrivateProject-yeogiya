@@ -1,27 +1,28 @@
-.btn_pink{
-       color: #fff !important; 
-       background-color:#F2C6C2 !important;
-       border: 1px solid #F2C6C2 !important;
-    }
-    
-    .btn_outline_pink{
-        color: #F2C6C2 !important;
-        background-color: #ffffff !important;
-        border: 1px solid #F2C6C2 !important;
-    }
-    
-    .btn_pink:hover, .btn_outline_pink:hover{
-        color: #ffffff !important; 
-        background-color:#3339A6  !important;
-        border: 1px solid #3339A6  !important;
-    }
-    
-    .form-control:focus {
-	    border-color: #F2C6C2;
-	    outline: 0;
-	    box-shadow: 0 0 0 0.2rem rgb(242 198 194 / 35%);
-    }
-    .btn.focus, .btn:focus {
-	    outline: 0;
-	    box-shadow: 0 0 0 0.2rem rgb(51 57 166 / 25%);
-	}
+.btn_pink {
+	color: #fff !important;
+	background-color: #F2C6C2 !important;
+	border: 1px solid #F2C6C2 !important;
+}
+
+.btn_outline_pink {
+	color: #F2C6C2 !important;
+	background-color: #ffffff !important;
+	border: 1px solid #F2C6C2 !important;
+}
+
+.btn_pink:hover, .btn_outline_pink:hover {
+	color: #ffffff !important;
+	background-color: #3339A6 !important;
+	border: 1px solid #3339A6 !important;
+}
+
+.form-control:focus {
+	border-color: #F2C6C2;
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgb(242 198 194/ 35%);
+}
+
+.btn.focus, .btn:focus {
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgb(51 57 166/ 25%);
+}

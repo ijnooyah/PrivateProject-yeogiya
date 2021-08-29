@@ -103,7 +103,7 @@ a.nav-link:hover {
 }
 
 /* 글쓰기버튼 */
-a.btn.btn_outline_pink.ml-auto {
+a.btn.btn-pink-outline.ml-auto {
 transform: scale(.7);
 font-weight:500;
 }
@@ -129,9 +129,9 @@ font-weight:500;
 	</style>
 </head>
 <body>
-	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../common/header.jsp" %>
 	<div class="container-fluid card_container d-md-flex">
-		<%@ include file="../include/sidebar.jsp" %>
+		<%@ include file="../common/sidebar.jsp" %>
 		<div class="container card">
 			<div class="district_bar" >
 				<a class="white_color active" href="">전체</a> <span class="white_color"> |</span> 
@@ -151,7 +151,7 @@ font-weight:500;
 			  <li class="nav-item">
 			    <a class="nav-link" data-toggle="tab" href="#menu2">병원</a>
 			  </li>
-			  <a href="" class="btn btn_outline_pink ml-auto">글쓰기</a>
+			  <a href="" class="btn btn-pink-outline ml-auto">글쓰기</a>
 			</ul>
 	
 			<!-- Tab panes -->
@@ -318,6 +318,6 @@ font-weight:500;
 		</div>
 	</div>
 	<!-- container-fluid 끝 -->
-	<%@ include file="../include/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
