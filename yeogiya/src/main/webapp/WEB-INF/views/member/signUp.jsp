@@ -37,6 +37,7 @@
                 <label for="user_id" class="font-weight-500 col-form-label">아이디</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" autocomplete="off" required>
                	<div class='invalid-feedback id-feedback'>이미 사용중이거나 탈퇴한 아이디입니다.</div>
+               	<div class='valid-feedback id-feedback'>멋진 아이디네요!</div>
             </div>
 	    	<!-- 비밀번호  -->
     		<div class="form-group">

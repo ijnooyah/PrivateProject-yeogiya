@@ -103,9 +103,21 @@ public class HomeController {
 		return "member/idFind";
 	}
 	
+	@RequestMapping(value = "pwFind", method = RequestMethod.GET)
+	public String pwFind(Model model) {
+		
+		return "member/pwFind";
+	}
+	
 	@RequestMapping(value = "idFindResult", method = RequestMethod.GET)
 	public String idFindResult(Model model) {
 		
 		return "member/idFindResult";
+	}
+	
+	@RequestMapping(value = "pwFindResult", method = RequestMethod.GET)
+	public String pwFindResult(Model model) {
+		
+		return "member/pwFindResult";
 	}
 }

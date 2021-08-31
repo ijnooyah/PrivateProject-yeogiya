@@ -34,8 +34,8 @@
 					<input type="email" id="user_email" name="user_email" class="form-control" required>
 				</div>
 			</div>
-			<div class="form-group text-center">
-				<button type="submit" class="btn btn-pink">다음</button>
+			<div class="mt-4 row">
+				<button type="button" class="btn btn-pink btn-block">다음</button>
 			</div>
 		</form>
 	</div>
