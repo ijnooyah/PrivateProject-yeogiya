@@ -24,7 +24,30 @@
 /*     text-decoration: none; */
 	}
 	
+/* 라디오버튼 */
+/* This is the default state */
+.custom-radio .custom-control-label::before {
+}
 
+/* This is the checked state */
+.custom-radio .custom-control-input:checked~.custom-control-label::before,
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+    background-color: var(--pink);  /* green */
+    /* this bg image SVG iYs just a white circle, you can replace it with any valid SVG code */
+/*     background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E);  */
+    border-radius: 50%;
+}
+
+/* active state i.e. displayed while the mouse is being pressed down */
+.custom-radio .custom-control-input:active ~ .custom-control-label::before {
+/*     color: #fff; */
+    background-color: var(--pink); /* red */
+}
+    
+/* the shadow; displayed while the element is in focus */
+.custom-radio .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgba(242, 198, 194, 0.3); /* pink, 25% opacity */
+}
 	</style>
 </head>
 <body>

@@ -17,7 +17,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
    	
    	<!-- my css -->
-   	<link rel="stylesheet" href="${contextPath}/resources/css/my-bootstrap.css">
+   	<link rel="stylesheet" href="${contextPath}/resources/css/style.css">
    	<link rel="stylesheet" href="${contextPath}/resources/css/navbar.css">
    	
    	<!-- sweet alert -->

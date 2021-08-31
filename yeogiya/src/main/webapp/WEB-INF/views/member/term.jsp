@@ -302,21 +302,21 @@
 			  </div>
 			</div>
     		<div class="custom-control custom-checkbox my-2">
-			  <input class="custom-control-input" type="checkbox" value="" name="geoCheck" id="geoCheck">
+			  <input class="custom-control-input" type="checkbox" name="geoCheck" id="geoCheck">
 			  <label class="custom-control-label" for="geoCheck">
 			    이용약관에 동의합니다. (필수)
 			  </label>
 			</div>
 			<div class="custom-control custom-checkbox my-2">
-			  <input class="custom-control-input" type="checkbox" value="" name="ageCheck" id="ageCheck">
+			  <input class="custom-control-input" type="checkbox" name="ageCheck" id="ageCheck">
 			  <label class="custom-control-label" for="ageCheck">
 			     만 14세 이상입니다.(필수)
 			  </label>
 			</div>
 			<div class="custom-control custom-checkbox my-2">
-			  <input class="custom-control-input" type="checkbox" value="" id="allCheck">
+			  <input class="custom-control-input" type="checkbox" id="allCheck">
 			  <label class="custom-control-label" for="allCheck">
-			   <strong>전체약관에 동의합니다.</strong>
+			   <b>전체약관에 동의합니다.</b>
 			  </label>
 			</div>
 			<div class="form-row">

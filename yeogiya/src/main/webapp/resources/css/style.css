@@ -256,3 +256,37 @@
 p {
 	margin-bottom: 0;
 }
+
+.find_wrap, .relogin_find_wrap {
+	padding: 24px 0 40px;
+	text-align: center;
+}
+
+.find_wrap li, .relogin_find_wrap li {
+	position: relative;
+	display: inline-block;
+}
+
+.find_wrap .en_find_text, .find_wrap .find_text, .relogin_find_wrap .en_find_text,
+	.relogin_find_wrap .find_text {
+	display: inline-block;
+	font-size: 13px;
+	line-height: 18px;
+	text-decoration: none;
+	color: var(--gray);
+}
+
+.find_wrap li+li, .relogin_find_wrap li+li {
+	padding-left: 28px;
+}
+
+.find_wrap li+li::before, .relogin_find_wrap li+li::before {
+	content: '';
+	position: absolute;
+	top: 7px;
+	left: 12px;
+	width: 1px;
+	height: 13px;
+	border-radius: .5px;
+	background-color: var(--gray);
+}
