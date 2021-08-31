@@ -21,120 +21,95 @@
 	
 	a:hover {
     color: var(--pink);
-/*     text-decoration: none; */
 	}
 	
-/* 라디오버튼 */
-/* This is the default state */
-.custom-radio .custom-control-label::before {
-}
-
-/* This is the checked state */
-.custom-radio .custom-control-input:checked~.custom-control-label::before,
-.custom-radio .custom-control-input:checked~.custom-control-label::after {
-    background-color: var(--pink);  /* green */
-    /* this bg image SVG iYs just a white circle, you can replace it with any valid SVG code */
-/*     background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E);  */
-    border-radius: 50%;
-}
-
-/* active state i.e. displayed while the mouse is being pressed down */
-.custom-radio .custom-control-input:active ~ .custom-control-label::before {
-/*     color: #fff; */
-    background-color: var(--pink); /* red */
-}
-    
-/* the shadow; displayed while the element is in focus */
-.custom-radio .custom-control-input:focus ~ .custom-control-label::before {
-    box-shadow: 0 0 0 0.2rem rgba(242, 198, 194, 0.3); /* pink, 25% opacity */
-}
 	</style>
 </head>
 <body>
-	<%@ include file="../common/header.jsp" %>
 	<div class="container">
-		<div class="h4 mt-5 text-center pink_color font-gmarket-bold">회원가입</div>
-			<form name="joinRun" method="post">
-			<div class="form-group mx-auto mt-5 p-0">
-				<!-- 아이디  -->
-				<div class="form-group">
-	                <label for="user_id" class="font-weight-500 col-form-label">아이디</label>
-	                <input type="text" class="form-control" id="user_id" name="user_id" autocomplete="off" required>
-	               	<div class='invalid-feedback id-feedback'>이미 사용중이거나 탈퇴한 아이디입니다.</div>
-	            </div>
-		    	<!-- 비밀번호  -->
-	    		<div class="form-group">
-	                <label for="user_pw" class="font-weight-500 col-form-label">비밀번호</label>
-	                <input type="password" class="form-control" id="user_pw" name="user_pw" autocomplete="off" required>
-	            	<div class='invalid-feedback pw-feedback'>8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
-	            </div>
-		    	<!-- 비밀번호 확인 -->
-	    		<div class="form-group">
-	                <label for="confirmPassword" class="font-weight-500 col-form-label">비밀번호 재확인</label>
-	                <input type="password" class="form-control" id="confirmPassword" name="user_pw" autocomplete="off" required>
-	                <div class='invalid-feedback cpw-feedback'>비밀번호가 일치하지 않습니다.</div>
-	            </div>
-	            <!-- 이름 -->
-	    		<div class="form-group">
-	                <label for="user_name" class="font-weight-500 col-form-label">이름</label>
-	                <input type="text" class="form-control" id="user_name" name="user_name" autocomplete="off" required>
-	                <div class='invalid-feedback name-feedback'>한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)</div>
-	            </div>
-	            <!-- 닉네임 -->
-	    		<div class="form-group">
-	                <label for="user_nick" class="font-weight-500 col-form-label">닉네임</label>
-	                <input type="text" class="form-control" id="user_nick" name="user_nick" autocomplete="off" required>
-	                <div class='invalid-feedback name-feedback'>이미 사용중인 닉네임 입니다.</div>
-	            </div>
-		    	<!-- 휴대전화 -->
-				<div class="form-group">
-					<label for="user_phone" class="font-weight-500 col-form-label">휴대전화</label>
-	                <input type="text" class="form-control" id="user_phone" name="user_phone" 
-	                	placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" autocomplete="off" required>
-	                <div class='invalid-feedback phone-feedback'>유효하지 않은 번호 입니다.</div>
-		    	</div>
-		    	<!-- 이메일 -->
-				<div class="form-group">
-					<label for="user_email" class="font-weight-500 col-form-label">이메일</label>
-				    <div class="form-row mb-2">
-				    	<div class="col-sm-8">
-						    <input type="email" class="form-control" name="user_email" id="user_email" placeholder="yeogiya@naver.com"
-						     pattern="/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i"  autocomplete="off" required>
-				    	</div>
-				    	<div class="col-sm-4">
-					    	<button type="button" class="btn btn_pink w-100">인증번호 받기</button>
-				    	</div>
-				   		<div class='invalid-feedback email-feedback'>유효하지 않은 이메일 입니다.</div>
-				    </div>
-	                <input type="text" class="form-control" id="confirmEmail" placeholder="인증번호 입력" required>
-			      	<div class='invalid-feedback'>인증번호가 일치하지 않습니다.</div>
-			      	<div class="valid-feedback">인증번호 확인완료</div>
-		    	</div>
-				<!-- 성별 -->
-				<div class="form-group">
-	              <label for="user_gender" class="font-weight-500 col-form-label">성별</label>
-				  <br>
-	               <div class="custom-control custom-radio custom-control-inline">
-						  <input class="custom-control-input" type="radio" name="user_gender" id="male" value="M">
-						  <label class="custom-control-label" for="male">남자</label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-						  <input class="custom-control-input" type="radio" name="user_gender" id="female" value="F">
-						  <label class="custom-control-label" for="female">여자</label>
-					</div>
-	            </div>
-	            <!-- 가입완료 버튼 -->
-				<button type="button" class="btn btn_pink btn-lg btn-block mt-4">가입하기</button>
-			</div>
-		</form>
-		<div class="text-center mb-5" >
-			<span class="font-weight-400">
-			    이미 아이디가 있으신가요?
-			</span>
-			<a href="${contextPath}/member/login" class="font-weight-700 pink_color">로그인</a>
+		<div class="text-center mb-5">
+			<a href="" class="logo">여기야!</a>
 		</div>
+		<form name="joinRun" method="post">
+		<div class="form-group mx-auto">
+			<!-- 아이디  -->
+			<div class="form-group">
+                <label for="user_id" class="font-weight-500 col-form-label">아이디</label>
+                <input type="text" class="form-control" id="user_id" name="user_id" autocomplete="off" required>
+               	<div class='invalid-feedback id-feedback'>이미 사용중이거나 탈퇴한 아이디입니다.</div>
+            </div>
+	    	<!-- 비밀번호  -->
+    		<div class="form-group">
+                <label for="user_pw" class="font-weight-500 col-form-label">비밀번호</label>
+                <input type="password" class="form-control" id="user_pw" name="user_pw" autocomplete="off" required>
+            	<div class='invalid-feedback pw-feedback'>8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
+            </div>
+	    	<!-- 비밀번호 확인 -->
+    		<div class="form-group">
+                <label for="confirmPassword" class="font-weight-500 col-form-label">비밀번호 재확인</label>
+                <input type="password" class="form-control" id="confirmPassword" name="user_pw" autocomplete="off" required>
+                <div class='invalid-feedback cpw-feedback'>비밀번호가 일치하지 않습니다.</div>
+            </div>
+            <!-- 이름 -->
+    		<div class="form-group">
+                <label for="user_name" class="font-weight-500 col-form-label">이름</label>
+                <input type="text" class="form-control" id="user_name" name="user_name" autocomplete="off" required>
+                <div class='invalid-feedback name-feedback'>한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)</div>
+            </div>
+            <!-- 닉네임 -->
+    		<div class="form-group">
+                <label for="user_nick" class="font-weight-500 col-form-label">닉네임</label>
+                <input type="text" class="form-control" id="user_nick" name="user_nick" autocomplete="off" required>
+                <div class='invalid-feedback name-feedback'>이미 사용중인 닉네임 입니다.</div>
+            </div>
+	    	<!-- 휴대전화 -->
+			<div class="form-group">
+				<label for="user_phone" class="font-weight-500 col-form-label">휴대전화</label>
+                <input type="text" class="form-control" id="user_phone" name="user_phone" 
+                	placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" autocomplete="off" required>
+                <div class='invalid-feedback phone-feedback'>유효하지 않은 번호 입니다.</div>
+	    	</div>
+	    	<!-- 이메일 -->
+			<div class="form-group">
+				<label for="user_email" class="font-weight-500 col-form-label">이메일</label>
+			    <div class="form-row mb-2">
+			    	<div class="col-sm-8">
+					    <input type="email" class="form-control" name="user_email" id="user_email" placeholder="yeogiya@naver.com"
+					     pattern="/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i"  autocomplete="off" required>
+			    	</div>
+			    	<div class="col-sm-4">
+				    	<button type="button" class="btn btn-pink w-100">인증번호 받기</button>
+			    	</div>
+			   		<div class='invalid-feedback email-feedback'>유효하지 않은 이메일 입니다.</div>
+			    </div>
+                <input type="text" class="form-control" id="confirmEmail" placeholder="인증번호 입력" required>
+		      	<div class='invalid-feedback'>인증번호가 일치하지 않습니다.</div>
+		      	<div class="valid-feedback">인증번호 확인완료</div>
+	    	</div>
+			<!-- 성별 -->
+			<div class="form-group">
+              <label for="user_gender" class="font-weight-500 col-form-label">성별</label>
+			  <br>
+               <div class="custom-control custom-radio custom-control-inline">
+					  <input class="custom-control-input" type="radio" name="user_gender" id="male" value="M">
+					  <label class="custom-control-label" for="male">남자</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+					  <input class="custom-control-input" type="radio" name="user_gender" id="female" value="F">
+					  <label class="custom-control-label" for="female">여자</label>
+				</div>
+            </div>
+            <!-- 가입완료 버튼 -->
+			<button type="button" class="btn btn-pink btn-lg btn-block mt-4">가입하기</button>
+		</div>
+	</form>
+	<div class="text-center mb-5" >
+		<span class="font-weight-400">
+		    이미 아이디가 있으신가요?
+		</span>
+		<a href="${contextPath}/member/login" class="font-weight-700 pink-color">로그인</a>
 	</div>
-	<%@ include file="../common/footer.jsp" %>
+	</div>
 	<%@ include file="../cdn/js.jsp" %>
 	<script>
 

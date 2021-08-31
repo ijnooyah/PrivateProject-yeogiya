@@ -4,9 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="../cdn/css.jsp" %>
+<title>boardView</title>
+	<style>
+	</style>
 </head>
 <body>
-
+<%@ include file="../common/header.jsp" %>
+	<div class="container">
+	</div>
+<%@ include file="../common/footer.jsp" %>
+<%@ include file="../cdn/js.jsp" %>
+	<script>
+	</script>
 </body>
 </html>

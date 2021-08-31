@@ -7,11 +7,12 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<title>main</title>
-	
-	<!-- pagination -->
-	<link rel="stylesheet" href="${contextPath}/resources/css/boardListPagination.css">
+	<%@ include file="../cdn/css.jsp" %>
+	<title>boardList</title>
 	<style>
+	.container {
+	max-width: 900px !important;
+	}
 /* 	테이블 */
 	#list_table {
 	    background: #fff;
@@ -126,18 +127,24 @@ font-weight:500;
     font-weight:600;
     text-decoration: none;
 }
+
+/* pagination */
+li.page-item {
+    transform: scale(.8);
+    font-size: 14px;
+}
 	</style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
-	<div class="container-fluid card_container d-md-flex">
+	<div class="container-fluid card_wrap d-md-flex">
 		<%@ include file="../common/sidebar.jsp" %>
 		<div class="container card">
 			<div class="district_bar" >
-				<a class="white_color active" href="">전체</a> <span class="white_color"> |</span> 
-				<a class="white_color" href="">남구</a> <span class="white_color"> |</span> 
-				<a class="white_color" href="">동구</a> <span class="white_color"> |</span> 
-				<a class="white_color" href="">북구</a>
+				<a class="white-color active" href="">전체</a> <span class="white-color"> |</span> 
+				<a class="white-color" href="">남구</a> <span class="white-color"> |</span> 
+				<a class="white-color" href="">동구</a> <span class="white-color"> |</span> 
+				<a class="white-color" href="">북구</a>
 			</div>
 		
 			<!-- Nav tabs -->
@@ -181,7 +188,7 @@ font-weight:500;
 										<tr>
 											<%-- 게시글 번호 --%>
 											<td style="width:5%;">
-												<div class='badge p-1 font-weight-normal orange_background white_color'>
+												<div class='badge p-1 font-weight-normal orange_background white-color'>
 												공지
 												</div>
 											</td>
@@ -208,7 +215,7 @@ font-weight:500;
 												<a href="" class="font-weight-300">
 													제목
 												</a>
-												<span class="orange_color mx-1">[3]</span>
+												<span class="orange-color mx-1">[3]</span>
 												<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#bf522a85" class="bi bi-card-image" viewBox="0 0 16 16">
 											  		<path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 											  		<path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z"/>
@@ -260,7 +267,7 @@ font-weight:500;
 												<a href="" class="font-weight-300">
 													제목
 												</a>
-												<span class="orange_color mx-1">[3]</span>
+												<span class="orange-color mx-1">[3]</span>
 												<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#bf522a85" class="bi bi-card-image" viewBox="0 0 16 16">
 											  		<path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 											  		<path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z"/>
@@ -317,7 +324,7 @@ font-weight:500;
 			<!-- Tab panes end -->
 		</div>
 	</div>
-	<!-- container-fluid 끝 -->
 	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../cdn/js.jsp" %>
 </body>
 </html>

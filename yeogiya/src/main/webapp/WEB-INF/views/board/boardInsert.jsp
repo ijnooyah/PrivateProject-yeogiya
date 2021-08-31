@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<%@ include file="../cdn/css.jsp" %>
-	<title>insert</title>
+	<title>boardInsert</title>
 	
 	<style>
 	.container {
@@ -194,8 +194,8 @@ select#district, select#city, select#sort {
 		
 
 						<div class="text-center">
-							<button type="submit" class="btn btn-sm btn_pink">등록</button>
-							<a class="btn btn-sm btn_outline_pink">취소</a>
+							<button type="submit" class="btn btn-sm btn-pink">등록</button>
+							<a class="btn btn-sm btn-pink-outline">취소</a>
 						</div>
 					</div>
 				</form>

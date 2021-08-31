@@ -28,19 +28,19 @@
 	body {
 		overflow:hidden;
 	}
-    .btn_pink{
+    .btn-pink{
        color: #fff !important; 
        background-color:#F2C6C2 !important;
        border: 1px solid #F2C6C2 !important;
     }
     
-    .btn_outline_pink{
+    .btn-pink-outline{
         color: #F2C6C2 !important;
         background-color: #ffffff !important;
         border: 1px solid #F2C6C2 !important;
     }
     
-    .btn_pink:hover, .btn_outline_pink:hover{
+    .btn-pink:hover, .btn-pink-outline:hover{
         color: #ffffff !important; 
         background-color:#3339A6  !important;
         border: 1px solid #3339A6  !important;
@@ -89,8 +89,8 @@
 	         </div>
 	         <div class="form-group row">
 		         	<div class="col-sm-12" style="text-align:center; margin-top:30px;">
-		             <button type="submit" class="btn btn_pink">건의</button>
-		              <button class="btn btn_outline_pink" onclick="self.close();">취소</button>
+		             <button type="submit" class="btn btn-pink">건의</button>
+		              <button class="btn btn-pink-outline" onclick="self.close();">취소</button>
 		          </div>
 	         </div>
      	</form>

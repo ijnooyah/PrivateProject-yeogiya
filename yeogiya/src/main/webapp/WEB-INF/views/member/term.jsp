@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<%@ include file="../cdn/css.jsp" %>
-	<title>join</title>
+	<title>term</title>
 	<style>
 	div.terms{
 		height: 200px;
@@ -22,14 +22,16 @@
 	</style>
 </head>
 <body>
-	<%@ include file="../common/header.jsp" %>
-		<div class="form-group mx-auto  mt-5">
-		<!-- 서비스 이용약관 -->
-			<div class="h4 mb-3">여기야! 서비스 이용약관
-			</div>
-			<div class="card">
-			  <div class="card-body terms">
-				<pre>
+	<div class="text-center mb-5">
+		<a href="" class="logo">여기야!</a>
+	</div>
+	<div class="form-group mx-auto">
+	<!-- 서비스 이용약관 -->
+		<div class="h4 mb-3">여기야! 서비스 이용약관
+		</div>
+		<div class="card">
+		  <div class="card-body terms">
+			<pre>
 제1장 총 칙
 제1조 (목적)
 이 약관(이하 “약관”이라 합니다)은 ㈜윤지(이하 “회사”라 합니다)와 이용 고객(이하 “회원”이라 합니다)간에 회사가 제공하는 서비스(이하 “서비스”라 합니다)를 이용함에 있어 회원과 회사간의 권리, 의무 및 책임사항, 이용조건 및 절차 등 기본적인 사항을 규정함을 목적으로 합니다.
@@ -321,14 +323,13 @@
 			</div>
 			<div class="form-row">
 				<div class="col">
-					<button class="btn btn_pink btn-lg mt-4 w-100" type="button" id="joinCountinue" onclick="doJoin();">확인</button>
+					<button class="btn btn-pink btn-lg mt-4 w-100" type="button" id="joinCountinue" onclick="doJoin();">확인</button>
 				</div>
 				<div class="col">
-					<button class="btn btn_outline_pink btn-lg mt-4 w-100" type="button" id="joinCancel" onclick="history.back();">취소</button>
+					<button class="btn btn-pink-outline btn-lg mt-4 w-100" type="button" id="joinCancel" onclick="history.back();">취소</button>
 				</div>
 			</div>
 		</div>
-	<%@ include file="../common/footer.jsp" %>
 	<%@ include file="../cdn/js.jsp" %>
 	<script>
 		// 전체 체크 박스
