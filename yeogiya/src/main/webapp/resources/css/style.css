@@ -49,6 +49,7 @@
 	--green: #00987f !important;
 	--pink30: #f3a6c645;
 	--pink50: #f3a6c67a;
+	--darkPink : #E69CBB;
 /* 	--orange: #BF522A !important;  */
 /* 	--blue: #3339A6 !important;  */
 	
@@ -86,7 +87,13 @@
 	border: 1px solid var(--pink) !important;
 }
 
-.btn-pink:hover, .btn-pink-outline:hover {
+.btn-pink:hover {
+	color: var(--white) !important;
+	background-color: var(--darkPink) !important;
+	border: 1px solid var(--darkPink) !important;
+}
+
+.btn-pink-outline:hover {
 	color: var(--white) !important;
 	background-color: var(--pink) !important;
 	border: 1px solid var(--pink) !important;
@@ -94,7 +101,7 @@
 
 .btn.focus, .btn:focus {
 	outline: 0;
-	box-shadow: 0 0 0 0.2rem rgb(51 57 166/ 25%);
+	box-shadow: none;
 }
 
 /*     입력폼 커스텀 */
@@ -238,6 +245,7 @@ a.page-link:hover {
 a.page-link:hover > span {
 	color:var(--white);
 }
+
 
 .find_wrap, .relogin_find_wrap {
 	padding: 24px 0 40px;

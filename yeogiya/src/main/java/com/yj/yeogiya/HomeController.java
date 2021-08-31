@@ -97,4 +97,15 @@ public class HomeController {
 		return "redirect:/board/boardList";
 	}
 	
+	@RequestMapping(value = "idFind", method = RequestMethod.GET)
+	public String idFind(Model model) {
+		
+		return "member/idFind";
+	}
+	
+	@RequestMapping(value = "idFindResult", method = RequestMethod.GET)
+	public String idFindResult(Model model) {
+		
+		return "member/idFindResult";
+	}
 }
