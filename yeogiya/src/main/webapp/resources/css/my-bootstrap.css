@@ -1,3 +1,163 @@
+/* font */
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+	/* 		font-weight: 400; */
+	/* 굵기 100, 300, 400, 500, 700 */
+	/* 		color: #2e415d; */
+	margin: 0;
+}
+
+@font-face {
+	font-family: 'GmarketSans-bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'GmarketSans-normal';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'GmarketSans-light';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*root */
+:root {
+	--orange: #BF522A !important; 
+	--blue: #3339A6 !important; 
+	--pink: #F2C6C2 !important; 
+	--gray: #b0b6ce !important; 
+	--green: #5F7362 !important;
+}
+
+.container {
+	max-width: 900px !important;
+}
+
+@media ( min-width : 768px) .d-md-flex {
+	display
+	:
+	 
+	-webkit-box
+	!important;
+	
+	    
+	display
+	:
+	 
+	-ms-flexbox
+	!important;
+	
+	    
+	display
+	:
+	 
+	flex
+	!important;
+	
+	
+}
+
+/* 	카드 컨테이너 */
+.container-fluid.card_container {
+	background: #f2f2f3;
+	padding: 2rem 5rem !important;
+}
+
+.card_container .card {
+	margin-left: 1.3rem !important;
+	border-radius: .3rem !important;
+	border: none !important;
+	padding: 0 !important;
+}
+
+/* 색깔 */
+.white_color {
+	color: #fff;
+}
+
+.orange_color {
+	color: #BF522A;
+}
+
+.orange_background {
+	background: #BF522A;
+}
+
+.blue_color {
+	color: #3339A6;
+}
+
+.blue_background {
+	background: #3339A6;
+}
+
+.pink_color {
+	color: #F2C6C2;
+}
+
+.pink_background {
+	background: #F2C6C2;
+}
+
+.gray_color {
+	color: #b0b6ce;
+}
+
+.green_color {
+	color: #5F7362;
+}
+
+.green_background {
+	background: #5F7362;
+}
+
+.font-weight-300 {
+	font-weight: 300 !important;
+}
+
+.font-weight-400 {
+	font-weight: 400 !important;
+}
+
+.font-weight-500 {
+	font-weight: 500 !important;
+}
+
+.font-weight-600 {
+	font-weight: 600 !important;
+}
+
+.font-weight-700 {
+	font-weight: 700 !important;
+}
+
+.font-gmarket-normal {
+	font-family: 'GmarketSans-normal';
+}
+
+.font-gmarket-bold {
+	font-family: 'GmarketSans-bold';
+}
+
+.font-gmarket-light {
+	font-family: 'GmarketSans-light';
+}
+
+/* 	버튼 커스텀 */
 .btn_pink {
 	color: #fff !important;
 	background-color: #F2C6C2 !important;
@@ -16,13 +176,83 @@
 	border: 1px solid #3339A6 !important;
 }
 
-.form-control:focus {
-	border-color: #F2C6C2;
-	outline: 0;
-	box-shadow: 0 0 0 0.2rem rgb(242 198 194/ 35%);
-}
-
 .btn.focus, .btn:focus {
 	outline: 0;
 	box-shadow: 0 0 0 0.2rem rgb(51 57 166/ 25%);
+}
+
+/*     입력폼 커스텀 */
+.form-control:focus {
+	/* 	    border-color: #F2C6C2; */
+	/* 	    outline: 0; */
+	/* 	    box-shadow: 0 0 0 0.2rem rgb(242 198 194 / 35%); */
+	/* border: none; */
+	border: 1px solid #ced4da;
+	/* background-color: var(--pink); */
+	outline: unset;
+	box-shadow: unset;
+}
+
+/* 체크박스 */
+/* This is the default state */
+.custom-checkbox .custom-control-label::before {
+}
+
+/* This is the checked state */
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before,
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
+   border-radius: .25rem;
+   background-color: var(--pink);  /* green */
+    /* this bg image SVG is just a white circle, you can replace it with any valid SVG code */
+/*     background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E);  */
+}
+
+/* active state i.e. displayed while the mouse is being pressed down */
+.custom-checkbox .custom-control-input:active ~ .custom-control-label::before {
+/*     color: #fff; */
+    background-color: var(--pink); /* red */
+}
+    
+/* the shadow; displayed while the element is in focus */
+.custom-checkbox .custom-control-input:focus ~ .custom-control-label::before {
+/*     border-radius: .25rem; */
+    border: 1px solid var(--pink);
+    box-shadow: 0 0 0 0.2rem rgba(242, 198, 194, 0.3); /* pink, 25% opacity */
+}
+
+/* 라디오버튼 */
+/* This is the default state */
+.custom-radio .custom-control-label::before {
+}
+
+/* This is the checked state */
+.custom-radio .custom-control-input:checked~.custom-control-label::before,
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+    background-color: var(--pink);  /* green */
+    /* this bg image SVG is just a white circle, you can replace it with any valid SVG code */
+/*     background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E);  */
+    border-radius: 50%;
+}
+
+/* active state i.e. displayed while the mouse is being pressed down */
+.custom-radio .custom-control-input:active ~ .custom-control-label::before {
+/*     color: #fff; */
+    background-color: var(--pink); /* red */
+}
+    
+/* the shadow; displayed while the element is in focus */
+.custom-radio .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgba(242, 198, 194, 0.3); /* pink, 25% opacity */
+}
+
+/* 	푸터 */
+.footer {
+	background-color: #333333;
+	font-size: 12px;
+	color: #fff;
+}
+
+/* 	p태그 마진 리셋 */
+p {
+	margin-bottom: 0;
 }

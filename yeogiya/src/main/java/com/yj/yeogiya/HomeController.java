@@ -38,32 +38,63 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("rootPath", rootPath );
 		
 		return "board/boardList";
 	}
 	
-	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public String insert(Model model) {
 		
 		return "board/boardInsert";
 	}
 	
-	@RequestMapping(value = "/insertRun", method = RequestMethod.GET)
+	@RequestMapping(value = "insertRun", method = RequestMethod.GET)
 	public String insertRun(TestVo testVo) {
 		testDao.insert(testVo);
 		
 		return "redirect:/board/boardList";
 	}
 	
-	@RequestMapping(value = "/content/{test_no}", method = RequestMethod.GET)
+	@RequestMapping(value = "content/{test_no}", method = RequestMethod.GET)
 	public String content(Model model, @PathVariable("test_no") int test_no) {
 		TestVo testVo = testDao.select(test_no);
 		System.out.println(testVo);
 		model.addAttribute("testVo", testVo);
 		return "home";
+	}
+	
+	@RequestMapping(value = "signUp", method = RequestMethod.GET)
+	public String signUp(Model model) {
+		
+		return "member/signUp";
+	}
+	
+	//약관동의
+	@RequestMapping(value = "term", method = RequestMethod.GET)
+	public String term(Model model) {
+		
+		return "member/term";
+	}
+	
+	@RequestMapping(value = "signUpRun", method = RequestMethod.GET)
+	public String signUpRun(Model model) {
+		
+		return "redirect:/member/login";
+	}
+	
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public String login(Model model) {
+		
+		return "member/login";
+	}
+	
+	@RequestMapping(value = "loginRun", method = RequestMethod.GET)
+	public String loginRun(Model model) {
+		
+		return "redirect:/board/boardList";
 	}
 	
 }

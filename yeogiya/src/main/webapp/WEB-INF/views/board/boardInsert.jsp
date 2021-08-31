@@ -7,6 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<%@ include file="../cdn/css.jsp" %>
 	<title>insert</title>
 	
 	<style>
@@ -108,13 +109,11 @@ select#district, select#city, select#sort {
 	outline: none;
 	border: 1.5px solid var(--pink);
 }
-
-	
 	</style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
-	<div class="container mb-5">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<form action="insertRun" method="post">
@@ -203,8 +202,8 @@ select#district, select#city, select#sort {
 			</div>
 		</div>
 	</div>
-	<!-- container 끝 -->
 	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../cdn/js.jsp" %>
 	<script>
 	var isShown = false; 
 	

@@ -10,5 +10,6 @@
 		<package name="com.yj.yeogiya.customer.model.vo"/>
 		<package name="com.yj.yeogiya.member.model.vo"/>
 		<package name="com.yj.yeogiya.manager.model.vo"/>
+		<package name="com.yj.yeogiya.mypage.model.vo"/>
 	</typeAliases>
 </configuration>
