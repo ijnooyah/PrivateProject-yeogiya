@@ -11,11 +11,17 @@
 	<title>boardInsert</title>
 	
 	<style>
-	.container {
-		border: 1px solid #efefef;
-		padding: 19px 27px 15px;
+	@media (min-width: 1200px) {
+	.container, .container-lg, .container-md, .container-sm, .container-xl {
+	    max-width: 1100px !important;
+		}
+	}
+	.card {
+		border: 1px solid var(--lightGray);
+		padding: 1.8rem;
 		box-sizing: border-box;
-		border-radius: 2px;
+		border-radius: 0.13rem;
+		width:845px;
 	}
 	
 /* 셀렉트 박스 */
@@ -33,7 +39,6 @@ select#district, select#city, select#sort {
 }
 
 .note-fontname .note-icon-caret, .note-fontsize .note-icon-caret, .note-para .note-icon-caret, .note-height .note-icon-caret{
-/*  color:red; */
  display:none;
 }
 
@@ -56,21 +61,6 @@ select#district, select#city, select#sort {
 #placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
 #placesList .info .tel {color: var(--green);}
 #placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(${contextPath}/resources/image/pin.png) no-repeat center; background-size: 35px;}
-/* #placesList .item .marker_1 {background-position: 0 -10px;} */
-/* #placesList .item .marker_2 {background-position: 0 -56px;} */
-/* #placesList .item .marker_3 {background-position: 0 -102px} */
-/* #placesList .item .marker_4 {background-position: 0 -148px;} */
-/* #placesList .item .marker_5 {background-position: 0 -194px;} */
-/* #placesList .item .marker_6 {background-position: 0 -240px;} */
-/* #placesList .item .marker_7 {background-position: 0 -286px;} */
-/* #placesList .item .marker_8 {background-position: 0 -332px;} */
-/* #placesList .item .marker_9 {background-position: 0 -378px;} */
-/* #placesList .item .marker_10 {background-position: 0 -423px;} */
-/* #placesList .item .marker_11 {background-position: 0 -470px;} */
-/* #placesList .item .marker_12 {background-position: 0 -516px;} */
-/* #placesList .item .marker_13 {background-position: 0 -562px;} */
-/* #placesList .item .marker_14 {background-position: 0 -608px;} */
-/* #placesList .item .marker_15 {background-position: 0 -654px;} */
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px; font-size: 80%;}
 #pagination .on {
@@ -101,55 +91,55 @@ select#district, select#city, select#sort {
 	outline: none;
 	border: 1.5px solid var(--pink);
 }
+
 	</style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<form action="insertRun" method="post">
-					<div class="col-md-12">
-						<!-- 카카오맵 모달 -->
-						<div class="row mb-2">
-							<span class="h6 cursor-pointer" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
-								<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-								</svg>
-								장소 선택
-								<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-					  			<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-								</svg>
-								<small class="text-muted" id="centerAddr">선택된 장소가 없습니다.</small>
-							</span>
-						</div>
-						<!--셀렉트박스 -->
-						<div class="row mb-2">
-							<select class="form-control mr-1" id="district">
-								<option value="">울산</option>
-							</select>
-							<select class="form-control mr-1" id="city">
-								<option value="">동구</option>
-							</select>
-							<select class="form-control" id="sort">
-								<option value="">맛집</option>
-							</select>
-						</div>
-						<!-- 제목 -->
-						<div class="row mb-2">
-							<input class="form-control" placeholder="제목을 입력해 주세요." autocomplete="off" spellcheck="false"></input>
-						</div>
-						<!-- 내용 -->
-						<div class="row mb-2">
-							<textarea class="form-control" name="" id="summernote" rows="10" style="resize: none;"></textarea>
-						</div>
-						<div class="text-center">
-							<button type="submit" class="btn btn-pink">등록</button>
-							<a class="btn btn-pink-outline">취소</a>
-						</div>
+	<div class="container d-md-flex my-4">
+		<%@ include file="../common/sidebar.jsp" %>
+		<div class="row card ml-auto">
+			<form action="insertRun" method="post">
+				<div class="col-md-12">
+					<!-- 카카오맵 모달 -->
+					<div class="row mb-2">
+						<span class="h6 cursor-pointer" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
+							<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+							</svg>
+							장소 선택
+							<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				  			<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+							</svg>
+							<small class="text-muted">선택된 장소가 없습니다.</small>
+						</span>
 					</div>
-				</form>
-			</div>
+					<!--셀렉트박스 -->
+					<div class="row mb-2">
+						<select class="form-control mr-1" id="district">
+							<option value="">울산</option>
+						</select>
+						<select class="form-control mr-1" id="city">
+							<option value="">동구</option>
+						</select>
+						<select class="form-control" id="sort">
+							<option value="">맛집</option>
+						</select>
+					</div>
+					<!-- 제목 -->
+					<div class="row mb-2">
+						<input class="form-control" placeholder="제목을 입력해 주세요." autocomplete="off" spellcheck="false"></input>
+					</div>
+					<!-- 내용 -->
+					<div class="row mb-2">
+						<textarea class="form-control" name="" id="summernote" rows="10" style="resize: none;"></textarea>
+					</div>
+					<div class="text-center">
+						<button type="submit" class="btn btn-pink">등록</button>
+						<button class="btn btn-pink-outline">취소</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	<!-- The Modal -->
@@ -203,10 +193,9 @@ select#district, select#city, select#sort {
 				        <ul id="placesList"></ul>
 				        <div id="pagination"></div>
 				    </div>
-	 						<input type="hidden" id="placeName" name="placeName" value="">
+	 				<input type="hidden" id="placeName" name="placeName" value="">
 					<input type="hidden" id="latitude" name="latitude" value="">
 					<input type="hidden" id="longitude" name="longitude" value="">
-					<div id="result"></div>
 				</div>
 				<!-- 지도끝 -->
 	        </div>
@@ -354,10 +343,13 @@ select#district, select#city, select#sort {
 	        (function(marker, place) {
 	        	var title = place.place_name;
 	        	
+	        	//장소 표시될 span
+	        	var selectedPlace = document.getElementById('selectedPlace');
 	        	// 마커에 클릭 이벤트 설정
 	            kakao.maps.event.addListener(marker, 'click', (function(placePosition) {
 	                
 	                return function() {
+	                	selectedPlace.innerHTML = '선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다';
 	                    console.log(place.address_name);
 	                }
 	                
@@ -367,6 +359,7 @@ select#district, select#city, select#sort {
 	            itemEl.onclick =  (function(placePosition) {
 
 	            	return function() {
+	            		selectedPlace.innerHTML = '선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다';
 	                    console.log(place.address_name);
 	                }
 	            	

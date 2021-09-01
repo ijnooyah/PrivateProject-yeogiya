@@ -11,6 +11,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
 	
 	<script>
+	//navbar
 	(function($) {
 		$('nav .dropdown-category').hover(function(){
 			var $this = $(this);
@@ -23,4 +24,14 @@
 			$(this).find('.dropdown-menu').removeClass('show');
 		});
 	})(jQuery);
+	
+	//툴팁
+	$('[data-toggle="tooltip"]').tooltip();   
+	
+	//sidebar
+	$(".city").click(function() {
+		var spanArrow = $(this).find(".fa");
+		spanArrow.toggleClass("fa-caret-down");
+		spanArrow.toggleClass("fa-caret-up");
+	});
 	</script>

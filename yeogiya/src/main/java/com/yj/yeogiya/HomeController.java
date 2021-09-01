@@ -44,6 +44,12 @@ public class HomeController {
 		
 		return "board/boardList";
 	}
+	@RequestMapping(value = "list2", method = RequestMethod.GET)
+	public String list2(Model model) {
+		model.addAttribute("rootPath", rootPath );
+		
+		return "board/boardList2";
+	}
 	
 	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public String insert(Model model) {
