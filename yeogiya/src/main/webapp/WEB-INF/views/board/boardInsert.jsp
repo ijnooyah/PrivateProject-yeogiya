@@ -17,19 +17,11 @@
 		box-sizing: border-box;
 		border-radius: 2px;
 	}
+	
 /* 셀렉트 박스 */
 select#district, select#city, select#sort {
 	font-size:80%;
 	width: 150px;
-}
-/* 제목 입력 */
-.titleArea {
-	width: 100%;
-	font-size: 23px;
-	border: none;
-}
-.titleArea:focus {
-	outline: none;
 }
 
 /* 썸머노트 */
@@ -62,7 +54,7 @@ select#district, select#city, select#sort {
 #placesList .item .info{padding:10px 0 10px 55px;}
 #placesList .info .gray {color:#8a8a8a;}
 #placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-#placesList .info .tel {color: var(--blue);}
+#placesList .info .tel {color: var(--green);}
 #placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(${contextPath}/resources/image/pin.png) no-repeat center; background-size: 35px;}
 /* #placesList .item .marker_1 {background-position: 0 -10px;} */
 /* #placesList .item .marker_2 {background-position: 0 -56px;} */
@@ -95,8 +87,8 @@ select#district, select#city, select#sort {
    	border-radius: .2rem;
     padding: 1px 4px;
     border: 1px solid var(--pink);
-    background: var(--pink);
-    color: var(--white);
+    background: var(--white);
+    color: var(--pink);
 }
 
 #keyword {
@@ -118,90 +110,109 @@ select#district, select#city, select#sort {
 			<div class="col-md-12">
 				<form action="insertRun" method="post">
 					<div class="col-md-12">
-						<div class="row">
-							<div class="form-row">
-								<select class="form-control" id="district">
-									<option value="">울산</option>
-								</select>
-								<select class="form-control" id="city">
-									<option value="">동구</option>
-								</select>
-								<select class="form-control" id="sort">
-									<option value="">맛집</option>
-								</select>
-							</div>
-							<div class="col-md-12 py-2">
-								<input class="form-control" placeholder="제목을 입력해 주세요." autocomplete="off" spellcheck="false"></input>
-							</div>
-						</div>
-						
 						<!-- 카카오맵 모달 -->
-						 <!-- Button to Open the Modal -->
-						  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
-						    Open modal
-						  </button>
-
-						  <!-- The Modal -->
-						  <div class="modal fade" id="modalMap">
-						    <div class="modal-dialog modal-lg">
-						      <div class="modal-content">
-						      
-						        <!-- Modal Header -->
-						        <div class="modal-header">
-						          <h4 class="modal-title">Modal Heading</h4>
-						          <button type="button" class="close" data-dismiss="modal">&times;</button>
-						        </div>
-						        
-						        <!-- Modal body -->
-						        <div class="modal-body">
-						       		 <!--지도 -->
-									<div class="map_wrap">
-									    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-									
-									    <div id="menu_wrap" class="bg_white">
-									        <div class="option">
-									            <div>
-									                    키워드 : <input type="text" value="울산 동구" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
-									                  <input type="button" id="btnSearch" onclick="searchPlaces()" value="검색">
-									            </div>
-									        </div>
-									        <hr>
-									        <ul id="placesList"></ul>
-									        <div id="pagination"></div>
-									    </div>
-				   						<input type="hidden" id="placeName" name="placeName" value="">
-										<input type="hidden" id="latitude" name="latitude" value="">
-										<input type="hidden" id="longitude" name="longitude" value="">
-										<div id="result"></div>
-									</div>
-									<!-- 지도끝 -->
-						        </div>
-						        
-						        <!-- Modal footer -->
-						        <div class="modal-footer">
-						          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						        </div>
-						        
-						      </div>
-						    </div>
-						  </div>						
-						
-						
+						<div class="row mb-2">
+							<span class="h6 cursor-pointer" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
+								<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+								</svg>
+								장소 선택
+								<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					  			<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+								</svg>
+								<small class="text-muted" id="centerAddr">선택된 장소가 없습니다.</small>
+							</span>
+						</div>
+						<!--셀렉트박스 -->
+						<div class="row mb-2">
+							<select class="form-control mr-1" id="district">
+								<option value="">울산</option>
+							</select>
+							<select class="form-control mr-1" id="city">
+								<option value="">동구</option>
+							</select>
+							<select class="form-control" id="sort">
+								<option value="">맛집</option>
+							</select>
+						</div>
+						<!-- 제목 -->
+						<div class="row mb-2">
+							<input class="form-control" placeholder="제목을 입력해 주세요." autocomplete="off" spellcheck="false"></input>
+						</div>
 						<!-- 내용 -->
-						<div class="form-group">
+						<div class="row mb-2">
 							<textarea class="form-control" name="" id="summernote" rows="10" style="resize: none;"></textarea>
 						</div>
-		
-
 						<div class="text-center">
-							<button type="submit" class="btn btn-sm btn-pink">등록</button>
-							<a class="btn btn-sm btn-pink-outline">취소</a>
+							<button type="submit" class="btn btn-pink">등록</button>
+							<a class="btn btn-pink-outline">취소</a>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+	<!-- The Modal -->
+	  <div class="modal fade" id="modalMap">
+	    <div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+	      
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <span class="font-weight-500">
+					<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-map" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					  <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98l4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/>
+					</svg>
+					지도에서 장소 선택	
+				</span>	
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        <!-- Modal body -->
+	        <div class="modal-body p-4">
+	        	<div class="row ml-2 mb-2">
+	        		<span class="pt-1 mr-1 text-pink font-size-080 cursor-pointer">
+						<svg width="16" height="16" viewBox="0 0 16 17" class="bi bi-compass" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  <path fill-rule="evenodd" d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+							  <path d="M6.94 7.44l4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
+							</svg>		
+						현재 위치 자동선택 
+					</span>
+				</div>
+				<div class="row mx-3 mb-3 font-size-080">
+					<span class="pt-1 mr-1">선택한 장소
+						<svg width="16" height="16" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+						  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+						</svg>
+					</span>
+					<span id="selectedPlace" class="text-muted pt-1">선택한 장소가 없습니다.</span>
+					<button id="setPlace" class="btn btn-pink btn-sm ml-2 my-auto font-size-075" style="padding:.1rem .3rem;">완료</button>
+				</div>
+	       		 <!--지도 -->
+				<div class="map_wrap">
+				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+				
+				    <div id="menu_wrap" class="bg_white">
+				        <div class="option">
+				            <div>
+				                    키워드 : <input type="text" value="울산 동구" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
+				                  <input type="button" id="btnSearch" onclick="searchPlaces()" value="검색">
+				            </div>
+				        </div>
+				        <hr>
+				        <ul id="placesList"></ul>
+				        <div id="pagination"></div>
+				    </div>
+	 						<input type="hidden" id="placeName" name="placeName" value="">
+					<input type="hidden" id="latitude" name="latitude" value="">
+					<input type="hidden" id="longitude" name="longitude" value="">
+					<div id="result"></div>
+				</div>
+				<!-- 지도끝 -->
+	        </div>
+	      </div>
+	    </div>
+	  </div>						
 	<%@ include file="../common/footer.jsp" %>
 	<%@ include file="../cdn/js.jsp" %>
 	<script>
@@ -223,8 +234,8 @@ select#district, select#city, select#sort {
 			    ['height', ['height']],
 			    ['insert',['picture','link','video']],
 			  	],
-				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+				fontNames: ['Noto Sans KR', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+				fontSizes: ['8','9','10','11','12', '13', '14','16','18','20','22','24','28','30','36','50','72']
 	    });
 	    
 	    $('#summernote').summernote('fontSize', 13);

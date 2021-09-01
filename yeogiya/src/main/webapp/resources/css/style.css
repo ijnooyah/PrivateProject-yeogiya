@@ -43,7 +43,6 @@
 /*root */
 :root {
 	--pink: #f3a6c6 !important; 
-	--gray: #979b9f !important; 
 	--black: #2e2e2e !important;
 	--lightGray: #e1e1e1;
 	--green: #00987f !important;
@@ -55,25 +54,13 @@
 	
 }
 
-/* 	카드 컨테이너 */
-.container-fluid.card_wrap {
-	background: var(--white);
-	padding: 2rem 5rem !important;
-}
-
-.card_wrap .card {
-	margin-left: 1.3rem !important;
-	border-radius: .3rem !important;
-	border: none !important;
-	padding: 0 !important;
-}
-
 /* 색깔 */
-.pink-color{color:var(--pink)}.white-color{color:var(--white)}.gray_color{color:var(--gray)}.lightGray_color{color:var(--lightGray)}.green-color{color:var(--green)}.blue_color{color:#3339a6}.orange-color{color:#bf522a}.pink_background{background:var(--pink)}
-
+.text-pink{color:var(--pink)}.text-black{color:var(--black)}.text-lightGray{color:var(--lightGray)}.text-green{color:var(--green)}
+.bg-pink{background:var(--pink)}
 /* font-weight */
 .font-weight-300{font-weight:300!important}.font-weight-400{font-weight:400!important}.font-weight-500{font-weight:500!important}.font-weight-600{font-weight:600!important}.font-weight-700{font-weight:700!important}
-
+/* font-size */
+.font-size-070{font-size:.7rem!important}.font-size-075{font-size:.75rem!important}.font-size-080{font-size:.8rem!important}.font-size-085{font-size:.85rem!important}.font-size-090{font-size:.9rem}.font-size-095{font-size:.95rem!important}.font-size-105{font-size:1.05rem!important}.font-size-110{font-size:1.1rem!important}.font-size-115{font-size:1.15rem!important}.font-size-120{font-size:1.2rem!important}.font-size-125{font-size:1.25rem!important}.font-size-130{font-size:1.3rem!important}.font-size-135{font-size:1.35rem!important}.font-size-140{font-size:1.4rem!important}.font-size-145{font-size:1.45rem!important}.font-size-150{font-size:1.5rem!important}
 /* 	버튼 커스텀 */
 .btn-pink {
 	color: var(--white) !important;
@@ -175,9 +162,26 @@
 	color: var(--white);
 }
 
+/* 	카드 컨테이너 */
+.container-fluid.card_wrap {
+	background: var(--white);
+	padding: 2rem 5rem !important;
+}
+
+.card_wrap .card {
+	margin-left: 1.3rem !important;
+	border-radius: .3rem !important;
+	border: none !important;
+	padding: 0 !important;
+}
+
 /* 	p태그 마진 리셋 */
 p {
 	margin-bottom: 0;
+}
+
+.cursor-pointer {
+	cursor:pointer;
 }
 
 /* pagination */

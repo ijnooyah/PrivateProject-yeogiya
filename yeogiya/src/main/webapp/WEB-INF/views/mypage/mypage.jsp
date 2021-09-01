@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../cdn/css.jsp" %>
-<title>Insert title here</title>
+<title>mypage</title>
 	<style>
 	</style>
 </head>
