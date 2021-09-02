@@ -24,80 +24,77 @@
 		width:845px;
 	}
 	
-/* 셀렉트 박스 */
-select#district, select#city, select#sort {
-	font-size:80%;
-	width: 150px;
-}
+	/* 셀렉트 박스 */
+	select#district, select#city, select#sort {
+		font-size:80%;
+		width: 150px;
+	}
+	
+	/* 썸머노트 */
+	.note-modal-footer {
+	    height: 50px !important;
+	}
+	.note-editor {
+		width: 100% !important;
+	}
+	
+	.note-fontname .note-icon-caret, .note-fontsize .note-icon-caret, .note-para .note-icon-caret, .note-height .note-icon-caret{
+	 display:none;
+	}
 
-/* 썸머노트 */
-.note-modal-footer {
-    height: 50px !important;
-}
-.note-editor {
-	width: 100% !important;
-}
-
-.note-fontname .note-icon-caret, .note-fontsize .note-icon-caret, .note-para .note-icon-caret, .note-height .note-icon-caret{
- display:none;
-}
-
-/* 카카오 */
-.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Noto Sans KR', sans-serif; font-size:12px;}
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-.bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-#menu_wrap .option{text-align: center;}
-#menu_wrap .option p {margin:10px 0;}  
-#menu_wrap .option button {margin-left:5px;}
-#placesList li {list-style: none;}
-#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-#placesList .item span {display: block;margin-top:4px;}
-#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 55px;}
-#placesList .info .gray {color:#8a8a8a;}
-#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-#placesList .info .tel {color: var(--green);}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(${contextPath}/resources/image/pin.png) no-repeat center; background-size: 35px;}
-#pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px; font-size: 80%;}
-#pagination .on {
-	font-weight: bold;
-	cursor: default;
-    color: var(--white);
-    background: var(--pink);
-    border-radius: .4rem;
-    padding: 2px 6px;
-}
-
-/* 장소 검색버튼 */
-#btnSearch {
-   	border-radius: .2rem;
-    padding: 1px 4px;
-    border: 1px solid var(--pink);
-    background: var(--white);
-    color: var(--pink);
-}
-
-#keyword {
-	border: 1px solid #ced4da;
-	border-radius: .2rem;
-	padding: 1px;
-}
-
-#keyword:focus{
-	outline: none;
-	border: 1.5px solid var(--pink);
-}
+	/* 카카오 */
+	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Noto Sans KR', sans-serif; font-size:12px;}
+	.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+	.map_wrap {position:relative;width:100%;height:500px;}
+	#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+	.bg_white {background:#fff;}
+	#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+	#menu_wrap .option{text-align: center;}
+	#menu_wrap .option p {margin:10px 0;}  
+	#menu_wrap .option button {margin-left:5px;}
+	#placesList li {list-style: none;}
+	#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+	#placesList .item span {display: block;margin-top:4px;}
+	#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+	#placesList .item .info{padding:10px 0 10px 55px;}
+	#placesList .info .gray {color:#8a8a8a;}
+	#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+	#placesList .info .tel {color: var(--green);}
+	#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(${contextPath}/resources/image/pin.png) no-repeat center; background-size: 35px;}
+	#pagination {margin:10px auto;text-align: center;}
+	#pagination a {display:inline-block;margin-right:10px; font-size: 80%;}
+	#pagination .on {
+		font-weight: bold;
+		cursor: default;
+	    color: var(--white);
+	    background: var(--pink);
+	    border-radius: .4rem;
+	    padding: 2px 6px;
+	}
+	/* 장소 검색버튼 */
+	#btnSearch {
+	   	border-radius: .2rem;
+	    padding: 1px 4px;
+	    border: 1px solid var(--pink);
+	    background: var(--white);
+	    color: var(--pink);
+	}
+	#keyword {
+		border: 1px solid #ced4da;
+		border-radius: .2rem;
+		padding: 1px;
+	}
+	#keyword:focus{
+		outline: none;
+		border: 1.5px solid var(--pink);
+	}
 
 	</style>
 </head>
 <body>
-	<%@ include file="../common/header.jsp" %>
+	<jsp:include page="../common/header.jsp" flush="false"/>
 	<div class="container d-md-flex my-4">
-		<%@ include file="../common/sidebar.jsp" %>
+		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 			<form action="insertRun" method="post">
 				<div class="col-md-12">
@@ -193,7 +190,8 @@ select#district, select#city, select#sort {
 				        <ul id="placesList"></ul>
 				        <div id="pagination"></div>
 				    </div>
-	 				<input type="hidden" id="placeName" name="placeName" value="">
+	 				<input type="hidden" id="place_name" name="place_name" value="">
+					<input type="hidden" id="place_id" name="place_id" value="">
 					<input type="hidden" id="latitude" name="latitude" value="">
 					<input type="hidden" id="longitude" name="longitude" value="">
 				</div>
@@ -202,7 +200,7 @@ select#district, select#city, select#sort {
 	      </div>
 	    </div>
 	  </div>						
-	<%@ include file="../common/footer.jsp" %>
+	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
 	<script>
 	var isShown = false; 
@@ -350,7 +348,7 @@ select#district, select#city, select#sort {
 	                
 	                return function() {
 	                	selectedPlace.innerHTML = '선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다';
-	                    console.log(place.address_name);
+	                    console.log(place.id);
 	                }
 	                
 	            })(placePosition));

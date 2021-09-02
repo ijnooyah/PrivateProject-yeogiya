@@ -10,10 +10,10 @@
 	</style>
 </head>
 <body>
-<%@ include file="../common/header.jsp" %>
+<jsp:include page="../common/header.jsp" flush="false"/>
 	<div class="container">
 	</div>
-<%@ include file="../common/footer.jsp" %>
+<jsp:include page="../common/footer.jsp" flush="false"/>
 <%@ include file="../cdn/js.jsp" %>
 	<script>
 	</script>

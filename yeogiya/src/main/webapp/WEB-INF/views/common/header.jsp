@@ -57,8 +57,10 @@
 				<li class="nav-item dropdown ml-md-auto">
 					<div class="dropdown">
 						<a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-							<span class="mr-2 d-none d-lg-inline nickname">윤지</span>
-							<img class="rounded-circle profile-img" src="${contextPath}/resources/image/profile.jpg"/>
+							<span class="pr-2 d-table-cell align-middle nickname">윤지</span>
+							<div class="profile-img d-table-cell" 
+								 style="background:url(${contextPath}/resources/image/profile2.jpg);
+								  width:36px; height:36px;"></div>
 						</a>
 					    <div class="dropdown-menu dropdown-menu-right">
 					      <a class="dropdown-item" href="#">마이페이지</a>
