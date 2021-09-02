@@ -178,9 +178,14 @@
 /* 	카카오 */
 	.customoverlay {position:relative;bottom:55px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
 	.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
-	.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: var(--pink);background: var(--pink) url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
-	.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+	.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;overflow:hidden;background: var(--pink);background: var(--pink) url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+	.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:500;}
 	.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+	
+/* 	상세보기 */
+.content-top a:hover {
+	color:unset;
+}
 	</style>
 </head>
 <body>
@@ -193,33 +198,46 @@
 			<!-- 상세보기 -->
 			<div class="col-md-12" style="flex:none;">
 				<!-- 글정보 -->
-				<div class="row mb-2">
-					<div class="w-100">
-						 <strong><span class="">맛집</span> 여기 브라우니 진짜 맛있어요!!</strong>
+				<div class="row mb-2 content-top">
+					<div class="w-100 h5">
+						<span class="text-muted">맛집</span> <span>여기 브라우니 진짜 맛있어요!!</span>
 					</div>
-					<div class="d-flex w-100">
-						<div class="">
-							<div class="profile-img d-table-cell" 
+					<div class="d-flex w-100 font-size-085 mt-1">
+						<div class="d-flex">
+							<div class="profile-img d-table-cell mr-2" 
 								 style="background: url(${contextPath}/resources/image/profile.jpg);
 								  width:30px; height:30px;"></div>
-							<a href="" class="d-table-cell">미미</a>
-							<span class="d-table-cell" >21.09.02 00:38</span> 
+							<div class="d-table-cell mr-2">
+								<a href="" class="align-middle text-black">미미</a>
+							</div>
+							<div class="d-table-cell mr-2">
+								<span class="align-middle text-muted" >21.09.02 00:38</span> 
+							</div>
+							<div class="d-table-cell">
+								<span class="align-middle text-muted">조회 2769</span> 
+							</div>
 						</div>
 						<div class="ml-auto">
-							<span class="fa fa-eye mr-1"></span><span class="mr-2" id="view_cnt">2769</span> 
-							<span class="fa fa-heart-o mr-1"></span><span class="mr-2" id="like_cnt">0</span>  
-							<span class="fa fa-comment-o mr-1"></span><span id="cmt_cnt">30</span> 
+							<a href="" class="text-muted">URL 복사</a>
 						</div>
 					</div>
 				</div>
 				<!-- 글내용 -->
-				<div class="row mb-2 px-3">
+				<div class="row mt-4 mb-3 px-3 content-middle">
 					<div class="content_wrap w-100">
 						정말맛있어욤
 					</div>
-					<div class="map_wrap w-100">
+					<div class="map_wrap w-100 mt-2">
 						<div id="map" class="rounded-sm border" style="width:100%;height:350px;"></div>
 					</div>
+				</div>
+				<!-- 글버튼 -->
+				<div class="row mb-2 content-bottom text-muted">
+					<span class="fa fa-heart-o mr-1 cursor-pointer" style="line-height: 1.5;"></span>
+					<span class="mr-2" id="like_cnt">0</span>  
+					<span class="fa fa-comment-o ml-2 mr-1 cursor-pointer" style="line-height: 1.4;"></span>
+					<span id="cmt_cnt">30</span> 
+					<a href="" class="text-muted ml-auto font-size-090">신고</a>
 				</div>
 				<!-- 상세보기 댓글 -->
 				<div class="row">
