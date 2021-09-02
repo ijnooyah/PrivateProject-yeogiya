@@ -16,8 +16,7 @@
 		}
 	}
 	.card {
-		border: 1px solid var(--light);
-		padding: 1.8rem;
+		border: 1px solid var(--grayEF);
 		box-sizing: border-box;
 		border-radius: 0.13rem;
 		width:845px;
@@ -40,7 +39,7 @@
 	}
 	/* 	검색창 */
 	.search_wrap .form-control, .search_wrap .btn {
- 		height: 33px; 
+ 		height: 30px; 
 	    font-size: .75rem; 
 	}
 	.search_wrap input {
@@ -107,7 +106,7 @@
 		font-weight: 300;
 		font-size: .75rem;
 		border-top:unset !important;
-		border-bottom: 0.5px solid var(--light) !important;
+		border-bottom: 0.5px solid var(--grayEF) !important;
 	}
 	.list_wrap table td:not(.td_title) {
 		text-align: center;
@@ -196,11 +195,20 @@
 			<!-- 탑 -->
 			<jsp:include page="./top.jsp" flush="false"/>
 			<!-- 상세보기 -->
-			<div class="col-md-12" style="flex:none;">
+			<div class="col-md-12 px-5 pb-5" style="flex:none;">
 				<!-- 글정보 -->
 				<div class="row mb-2 content-top">
-					<div class="w-100 h5">
-						<span class="text-muted">맛집</span> <span>여기 브라우니 진짜 맛있어요!!</span>
+					<div class="d-flex w-100 h5">
+						<span class="text-muted mr-2">맛집</span>
+						<span>여기 브라우니 진짜 맛있어요!!</span>
+						<!-- 수정 삭제 버튼 -->
+						<svg class="bi bi-three-dots-vertical cursor-pointer ml-auto" data-toggle="dropdown" width="1.1rem" height="1.1rem" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+							<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+						</svg>
+						<div class="dropdown-menu dropdown-menu-right" style="min-width:4rem; font-size:0.8rem;">
+							 <a class="dropdown-item" href="">수정</a> 
+							 <a class="dropdown-item" href="">삭제</a>
+						</div>
 					</div>
 					<div class="d-flex w-100 font-size-085 mt-1">
 						<div class="d-flex">
@@ -223,9 +231,8 @@
 					</div>
 				</div>
 				<!-- 글내용 -->
-				<div class="row mt-4 mb-3 px-3 content-middle">
+				<div class="row my-4 px-3 content-middle">
 					<div class="content_wrap w-100">
-						정말맛있어욤
 					</div>
 					<div class="map_wrap w-100 mt-2">
 						<div id="map" class="rounded-sm border" style="width:100%;height:350px;"></div>
@@ -239,12 +246,41 @@
 					<span id="cmt_cnt">30</span> 
 					<a href="" class="text-muted ml-auto font-size-090">신고</a>
 				</div>
-				<!-- 상세보기 댓글 -->
-				<div class="row">
+			</div>
+			<!-- 상세보기 댓글 -->
+			<div class="row">
+				<div class="col-md-12">
 					<jsp:include page="./comment.jsp" flush="false"/>
 				</div>
 			</div>
-			<jsp:include page="./list.jsp" flush="false"/>
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs mt-5 mx-4">
+			  <li class="nav-item">
+			    <a class="nav-link active" data-toggle="tab" href="#all">전체</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#menu1">맛집</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" data-toggle="tab" href="#menu2">병원</a>
+			  </li>
+			  <a href="" class="btn btn-pink-outline ml-auto">글쓰기</a>
+			</ul>
+			<!-- Tab panes -->
+			<div class="tab-content px-4">
+				<div id="all" class="tab-pane fade show active px-3">
+					<br>
+					<jsp:include page="./list.jsp" flush="false"/>
+				</div>
+				<div id="menu1" class="tab-pane fade">
+					<br>
+					<jsp:include page="./list.jsp" flush="false"/>
+				</div>
+				<div id="menu2" class="tab-pane fade">
+					<br>
+					<jsp:include page="./list.jsp" flush="false"/>
+				</div>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="../common/footer.jsp" flush="false"/>

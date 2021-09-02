@@ -16,7 +16,7 @@
 		}
 	}
 	.card {
-		border: 1px solid var(--light);
+		border: 1px solid var(--grayEF);
 		padding: 1.8rem;
 		box-sizing: border-box;
 		border-radius: 0.13rem;
@@ -107,7 +107,7 @@
 		font-weight: 300;
 		font-size: .75rem;
 		border-top:unset !important;
-		border-bottom: 0.5px solid var(--light) !important;
+		border-bottom: 0.5px solid var(--grayEF) !important;
 	}
 	.list_wrap table td:not(.td_title) {
 		text-align: center;

@@ -62,19 +62,7 @@
 }
 
 /* 드롭다운 */
-.my-navbar .navbar-nav > .nav-item .dropdown-menu {
-    border: 1px solid var(--lightGray);
-    background: var(--white);
-    border-radius: 0;
-}
-.my-navbar .navbar-nav > .nav-item .dropdown-menu .dropdown-item {
-    font-size: 12px;
-    color: var(--black);
-}
-.my-navbar .navbar-nav > .nav-item .dropdown-menu .dropdown-item:hover, .my-navbar .navbar-nav > .nav-item .dropdown-menu .dropdown-item:focus {
-    background: var(--pink);
-    color: var(--white);
-}
+
 .my-navbar .nickname {
 	color: var(--gray);
 	font-size: 0.8rem;

@@ -5,7 +5,7 @@
 <style>
 .comment-row{
 	 padding: 1rem 2rem;
-	 border-top: 1px solid var(--lightGray);
+	 border-top: 1px solid var(--grayE1);
 }
 .comment-row:first-child{
 	border-top: none;
@@ -43,7 +43,7 @@
     margin-top: 10px;
 }
 </style>
-<div class="bg-light w-100">
+<div class="w-100 h-100 bg-WhiteGray pt-3">
 	<!-- 댓글목록 -->
 	<div class="commentList-container" id="commentContainer">
 		<div class="comment-row">
@@ -61,10 +61,10 @@
 				</div>
 				<div class="input-group px-5">
 					<textarea name="c_content" spellcheck="false" autocomplete="off"
-						class="form-control rounded-0"
+						class="form-control rounded-0 font-size-085"
 						 style="height:100px; resize:none;"></textarea>
 					<div class="input-group-append">
-						<button class="loginNeed btn btn-pink rounded-0 updateBtn" type="button" style="width:100px;" 
+						<button class="loginNeed btn btn-pink rounded-0 font-size-090 updateBtn" type="button" style="width:100px;" 
 							onclick="updateComment()">등록</button>
 					</div>
 				</div>
@@ -84,16 +84,15 @@
 								<span class="is_hobby_writer badge badge-pill badge-pink font-size-060 align-top">글주인</span>
 							</div>
 							<!-- 댓글, 수정 삭제 -->
-							<svg id="dropdownMenuButton" class="bi bi-three-dots-vertical cursor-pointer ml-auto" data-toggle="dropdown" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+							<svg class="bi bi-three-dots-vertical cursor-pointer ml-auto" data-toggle="dropdown" width="16" height="16" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 								<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 							</svg>
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"
-									style="min-width: 4rem;font-size: 13px;">
-									 <a class="dropdown-item doUpdateComment" 
-									 	href="javascript:void(0);" >수정</a> 
-									 <a class="dropdown-item deleteComment" 
-									 	href="javascript:void(0);">삭제</a>
-								</div>
+							<div class="dropdown-menu dropdown-menu-right" style="min-width:4rem;font-size:0.8rem;">
+								 <a class="dropdown-item doUpdateComment" 
+								 	href="javascript:void(0);" >수정</a> 
+								 <a class="dropdown-item deleteComment" 
+								 	href="javascript:void(0);">삭제</a>
+							</div>
 							<!-- //댓글, 수정 삭제 -->
 						</div>
 						<div class="comment_right_middle py-1">
@@ -116,16 +115,16 @@
 	<div class="text-center mt-3">
 		<button type="button" id="btnMoreComments"
 			onclick="moreViewToggle(this);" style="color:white;"
-			class="btn btn-sm btn-pink">댓글 더보기</button>
+			class="btn btn-sm btn-pink font-size-085">댓글 더보기</button>
 	</div>
 	<!--댓글 작성 -->
 	<div class="commentWrite-container my-4">
 		<div class="input-group px-5">
 			<textarea id="c_content" name="c_content" spellcheck="false" autocomplete="off"
-				class="form-control rounded-0" placeholder="댓글을 남겨주세요."
+				class="form-control rounded-0 font-size-085" placeholder="댓글을 남겨주세요."
 				 style="height:100px; resize:none;"></textarea>
 			<div class="input-group-append">
-				<button class="loginNeed btn btn-pink rounded-0" type="button" style="width:100px;" 
+				<button class="loginNeed btn btn-pink rounded-0 font-size-090" type="button" style="width:100px;" 
 					onclick="insertComment(this)">등록</button>
 			</div>
 		</div>
@@ -135,10 +134,10 @@
 		<div id="reply_div" class="d-none">
 			<div class="input-group px-5">
 				<input type="hidden" id="parent_c_no" value=""/>
-				<textarea id="re_c_content" class="form-control rounded-0" spellcheck="false" autocomplete="off"
+				<textarea id="re_c_content" class="form-control rounded-0 font-size-085" spellcheck="false" autocomplete="off"
 					 style="height:100px; resize:none;" placeholder="답댓글을 남겨보세요."></textarea>
 				<div class="input-group-append">
-					<button class="loginNeed btn btn-pink rounded-0 insertRecomment" type="button" style="width:100px;" 
+					<button class="loginNeed btn btn-pink rounded-0 font-size-090 insertRecomment" type="button" style="width:100px;" 
 						onclick="insertRecomment(this)">등록</button>
 				</div>
 			</div>

@@ -17,7 +17,7 @@
 		}
 	}
 	.card {
-		border: 1px solid var(--lightGray);
+		border: 1px solid var(--grayE1);
 		padding: 1.8rem;
 		box-sizing: border-box;
 		border-radius: 0.13rem;

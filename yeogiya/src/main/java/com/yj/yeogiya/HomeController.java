@@ -69,7 +69,7 @@ public class HomeController {
 		TestVo testVo = testDao.select(test_no);
 		System.out.println(testVo);
 		model.addAttribute("testVo", testVo);
-		return "home";
+		return "board/boardView";
 	}
 	
 	@RequestMapping(value = "signUp", method = RequestMethod.GET)
