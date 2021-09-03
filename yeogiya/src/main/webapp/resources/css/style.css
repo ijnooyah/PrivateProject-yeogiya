@@ -50,38 +50,44 @@
    	border-color: var(--pink30) var(--pink30) var(--pink50);
 }
 /* 페이지네이션 */
-.pagination .page-item {
-   	margin-left: .45rem;
-}
-.pagination .page-item:first-child .page-link,
-.pagination .page-item:last-child .page-link {
-    border: none;
-}
-.pagination .page-item:first-child .page-link:hover,
-.pagination .page-item:last-child .page-link:hover {
-    background:none !important;
-}
-
-.pagination .page-item .page-link {
-    border-radius: 3px;
-}
-.pagination .page-item.active .page-link {
-    background-color: var(--pink) !important;
-    border-color: var(--pink) !important;
-    color: var(--white) !important;
-}
-.pagination .page-link:focus {
-    box-shadow: none !important;
-}
-.pagination .page-link:hover {
-    color: var(--white) !important;
-    text-decoration: none;
-    background: var(--pink) !important;
-    border-color: var(--pink) !important;
-}
-.pagination .page-link, .pagination .page-link > svg, .pagination .page-link:hover > svg  {
-    color: var(--black);
-}
+	.pagination-sm .page-link {
+	    padding: .2rem .5rem;
+	    font-size: .75rem;
+	    line-height: 1.5;
+	}
+	
+	.pagination .page-item {
+	   	margin-left: .45rem;
+	}
+	.pagination .page-item:first-child .page-link,
+	.pagination .page-item:last-child .page-link {
+	    border: none;
+	}
+	.pagination .page-item:first-child .page-link:hover,
+	.pagination .page-item:last-child .page-link:hover {
+	    background:none !important;
+	}
+	
+	.pagination .page-item .page-link {
+	    border-radius: 3px;
+	}
+	.pagination .page-item.active .page-link {
+	    background-color: var(--pink) !important;
+	    border-color: var(--pink) !important;
+	    color: var(--white) !important;
+	}
+	.pagination .page-link:focus {
+	    box-shadow: none !important;
+	}
+	.pagination .page-link:hover {
+	    color: var(--white) !important;
+	    text-decoration: none;
+	    background: var(--pink) !important;
+	    border-color: var(--pink) !important;
+	}
+	.pagination .page-link, .pagination .page-link > svg, .pagination .page-link:hover > svg  {
+	    color: var(--black);
+	}
 
 /* 사이드바 */
 .sidebar {
@@ -184,6 +190,85 @@ button.dropdown-toggle[aria-expanded=true]::after, a.dropdown-toggle[aria-expand
     background: var(--pink);
     color: var(--white);
 }
+
+/* table_wrap, table */
+	.table_wrap {
+	    font-size: 0.8rem;
+	}
+	.table_wrap table td, .table_wrap table th {
+    	padding: .4rem 0 .4rem 0 !important;
+	}
+	.table_wrap table {
+		border-collapse: unset;
+		border-spacing: 0px;
+	}
+	.table_wrap table a{
+		color: var(--black);
+	    text-decoration: none;
+	    background-color: transparent;
+	}
+	.table_wrap table a:hover, .table_wrap table a:active, .table_wrap table a:focus {
+		color: var(--pink);
+	    text-decoration: none;
+	    background-color: transparent;
+	}
+	/* 	thead */
+	.table_wrap table th {
+		text-align: center;
+		vertical-align: middle;
+		font-weight: 500;
+		border-top: 1px solid #bcbcbc !important;
+   		border-bottom: 1px solid #e1e1e1 !important;
+	}
+	/* 	tbody */
+	.table_wrap tbody tr:hover {
+	    background-color: var(--whiteGray) !important;
+	}
+	.table_wrap table td {
+		font-weight: 300;
+		font-size: .75rem;
+		border-top:unset !important;
+		border-bottom: 0.5px solid var(--grayEF) !important;
+	}
+	.table_wrap table td:not(.td_title) {
+		text-align: center;
+	}
+	.table_wrap table td.td_title {
+    	padding-left: 0.4rem !important;
+    	padding-right: 0.4rem !important;
+	}
+	.table_wrap table .td_writer a {
+		color:var(--gray) !important;
+		font-size:0.7rem;
+	}
+	.table_wrap table .td_writer a:hover, .table_wrap table .td_writer a:active, .table_wrap table .td_writer a:focus {
+		color:var(--gray) !important;
+		text-decoration: underline;
+	}
+	.table_wrap table .td_title a:hover, .table_wrap table .td_title a:active, .table_wrap table .td_title a:focus {
+		color:var(--black) !important;
+		text-decoration: underline;
+	}
+	/* 넓이설정 */
+	.table_wrap table .td_no{width:50px}.table_wrap table .td_district{width:55px}.table_wrap table .td_city{width:55px}.table_wrap table .td_sort{width:55px}.table_wrap table .td_writer{width:90px;}.table_wrap table .td_date{width:55px}.table_wrap table .td_like{width:50px}.table_wrap table .td_view{width:50px}	
+	.table_wrap table .td_no:not(.td_notice), 
+	.table_wrap table .td_date, 
+	.table_wrap table .td_like, 
+	.table_wrap table .td_view {
+		font-size:0.65rem !important;
+	    line-height: 1.7 !important;
+		color:var(--gray) !important;
+	}
+
+/* 	검색창 */
+	.search_wrap .form-control, .search_wrap .btn {
+		height: 30px; 
+	    font-size: .75rem; 
+	}
+	.search_wrap input {
+		width: 220px !important; 
+	}
+
 .find_wrap, .relogin_find_wrap {
 	padding: 24px 0 40px;
 	text-align: center;
