@@ -127,4 +127,10 @@ public class HomeController {
 		return "mypage/mypage";
 	}
 	
+	@RequestMapping(value = "mypageChange", method = RequestMethod.GET)
+	public String mypageChange(Model model) {
+		
+		return "mypage/mypageChange";
+	}
+	
 }
