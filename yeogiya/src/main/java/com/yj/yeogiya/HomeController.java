@@ -139,4 +139,10 @@ public class HomeController {
 		return "myInfo/myInfoView";
 	}
 	
+	@RequestMapping(value = "myInfoChange", method = RequestMethod.GET)
+	public String myInfoChange(Model model) {
+		
+		return "myInfo/myInfoChange";
+	}
+	
 }

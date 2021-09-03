@@ -69,59 +69,59 @@
 <jsp:include page="../common/header.jsp" flush="false"/>
 	<div class="container myInfo-container my-4">
 		<div class="row">
-    <div class="col-sm-9">
-      <table class="table table-divider">
-			<tbody>
-				<!-- 아이디 -->
-				<tr>
-					<th>아이디</th>
-					<td class="td_body">ijnooyah</td>
-				</tr>
-				<!-- 이름 -->
-				<tr>
-					<th>이름</th>
-					<td class="td_body">하윤지</td>
-				</tr>
-				<!-- 지역 -->
-				<tr>
-					<th>지역</th>
-					<td class="td_body">울산 동구</td>
-				</tr>
-				<!-- 휴대전화 -->
-				<tr>
-					<th>휴대전화</th>
-					<td class="td_body">010-8261-6277</td>
-				</tr>
-				<!-- 이메일 -->
-				<tr>
-					<th>이메일</th>
-					<td class="td_body">ijnooyah@gmail.com</td>
-				</tr>
-				<!-- 성별 -->
-				<tr>
-					<th>성별</th>
-					<td class="td_body">여</td>
-				</tr>
-				<!-- 가입일 -->
-				<tr>
-					<th>가입일</th>
-					<td class="td_body">2021-09-04</td>
-				</tr>
-			</tbody>
-		</table>
-    </div>
-    <div class="col-sm-3">
-      <h3>회원 정보</h3>
-      <hr class="hr">
-      <ul class="list-menu">
-        <li><a href="">회원정보 변경</a></li>
-        <li><a href="">이메일 주소 변경</a></li>
-        <li><a href="">비밀번호 변경</a></li>
-        <li><a href="">탈퇴</a></li>
-      </ul>
-    </div>  
-   </div>
-</div>
+		    <div class="col-sm-9">
+		      <table class="table table-divider">
+					<tbody>
+						<!-- 아이디 -->
+						<tr>
+							<th>아이디</th>
+							<td class="td_body">ijnooyah</td>
+						</tr>
+						<!-- 이름 -->
+						<tr>
+							<th>이름</th>
+							<td class="td_body">하윤지</td>
+						</tr>
+						<!-- 지역 -->
+						<tr>
+							<th>지역</th>
+							<td class="td_body">울산 동구</td>
+						</tr>
+						<!-- 휴대전화 -->
+						<tr>
+							<th>휴대전화</th>
+							<td class="td_body">010-8261-6277</td>
+						</tr>
+						<!-- 이메일 -->
+						<tr>
+							<th>이메일</th>
+							<td class="td_body">ijnooyah@gmail.com</td>
+						</tr>
+						<!-- 성별 -->
+						<tr>
+							<th>성별</th>
+							<td class="td_body">여</td>
+						</tr>
+						<!-- 가입일 -->
+						<tr>
+							<th>가입일</th>
+							<td class="td_body">2021-09-04</td>
+						</tr>
+					</tbody>
+				</table>
+		    </div>
+		    <div class="col-sm-3">
+		      <h3>회원 정보</h3>
+		      <hr class="hr">
+		      <ul class="list-menu">
+		        <li><a href="">회원정보 변경</a></li>
+		        <li><a href="">이메일 주소 변경</a></li>
+		        <li><a href="">비밀번호 변경</a></li>
+		        <li><a href="">탈퇴</a></li>
+		      </ul>
+		    </div>  
+   		</div>
+	</div>
 <jsp:include page="../common/footer.jsp" flush="false"/>
 <%@ include file="../cdn/js.jsp" %>
 	<script>

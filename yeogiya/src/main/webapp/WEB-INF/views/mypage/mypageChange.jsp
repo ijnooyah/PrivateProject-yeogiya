@@ -145,6 +145,10 @@
 						</div>
 		    		</div>
 				</div>
+				<div class="text-center pt-5">
+					<button type="submit" class="btn btn-pink">수정</button>
+					<button class="btn btn-pink-outline">취소</button>
+				</div>
 			</form>
 		</div>
 	</div>
