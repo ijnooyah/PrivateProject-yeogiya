@@ -159,9 +159,20 @@
 	border:1px solid var(--grayE1) !important;
 }
 
+.short_title {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}
+
 /* 드롭다운 */
+button.dropdown-toggle[aria-expanded=true]::after, a.dropdown-toggle[aria-expanded=true]::after {
+	border-top: 0;
+    border-bottom: .3em solid;
+}
 .dropdown-menu {
-    border: 1px solid var(--grayEF);
+    border: 1px solid var(--grayE1);
     background: var(--white);
     border-radius: 0;
 }

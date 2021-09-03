@@ -1,7 +1,6 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,6 +89,7 @@
 	}
 	.board-container .table_wrap table td.td_title {
     	padding-left: 0.4rem !important;
+    	padding-right: 0.4rem !important;
 	}
 	.board-container .table_wrap table .td_writer a {
 		color:var(--gray) !important;
@@ -104,7 +104,7 @@
 		text-decoration: underline;
 	}
 	/* 넓이설정 */
-	.board-container .table_wrap table .td_no{width:50px}.board-container .table_wrap table .td_district{width:55px}.board-container .table_wrap table .td_city{width:55px}.board-container .table_wrap table .td_sort{width:55px}.board-container .table_wrap table .td_writer{width:100px;}.board-container .table_wrap table .td_date{width:55px}.board-container .table_wrap table .td_like{width:50px}.board-container .table_wrap table .td_view{width:50px}	
+	.board-container .table_wrap table .td_no{width:50px}.board-container .table_wrap table .td_district{width:55px}.board-container .table_wrap table .td_city{width:55px}.board-container .table_wrap table .td_sort{width:55px}.board-container .table_wrap table .td_writer{width:90px;}.board-container .table_wrap table .td_date{width:55px}.board-container .table_wrap table .td_like{width:50px}.board-container .table_wrap table .td_view{width:50px}	
 	.board-container .table_wrap table .td_no:not(.td_notice), 
 	.board-container .table_wrap table .td_date, 
 	.board-container .table_wrap table .td_like, 

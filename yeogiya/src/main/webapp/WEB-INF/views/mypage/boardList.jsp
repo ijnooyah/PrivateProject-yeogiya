@@ -2,12 +2,33 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<div class="px-4">
-	<!-- 글목록 -->
+<div class="pl-4">
+	<!-- 상단 -->
+	<div class="d-flex mb-1">
+		<svg xmlns="http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem" fill="currentColor" class="bi bi-trash text-muted cursor-pointer mt-2 ml-1" viewBox="0 0 16 16">
+		  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+		  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+		</svg>
+		  <button type="button" class="btn-sm btn border dropdown-toggle ml-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    10개씩
+		  </button>
+		  <div class="dropdown-menu">
+			  <c:forEach begin="10" end="50" step="10" var="v">
+				<a class="dropdown-item" href="#">${v}개씩</a>
+			</c:forEach>
+		  </div>
+	</div>
+	 <!-- 목록 -->
 	<div class="table_wrap">
 		<table class="table">
 			<thead>
 				<tr>
+					<th>
+					<div class="custom-control custom-checkbox">
+						 <input class="custom-control-input" type="checkbox" id="allCheck">
+						 <label class="custom-control-label" for="allCheck"></label>
+					</div>
+					</th>
 					<th>번호</th>
 					<th>지역</th>
 					<th>구역</th>
@@ -21,65 +42,18 @@
 			</thead>
 			<tbody>
 				<!--조회된 게시글 목록 있을 때 -->
-					<!-- 공지목록 -->
-				<c:forEach var="v" begin="1" end="3">
-					<tr>
-						<!-- 번호 -->
-						<td class="td_no td_notice">
-							<div class='badge badge-pink p-1'>
-							공지
-							</div>
-						</td>
-						<!-- 구역 -->
-						<td class="td_district">
-							<a href="" class="district ">
-								충청남도
-							</a>
-						</td>
-						<!-- 지역 -->
-						<td class="td_city">
-							<a href="" class="city ">
-								천안
-							</a>
-						</td>
-						<!-- 분류 -->
-						<td class="td_sort">
-							<a href="" class="">	
-								맛집
-							</a>
-						</td>
-						<!-- 제목 -->
-						<td class="td_title d-flex" style="width:277px;">
-							<a href="" class="short_title" style="width:230px;">
-								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
-							</a>
-							<span class="text-pink mx-1">[3]</span>
-							<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image" viewBox="0 0 16 16" style="margin-top:2px;">
-							  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-							  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-							</svg>
-						</td>
-						<!-- 글쓴이 -->
-						<td class="td_writer">
-							<a href=""  class="">
-								관리자
-							</a>
-						</td>
-						<!-- 날짜 -->
-						<td  class="td_date">
-						21.08.27
-						</td>
-						<!-- 좋아요 -->
-						<td  class="td_like">113</td>
-						<!-- 조회 -->
-						<td  class="td_view">1003</td>
-					</tr>
-				</c:forEach>
 				<c:forEach var="v" begin="1" end="10">
 					<tr>
+						<td>
+							<!-- 자기 글일때만 체크 버튼 보이기 -->
+							<div class="custom-control custom-checkbox">
+								 <input class="${v>0 ?  'custom-control-input' : 'd-none'}" type="checkbox" id="board${v}">
+								 <label class="${v>0 ?  'custom-control-label' : ''}" for="board${v}"></label>
+							</div>
+						</td>
 						<!-- 번호 -->
 						<td  class="td_no">
-							${v}
+						 	${v}
 						</td>
 						<!-- 구역 -->
 						<td class="td_district">
@@ -100,7 +74,7 @@
 							</a>
 						</td>
 						<!-- 제목 -->
-						<td class="td_title d-flex" style="width:277px;">
+						<td class="td_title d-flex" style="width:296px;">
 							<a href="" class="short_title" style="width:230px;">
 								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
 							</a>
@@ -177,7 +151,6 @@
 				<select class="form-control rounded-0">
 					<option value="titcont">제목+내용</option>
 					<option value="title">제목</option>
-					<option value="writer">작성자</option>
 				</select>
 				<div class="input-group-append">
 					<input type="text" class="form-control rounded-0"
