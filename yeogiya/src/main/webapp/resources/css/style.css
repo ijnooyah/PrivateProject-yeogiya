@@ -6,14 +6,15 @@
 /*root */
 :root {
 	--pink: #f3a6c6 !important; 
-	--black: #2e2e2e !important;
+	--black: #333333 !important;
+	--gray9:#999 !important;
 	--grayE1: #e1e1e1 !important;
 	--grayEF: #efefef !important;
-	--whiteGray: #f8f8f8;
+	--whiteGray: #f8f8f8 !important;
 	--green: #00987f !important;
-	--pink30: #f3a6c645;
-	--pink50: #f3a6c67a;
-	--darkPink : #E69CBB;
+	--pink30: #f3a6c645 !important;
+	--pink50: #f3a6c67a !important;
+	--darkPink : #E69CBB !important;
 }
 /* color */
 .text-pink{color:var(--pink)}.text-black{color:var(--black)!important}.text-grayEF{color:var(--grayEF)}.text-whiteGray{color:var(--whiteGray)}.text-green{color:var(--green)}

@@ -133,4 +133,10 @@ public class HomeController {
 		return "mypage/mypageChange";
 	}
 	
+	@RequestMapping(value = "myInfoView", method = RequestMethod.GET)
+	public String myInfoView(Model model) {
+		
+		return "myInfo/myInfoView";
+	}
+	
 }

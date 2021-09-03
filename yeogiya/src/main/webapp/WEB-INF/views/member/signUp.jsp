@@ -63,6 +63,18 @@
                 <input type="text" class="form-control" id="user_nick" name="user_nick" autocomplete="off" required>
                 <div class='invalid-feedback name-feedback'>이미 사용중인 닉네임 입니다.</div>
             </div>
+            <!-- 지역 -->
+    		<div class="form-group">
+                <label for="" class="font-weight-500 col-form-label">지역</label>
+               	<div class="d-flex mb-2">
+               		<select class="form-control mr-1" id="district">
+						<option value="">울산</option>
+					</select>
+					<select class="form-control mr-1" id="city">
+						<option value="">동구</option>
+					</select>
+			    </div>
+            </div>
 	    	<!-- 휴대전화 -->
 			<div class="form-group">
 				<label for="user_phone" class="font-weight-500 col-form-label">휴대전화</label>
@@ -108,7 +120,7 @@
 		<span class="font-weight-400">
 		    이미 아이디가 있으신가요?
 		</span>
-		<a href="${contextPath}/member/login" class="font-weight-700 pink-color">로그인</a>
+		<a href="${contextPath}/member/login" class="font-weight-700 text-pink">로그인</a>
 	</div>
 	</div>
 	<%@ include file="../cdn/js.jsp" %>
