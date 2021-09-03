@@ -121,9 +121,10 @@ public class HomeController {
 		return "member/idFindResult";
 	}
 	
-	@RequestMapping(value = "pwFindResult", method = RequestMethod.GET)
-	public String pwFindResult(Model model) {
+	@RequestMapping(value = "mypage", method = RequestMethod.GET)
+	public String mypage(Model model) {
 		
-		return "member/pwFindResult";
+		return "mypage/mypage";
 	}
+	
 }

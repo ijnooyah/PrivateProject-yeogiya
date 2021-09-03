@@ -11,11 +11,11 @@
 	<title>boardView</title>
 	<style>
 	@media (min-width: 1200px) {
-	.container, .container-lg, .container-md, .container-sm, .container-xl {
+	.board-container.container {
 	    max-width: 1100px !important;
 		}
 	}
-	.card {
+	.board-container .card {
 		border: 1px solid var(--grayEF);
 		box-sizing: border-box;
 		border-radius: 0.13rem;
@@ -23,75 +23,52 @@
 	}
 	
 	/* 지역바 */
-	.district_wrap a, .district_wrap span {
+	.board-container .district_wrap a, .board-container .district_wrap span {
 		color:var(--black);
 		font-weight:500;
 		font-size: .95rem;
 	}
-	.district_wrap span{
+	.board-container .district_wrap span{
 		font-weight:300;
 		font-size: .9rem;
 	}
-	.district_wrap a:hover, .district_wrap a:focus, .district_wrap a:active, .district_wrap a.active {
+	.board-container .district_wrap a:hover, .board-container .district_wrap a:focus, .board-container .district_wrap a:active, .board-container .district_wrap a.active {
 	    color: var(--pink);
 	    font-weight:600;
 	    text-decoration: none;
 	}
 	/* 	검색창 */
-	.search_wrap .form-control, .search_wrap .btn {
+	.board-container .search_wrap .form-control, .board-container .search_wrap .btn {
  		height: 30px; 
 	    font-size: .75rem; 
 	}
-	.search_wrap input {
+	.board-container .search_wrap input {
  		width: 220px !important; 
 	}
-	/* 	탭 */
-	.nav-tabs {
-	    border-bottom: 1px solid var(--pink) !important;
-	}
-	.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-	    border-color: var(--pink30) var(--pink30) var(--pink30) !important;
-	}
-	.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-	    color: var(--pink) !important;
-	    border-color: var(--pink) var(--pink) var(--white) !important;
-	}
-	a.nav-link {
-	    color: var(--black);
-	    font-size: 0.8rem;
-	    font-weight: 500;
-	}
-	a.nav-link:hover {
-	    color: var(--pink);
-	}
-	/* 글쓰기버튼 */
-	a.btn.btn-pink-outline.ml-auto {
-		transform: scale(.7);
-		font-weight:500;
-	}
+	
 	/*테이블*/
-	.list_wrap {
+	.board-container .table_wrap {
 	    font-size: 0.8rem;
 	}
-	.list_wrap table td, .list_wrap table th {
+	.board-container .table_wrap table td, .board-container .table_wrap table th {
     	padding: .4rem 0 .4rem 0 !important;
 	}
-	.list_wrap table {
+	.board-container .table_wrap table {
 		border-collapse: unset;
 		border-spacing: 0px;
 	}
-	.list_wrap table a{
+	.board-container .table_wrap table a{
 		color: var(--black);
 	    text-decoration: none;
 	    background-color: transparent;
 	}
-	.list_wrap table a:hover, .list_wrap table a:active, .list_wrap table a:focus {
+	.board-container .table_wrap table a:hover, .board-container .table_wrap table a:active, .board-container .table_wrap table a:focus {
 		color: var(--pink);
 	    text-decoration: none;
 	    background-color: transparent;
 	}
 	/* 	thead */
-	.list_wrap table th {
+	.board-container .table_wrap table th {
 		text-align: center;
 		vertical-align: middle;
 		font-weight: 500;
@@ -99,97 +76,76 @@
    		border-bottom: 1px solid #e1e1e1 !important;
 	}
 	/* 	tbody */
-	.list_wrap tbody tr:hover {
+	.board-container .table_wrap tbody tr:hover {
 	    background-color: var(--whiteGray) !important;
 	}
-	.list_wrap table td {
+	.board-container .table_wrap table td {
 		font-weight: 300;
 		font-size: .75rem;
 		border-top:unset !important;
 		border-bottom: 0.5px solid var(--grayEF) !important;
 	}
-	.list_wrap table td:not(.td_title) {
+	.board-container .table_wrap table td:not(.td_title) {
 		text-align: center;
 	}
-	.list_wrap table td.td_title {
+	.board-container .table_wrap table td.td_title {
     	padding-left: 0.4rem !important;
 	}
-	.list_wrap table .td_writer a {
+	.board-container .table_wrap table .td_writer a {
 		color:var(--gray) !important;
 		font-size:0.7rem;
 	}
-	.list_wrap table .td_writer a:hover, .list_wrap table .td_writer a:active, .list_wrap table .td_writer a:focus {
+	.board-container .table_wrap table .td_writer a:hover, .board-container .table_wrap table .td_writer a:active, .board-container .table_wrap table .td_writer a:focus {
 		color:var(--gray) !important;
 		text-decoration: underline;
 	}
-	.list_wrap table .td_title a:hover, .list_wrap table .td_title a:active, .list_wrap table .td_title a:focus {
+	.board-container .table_wrap table .td_title a:hover, .board-container .table_wrap table .td_title a:active, .board-container .table_wrap table .td_title a:focus {
 		color:var(--black) !important;
 		text-decoration: underline;
 	}
 	/* 넓이설정 */
-	.list_wrap table .td_no{width:50px}.list_wrap table .td_district{width:55px}.list_wrap table .td_city{width:55px}.list_wrap table .td_sort{width:55px}.list_wrap table .td_writer{width:100px;}.list_wrap table .td_date{width:55px}.list_wrap table .td_like{width:50px}.list_wrap table .td_view{width:50px}	
-	.list_wrap table .td_no:not(.td_notice), 
-	.list_wrap table .td_date, 
-	.list_wrap table .td_like, 
-	.list_wrap table .td_view {
+	.board-container .table_wrap table .td_no{width:50px}.board-container .table_wrap table .td_district{width:55px}.board-container .table_wrap table .td_city{width:55px}.board-container .table_wrap table .td_sort{width:55px}.board-container .table_wrap table .td_writer{width:100px;}.board-container .table_wrap table .td_date{width:55px}.board-container .table_wrap table .td_like{width:50px}.board-container .table_wrap table .td_view{width:50px}	
+	.board-container .table_wrap table .td_no:not(.td_notice), 
+	.board-container .table_wrap table .td_date, 
+	.board-container .table_wrap table .td_like, 
+	.board-container .table_wrap table .td_view {
 		font-size:0.65rem !important;
 	    line-height: 1.7 !important;
 		color:var(--gray) !important;
 	}
 	/* pagination */
-	.pagination-sm .page-link {
+	.board-container .pagination-sm .page-link {
 	    padding: .2rem .5rem;
 	    font-size: .75rem;
 	    line-height: 1.5;
 	}
-	.pagination .page-item {
-    	margin-left: .45rem;
+	/* 	탭 */
+	.board-container .nav-tabs .nav-link {
+	    font-size: 14px;
+	    font-weight: 500;
 	}
-	.pagination .page-item:first-child .page-link,
-	.pagination .page-item:last-child .page-link {
-	    border: none;
-	}
-	.pagination .page-item:first-child .page-link:hover,
-	.pagination .page-item:last-child .page-link:hover {
-	    background:none !important;
-	}
-	
-	.pagination .page-item .page-link {
-	    border-radius: 3px;
-	}
-	.page-item.active .page-link {
-	    background-color: var(--pink) !important;
-	    border-color: var(--pink) !important;
-	}
-	.page-link:focus {
-	    box-shadow: none !important;
-	}
-	.page-link:hover {
-	    color: var(--white) !important;
-	    text-decoration: none;
-	    background: var(--pink) !important;
-	    border-color: var(--pink) !important;
-	}
-	.pagination .page-link, .pagination .page-link > svg, .pagination .page-link:hover > svg  {
-	    color: var(--black);
+	/* 글쓰기버튼 */
+	.board-container a.btn.btn-pink-outline.ml-auto {
+		transform: scale(.7);
+		font-weight:500;
 	}
 	
-/* 	카카오 */
-	.customoverlay {position:relative;bottom:55px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
-	.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
-	.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;overflow:hidden;background: var(--pink);background: var(--pink) url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
-	.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:500;}
-	.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 	
-/* 	상세보기 */
-.content-top a:hover {
-	color:unset;
-}
+	/* 	상세보기 */
+	.board-container .content-top a:hover {
+		color:unset;
+	}
+	/* 	카카오 */
+	.board-container .customoverlay {position:relative;bottom:55px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+	.board-container .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+	.board-container .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;overflow:hidden;background: var(--pink);background: var(--pink) url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+	.board-container .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:500;}
+	.board-container .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 	</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" flush="false"/>
-	<div class="container d-md-flex my-4">
+	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 			<!-- 탑 -->
@@ -268,7 +224,7 @@
 			</ul>
 			<!-- Tab panes -->
 			<div class="tab-content px-4">
-				<div id="all" class="tab-pane fade show active px-3">
+				<div id="all" class="tab-pane fade show active">
 					<br>
 					<jsp:include page="./list.jsp" flush="false"/>
 				</div>

@@ -64,8 +64,7 @@
 						</a>
 					    <div class="dropdown-menu dropdown-menu-right">
 					      <a class="dropdown-item" href="#">마이페이지</a>
-						    <a class="dropdown-item" href="#">쪽지함</a>
-						    <a class="dropdown-item" href="#">1:1문의</a>
+					      <a class="dropdown-item" href="#">회원정보</a>
 						    <hr class="dropdown-divider">
 						    <a class="dropdown-item" href="#">로그아웃</a>
 					    </div>

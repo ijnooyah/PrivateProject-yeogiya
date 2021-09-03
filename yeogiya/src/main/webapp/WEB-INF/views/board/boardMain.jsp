@@ -11,7 +11,7 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" flush="false"/>
-	<div class="container">
+	<div class="container board-container">
 	</div>
 <jsp:include page="../common/footer.jsp" flush="false"/>
 <%@ include file="../cdn/js.jsp" %>

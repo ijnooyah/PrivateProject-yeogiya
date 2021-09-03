@@ -23,14 +23,66 @@
 /* border */.rounded-sm{border-radius:.1rem!important;}.rounded-md{border-radius:.2rem!important;}.border{border:1px solid var(--grayE1)!important;}
 /* 	버튼 커스텀 */.btn-pink{color:var(--white)!important;background-color:var(--pink)!important;border:1px solid var(--pink)!important}.btn-pink-outline{color:var(--pink)!important;background-color:var(--white)!important;border:1px solid var(--pink)!important}.btn-pink:hover{color:var(--white)!important;background-color:var(--darkPink)!important;border:1px solid var(--darkPink)!important}.btn-pink-outline:hover{color:var(--white)!important;background-color:var(--pink)!important;border:1px solid var(--pink)!important}.btn.focus,.btn:focus{outline:0;box-shadow:none}
 /*입력폼 커스텀 */.form-control:focus{border:1px solid #ced4da;outline:unset;box-shadow:unset}
-/* 체크박스 */.custom-checkbox .custom-control-label::before {}.custom-checkbox .custom-control-input:checked~.custom-control-label::after,.custom-checkbox .custom-control-input:checked~.custom-control-label::before{border-radius:.25rem;background-color:var(--pink)}.custom-checkbox .custom-control-input:active~.custom-control-label::before{background-color:var(--pink)}.custom-checkbox .custom-control-input:focus~.custom-control-label::before{border:1px solid var(--pink);box-shadow:0 0 0 .2rem var(--pink30)}
-/* 라디오버튼 */.custom-radio .custom-control-input:checked~.custom-control-label::after,.custom-radio .custom-control-input:checked~.custom-control-label::before{background-color:var(--pink);border-radius:50%}.custom-radio .custom-control-input:active~.custom-control-label::before{background-color:var(--pink)}.custom-radio .custom-control-input:focus~.custom-control-label::before{box-shadow:0 0 0 .2rem var(--pink30)}
+/* 체크박스 */.custom-checkbox .custom-control-label::before {}.custom-checkbox .custom-control-input:checked~.custom-control-label::after,.custom-checkbox .custom-control-input:checked~.custom-control-label::before{border-radius:.25rem;background-color:var(--pink);border-color:var(--pink);}.custom-checkbox .custom-control-input:active~.custom-control-label::before{background-color:var(--pink)}.custom-checkbox .custom-control-input:focus~.custom-control-label::before{border:1px solid var(--pink);box-shadow:0 0 0 .2rem var(--pink30);}.custom-control-input:not(:disabled):active~.custom-control-label::before{color:var(--white);background-color:var(--pink30);border-color:var(--pink30)}
+/* 라디오버튼 */.custom-radio .custom-control-input:checked~.custom-control-label::after,.custom-radio .custom-control-input:checked~.custom-control-label::before{background-color:var(--pink);border-radius:50%}.custom-radio .custom-control-input:active~.custom-control-label::before{background-color:var(--pink);border-color:var(--pink);}.custom-radio .custom-control-input:focus~.custom-control-label::before{box-shadow:0 0 0 .2rem var(--pink30)}
 /* 뱃지 */
 .badge-pink {
 	background: var(--pink)!important;
 	color: var(--white)!important;
 	font-weight: 500!important;
 }
+/* 탭펜 */
+.nav-tabs {
+   border-bottom: 1px solid var(--pink50);
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+   color: var(--black);
+   background-color: var(--white);
+   border-color: var(--pink50) var(--pink50) var(--white);
+}
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .15rem;
+    border-top-right-radius: .15rem;
+    color: var(--gray);
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+   	border-color: var(--pink30) var(--pink30) var(--pink50);
+}
+/* 페이지네이션 */
+.pagination .page-item {
+   	margin-left: .45rem;
+}
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link {
+    border: none;
+}
+.pagination .page-item:first-child .page-link:hover,
+.pagination .page-item:last-child .page-link:hover {
+    background:none !important;
+}
+
+.pagination .page-item .page-link {
+    border-radius: 3px;
+}
+.pagination .page-item.active .page-link {
+    background-color: var(--pink) !important;
+    border-color: var(--pink) !important;
+    color: var(--white) !important;
+}
+.pagination .page-link:focus {
+    box-shadow: none !important;
+}
+.pagination .page-link:hover {
+    color: var(--white) !important;
+    text-decoration: none;
+    background: var(--pink) !important;
+    border-color: var(--pink) !important;
+}
+.pagination .page-link, .pagination .page-link > svg, .pagination .page-link:hover > svg  {
+    color: var(--black);
+}
+
 /* 사이드바 */
 .sidebar {
     width: 210px;

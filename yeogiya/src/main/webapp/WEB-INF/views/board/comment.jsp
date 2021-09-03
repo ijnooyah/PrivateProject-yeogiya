@@ -3,24 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<c:if test="${param.type == 'A'}">A</c:if> --%>
 <style>
-.comment-row{
+.board-container .comment-row{
 	 padding: 1rem 2rem;
 	 border-top: 1px solid var(--grayE1);
 }
-.comment-row:first-child{
+.board-container .comment-row:first-child{
 	border-top: none;
 }
 
-.comment-row.recomment-row{
+.board-container .comment-row.recomment-row{
 	 padding-left: 4rem;;
 	 padding-top: 10px;
 	 border-top:none;
 }
 
-.comment_right_top {
+.board-container .comment_right_top {
 	line-height: 1;
 }
-.comment_right_top .c_user_nick, .updateCommentDiv .c_user_nick {
+.board-container .comment_right_top .c_user_nick, .updateCommentDiv .c_user_nick {
 	font-size: .85rem;
 	font-weight: 500;
 	color: var(--black);
@@ -28,17 +28,17 @@
     vertical-align: top;
 }
 
-.comment_right_middle {
+.board-container .comment_right_middle {
 	font-size: .8rem;
 	font-weight: 400;
 }
 
-.comment_right_bottom {
+.board-container .comment_right_bottom {
 	font-size: .7rem;
 	color: var(--gray);
 }
 
-#reply_div {
+.board-container #reply_div {
     width: 100%;
     margin-top: 10px;
 }

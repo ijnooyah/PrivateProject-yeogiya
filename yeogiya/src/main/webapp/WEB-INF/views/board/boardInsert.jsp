@@ -93,7 +93,7 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" flush="false"/>
-	<div class="container d-md-flex my-4">
+	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 			<form action="insertRun" method="post">
