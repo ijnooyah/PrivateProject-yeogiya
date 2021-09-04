@@ -57,9 +57,9 @@
 	<div class="container mypage-container my-4">
 		<div class="mypage_top row mb-5 mx-4">
 				<div class="mypage_top_left">
-					<div class="profile-img" 
-						 style="background: url(${contextPath}/resources/image/profile.jpg);
-						  width:80px; height:80px;"></div>
+					<div class="set-bg rounded-circle border" 
+						 data-setbg="${contextPath}/resources/image/profile.jpg"
+						 style="width:80px; height:80px;"></div>
 				</div>
 				<div class="mypage_top_right ml-4">
 					<div class="font-size-105 mb-1">

@@ -21,18 +21,20 @@
 	}
 }
 
-.my-navbar {
+.navbar {
    background: var(--white)!important;
    z-index: 3;
    padding: 0;
+   border-bottom: var(--grayE1) 1px solid;
+   box-shadow: -4px -6px 11px 2px #898f9545;
 }
-.my-navbar .navbar-nav > .nav-item.active > a {
+.navbar .navbar-nav > .nav-item.active > a {
     color: var(--pink);
 }
-.my-navbar .navbar-nav > .nav-item > .nav-link:hover {
+.navbar .navbar-nav > .nav-item > .nav-link:hover {
     color: var(--pink);
 }
-.my-navbar .navbar-nav > .nav-item > .nav-link {
+.navbar .navbar-nav > .nav-item > .nav-link {
 	font-size: 0.85rem;
 	font-weight: 500;
     padding-top: 1.5rem;
@@ -45,10 +47,10 @@
     position: relative;
     opacity: 1 !important;
 }
-.my-navbar .navbar-nav > .nav-item > .nav-link:hover:before {
+.navbar .navbar-nav > .nav-item > .nav-link:hover:before {
     width: 100%;
 }
-.my-navbar .navbar-nav > .nav-item > .nav-link:before {
+.navbar .navbar-nav > .nav-item > .nav-link:before {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -63,25 +65,25 @@
 
 /* 드롭다운 */
 
-.my-navbar .nickname {
+.navbar .nickname {
 	color: var(--gray);
 	font-size: 0.8rem;
 }
-.my-navbar .dropdown-svg {
+.navbar .dropdown-svg {
 	margin-right: 10px;
 	padding-top: 0.3rem;
 }
-.my-navbar .dropdown-svg svg{
+.navbar .dropdown-svg svg{
 	fill : var(--gray);
 	width : 22px;
 }
-.my-navbar .navbar-divider {
+.navbar .navbar-divider {
     width: 0;
     border-right: 1px solid var(--gray);
     height: calc(4.375rem - 2rem);
     margin: auto 1rem;
 }
-.my-navbar .badge-alert {
+.navbar .badge-alert {
 	font-size: 8px;
     font-weight: 500;
     height: 15px;
@@ -92,9 +94,9 @@
     transform-origin: top right;
     top:28%;
 }
-.my-navbar #newAlertCnt{
+.navbar #newAlertCnt{
 	right:12%;
 }
-.my-navbar #newMsgCnt {
+.navbar #newMsgCnt {
 	right: 5%;
 }

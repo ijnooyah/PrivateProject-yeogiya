@@ -43,12 +43,6 @@
 	    font-weight: 500;
 	}
 	
-	/* 글쓰기버튼 */
-	.board-container a.btn.btn-pink-outline.ml-auto {
-		transform: scale(.7);
-		font-weight:500;
-	}
-	
 	/* 	상세보기 */
 	.board-container .content-top a:hover {
 		color:unset;
@@ -59,6 +53,19 @@
 	.board-container .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;overflow:hidden;background: var(--pink);background: var(--pink) url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 	.board-container .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:500;}
 	.board-container .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+	
+	.board-container .dropdown-toggle {
+		border-radius: 0;
+		font-size: .75rem;
+	}
+	.board-container .dropdown-menu {
+		min-width: 4.05rem;;
+		margin-top: -1px;
+	}
+	.board-container .dropdown-item {
+		padding: .25rem 0;
+    	text-align: center;
+	}
 	</style>
 </head>
 <body>
@@ -86,9 +93,9 @@
 					</div>
 					<div class="d-flex w-100 font-size-085 mt-1">
 						<div class="d-flex">
-							<div class="profile-img d-table-cell mr-2" 
-								 style="background: url(${contextPath}/resources/image/profile.jpg);
-								  width:30px; height:30px;"></div>
+							<div class="d-table-cell mr-2 set-bg rounded-circle border" 
+								 data-setbg="${contextPath}/resources/image/profile.jpg"
+								 style="width:30px; height:30px;"></div>
 							<div class="d-table-cell mr-2">
 								<a href="" class="align-middle text-black">미미</a>
 							</div>
@@ -138,7 +145,6 @@
 			  <li class="nav-item">
 			    <a class="nav-link" data-toggle="tab" href="#menu2">병원</a>
 			  </li>
-			  <a href="" class="btn btn-pink-outline ml-auto">글쓰기</a>
 			</ul>
 			<!-- Tab panes -->
 			<div class="tab-content px-4">

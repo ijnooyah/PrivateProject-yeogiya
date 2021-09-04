@@ -36,23 +36,10 @@
 	    font-weight:600;
 	    text-decoration: none;
 	}
-	/* 	검색창 */
-	.board-container .search_wrap .form-control, .board-container .search_wrap .btn {
- 		height: 30px; 
-	    font-size: .75rem; 
-	}
-	.board-container .search_wrap input {
- 		width: 220px !important; 
-	}
-/* 	탭 */
+	/* 	탭 */
 	.board-container .nav-tabs .nav-link {
 	    font-size: 13px;
 	    font-weight: 500;
-	}
-	/* 글쓰기버튼 */
-	.board-container a.btn.btn-pink-outline.ml-auto {
-		transform: scale(.7);
-		font-weight:500;
 	}
 	/*테이블*/
 	.board-container .table_wrap {

@@ -51,9 +51,9 @@
 			<input type="hidden" class="re_group" value=""/>
 			<div class="updateCommentDiv d-none">
 				<div class="d-flex">
-					<div class="d-table-cell profile-img mr-2" 
-					 	 style="background:url(${contextPath}/resources/image/profile.jpg);
-					 		 width:34px; height:34px;"></div>
+					<div class="d-table-cell mr-2 set-bg rounded-circle border" 
+						 data-setbg="${contextPath}/resources/image/profile.jpg"
+						 style="width:34px; height:34px;"></div>
 					<div class="d-table-cell">
 						<a href="" class="align-middle c_user_nick">윤지</a>
 					</div>
@@ -71,9 +71,9 @@
 			</div>
 			<div class="view_comment d-flex">
 					<div class="comment_left">
-						<div class="profile-img" 
-						 	 style="background:url(${contextPath}/resources/image/profile.jpg);
-						 		 width:34px; height:34px;"></div>
+						<div class="d-table-cell mr-2 set-bg rounded-circle border" 
+							 data-setbg="${contextPath}/resources/image/profile.jpg"
+							 style="width:34px; height:34px;"></div>
 					</div>
 					<div class="comment_right w-100 pl-2">
 						<div class="comment_right_top d-flex">

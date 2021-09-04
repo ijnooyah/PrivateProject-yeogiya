@@ -10,16 +10,9 @@
 	<%@ include file="../cdn/css.jsp" %>
 	<title>login</title>
 	<style>
-	
 	.container{
 		width: 330px;
 		padding: 5rem 0;
-	}
-	
-/* 	로고 */
-	a.logo{
-		font-size: 4rem;
-		text-decoration: none;
 	}
 	
 	.container input[type="text"]{
@@ -36,13 +29,12 @@
 		transform:scale(.8);
 	}
 	
-	
 	</style>
 </head>
 <body>
 	<div class="container">
 		<div class="text-center mb-5">
-			<a href="" class="logo">여기야!</a>
+			<a href="${contextPath}/" class="logo">여기야!</a>
 		</div>
 		<form method="post" action="loginRun">
 			<div class="h4 text-center">로그인</div>

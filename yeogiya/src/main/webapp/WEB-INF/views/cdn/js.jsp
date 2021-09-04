@@ -12,19 +12,35 @@
 	
 	<script>
 	//navbar
-	(function($) {
-		$('nav .dropdown-category').hover(function(){
-			var $this = $(this);
-			$(this).addClass('show');
-			$(this).find('> a').attr('aria-expanded', true);
-			$(this).find('.dropdown-menu').addClass('show');
-		}, function(){
-			$(this).removeClass('show');
-			$(this).find('> a').attr('aria-expanded', false);
-			$(this).find('.dropdown-menu').removeClass('show');
+	$(document).ready(function() {
+		//hover 이벤트
+		$('nav.navbar .dropdown').on("mouseover", function(e){
+			$(this).children('a').attr('aria-expanded', true);
+			$(this).children('ul').addClass('show');
+			$('li.dropdown-submenu').hover(function(e) {
+				$(this).children('a').attr('aria-expanded', true);
+				$(this).children('ul').addClass('show');
+			}, function(e) {
+				$(this).children('a').attr('aria-expanded', false);
+				$(this).children('ul').removeClass('show');
+			});
 		});
-	})(jQuery);
-	
+		$('nav.navbar .dropdown').on("mouseleave", function(e){
+			console.log("빠져나감")
+			$(this).children('a').attr('aria-expanded', false);
+			$(this).children('ul').removeClass('show');
+		});
+		//클릭이벤트
+		$('li.dropdown-submenu').on("click", function(e) {
+			e.preventDefault();
+		    e.stopPropagation();
+			$(this).children('ul').toggleClass('show');
+			$("li.dropdown-submenu ul.dropdown-menu").not($(this).children('ul')).removeClass("show");
+		    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+		      $('li.dropdown-submenu .show').removeClass("show");
+		    });
+		});
+	});
 	//툴팁
 	$('[data-toggle="tooltip"]').tooltip();   
 	
@@ -34,4 +50,9 @@
 		spanArrow.toggleClass("fa-caret-down");
 		spanArrow.toggleClass("fa-caret-up");
 	});
+	
+	$('.set-bg').each(function () {
+        var bg = $(this).data('setbg');
+        $(this).css('background-image', 'url(' + bg + ')');
+    });
 	</script>

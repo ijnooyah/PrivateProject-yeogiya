@@ -4,11 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="pl-4">
 	<!-- 상단 -->
-	<div class="d-flex mb-1">
-		<svg xmlns="http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem" fill="currentColor" class="bi bi-trash-fill text-muted cursor-pointer mt-2 ml-1" viewBox="0 0 16 16" style="opacity:.7;">
-		  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-		</svg>
-		  <button type="button" class="btn-sm btn border dropdown-toggle ml-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	<div class="d-flex mb-1 dropdown">
+		  <button type="button" class="btn-sm btn border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    10개씩
 		  </button>
 		  <div class="dropdown-menu">
@@ -16,6 +13,9 @@
 				<a class="dropdown-item" href="#">${v}개씩</a>
 			</c:forEach>
 		  </div>
+		<svg xmlns="http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem" fill="currentColor" class="bi bi-trash-fill text-muted cursor-pointer mt-2 ml-auto mr-2" viewBox="0 0 16 16" style="opacity:.6;">
+		  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+		</svg>
 	</div>
 	 <!-- 목록 -->
 	<div class="table_wrap">

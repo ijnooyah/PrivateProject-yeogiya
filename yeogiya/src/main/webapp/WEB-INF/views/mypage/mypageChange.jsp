@@ -13,14 +13,6 @@
 		}
 	}
 	
-	.mypage-container .label_user_img {
-		cursor:pointer;
-		background-size: cover !important;
-		background-repeat: no-repeat !important;
-	    background-position: center !important;
-		border:1px solid var(--grayE1) !important;
-	}
-	
 	.mypage-container .btn_del {
 	    display: block;
 	    width: 1rem;
@@ -75,8 +67,9 @@
 				<div class="mb-4 row">
 				    <label for="user_img" class="col-sm-3">프로필 사진</label>
 				    <div class="d-flex">
-			    		<label class="label_user_img mb-auto" for="user_img" 
-			    			style="background: url(${contextPath}/resources/image/no-profile.png); width:80px; height:80px;">
+			    		<label class="label_user_img mb-auto set-bg border" for="user_img"
+			    			data-setbg="${contextPath}/resources/image/no-profile.png" 
+			    			style="width:80px; height:80px; cursor:pointer;">
 						</label>
 						<a id="" class="btn_del d-none" href=""></a>
 						<input type="file" class="d-none" id="user_img" accept=".gif, .jpg, .png, .jpeg" onchange="">

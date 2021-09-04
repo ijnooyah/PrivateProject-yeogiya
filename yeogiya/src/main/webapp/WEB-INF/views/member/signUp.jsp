@@ -18,17 +18,12 @@
 			width: 90%;
 		}
 	}
-	
-	a:hover {
-    color: var(--pink);
-	}
-	
 	</style>
 </head>
 <body>
-	<div class="container">
+	<div class="container my-5">
 		<div class="text-center mb-5">
-			<a href="" class="logo">여기야!</a>
+			<a href="${contextPath}/" class="logo">여기야!</a>
 		</div>
 		<form name="joinRun" method="post">
 		<div class="form-group mx-auto">

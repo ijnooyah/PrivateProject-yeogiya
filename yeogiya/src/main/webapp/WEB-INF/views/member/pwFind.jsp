@@ -16,7 +16,7 @@
 <body>
 	<div class="container">
 		<div class="text-center mb-5">
-			<a href="" class="logo">여기야!</a>
+			<a href="${contextPath}/" class="logo">여기야!</a>
 		</div>
 		<form action="" method="post">
 			<div class="h4 text-center">비밀번호 찾기</div>

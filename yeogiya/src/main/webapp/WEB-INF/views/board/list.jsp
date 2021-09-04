@@ -3,6 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="px-4">
+	<!-- 상단 -->
+	<div class="d-flex mb-1 dropdown">
+		  <button type="button" class="btn-sm btn border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    최신순
+		  </button>
+		  <div class="dropdown-menu">
+				<a class="dropdown-item" href="#">최신순</a>
+				<a class="dropdown-item" href="#">댓글순</a>
+				<a class="dropdown-item" href="#">좋아요순</a>
+				<a class="dropdown-item" href="#">조회수순</a>
+		  </div>
+		  <a type="button" class="btn-sm btn border ml-auto mr-2 font-size-075 rounded-0">
+		    글쓰기
+		  </a>
+<!-- 		  <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" fill="currentColor" class="bi bi-pencil-fill text-muted cursor-pointer mt-2 ml-auto mr-2" viewBox="0 0 16 16" style="opacity:.6;"> -->
+<!--   			<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/> -->
+<!-- 		</svg> -->
+	</div>
 	<!-- 글목록 -->
 	<div class="table_wrap">
 		<table class="table">

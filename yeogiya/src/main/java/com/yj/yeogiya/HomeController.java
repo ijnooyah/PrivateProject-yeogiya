@@ -50,6 +50,12 @@ public class HomeController {
 		
 		return "board/boardView";
 	}
+	@RequestMapping(value = "boardMain", method = RequestMethod.GET)
+	public String boardMain(Model model) {
+		model.addAttribute("rootPath", rootPath );
+		
+		return "board/boardMain";
+	}
 	
 	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public String insert(Model model) {
@@ -113,6 +119,11 @@ public class HomeController {
 	public String pwFind(Model model) {
 		
 		return "member/pwFind";
+	}
+	@RequestMapping(value = "pwFindResult", method = RequestMethod.GET)
+	public String pwFindResult(Model model) {
+		
+		return "member/pwFindResult";
 	}
 	
 	@RequestMapping(value = "idFindResult", method = RequestMethod.GET)
