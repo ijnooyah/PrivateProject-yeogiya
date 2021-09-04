@@ -145,4 +145,10 @@ public class HomeController {
 		return "myInfo/myInfoChange";
 	}
 	
+	@RequestMapping(value = "myInfoChangePw", method = RequestMethod.GET)
+	public String myInfoChangePw(Model model) {
+		
+		return "myInfo/myInfoChangePw";
+	}
+	
 }
