@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<%@ include file="../cdn/css.jsp" %>
-	<title>emailChangePw</title>
+	<title>pwChange</title>
 	<style>
 	div.form-group{
 		width: 500px;

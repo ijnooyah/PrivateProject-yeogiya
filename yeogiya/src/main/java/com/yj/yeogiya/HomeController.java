@@ -161,10 +161,10 @@ public class HomeController {
 		
 		return "myInfo/emailChange";
 	}
-	@RequestMapping(value = "deleteAccount", method = RequestMethod.GET)
-	public String deleteAccount(Model model) {
+	@RequestMapping(value = "deleteAccountResult", method = RequestMethod.GET)
+	public String deleteAccountResult(Model model) {
 		
-		return "myInfo/deleteAccount";
+		return "myInfo/deleteAccountResult";
 	}
 	@RequestMapping(value = "deleteAccountPw", method = RequestMethod.GET)
 	public String deleteAccountPw(Model model) {
