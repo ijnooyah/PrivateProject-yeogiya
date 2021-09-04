@@ -151,4 +151,30 @@ public class HomeController {
 		return "myInfo/myInfoChangePw";
 	}
 	
+	@RequestMapping(value = "emailChangePw", method = RequestMethod.GET)
+	public String emailChangePw(Model model) {
+		
+		return "myInfo/emailChangePw";
+	}
+	@RequestMapping(value = "emailChange", method = RequestMethod.GET)
+	public String emailChange(Model model) {
+		
+		return "myInfo/emailChange";
+	}
+	@RequestMapping(value = "deleteAccount", method = RequestMethod.GET)
+	public String deleteAccount(Model model) {
+		
+		return "myInfo/deleteAccount";
+	}
+	@RequestMapping(value = "deleteAccountPw", method = RequestMethod.GET)
+	public String deleteAccountPw(Model model) {
+		
+		return "myInfo/deleteAccountPw";
+	}
+	@RequestMapping(value = "pwChange", method = RequestMethod.GET)
+	public String pwChange(Model model) {
+		
+		return "myInfo/pwChange";
+	}
+	
 }
