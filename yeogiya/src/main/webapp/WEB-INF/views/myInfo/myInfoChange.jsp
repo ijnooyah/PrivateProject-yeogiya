@@ -29,7 +29,7 @@
 <jsp:include page="../common/header.jsp" flush="false"/>
 	<div class="container myInfo-container my-4">
 		<p class="h4 mb-5 text-center">회원정보 수정</p>
-		<form name="joinRun" method="post">
+		<form name="" method="post">
 			<div class="form-group mx-auto">
 				<!-- 아이디  -->
 				<div class="form-group">

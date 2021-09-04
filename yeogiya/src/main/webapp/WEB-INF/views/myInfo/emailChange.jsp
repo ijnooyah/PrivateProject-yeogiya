@@ -46,8 +46,9 @@
 		    		<div class="col-sm-3"></div>
 				</div>
 	    	</div>
-			<div class="mt-4 row">
-				<button type="button" class="btn btn-pink btn-block">다음</button>
+			 <div class="text-center pt-5">
+				<button type="submit" class="btn btn-pink">수정</button>
+				<button class="btn btn-pink-outline">취소</button>
 			</div>
 		</form>
 	</div>
