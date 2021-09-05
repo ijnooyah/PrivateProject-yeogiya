@@ -88,7 +88,60 @@
 		outline: none;
 		border: 1.5px solid var(--pink);
 	}
+	
+/* 	태그 */
+ul.tagit {
+    width : 620px;
+    vertical-align : middle;
 
+}
+ul.tagit input[type="text"] {
+    width: 100%;
+    font-family: 'Noto Sans KR';
+}
+.ui-widget.ui-widget-content {
+    border: 1px solid #ced4da;
+    color: var(--black);
+    width:100%;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid var(--pink);
+    font-weight: 500;
+    background: var(--white);
+    color: var(--pink);
+}
+ul.tagit li.tagit-choice .close {
+    top: 38%;
+}
+ul.tagit li.tagit-choice .tagit-close .text-icon {
+    display: none;
+}
+.ui-icon {
+    background-image: url(/yeogiya/resources/image/close.png) !important;
+    background-size: 8px;
+    background-position: center;
+    opacity: .7;
+}
+.ui-icon, .ui-widget-content .ui-icon {
+    background-image:unset;
+}
+.ui-icon:not(:disabled):not(.disabled):focus, .ui-icon:not(:disabled):not(.disabled):hover {
+    opacity: 1 !important;
+}
+ul.tagit li.tagit-choice {
+    padding: .2em .5em .2em .5em;
+}
+ul.tagit-autocomplete {
+	width:inherit!important;
+}
+ul.tagit-autocomplete .ui-menu-item {
+	font-family: 'Noto Sans KR';
+}
+ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+    background: var(--pink) !important;
+    color: var(--white) !important;
+	border: none;
+}
 	</style>
 </head>
 <body>
@@ -97,7 +150,7 @@
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 			<form action="insertRun" method="post">
-				<div class="col-md-12">
+				<div class="">
 					<!-- 카카오맵 모달 -->
 					<div class="row mb-2">
 						<span class="h6 cursor-pointer" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
@@ -133,7 +186,9 @@
 					</div>
 					<!-- 해시태그 -->
 					<div class="row mb-2">
-						 <input type="hidden" name="tag" value="" id="tag" style="width:100%">
+						<div class="tag_wrap w-100">
+							 <input type="hidden" name="tag" value="" id="tag" style="width:100%">
+						</div>
 					</div>
 					<div class="text-center">
 						<button type="submit" class="btn btn-pink">등록</button>
@@ -250,7 +305,20 @@
 	    	});
 		});
 	    
-		
+	    var cache = {};
+	    $("#tag").tagit({
+	        singleField: false,
+	        singleFieldNode: $('#tag'),
+	        singleFieldDelimiter: ',',
+	        allowSpaces: false,
+// 	        placeholderText:"콤마나 스페이스로 태그를 구분하세요.",
+	        preprocessTag : function(val) {
+	            return val.replace(",","").replace("#","");
+	        },
+	        autocomplete : {
+	            source: ['사과', '배', '사진', '사랑', '사랑니', '사진기']
+	        }
+	    });
 	});
 	
 	//카카오 지도

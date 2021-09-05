@@ -12,7 +12,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
 	
 	<!-- tagit -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tag-it/2.0/js/tag-it.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/tag-it@2.0.0/js/tag-it.min.js"></script>
 	
 	<script>
 	//navbar
