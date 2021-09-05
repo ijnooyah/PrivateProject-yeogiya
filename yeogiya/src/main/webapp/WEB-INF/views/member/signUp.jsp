@@ -23,7 +23,7 @@
 <body>
 	<div class="container my-5">
 		<div class="text-center mb-5">
-			<a href="${contextPath}/" class="logo">여기야!</a>
+			<a href="" class="logo text-pink">여기야!</a>
 		</div>
 		<form name="joinRun" method="post">
 		<div class="form-group mx-auto">

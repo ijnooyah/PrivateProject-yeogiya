@@ -66,6 +66,11 @@
 		padding: .25rem 0;
     	text-align: center;
 	}
+	
+	a.text-pink:hover {
+		text-decoration:none;
+		color:var(--pink);
+	}
 	</style>
 </head>
 <body>
@@ -74,16 +79,16 @@
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 			<!-- 탑 -->
-			<jsp:include page="./top.jsp" flush="false"/>
+<%-- 			<jsp:include page="./top.jsp" flush="false"/> --%>
 			<!-- 상세보기 -->
-			<div class="col-md-12 px-5 pb-5" style="flex:none;">
+			<div class="col-md-12 mt-4 px-5 pb-5" style="flex:none;">
 				<!-- 글정보 -->
 				<div class="row mb-2 content-top">
 					<div class="d-flex w-100 h5">
-						<span class="text-muted mr-2">맛집</span>
+						<span class="text-pink mr-1 font-weight-500">[맛집]</span>
 						<span>여기 브라우니 진짜 맛있어요!!</span>
 						<!-- 수정 삭제 버튼 -->
-						<svg class="bi bi-three-dots-vertical cursor-pointer ml-auto" data-toggle="dropdown" width="1.1rem" height="1.1rem" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+						<svg class="bi bi-three-dots-vertical cursor-pointer ml-auto my-auto" data-toggle="dropdown" width="1.2rem" height="1.2rem" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 							<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 						</svg>
 						<div class="dropdown-menu dropdown-menu-right" style="min-width:4rem; font-size:0.8rem;">
@@ -106,8 +111,14 @@
 								<span class="align-middle text-muted">조회 2769</span> 
 							</div>
 						</div>
-						<div class="ml-auto">
-							<a href="" class="text-muted">URL 복사</a>
+						<div class="ml-auto mr-2">
+							<svg xmlns="http://www.w3.org/2000/svg" width="0.98rem" height="0.98rem" fill="currentColor" class="bi bi-bookmark text-muted mr-2 cursor-pointer" viewBox="0 0 16 16">
+							  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+							</svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="0.98rem" height="0.98rem" fill="currentColor" class="bi bi-share text-muted cursor-pointer" viewBox="0 0 16 16">
+							  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+							</svg>
+<!-- 							<a href="" class="text-muted align-middle">URL 복사</a> -->
 						</div>
 					</div>
 				</div>
@@ -118,6 +129,12 @@
 					<div class="map_wrap w-100 mt-2">
 						<div id="map" class="rounded-sm border" style="width:100%;height:350px;"></div>
 					</div>
+				</div>
+				<!-- 해시태그 -->
+				<div class="row mb-1">
+					<c:forEach begin="1" end="4">
+						<a href="" class="mr-2 text-pink">&num;해시태그</a>
+					</c:forEach>
 				</div>
 				<!-- 글버튼 -->
 				<div class="row mb-2 content-bottom text-muted">

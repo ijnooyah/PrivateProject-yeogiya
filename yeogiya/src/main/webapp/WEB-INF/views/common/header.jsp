@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-    <a href="${contextPath}/" class="logo-font text-pink mx-3" style="font-size:1.35rem; line-height:1;">여기야!</a>
+    <a href="${contextPath}/" class="logo text-pink ml-3 mr-4" style="font-size:1rem;">여기야!</a>
     <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -21,7 +21,7 @@
 	            <li class="dropdown-submenu dropright">
 	              <a id="dropdownMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">경기도</a>
 	              <ul aria-labelledby="dropdownMenu3" class="dropdown-menu">
-	                <li><a href="#" class="dropdown-item">용인</a></li>
+	                <li><a href="" class="dropdown-item">용인</a></li>
 	                <li><a href="#" class="dropdown-item">수원</a></li>
 	              </ul>
 	            </li>

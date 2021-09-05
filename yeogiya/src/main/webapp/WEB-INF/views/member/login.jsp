@@ -34,7 +34,7 @@
 <body>
 	<div class="container">
 		<div class="text-center mb-5">
-			<a href="${contextPath}/" class="logo">여기야!</a>
+			<a href="" class="logo text-pink">여기야!</a>
 		</div>
 		<form method="post" action="loginRun">
 			<div class="h4 text-center">로그인</div>

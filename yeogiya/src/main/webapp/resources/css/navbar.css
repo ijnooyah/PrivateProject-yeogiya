@@ -47,7 +47,10 @@
     position: relative;
     opacity: 1 !important;
 }
-.navbar .navbar-nav > .nav-item > .nav-link:hover:before {
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: var(--pink) !important;
+}
+.navbar .navbar-nav > .nav-item > .nav-link:hover:before, .navbar .navbar-nav > .nav-item > .nav-link.active:before {
     width: 100%;
 }
 .navbar .navbar-nav > .nav-item > .nav-link:before {

@@ -14,6 +14,10 @@
 
 	<!--summernote -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+	<!-- tagit -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/tag-it/2.0/css/jquery.tagit.css" rel="stylesheet">
    	
    	<!-- my css -->
    	<link rel="stylesheet" href="${contextPath}/resources/css/style.css">

@@ -131,6 +131,10 @@
 					<div class="row mb-2">
 						<textarea class="form-control" name="" id="summernote" rows="10" style="resize: none;"></textarea>
 					</div>
+					<!-- 해시태그 -->
+					<div class="row mb-2">
+						 <input type="hidden" name="tag" value="" id="tag" style="width:100%">
+					</div>
 					<div class="text-center">
 						<button type="submit" class="btn btn-pink">등록</button>
 						<button class="btn btn-pink-outline">취소</button>
@@ -203,14 +207,14 @@
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
 	<script>
-	var isShown = false; 
 	
+	var isShown = false; 
 	$(document).ready(function() {
 	    $('#summernote').summernote({
 	        width : 1110,   
-	        height : 600,   
+	        height : 300,   
 	        placeholder: '내용을 입력해 주세요.',
-	        disableResizeEditor: true,
+// 	        disableResizeEditor: true,
 	        spellCheck:false,
 	        toolbar: [
 			    ['fontname', ['fontname']],
@@ -245,6 +249,8 @@
 	    	    }
 	    	});
 		});
+	    
+		
 	});
 	
 	//카카오 지도
@@ -492,7 +498,6 @@
 	    }
 	}	
 	 
-
 	</script>
 </body>
 </html>
