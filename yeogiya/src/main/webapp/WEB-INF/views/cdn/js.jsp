@@ -55,21 +55,17 @@
 	
 	//sidebar
 	$('[data-toggle=collapse]').on('click', function(e) {
-		e.preventDefault();
-		e.stopPropagation();
+		e.stopPropagation(); // 이벤트 전파막기
 		console.log("클릭")
 		if($(this).attr('aria-expanded') == 'false') {
 			$(this).attr('aria-expanded', true);
 		} else {
 			$(this).attr('aria-expanded', false);
 		}
-		$(this).children('ul').collapse('toggle');
-	});
-	$('[data-toggle=collapse] a').click(function(e) {
-		e.stopPropagation();
-		console.log("링크클릭")
+		$(this).siblings('ul').collapse('toggle'); 
 	});
 	
+	//data-setbg
 	$('.set-bg').each(function () {
         var bg = $(this).data('setbg');
         $(this).css('background-image', 'url(' + bg + ')');
