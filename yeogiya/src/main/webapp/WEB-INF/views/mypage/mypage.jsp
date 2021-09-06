@@ -13,10 +13,6 @@
 		}
 	}
 	
-	.mypage-container .nav-tabs .nav-link {
-	    font-size: 14px;
-	    font-weight: 500;
-	}
 	
 	/* 	체크박스 사이즈 */
 	.mypage-container .custom-checkbox .custom-control-label::before {

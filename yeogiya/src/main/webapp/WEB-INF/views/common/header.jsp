@@ -11,7 +11,7 @@
 	          <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">지역</a>
 	          <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
 	            <li class="dropdown-submenu dropright">
-	              <a id="dropdownMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">울산</a>
+	              <a id="dropdownMenu2" href="${contextPath }/boardView" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">울산</a>
 	              <ul aria-labelledby="dropdownMenu2" class="dropdown-menu">
 	                <li><a href="#" class="dropdown-item">동구</a></li>
 	                <li><a href="#" class="dropdown-item">남구</a></li>
@@ -19,7 +19,7 @@
 	              </ul>
 	            </li>
 	            <li class="dropdown-submenu dropright">
-	              <a id="dropdownMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">경기도</a>
+	              <a id="dropdownMenu3" href="${contextPath}/list" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">경기도</a>
 	              <ul aria-labelledby="dropdownMenu3" class="dropdown-menu">
 	                <li><a href="" class="dropdown-item">용인</a></li>
 	                <li><a href="#" class="dropdown-item">수원</a></li>

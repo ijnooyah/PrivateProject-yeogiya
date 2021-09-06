@@ -37,25 +37,37 @@
 			$(this).children('ul').removeClass('show');
 		});
 		//클릭이벤트
-		$('li.dropdown-submenu').on("click", function(e) {
-		    e.stopPropagation();
-			$(this).children('a').toggleClass('active');
-			$(this).children('ul').toggleClass('show');
-			$("li.dropdown-submenu > a").not($(this).children('a')).removeClass("active");
-			$("li.dropdown-submenu > ul").not($(this).children('ul')).removeClass("show");
-		    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
-		      $('li.dropdown-submenu .show').removeClass("show");
-		    });
+		$('li.dropdown-submenu [data-toggle=dropdown]').on("click", function(e) {
+			console.log("클릭")
+			location.href=$(this).attr("href");
+// 		    e.stopPropagation();
+// 			$(this).children('a').toggleClass('active');
+// 			$(this).children('ul').toggleClass('show');
+// 			$("li.dropdown-submenu > a").not($(this).children('a')).removeClass("active");
+// 			$("li.dropdown-submenu > ul").not($(this).children('ul')).removeClass("show");
+// 		    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+// 		      $('li.dropdown-submenu .show').removeClass("show");
+// 		    });
 		});
 	});
 	//툴팁
 	$('[data-toggle="tooltip"]').tooltip();   
 	
 	//sidebar
-	$(".city").click(function() {
-		var spanArrow = $(this).find(".fa");
-		spanArrow.toggleClass("fa-caret-down");
-		spanArrow.toggleClass("fa-caret-up");
+	$('[data-toggle=collapse]').on('click', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		console.log("클릭")
+		if($(this).attr('aria-expanded') == 'false') {
+			$(this).attr('aria-expanded', true);
+		} else {
+			$(this).attr('aria-expanded', false);
+		}
+		$(this).children('ul').collapse('toggle');
+	});
+	$('[data-toggle=collapse] a').click(function(e) {
+		e.stopPropagation();
+		console.log("링크클릭")
 	});
 	
 	$('.set-bg').each(function () {

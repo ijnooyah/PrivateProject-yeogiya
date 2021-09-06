@@ -18,14 +18,14 @@
 	}
 	.card {
 		border: 1px solid var(--grayE1);
-		padding: 1.8rem;
+		padding: 1.8rem 3rem;
 		box-sizing: border-box;
 		border-radius: 0.13rem;
 		width:845px;
 	}
 	
 	/* 셀렉트 박스 */
-	select#district, select#city, select#sort {
+	select.form-control {
 		font-size:80%;
 		width: 150px;
 	}
@@ -172,7 +172,11 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 						<select class="form-control mr-1" id="city">
 							<option value="">동구</option>
 						</select>
-						<select class="form-control" id="sort">
+						<select class="form-control mr-1" id="board_sort">
+							<option value="">추천</option>
+							<option value="">사담</option>
+						</select>
+						<select class="form-control" id="place_sort">
 							<option value="">맛집</option>
 						</select>
 					</div>
@@ -186,6 +190,9 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 					</div>
 					<!-- 해시태그 -->
 					<div class="row mb-2">
+						<div class="text-muted font-size-090 mb-1">
+							콤마나 스페이스로 해시태그를 구분지어 주세요.
+						</div>
 						<div class="tag_wrap w-100">
 							 <input type="hidden" name="tag" value="" id="tag" style="width:100%">
 						</div>

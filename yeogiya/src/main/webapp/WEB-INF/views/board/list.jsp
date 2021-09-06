@@ -2,11 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style>
+td.td_title {
+min-width:397px;
+}
+tr.tr_notice td.td_title .short_title {
+width:310px;
+}
+tr:not(.tr_notice) td.td_title .short_title {
+width:290px;
+}
+</style>
 <div class="px-4">
 	<!-- 상단 -->
 	<div class="d-flex mb-1 dropdown">
 		  <button type="button" class="btn-sm btn border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    최신순
+		  </button>
+		  <div class="dropdown-menu">
+				<a class="dropdown-item" href="#">최신순</a>
+				<a class="dropdown-item" href="#">댓글순</a>
+				<a class="dropdown-item" href="#">좋아요순</a>
+				<a class="dropdown-item" href="#">조회수순</a>
+		  </div>
+		  <button type="button" class="btn-sm btn border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    추천
 		  </button>
 		  <div class="dropdown-menu">
 				<a class="dropdown-item" href="#">최신순</a>
@@ -27,8 +47,6 @@
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th>지역</th>
-					<th>구역</th>
 					<th>분류</th>
 					<th>제목</th>
 					<th>작성자</th>
@@ -41,34 +59,23 @@
 				<!--조회된 게시글 목록 있을 때 -->
 					<!-- 공지목록 -->
 				<c:forEach var="v" begin="1" end="3">
-					<tr>
+					<tr class="tr_notice">
 						<!-- 번호 -->
 						<td class="td_no td_notice">
 							<div class='badge badge-pink p-1'>
 							공지
 							</div>
 						</td>
-						<!-- 구역 -->
-						<td class="td_district">
-							<a href="" class="district ">
-								충청남도
-							</a>
-						</td>
-						<!-- 지역 -->
-						<td class="td_city">
-							<a href="" class="city ">
-								천안
-							</a>
-						</td>
 						<!-- 분류 -->
 						<td class="td_sort">
 							<a href="" class="">	
-								맛집
+								추천
 							</a>
 						</td>
 						<!-- 제목 -->
-						<td class="td_title d-flex" style="width:277px;">
-							<a href="" class="short_title" style="width:230px;">
+						<td class="td_title d-flex">
+							<span class="place_sort mr-1 text-muted font-weight-400">[맛집]</span>
+							<a href="" class="short_title">
 								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
 							</a>
 							<span class="text-pink mx-1">[3]</span>
@@ -99,18 +106,6 @@
 						<td  class="td_no">
 							${v}
 						</td>
-						<!-- 구역 -->
-						<td class="td_district">
-							<a href="" class="district ">
-								충청남도
-							</a>
-						</td>
-						<!-- 지역 -->
-						<td class="td_city">
-							<a href="" class="city ">
-								천안
-							</a>
-						</td>
 						<!-- 분류 -->
 						<td class="td_sort">
 							<a href="" class="">	
@@ -118,8 +113,9 @@
 							</a>
 						</td>
 						<!-- 제목 -->
-						<td class="td_title d-flex" style="width:277px;">
-							<a href="" class="short_title" style="width:230px;">
+						<td class="td_title d-flex">
+							<span class="place_sort mr-1 text-muted font-weight-400">[맛집]</span>
+							<a href="" class="short_title">
 								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
 							</a>
 							<span class="text-pink mx-1">[3]</span>

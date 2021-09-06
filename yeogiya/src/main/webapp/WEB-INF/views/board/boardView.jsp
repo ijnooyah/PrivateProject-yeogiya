@@ -21,28 +21,6 @@
 		width:845px;
 	}
 	
-	/* 지역바 */
-	.board-container .district_wrap a, .board-container .district_wrap span {
-		color:var(--black);
-		font-weight:500;
-		font-size: .95rem;
-	}
-	.board-container .district_wrap span{
-		font-weight:300;
-		font-size: .9rem;
-	}
-	.board-container .district_wrap a:hover, .board-container .district_wrap a:focus, .board-container .district_wrap a:active, .board-container .district_wrap a.active {
-	    color: var(--pink);
-	    font-weight:600;
-	    text-decoration: none;
-	}
-	
-	/* 	탭 */
-	.board-container .nav-tabs .nav-link {
-	    font-size: 14px;
-	    font-weight: 500;
-	}
-	
 	/* 	상세보기 */
 	.board-container .content-top a:hover {
 		color:unset;
@@ -53,19 +31,6 @@
 	.board-container .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;overflow:hidden;background: var(--pink);background: var(--pink) url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 	.board-container .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:500;}
 	.board-container .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-	
-	.board-container .dropdown-toggle {
-		border-radius: 0;
-		font-size: .75rem;
-	}
-	.board-container .dropdown-menu {
-		min-width: 4.05rem;;
-		margin-top: -1px;
-	}
-	.board-container .dropdown-item {
-		padding: .25rem 0;
-    	text-align: center;
-	}
 	
 	a.text-pink:hover {
 		text-decoration:none;

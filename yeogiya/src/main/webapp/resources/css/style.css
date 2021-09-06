@@ -55,6 +55,10 @@
 	font-weight: 500!important;
 }
 /* 탭펜 */
+.nav-tabs .nav-link {
+   font-size: 14px;
+   font-weight: 500;
+}
 .nav-tabs {
    border-bottom: 1px solid var(--pink50);
 }
@@ -123,17 +127,12 @@
     z-index: 0;
   	border-radius: .3rem;
 }
-.sidebar a:hover, .sidebar a:focus, .sidebar a:active, .sidebar a.active {
-	text-decoration: none!important;
-    outline: none!important;
-    color: var(--pink) !important;
-}
 .sidebar .title_wrap {
     text-align: center;
     padding: 1rem;
     border-bottom: 1px solid var(--pink);
 }
-.sidebar a.district {
+.sidebar a.sideMenuTitle {
 	color: var(--black);
 	font-weight: 500;
 }
@@ -145,32 +144,11 @@
    color: var(--black);
 }
 .sidebar a.city:hover {
-	color:var(--pink);
-}
-.sidebar span.fa {
-	position: absolute;
-    top: 50%;
-    right: 15%;
-    color: var(--pink);
+/* 	color:var(--pink); */
 }
 .sidebar ul li>ul li {
-	padding-left: 3rem;
-   	padding-top: 0.5rem;
-}
-.sidebar ul li>ul li a {
-	font-size: 0.8rem;
-    border-bottom: 1px solid transparent;
-    color: var(--gray);
-}
-.sidebar .list-unstyled {
-    padding-left: 0;
-    list-style: none;
-}
-.sidebar .collapse:not(.show) {
-    display: none;
-}
-.sidebar a[data-toggle=collapse] {
-    position: relative;
+/* 	padding-left: 3rem; */
+/*    	padding-top: 0.5rem; */
 }
 
 /* 	푸터 */.footer{background-color:var(--pink);font-size:12px;color:var(--white);}
@@ -275,7 +253,7 @@
 		text-decoration: underline;
 	}
 	/* 넓이설정 */
-	.table_wrap table .td_no{width:50px}.table_wrap table .td_district{width:55px}.table_wrap table .td_city{width:55px}.table_wrap table .td_sort{width:55px}.table_wrap table .td_writer{width:90px;}.table_wrap table .td_date{width:55px}.table_wrap table .td_like{width:50px}.table_wrap table .td_view{width:50px}	
+	.table_wrap table .td_no{min-width:50px}.table_wrap table .td_district{min-width:55px}.table_wrap table .td_city{min-width:55px}.table_wrap table .td_sort{min-width:55px}.table_wrap table .td_writer{min-width:90px;}.table_wrap table .td_date{min-width:55px}.table_wrap table .td_like{min-width:50px}.table_wrap table .td_view{min-width:50px}	
 	.table_wrap table .td_no:not(.td_notice), 
 	.table_wrap table .td_date, 
 	.table_wrap table .td_like, 
@@ -303,6 +281,20 @@
 .logo:hover {
 	color:var(--pink);
 	text-decoration:none;
+}
+
+/* order 드롭다운 */
+.order-dropdown .dropdown-toggle {
+	border-radius: 0;
+	font-size: .75rem;
+}
+.order-dropdown .dropdown-menu {
+	min-width: 4.05rem;;
+	margin-top: -1px;
+}
+.order-dropdown .dropdown-item {
+	padding: .25rem 0;
+   	text-align: center;
 }
 
 .find_wrap, .relogin_find_wrap {

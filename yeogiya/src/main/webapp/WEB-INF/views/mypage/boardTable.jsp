@@ -30,7 +30,6 @@
 					</th>
 					<th>번호</th>
 					<th>지역</th>
-					<th>구역</th>
 					<th>분류</th>
 					<th>제목</th>
 					<th>작성자</th>
@@ -54,12 +53,6 @@
 						<td  class="td_no">
 						 	${v}
 						</td>
-						<!-- 구역 -->
-						<td class="td_district">
-							<a href="" class="district ">
-								충청남도
-							</a>
-						</td>
 						<!-- 지역 -->
 						<td class="td_city">
 							<a href="" class="city ">
@@ -69,12 +62,13 @@
 						<!-- 분류 -->
 						<td class="td_sort">
 							<a href="" class="">	
-								맛집
+								추천
 							</a>
 						</td>
 						<!-- 제목 -->
-						<td class="td_title d-flex" style="width:296px;">
-							<a href="" class="short_title" style="width:230px;">
+						<td class="td_title d-flex" style="min-width:340px;">
+							<span class="place_sort mr-1 text-muted font-weight-400">[맛집]</span>
+							<a href="" class="short_title" style="width:250px;">
 								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
 							</a>
 							<span class="text-pink mx-1">[3]</span>
