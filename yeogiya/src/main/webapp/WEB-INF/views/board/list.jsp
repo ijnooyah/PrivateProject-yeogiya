@@ -12,38 +12,85 @@ width:310px;
 tr:not(.tr_notice) td.td_title .short_title {
 width:290px;
 }
+
+.board-container .dropdown-menu {
+    margin-top: -1px;
+}
+.board-container .dropdown-item {
+    padding: .25rem 0;
+    text-align: center;
+}
+
+div.local_title span {
+	font-family:'logo';
+	font-size:1.3rem;
+	color:var(--pink);
+	position:relative;
+}
+div.local_title span::after {
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--pink);
+}
+.local_wrap a, .local_wrap span {
+	color:var(--gray);
+	font-family:'logo';
+	font-size: .9rem;
+}
+.local_wrap span{
+	font-weight:300;
+	font-size: .9rem;
+}
+.local_wrap a:hover, .local_wrap a:focus, .local_wrap a:active, .local_wrap a.active {
+    color: var(--pink);
+    text-decoration: none;
+}
 </style>
 <div class="px-4">
-	<!-- 상단 -->
-	<div class="d-flex mb-1 dropdown">
-		  <button type="button" class="btn-sm btn border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    최신순
-		  </button>
-		  <div class="dropdown-menu">
+	<!-- 분류 -->
+	<div class="d-flex mb-1">
+		<div class="dropdown">
+			<button type="button" class="btn-sm btn border-0 dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  분류
+			</button>
+			<div class="dropdown-menu" style="min-width:3.55rem;">
+				<a class="dropdown-item" href="#">전체</a>
+				<a class="dropdown-item" href="#">사담</a>
+				<a class="dropdown-item" href="#">추천</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  말머리
+			</button>
+			<div class="dropdown-menu" style="min-width:4rem;">
+				<a class="dropdown-item" href="#">전체</a>
+				<a class="dropdown-item" href="#">식당</a>
+				<a class="dropdown-item" href="#">카페</a>
+				<a class="dropdown-item" href="#">운동</a>
+				<a class="dropdown-item" href="#">미용실</a>
+			</div>
+		</div>
+		<div class="dropdown ml-auto">
+			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  최신순
+			</button>
+			<div class="dropdown-menu" style="min-width:4rem;">
 				<a class="dropdown-item" href="#">최신순</a>
 				<a class="dropdown-item" href="#">댓글순</a>
 				<a class="dropdown-item" href="#">좋아요순</a>
 				<a class="dropdown-item" href="#">조회수순</a>
-		  </div>
-		  <button type="button" class="btn-sm btn border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    추천
-		  </button>
-		  <div class="dropdown-menu">
-				<a class="dropdown-item" href="#">최신순</a>
-				<a class="dropdown-item" href="#">댓글순</a>
-				<a class="dropdown-item" href="#">좋아요순</a>
-				<a class="dropdown-item" href="#">조회수순</a>
-		  </div>
-		  <a type="button" class="btn-sm btn border ml-auto mr-2 font-size-075 rounded-0">
-		    글쓰기
-		  </a>
-<!-- 		  <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" fill="currentColor" class="bi bi-pencil-fill text-muted cursor-pointer mt-2 ml-auto mr-2" viewBox="0 0 16 16" style="opacity:.6;"> -->
-<!--   			<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/> -->
-<!-- 		</svg> -->
+			</div>
+		</div>
 	</div>
 	<!-- 글목록 -->
 	<div class="table_wrap">
-		<table class="table">
+		<table class="table" style="margin-bottom:.5rem;">
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -109,7 +156,7 @@ width:290px;
 						<!-- 분류 -->
 						<td class="td_sort">
 							<a href="" class="">	
-								맛집
+								사담
 							</a>
 						</td>
 						<!-- 제목 -->
@@ -149,6 +196,11 @@ width:290px;
 				</c:forEach>
 			</tbody>
 		</table>
+	</div>
+	<div class="d-flex">
+		<a type="button" class="btn-sm btn border ml-auto mr-2 font-size-075 rounded-0">
+			    글쓰기
+		</a>
 	</div>
 	<!-- pagination -->
 	<div class="page_wrap mt-4">

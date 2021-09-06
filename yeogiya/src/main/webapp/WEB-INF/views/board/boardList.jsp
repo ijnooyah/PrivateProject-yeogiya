@@ -28,33 +28,8 @@
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
-			<!-- Nav tabs -->
-			<ul class="nav nav-tabs mt-4 mx-4">
-			  <li class="nav-item">
-			    <a class="nav-link active" data-toggle="tab" href="#all">전체</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#menu1">추천</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#menu2">사담</a>
-			  </li>
-			</ul>
-			<!-- Tab panes -->
-			<div class="tab-content px-4">
-				<div id="all" class="tab-pane fade show active">
-					<br>
-					<jsp:include page="./list.jsp" flush="false"/>
-				</div>
-				<div id="menu1" class="tab-pane fade">
-					<br>
-					<jsp:include page="./list.jsp" flush="false"/>
-				</div>
-				<div id="menu2" class="tab-pane fade">
-					<br>
-					<jsp:include page="./list.jsp" flush="false"/>
-				</div>
-			</div>
+			<jsp:include page="./top.jsp" flush="false"/>
+			<jsp:include page="./list.jsp" flush="false"/>
 		</div>
 	</div>
 	<jsp:include page="../common/footer.jsp" flush="false"/>

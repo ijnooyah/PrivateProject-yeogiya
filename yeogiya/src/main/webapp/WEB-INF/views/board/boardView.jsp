@@ -44,9 +44,9 @@
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 			<!-- 탑 -->
-<%-- 			<jsp:include page="./top.jsp" flush="false"/> --%>
+			<jsp:include page="./top.jsp" flush="false"/>
 			<!-- 상세보기 -->
-			<div class="col-md-12 mt-4 px-5 pb-5" style="flex:none;">
+			<div class="col-md-12 pt-4 px-5 pb-5 border-top" style="flex:none;">
 				<!-- 글정보 -->
 				<div class="row mb-2 content-top">
 					<div class="d-flex w-100 h5">
@@ -116,32 +116,9 @@
 					<jsp:include page="./comment.jsp" flush="false"/>
 				</div>
 			</div>
-			<!-- Nav tabs -->
-			<ul class="nav nav-tabs mt-5 mx-4">
-			  <li class="nav-item">
-			    <a class="nav-link active" data-toggle="tab" href="#all">전체</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#menu1">맛집</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" data-toggle="tab" href="#menu2">병원</a>
-			  </li>
-			</ul>
-			<!-- Tab panes -->
-			<div class="tab-content px-4">
-				<div id="all" class="tab-pane fade show active">
-					<br>
-					<jsp:include page="./list.jsp" flush="false"/>
-				</div>
-				<div id="menu1" class="tab-pane fade">
-					<br>
-					<jsp:include page="./list.jsp" flush="false"/>
-				</div>
-				<div id="menu2" class="tab-pane fade">
-					<br>
-					<jsp:include page="./list.jsp" flush="false"/>
-				</div>
+			<!-- 글목록 -->
+			<div class="mt-5">
+				<jsp:include page="./list.jsp" flush="false"/>
 			</div>
 		</div>
 	</div>

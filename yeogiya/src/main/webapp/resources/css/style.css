@@ -321,20 +321,6 @@ div[aria-expanded=false]::after {
 	text-decoration:none;
 }
 
-/* order 드롭다운 */
-.order-dropdown .dropdown-toggle {
-	border-radius: 0;
-	font-size: .75rem;
-}
-.order-dropdown .dropdown-menu {
-	min-width: 4.05rem;;
-	margin-top: -1px;
-}
-.order-dropdown .dropdown-item {
-	padding: .25rem 0;
-   	text-align: center;
-}
-
 .find_wrap, .relogin_find_wrap {
 	padding: 24px 0 40px;
 	text-align: center;
