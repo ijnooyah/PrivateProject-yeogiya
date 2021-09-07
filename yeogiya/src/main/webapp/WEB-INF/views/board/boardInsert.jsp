@@ -166,9 +166,9 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 					</div>
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
-						<select class="form-control mr-1" id="district">
-							<option value="">울산</option>
-						</select>
+<!-- 						<select class="form-control mr-1" id="district"> -->
+<!-- 							<option value="">울산</option> -->
+<!-- 						</select> -->
 						<select class="form-control mr-1" id="city">
 							<option value="">동구</option>
 						</select>

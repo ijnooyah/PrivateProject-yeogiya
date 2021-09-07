@@ -4,13 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 td.td_title {
-min-width:397px;
+min-width:330px;
 }
-tr.tr_notice td.td_title .short_title {
-width:310px;
-}
-tr:not(.tr_notice) td.td_title .short_title {
-width:290px;
+td.td_title .short_title {
+width:220px;
 }
 
 .board-container .dropdown-menu {
@@ -21,41 +18,41 @@ width:290px;
     text-align: center;
 }
 
-div.local_title span {
-	font-family:'logo';
-	font-size:1.3rem;
-	color:var(--pink);
-	position:relative;
-}
-div.local_title span::after {
-	position: absolute;
-    bottom: 0;
-    left: 0;
+.dropdown-chevron > .dropdown-toggle::after,  .dropdown-chevron > .dropdown-toggle[aria-expanded=true]::after{
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQ1MS44NDdweCIgaGVpZ2h0PSI0NTEuODQ2cHgiIHZpZXdCb3g9IjAgMCA0NTEuODQ3IDQ1MS44NDYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ1MS44NDcgNDUxLjg0NjsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggZD0iTTI0OC4yOTIsMTA2LjQwNmwxOTQuMjgxLDE5NC4yOWMxMi4zNjUsMTIuMzU5LDEyLjM2NSwzMi4zOTEsMCw0NC43NDRjLTEyLjM1NCwxMi4zNTQtMzIuMzkxLDEyLjM1NC00NC43NDQsMA0KCQlMMjI1LjkyMywxNzMuNTI5TDU0LjAxOCwzNDUuNDRjLTEyLjM2LDEyLjM1NC0zMi4zOTUsMTIuMzU0LTQ0Ljc0OCwwYy0xMi4zNTktMTIuMzU0LTEyLjM1OS0zMi4zOTEsMC00NC43NUwyMDMuNTU0LDEwNi40DQoJCWM2LjE4LTYuMTc0LDE0LjI3MS05LjI1OSwyMi4zNjktOS4yNTlDMjM0LjAxOCw5Ny4xNDEsMjQyLjExNSwxMDAuMjMyLDI0OC4yOTIsMTA2LjQwNnoiLz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K) !important;
+	width: 10px !important;
+    height: 10px !important;
+    background-size: 10px !important;
+    opacity: 1;
     content: '';
-    display: block;
-    width: 100%;
-    height: 1.5px;
-    background: var(--pink);
+    border: 0;
+    transform:rotate(90deg);
+    position:absolute;
+    left: 45px;
+    top: 13px;
 }
-.local_wrap a, .local_wrap span {
-	color:var(--gray);
-	font-family:'logo';
-	font-size: .9rem;
+.dropdown-plain > .dropdown-toggle::after {
+	content: none;
 }
-.local_wrap span{
-	font-weight:300;
-	font-size: .9rem;
-}
-.local_wrap a:hover, .local_wrap a:focus, .local_wrap a:active, .local_wrap a.active {
-    color: var(--pink);
-    text-decoration: none;
+.dropdown-chevron > .dropdown-toggle, .dropdown-plain > .dropdown-toggle {
+	font-weight:500;
 }
 </style>
-<div class="px-4">
+<div class="px-4 pt-4">
 	<!-- 분류 -->
-	<div class="d-flex mb-1">
-		<div class="dropdown">
-			<button type="button" class="btn-sm btn border-0 dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	<div class="d-flex mb-1" style="margin-left: -6px;">
+		<div class="dropdown dropdown-chevron">
+			<button type="button" class="btn border-0 dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  지역
+			</button>
+			<div class="dropdown-menu" style="min-width:3.55rem;">
+				<a class="dropdown-item" href="#">전체</a>
+				<a class="dropdown-item" href="#">사담</a>
+				<a class="dropdown-item" href="#">추천</a>
+			</div>
+		</div>
+		<div class="dropdown dropdown-chevron">
+			<button type="button" class="btn border-0 dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			  분류
 			</button>
 			<div class="dropdown-menu" style="min-width:3.55rem;">
@@ -64,8 +61,8 @@ div.local_title span::after {
 				<a class="dropdown-item" href="#">추천</a>
 			</div>
 		</div>
-		<div class="dropdown">
-			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<div class="dropdown dropdown-plain">
+			<button type="button" class="btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			  말머리
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
@@ -76,7 +73,9 @@ div.local_title span::after {
 				<a class="dropdown-item" href="#">미용실</a>
 			</div>
 		</div>
-		<div class="dropdown ml-auto">
+	</div>
+	<div class="d-flex mb-1 px-3 mt-3">
+		<div class="dropdown">
 			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			  최신순
 			</button>
@@ -87,13 +86,17 @@ div.local_title span::after {
 				<a class="dropdown-item" href="#">조회수순</a>
 			</div>
 		</div>
+		<a type="button" class="btn-sm btn border ml-auto mr-2 font-size-075 rounded-0">
+			    글쓰기
+		</a>
 	</div>
 	<!-- 글목록 -->
-	<div class="table_wrap">
+	<div class="table_wrap px-4">
 		<table class="table" style="margin-bottom:.5rem;">
 			<thead>
 				<tr>
 					<th>번호</th>
+					<th>지역</th>
 					<th>분류</th>
 					<th>제목</th>
 					<th>작성자</th>
@@ -113,8 +116,14 @@ div.local_title span::after {
 							공지
 							</div>
 						</td>
+						<!-- 지역 -->
+						<td class="td_subLocal">
+							<a href="" class="">	
+								강남구
+							</a>
+						</td>
 						<!-- 분류 -->
-						<td class="td_sort">
+						<td class="td_sortBoard">
 							<a href="" class="">	
 								추천
 							</a>
@@ -153,8 +162,14 @@ div.local_title span::after {
 						<td  class="td_no">
 							${v}
 						</td>
+						<!-- 지역 -->
+						<td class="td_subLocal">
+							<a href="" class="">	
+								강남구
+							</a>
+						</td>
 						<!-- 분류 -->
-						<td class="td_sort">
+						<td class="td_sortBoard">
 							<a href="" class="">	
 								사담
 							</a>
@@ -196,11 +211,6 @@ div.local_title span::after {
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
-	<div class="d-flex">
-		<a type="button" class="btn-sm btn border ml-auto mr-2 font-size-075 rounded-0">
-			    글쓰기
-		</a>
 	</div>
 	<!-- pagination -->
 	<div class="page_wrap mt-4">

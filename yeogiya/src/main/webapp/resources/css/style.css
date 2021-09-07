@@ -150,7 +150,7 @@ li.sideMenu div {
     display: inline-block;
 }
 li.sideMenu > div > a {
-    color: var(--pink);
+    color: var(--gray);
     font-size: .9rem;
     font-family:'logo';
 }
@@ -291,7 +291,7 @@ div[aria-expanded=false]::after {
 		text-decoration: underline;
 	}
 	/* 넓이설정 */
-	.table_wrap table .td_no{min-width:50px}.table_wrap table .td_district{min-width:55px}.table_wrap table .td_city{min-width:55px}.table_wrap table .td_sort{min-width:55px}.table_wrap table .td_writer{min-width:90px;}.table_wrap table .td_date{min-width:55px}.table_wrap table .td_like{min-width:50px}.table_wrap table .td_view{min-width:50px}	
+	.table_wrap table .td_no{min-width:50px}.table_wrap table .td_subLocal{min-width:75px}.table_wrap table .td_sortBoard{min-width:55px}.table_wrap table .td_writer{min-width:90px;}.table_wrap table .td_date{min-width:55px}.table_wrap table .td_like{min-width:50px}.table_wrap table .td_view{min-width:50px}	
 	.table_wrap table .td_no:not(.td_notice), 
 	.table_wrap table .td_date, 
 	.table_wrap table .td_like, 

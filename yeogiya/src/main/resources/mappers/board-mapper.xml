@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yj.yeogiya.board">
+<!-- 카테고리 -->
+	<select id="selectSortLocal" resultType="Sort">
+ 		SELECT * FROM tbl_sort_local
+ 		order by sort_name asc
+ 	</select>
+	<select id="selectSortPlace" resultType="Sort">
+ 		SELECT * FROM tbl_sort_place
+ 	</select>
+	<select id="selectSortBoard" resultType="Sort">
+ 		SELECT * FROM tbl_sort_board
+ 	</select>
+ 	<!-- 상위지역 영어이름으로 select 하기 -->
+ 	<select id="selectSortLocalPByEngName" resultType="Sort">
+ 		SELECT * FROM tbl_sort_local
+ 		where eng_name = #{eng_name}
+ 	</select>
+</mapper>

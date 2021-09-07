@@ -59,13 +59,14 @@
 	</style>
 </head>
 <body>
+${sortLocal1Arr }
 <jsp:include page="../common/header.jsp" flush="false"/>
 	<div class="container board-container my-5">
 		<!-- 비로그인 사용자일경우 전국 인기장소만 보여주기. -->
 		<!-- 울산 동구 (설정지역) 핫플레이스 (글말고장소)-->
 		<!-- 검색창 -->
 		<div class="text-center pt-2 mb-4">
-			<a href="${contextPath}/" class="logo text-pink">울산</a>
+			<a href="${contextPath}/" class="logo text-pink">${sortLocalP.sort_name}</a>
 		</div>
 		<div style="width:700px;" class="mx-auto mb-5">
 			<form  method="post" action="">

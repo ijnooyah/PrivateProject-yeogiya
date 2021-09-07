@@ -46,7 +46,7 @@
 			<!-- 탑 -->
 			<jsp:include page="./top.jsp" flush="false"/>
 			<!-- 상세보기 -->
-			<div class="col-md-12 pt-4 px-5 pb-5 border-top" style="flex:none;">
+			<div class="col-md-12 pt-4 px-5 pb-5" style="flex:none;">
 				<!-- 글정보 -->
 				<div class="row mb-2 content-top">
 					<div class="d-flex w-100 h5">
