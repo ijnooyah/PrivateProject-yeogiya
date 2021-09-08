@@ -1,8 +1,13 @@
-package com.yj.yeogiya.test.model.vo;
+package com.yj.yeogiya.model.vo;
+
+import java.util.List;
 
 public class TestVo {
 	private int test_no;
 	private String content;
+	
+	private List<TestImg> imgs;
+	
 	public TestVo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -19,9 +24,15 @@ public class TestVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public List<TestImg> getImgs() {
+		return imgs;
+	}
+	public void setImgs(List<TestImg> imgs) {
+		this.imgs = imgs;
+	}
 	@Override
 	public String toString() {
-		return "TestVo [test_no=" + test_no + ", content=" + content + "]";
+		return "TestVo [test_no=" + test_no + ", content=" + content + ", imgs=" + imgs + "]";
 	}
 	
 	

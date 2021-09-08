@@ -1,4 +1,4 @@
-package com.yj.yeogiya.board.model.vo;
+package com.yj.yeogiya.model.vo;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ public class Place {
 	private double place_lat;
 	private double place_long;
 	private int kakao_id;
-	private int parent_local;
-	private int local;
-	private int place_sort;
+	private String sort_place;
+	private String sort_local;
+	private String sub_local;
 	private int ment_cnt;
 	private int rp_cnt;
 	
@@ -72,29 +72,7 @@ public class Place {
 		this.kakao_id = kakao_id;
 	}
 
-	public int getParent_local() {
-		return parent_local;
-	}
 
-	public void setParent_local(int parent_local) {
-		this.parent_local = parent_local;
-	}
-
-	public int getLocal() {
-		return local;
-	}
-
-	public void setLocal(int local) {
-		this.local = local;
-	}
-
-	public int getPlace_sort() {
-		return place_sort;
-	}
-
-	public void setPlace_sort(int place_sort) {
-		this.place_sort = place_sort;
-	}
 
 	public int getMent_cnt() {
 		return ment_cnt;
@@ -118,6 +96,30 @@ public class Place {
 
 	public void setBoards(List<BoardPlace> boards) {
 		this.boards = boards;
+	}
+
+	public String getSort_place() {
+		return sort_place;
+	}
+
+	public void setSort_place(String sort_place) {
+		this.sort_place = sort_place;
+	}
+
+	public String getSort_local() {
+		return sort_local;
+	}
+
+	public void setSort_local(String sort_local) {
+		this.sort_local = sort_local;
+	}
+
+	public String getSub_local() {
+		return sub_local;
+	}
+
+	public void setSub_local(String sub_local) {
+		this.sub_local = sub_local;
 	}
 
 	

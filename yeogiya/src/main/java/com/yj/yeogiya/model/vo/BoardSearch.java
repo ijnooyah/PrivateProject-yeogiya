@@ -1,4 +1,4 @@
-package com.yj.yeogiya.board.model.vo;
+package com.yj.yeogiya.model.vo;
 
 public class BoardSearch {
 	private String user_id; //로그인한 아이디

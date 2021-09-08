@@ -1,4 +1,4 @@
-package com.yj.yeogiya.board.model.vo;
+package com.yj.yeogiya.model.vo;
 
 
 public class Sort {

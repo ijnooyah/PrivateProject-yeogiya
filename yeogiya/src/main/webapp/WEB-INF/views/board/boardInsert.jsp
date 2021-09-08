@@ -37,7 +37,12 @@
 	.note-editor {
 		width: 100% !important;
 	}
-	
+	.note-editor .note-toolbar .note-color-all .note-dropdown-menu, .note-popover .popover-content .note-color-all .note-dropdown-menu {
+    min-width: 345px;
+	}
+	.note-editor .note-toolbar .note-para .note-dropdown-menu, .note-popover .popover-content .note-para .note-dropdown-menu {
+   	min-width: 237px;
+	}
 	.note-fontname .note-icon-caret, .note-fontsize .note-icon-caret, .note-para .note-icon-caret, .note-height .note-icon-caret{
 	 display:none;
 	}
@@ -149,7 +154,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
-			<form action="insertRun" method="post">
+			<form action="testRun" method="post">
 				<div class="">
 					<!-- 카카오맵 모달 -->
 					<div class="row mb-2">
@@ -166,17 +171,15 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 					</div>
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
-<!-- 						<select class="form-control mr-1" id="district"> -->
-<!-- 							<option value="">울산</option> -->
-<!-- 						</select> -->
-						<select class="form-control mr-1" id="city">
+						<input type="hidden" name="sort_local"/>
+						<select class="form-control mr-1" id="subLocal">
 							<option value="">동구</option>
 						</select>
-						<select class="form-control mr-1" id="board_sort">
+						<select class="form-control mr-1" id="sortBoard">
 							<option value="">추천</option>
 							<option value="">사담</option>
 						</select>
-						<select class="form-control" id="place_sort">
+						<select class="form-control" id="sortPlace">
 							<option value="">맛집</option>
 						</select>
 					</div>
@@ -276,22 +279,69 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	        width : 1110,   
 	        height : 300,   
 	        placeholder: '내용을 입력해 주세요.',
+	        lang : 'ko-KR',
 // 	        disableResizeEditor: true,
 	        spellCheck:false,
 	        toolbar: [
 			    ['fontname', ['fontname']],
 			    ['fontsize', ['fontsize']],
+			    ['color', ['color']],
 			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-			    ['color', ['forecolor','color']],
 			    ['para', ['ul', 'ol', 'paragraph']],
 			    ['height', ['height']],
 			    ['insert',['picture','link','video']],
 			  	],
 				fontNames: ['Noto Sans KR', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-				fontSizes: ['8','9','10','11','12', '13', '14','16','18','20','22','24','28','30','36','50','72']
+				fontSizes: ['8','9','10','11','12', '13', '14','16','18','20','22','24','28','30','36','50','72'],
+			callbacks : { 
+				onImageUpload: function(files) {
+					for (var i = files.length - 1; i >= 0; i--) {
+	                	uploadFiles(files[i], this);
+	           		}
+	         	}
+	    	}
 	    });
 	    
+	    //써머노트 글자 기본크기 
 	    $('#summernote').summernote('fontSize', 13);
+	    
+	    
+	    function uploadFiles(files, el) {
+	    	data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				 type: "POST",
+		            enctype: "multipart/form-data",
+		            url: "/uploadImage",
+		            data: formData,
+		            cache: false,
+		            contentType: false,
+		            processData: false,
+		            success: function (data) {
+		                if (data.returnCode !== 200) {
+		                    alert();
+		                    return;
+		                }
+						$(el).summernote('editor.insertImage', data.url);
+		            },
+		            error: function (e) {
+		                alert();
+		            }
+			});
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 	    
 	    // 카카오맵 잘림 현상 해결
 	    $('#modalMap').on('shown.bs.modal', function (e) {

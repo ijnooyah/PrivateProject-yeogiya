@@ -1,4 +1,4 @@
-package com.yj.yeogiya.board.model.dao;
+package com.yj.yeogiya.model.dao;
 
 import java.util.List;
 
@@ -7,7 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.yj.yeogiya.board.model.vo.Sort;
+import com.yj.yeogiya.model.vo.Sort;
+
 
 @Repository
 public class BoardDaoImpl implements BoardDao {

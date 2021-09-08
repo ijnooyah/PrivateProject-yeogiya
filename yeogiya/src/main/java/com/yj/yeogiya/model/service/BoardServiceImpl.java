@@ -1,14 +1,14 @@
-package com.yj.yeogiya.board.model.service;
+package com.yj.yeogiya.model.service;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.yj.yeogiya.board.model.dao.BoardDao;
-import com.yj.yeogiya.board.model.vo.Sort;
+import com.yj.yeogiya.model.dao.BoardDao;
+import com.yj.yeogiya.model.vo.Sort;
+
 
 
 @Service

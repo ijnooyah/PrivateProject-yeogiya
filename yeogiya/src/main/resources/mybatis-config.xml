@@ -5,12 +5,6 @@
 
 <configuration>
 	<typeAliases>
-		<package name="com.yj.yeogiya.test.model.vo"/>
-		<package name="com.yj.yeogiya.board.model.vo"/>
-		<package name="com.yj.yeogiya.customer.model.vo"/>
-		<package name="com.yj.yeogiya.member.model.vo"/>
-		<package name="com.yj.yeogiya.manager.model.vo"/>
-		<package name="com.yj.yeogiya.mypage.model.vo"/>
-		<package name="com.yj.yeogiya.common.model.vo"/>
+		<package name="com.yj.yeogiya.model.vo"/>
 	</typeAliases>
 </configuration>

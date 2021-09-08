@@ -1,8 +1,9 @@
-package com.yj.yeogiya.board.model.dao;
+package com.yj.yeogiya.model.dao;
 
 import java.util.List;
 
-import com.yj.yeogiya.board.model.vo.Sort;
+import com.yj.yeogiya.model.vo.Sort;
+
 
 public interface BoardDao {
 	public List<Sort> selectSortLocal();

@@ -1,4 +1,4 @@
-package com.yj.yeogiya.board.model.vo;
+package com.yj.yeogiya.model.vo;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -8,9 +8,9 @@ public class Board {
 	private String user_id;
 	private String board_title;
 	private String board_content;
-	private int parent_local;
-	private int local;
-	private int board_sort;
+	private String sort_local;
+	private String sub_local;
+	private String sort_board;
 	private int cmt_cnt;
 	private int like_cnt;
 	private int bmk_cnt;
@@ -67,29 +67,7 @@ public class Board {
 		this.board_content = board_content;
 	}
 
-	public int getParent_local() {
-		return parent_local;
-	}
 
-	public void setParent_local(int parent_local) {
-		this.parent_local = parent_local;
-	}
-
-	public int getLocal() {
-		return local;
-	}
-
-	public void setLocal(int local) {
-		this.local = local;
-	}
-
-	public int getBoard_sort() {
-		return board_sort;
-	}
-
-	public void setBoard_sort(int board_sort) {
-		this.board_sort = board_sort;
-	}
 
 	public int getCmt_cnt() {
 		return cmt_cnt;
@@ -211,18 +189,41 @@ public class Board {
 		this.bm_board = bm_board;
 	}
 
+	public String getSort_local() {
+		return sort_local;
+	}
+
+	public void setSort_local(String sort_local) {
+		this.sort_local = sort_local;
+	}
+
+	public String getSub_local() {
+		return sub_local;
+	}
+
+	public void setSub_local(String sub_local) {
+		this.sub_local = sub_local;
+	}
+
+	public String getSort_board() {
+		return sort_board;
+	}
+
+	public void setSort_board(String sort_board) {
+		this.sort_board = sort_board;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", board_title=" + board_title
-				+ ", board_content=" + board_content + ", parent_local=" + parent_local + ", local=" + local
-				+ ", board_sort=" + board_sort + ", cmt_cnt=" + cmt_cnt + ", like_cnt=" + like_cnt + ", bmk_cnt="
+				+ ", board_content=" + board_content + ", sort_local=" + sort_local + ", sub_local=" + sub_local
+				+ ", sort_board=" + sort_board + ", cmt_cnt=" + cmt_cnt + ", like_cnt=" + like_cnt + ", bmk_cnt="
 				+ bmk_cnt + ", view_cnt=" + view_cnt + ", rp_cnt=" + rp_cnt + ", is_notice=" + is_notice + ", reg_date="
 				+ reg_date + ", is_del=" + is_del + ", del_date=" + del_date + ", mod_date=" + mod_date + ", place="
 				+ place + ", tags=" + tags + ", imgs=" + imgs + ", like_board=" + like_board + ", bm_board=" + bm_board
 				+ "]";
 	}
 
-	
 	
 
 	
