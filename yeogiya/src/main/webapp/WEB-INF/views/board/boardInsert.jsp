@@ -161,7 +161,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
-			<form action="testRun" method="post">
+			<form action="testRun" method="post" id="istFrm">
 				<div class="">
 					<!-- 카카오맵 모달 -->
 					<div class="row mb-2">
@@ -289,6 +289,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	        lang : 'ko-KR',
 // 	        disableResizeEditor: true,
 	        spellCheck:false,
+	        focus:true,
 	        toolbar: [
 			    ['fontname', ['fontname']],
 			    ['fontsize', ['fontsize']],
@@ -424,7 +425,9 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	function doSubmit() {
 		if ($('#summernote').summernote('isEmpty')) {
 	    	  alert('editor content is empty');
+	    	  return false
 	    }
+		$("#istFrm").submit();
 	}
 	
 	

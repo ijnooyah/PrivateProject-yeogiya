@@ -14,6 +14,10 @@ public class Tag {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Tag(String tag_name) {
+		this.tag_name = tag_name;
+	}
+
 	public int getTag_no() {
 		return tag_no;
 	}

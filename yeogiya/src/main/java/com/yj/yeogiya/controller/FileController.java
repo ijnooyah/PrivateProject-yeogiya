@@ -47,7 +47,6 @@ public class FileController {
 	@RequestMapping(value="/display", method=RequestMethod.GET)
 	public ResponseEntity<byte[]> yeogiyaImage(String img) throws Exception {
 		String fullFilePath = rootPath + "/" + img;
-		System.out.println(fullFilePath);
 		FileInputStream fis = new FileInputStream(fullFilePath);
 		HttpHeaders header = new HttpHeaders();
         header.setContentType(MediaType.IMAGE_JPEG);

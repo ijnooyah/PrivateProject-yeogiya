@@ -41,9 +41,23 @@ public class TestController {
 	public String testRun(TestVo testVo) throws Exception {
 		System.out.println(testVo);
 		int test_no = testService.insertTest(testVo);
-		return "redirect:content/" + test_no;
+//		return "redirect:content/" + test_no;
+		return "board/boardInsert";
+	}
+	@RequestMapping(value = "/update/{test_no}")
+	public String update(Model model, @PathVariable("test_no") int test_no) throws Exception {
+		TestVo test = testService.selectTest(test_no);
+		model.addAttribute("test", test);
+		return "board/boardUpdate";
 	}
 	
+	@RequestMapping(value = "/updateRun", method = RequestMethod.POST)
+	public String updateRun(TestVo testVo) throws Exception {
+		System.out.println("======update=========");
+		System.out.println(testVo);
+		testService.updateTest(testVo);
+		return "redirect:content/" + testVo.getTest_no();
+	}
 	@RequestMapping(value = "/content/{test_no}")
 	public String content(Model model, @PathVariable("test_no") int test_no) {
 		TestVo test = testService.selectTest(test_no);

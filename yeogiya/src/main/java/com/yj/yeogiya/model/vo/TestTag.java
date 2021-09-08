@@ -1,25 +1,24 @@
 package com.yj.yeogiya.model.vo;
 
-public class BoardTag {
-	private int board_no;
+public class TestTag {
+	private int test_no;
 	private int tag_no;
 	private int seq;
 	private String is_del;
 	
 	private String tag_name;
 	
-	public BoardTag() {
+	public TestTag() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getBoard_no() {
-		return board_no;
+
+	public TestTag(String tag_name) {
+		super();
+		this.tag_name = tag_name;
 	}
 
-	public void setBoard_no(int board_no) {
-		this.board_no = board_no;
-	}
 
 	public int getTag_no() {
 		return tag_no;
@@ -45,19 +44,35 @@ public class BoardTag {
 		this.is_del = is_del;
 	}
 
+
+	public int getTest_no() {
+		return test_no;
+	}
+
+
+	public void setTest_no(int test_no) {
+		this.test_no = test_no;
+	}
+
+
 	public String getTag_name() {
 		return tag_name;
 	}
+
 
 	public void setTag_name(String tag_name) {
 		this.tag_name = tag_name;
 	}
 
+
 	@Override
 	public String toString() {
-		return "BoardTag [board_no=" + board_no + ", tag_no=" + tag_no + ", seq=" + seq + ", is_del=" + is_del
+		return "TestTag [test_no=" + test_no + ", tag_no=" + tag_no + ", seq=" + seq + ", is_del=" + is_del
 				+ ", tag_name=" + tag_name + "]";
 	}
+
+
+
 
 
 

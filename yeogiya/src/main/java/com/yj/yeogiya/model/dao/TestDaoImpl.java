@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.yj.yeogiya.model.vo.Tag;
 import com.yj.yeogiya.model.vo.TestImg;
+import com.yj.yeogiya.model.vo.TestTag;
 import com.yj.yeogiya.model.vo.TestVo;
 
 
@@ -38,6 +40,21 @@ public class TestDaoImpl implements TestDao {
 	@Override
 	public List<TestImg> selectImg(int test_no) {
 		return sqlSession.selectList(NAMESPACE + "selectImg", test_no);
+	}
+
+	@Override
+	public int updateTest(TestVo testVo) {
+		return sqlSession.update(NAMESPACE + "updateTest", testVo);
+	}
+
+	@Override
+	public int insertTag(List<TestTag> tagList) {
+		return sqlSession.insert(NAMESPACE + "insertTag", tagList);
+	}
+
+	@Override
+	public int insertBoardTag(List<TestTag> tagList) {
+		return sqlSession.insert(NAMESPACE + "insertBoardTag", tagList);
 	}
 
 }

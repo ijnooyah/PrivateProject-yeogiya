@@ -1,5 +1,6 @@
 package com.yj.yeogiya.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,7 +8,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.yj.yeogiya.model.dao.TestDao;
+import com.yj.yeogiya.model.vo.Tag;
 import com.yj.yeogiya.model.vo.TestImg;
+import com.yj.yeogiya.model.vo.TestTag;
 import com.yj.yeogiya.model.vo.TestVo;
 
 
@@ -26,7 +29,19 @@ public class TestServiceImpl implements TestService {
 //			img.setTest_no(test_no);
 //		}
 //		int result = testDao.insertImg(imgs);
-		System.out.println("test_no:" + test_no);
+		
+		// tag 테이블 insert
+		String tag = testVo.getTag(); // "콤마로 연결되어 있는 상태"
+		String[] tags = tag.split(",");
+		List<TestTag> tagList = new ArrayList<TestTag>();
+		for (String splittedTag : tags) {
+			TestTag tagItem = new TestTag(splittedTag);
+			tagItem.setTest_no(test_no);
+			tagList.add(tagItem);
+		}
+		testDao.insertTag(tagList);
+		
+		testDao.insertBoardTag(tagList);
 		return test_no;
 	}
 
@@ -36,6 +51,11 @@ public class TestServiceImpl implements TestService {
 //		List<TestImg> imgs = testDao.selectImg(test_no);
 //		test.setImgs(imgs);
 		return test;
+	}
+
+	@Override
+	public int updateTest(TestVo testVo) {
+		return testDao.updateTest(testVo);
 	}
 
 }
