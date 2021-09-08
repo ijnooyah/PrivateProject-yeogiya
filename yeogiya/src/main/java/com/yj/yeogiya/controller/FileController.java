@@ -31,16 +31,13 @@ import com.google.gson.JsonObject;
 import com.yj.yeogiya.model.service.TestService;
 import com.yj.yeogiya.util.FileUploadUtil;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 
 @RestController
 public class FileController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	
-	private static final String UPLOAD_PATH = "yeogiya/board";
+	private static final String UPLOAD_PATH = "board";
 	@Value("#{property['file.rootPath']}") 
 	private String rootPath;
 	@Inject
@@ -48,7 +45,7 @@ public class FileController {
 	
 	//이미지 출력
 	@RequestMapping(value="/display", method=RequestMethod.GET)
-	public ResponseEntity<byte[]> yeogiyaImage(/* @RequestParam("img") */ String img) throws Exception {
+	public ResponseEntity<byte[]> yeogiyaImage(String img) throws Exception {
 		String fullFilePath = rootPath + "/" + img;
 		System.out.println(fullFilePath);
 		FileInputStream fis = new FileInputStream(fullFilePath);
@@ -66,51 +63,17 @@ public class FileController {
 	// filePath <- 루트경로 제외한 서버에 저장된 파일경로 리턴 
 	@RequestMapping(value="/uploadImage", method=RequestMethod.POST, produces="application/text;charset=utf-8")
 	public String uploadImg(@RequestParam List<MultipartFile> files) throws Exception {
-		System.out.println("----함수실행-----");
-		System.out.println("files:" + files);
 		
 		JsonArray jsonArr = new JsonArray();
-		String fileRoot = rootPath + "/test/";
 		for (MultipartFile file : files) {
-			String originalFileName = file.getOriginalFilename();	//오리지날 파일명
-			System.out.println("originalFileName:" + originalFileName);
-			String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-			String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-			System.out.println("savedFileName:" + savedFileName);
-			File targetFile = new File(fileRoot + savedFileName);	
-			System.out.println("targetFile:" + targetFile);
-			InputStream fileStream = file.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			String filePath = FileUploadUtil.uploadImage(file, rootPath, UPLOAD_PATH);
 			JsonObject jsonObj = new JsonObject();
-			jsonObj.addProperty("filePath", "test/" + savedFileName);
+			jsonObj.addProperty("filePath", filePath);
 			jsonArr.add(jsonObj);
 		}
 		
 		return jsonArr.toString();
 	}
 	
-	//첨부파일 서버에서 삭제
-	@RequestMapping(value="/deleteFile", method=RequestMethod.GET)
-	public String deleteFile(String filePath) throws Exception {
-		if (FileUploadUtil.deleteFile(rootPath, filePath)) {
-			return "success";
-		};
-		return "fail";
-	}
-	
-//	//*수정작업 (db에 있는 사진인지 판단하는 부분)
-//	@RequestMapping(value="/selectCompleteImgName", method=RequestMethod.POST, produces="application/text;charset=utf-8") 
-//	@ResponseBody
-//	public String selectCompleteImgName(@RequestBody CompleteImgVo completeImgVo){
-//		System.out.println("완성사진: " + completeImgVo);
-//		return hobbyService.selectCompleteImgName(completeImgVo);
-//	}
-//	
-//	@RequestMapping(value="/selectMainImg", method=RequestMethod.GET, produces="application/text;charset=utf-8") 
-//	@ResponseBody
-//	public String selectMainImg(int hobby_no){
-//		return hobbyService.selectMainImg(hobby_no);
-//	}
-//	
 
 }

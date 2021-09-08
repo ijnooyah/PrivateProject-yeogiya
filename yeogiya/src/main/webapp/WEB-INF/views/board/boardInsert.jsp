@@ -303,7 +303,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 				fontSizes: ['8','9','10','11','12', '13', '14','16','18','20','22','24','28','30','36','50','72'],
 			callbacks : { 
 				onImageUpload: function(files) {
-					let fileList = []; // 초기화
+					let fileList = [];
 
 	                for (let i = files.length - 1; i >= 0; i--) {
 	                    fileList.push(files[i]);
@@ -319,7 +319,18 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	    	let formData = new FormData();
 			
 	    	let fileSize = 0;
+	    	let imgJ = /^.*\.(jpg|jpeg|png|gif)$/;
 	        for (let i=0; i<files.length; i++) {
+	        	if(!files[i].name.match(imgJ)) {
+	        		Swal.fire({
+	 		        	title: '첨부파일 업로드 실패',
+	 		        	html: '이미지 파일만 업로드 가능합니다.', 
+	 					allowOutsideClick: false,
+	 					icon: 'error', 
+	 					confirmButtonText: "확인"
+	 				});
+	 	            return;
+	 	        } 
 	            fileSize += files[i].size;
 	            formData.append("files", files[i]);
 	        }
@@ -329,13 +340,12 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	        if (fileSize > maxSize) {
 	        	console.log("크다")
 	        	Swal.fire({
-	    			text: '이미지 파일만 업로드 가능합니다.', 
-	    			allowOutsideClick: false,
-	    			iconColor: "var(--pink)",
-	    			icon: 'warning', 
-	    			confirmButtonText: "확인",
-	    			confirmButtonColor: "var(--pink)",
-	    		});
+		        	title: '첨부파일 업로드 실패',
+		        	html: '한번에 업로드 가능한 <br>이미지 파일의 총 용량은 10MB 미만입니다.', 
+					allowOutsideClick: false,
+					icon: 'error', 
+					confirmButtonText: "확인"
+				});
 	            return;
 	        }
 			$.ajax({
@@ -346,7 +356,6 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 			        timeout: 600000,
 		            url: "${contextPath}/uploadImage",
 		            data: formData,
-// 		            dataType: 'json',
 		            method : "post",
 		            success: function (data) {
 		            	data = JSON.parse(data);

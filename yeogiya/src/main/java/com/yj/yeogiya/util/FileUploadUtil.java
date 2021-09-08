@@ -1,48 +1,42 @@
 package com.yj.yeogiya.util;
 
 import java.io.File;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.FileCopyUtils;
+import org.apache.commons.io.FileUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 
 
 public class FileUploadUtil {
 	
 	
-	/**
-	 * @param uploadPath
-	 * @param orgFileName
-	 * @param fileData
-	 * @return rootPath제외한 파일경로 리턴
-	 * @throws Exception
-	 */
-	public static String uploadImage (String rootPath, String uploadPath, 
-				String orgFileName, byte[] fileData) throws Exception {
-		
+	public static String uploadImage (MultipartFile file, String rootPath, String uploadPath) throws Exception {
 		String datePath = getDatePath();
-		// -> 2021/07/31
+		// -> 2021/09/08
 	
 		String dateDirPath = makeDateDir(rootPath, uploadPath, datePath);
-		// -> D:/ggomjirak/hobby/main_img/2021/07/31
+		// -> rootPath/uploadPath/2021/09/08 폴더 생성
 		
-		String uuidFileName = getUUIDFileName(orgFileName); // -> uuid_메인이미지.jpg
-		String fullFilePath = dateDirPath + "/" + uuidFileName;
-		// -> D:/ggomjirak/hobby/main_img/2021/07/31 + "/" + uuid_메인이미지.jpg
+		String savedFileName = getUUIDFileName(file); 
+		// -> uuid_파일명.jpg
 		
-		File target = new File(fullFilePath);
-		FileCopyUtils.copy(fileData, target); // fileData를 target에 복사
+		File target = new File(dateDirPath + "/" + savedFileName);
+		// -> rootPath/uploadPath/2021/09/08 + "/" + uuid_파일명.jpg
+
+		InputStream fileStream = file.getInputStream();
+		FileUtils.copyInputStreamToFile(fileStream, target);	//파일 저장
 		
-		String filePath = uploadPath + "/" + datePath + "/" + uuidFileName;
-		// -> hobby/main_img/2021/07/31 + "/" + uuid_메인이미지.jpg
+		String filePath = uploadPath + "/" + datePath + "/" + savedFileName;
+		// -> rootPath 제외한 파일 전체 경로
 		return filePath;
 	}
 
 	private static String makeDateDir(String rootPath, String uploadPath, String datePath) {
 		String dateDirPath = rootPath + "/" + uploadPath + "/" + datePath;
-		// -> D:/ggomjirak + / +  hobby/main_img + / + 2021/07/31
 		
 		//날짜별 폴더 생성
 		File f = new File(dateDirPath);
@@ -62,9 +56,10 @@ public class FileUploadUtil {
 		return datePath;
 	}
 
-	private static String getUUIDFileName(String orgFileName) {
+	private static String getUUIDFileName(MultipartFile file) {
+		String originalFileName = file.getOriginalFilename();	
 		UUID uuid = UUID.randomUUID(); 
-		String uuidFileName = uuid + "_" + orgFileName;
+		String uuidFileName = uuid + "_" + originalFileName;
 		return uuidFileName;
 	}
 	
