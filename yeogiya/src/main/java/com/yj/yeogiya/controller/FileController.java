@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -17,15 +19,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.yj.yeogiya.model.service.TestService;
 import com.yj.yeogiya.util.FileUploadUtil;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 
 @RestController
@@ -58,33 +65,28 @@ public class FileController {
 	//이미지 파일 업로드
 	// filePath <- 루트경로 제외한 서버에 저장된 파일경로 리턴 
 	@RequestMapping(value="/uploadImage", method=RequestMethod.POST, produces="application/text;charset=utf-8")
-	public String uploadImg(MultipartFile file) throws Exception {
-		System.out.println(file);
-		JsonObject jsonObject = new JsonObject();
+	public String uploadImg(@RequestParam List<MultipartFile> files) throws Exception {
+		System.out.println("----함수실행-----");
+		System.out.println("files:" + files);
 		
+		JsonArray jsonArr = new JsonArray();
 		String fileRoot = rootPath + "/test/";
-		
-		String originalFileName = file.getOriginalFilename();	//오리지날 파일명
-		System.out.println("originalFileName:" + originalFileName);
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-		System.out.println("savedFileName:" + savedFileName);
-		
-		File targetFile = new File(fileRoot + savedFileName);	
-		System.out.println("targetFile:" + targetFile);
-		try {
+		for (MultipartFile file : files) {
+			String originalFileName = file.getOriginalFilename();	//오리지날 파일명
+			System.out.println("originalFileName:" + originalFileName);
+			String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+			String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+			System.out.println("savedFileName:" + savedFileName);
+			File targetFile = new File(fileRoot + savedFileName);	
+			System.out.println("targetFile:" + targetFile);
 			InputStream fileStream = file.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			jsonObject.addProperty("filePath", "test/" + savedFileName); 
-			jsonObject.addProperty("returnCode", "200");
-				
-		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
-			e.printStackTrace();
+			JsonObject jsonObj = new JsonObject();
+			jsonObj.addProperty("filePath", "test/" + savedFileName);
+			jsonArr.add(jsonObj);
 		}
-		String a = jsonObject.toString();
-		System.out.println("a:" + a);
-		return a;
+		
+		return jsonArr.toString();
 	}
 	
 	//첨부파일 서버에서 삭제

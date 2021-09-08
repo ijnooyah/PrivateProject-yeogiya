@@ -23,8 +23,5 @@
    	<link rel="stylesheet" href="${contextPath}/resources/css/style.css">
    	<link rel="stylesheet" href="${contextPath}/resources/css/navbar.css">
    	
-   	<!-- sweet alert -->
-  	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-   
    	<!-- 카카오 지도 -->
    	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8902730ec3b20695d83c6d6757b1881a&libraries=services,clusterer,drawing"></script>

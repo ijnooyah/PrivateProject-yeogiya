@@ -147,6 +147,13 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
     color: var(--white) !important;
 	border: none;
 }
+
+
+
+/* swal */
+.swal2-styled.swal2-default-outline:focus, .swal2-styled.swal2-confirm:focus {
+    box-shadow: unset !important;
+}
 	</style>
 </head>
 <body>
@@ -296,34 +303,59 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 				fontSizes: ['8','9','10','11','12', '13', '14','16','18','20','22','24','28','30','36','50','72'],
 			callbacks : { 
 				onImageUpload: function(files) {
-					for (var i = files.length - 1; i >= 0; i--) {
-	                	uploadFiles(files[i], this);
-	           		}
+					let fileList = []; // 초기화
+
+	                for (let i = files.length - 1; i >= 0; i--) {
+	                    fileList.push(files[i]);
+	                }
+					
+	                uploadFiles(fileList, this);
 	         	}
 	    	}
 	    });
 	    
-	    function uploadFiles(file, el) {
-	    	console.log(file);
-	    	formData = new FormData();
-	    	formData.append("file", file);
+	    function uploadFiles(files, el) {
+	    	console.log(files);
+	    	let formData = new FormData();
+			
+	    	let fileSize = 0;
+	        for (let i=0; i<files.length; i++) {
+	            fileSize += files[i].size;
+	            formData.append("files", files[i]);
+	        }
+	        console.log(formData);
+	        console.log(fileSize);
+	        let maxSize = 10 * 1024 * 1024;
+	        if (fileSize > maxSize) {
+	        	console.log("크다")
+	        	Swal.fire({
+	    			text: '이미지 파일만 업로드 가능합니다.', 
+	    			allowOutsideClick: false,
+	    			iconColor: "var(--pink)",
+	    			icon: 'warning', 
+	    			confirmButtonText: "확인",
+	    			confirmButtonColor: "var(--pink)",
+	    		});
+	            return;
+	        }
 			$.ajax({
 					enctype : 'multipart/form-data',
-					contentType : false,
-					processData : false,
+					cache: false,
+			        contentType: false,
+			        processData: false,
+			        timeout: 600000,
 		            url: "${contextPath}/uploadImage",
 		            data: formData,
+// 		            dataType: 'json',
 		            method : "post",
 		            success: function (data) {
 		            	data = JSON.parse(data);
 		            	console.log(data);
-		            	console.log(data.returnCode);
-		                if (data.returnCode != 200) {
-		                    alert();
-		                    return;
+		            	console.log(data[0].filePath);
+						
+		                for(let i=0; i<data.length; i++) {
+		                	$(el).summernote('editor.insertImage', "${contextPath}/display?img=" + data[i].filePath);
 		                }
-		                console.log(data.filePath);
-						$(el).summernote('editor.insertImage', "${contextPath}/display?img=" + data.filePath);
 		            },
 		            error: function (e) {
 		                alert("error");
