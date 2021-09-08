@@ -189,7 +189,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 					</div>
 					<!-- 내용 -->
 					<div class="row mb-2">
-						<textarea class="form-control" name="" id="summernote" rows="10" style="resize: none;"></textarea>
+						<textarea class="form-control" name="content" id="summernote" rows="10" style="resize: none;"></textarea>
 					</div>
 					<!-- 해시태그 -->
 					<div class="row mb-2">
@@ -201,7 +201,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 						</div>
 					</div>
 					<div class="text-center">
-						<button type="submit" class="btn btn-pink">등록</button>
+						<button type="button" onclick="doSubmit();" class="btn btn-pink">등록</button>
 						<button class="btn btn-pink-outline">취소</button>
 					</div>
 				</div>
@@ -277,7 +277,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	$(document).ready(function() {
 	    $('#summernote').summernote({
 	        width : 1110,   
-	        height : 300,   
+	        height : 600,   
 	        placeholder: '내용을 입력해 주세요.',
 	        lang : 'ko-KR',
 // 	        disableResizeEditor: true,
@@ -290,6 +290,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 			    ['para', ['ul', 'ol', 'paragraph']],
 			    ['height', ['height']],
 			    ['insert',['picture','link','video']],
+			    ['view', ['fullscreen', 'codeview', 'help']]
 			  	],
 				fontNames: ['Noto Sans KR', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
 				fontSizes: ['8','9','10','11','12', '13', '14','16','18','20','22','24','28','30','36','50','72'],
@@ -302,30 +303,30 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	    	}
 	    });
 	    
-	    //써머노트 글자 기본크기 
-	    $('#summernote').summernote('fontSize', 13);
-	    
-	    
-	    function uploadFiles(files, el) {
-	    	data = new FormData();
-			data.append("file", file);
+	    function uploadFiles(file, el) {
+	    	console.log(file);
+	    	formData = new FormData();
+	    	formData.append("file", file);
 			$.ajax({
-				 type: "POST",
-		            enctype: "multipart/form-data",
-		            url: "/uploadImage",
+					enctype : 'multipart/form-data',
+					contentType : false,
+					processData : false,
+		            url: "${contextPath}/uploadImage",
 		            data: formData,
-		            cache: false,
-		            contentType: false,
-		            processData: false,
+		            method : "post",
 		            success: function (data) {
-		                if (data.returnCode !== 200) {
+		            	data = JSON.parse(data);
+		            	console.log(data);
+		            	console.log(data.returnCode);
+		                if (data.returnCode != 200) {
 		                    alert();
 		                    return;
 		                }
-						$(el).summernote('editor.insertImage', data.url);
+		                console.log(data.filePath);
+						$(el).summernote('editor.insertImage', "${contextPath}/display?img=" + data.filePath);
 		            },
 		            error: function (e) {
-		                alert();
+		                alert("error");
 		            }
 			});
 	    }
@@ -377,6 +378,23 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	        }
 	    });
 	});
+	
+	
+	function doSubmit() {
+		if ($('#summernote').summernote('isEmpty')) {
+	    	  alert('editor content is empty');
+	    }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//카카오 지도
 	

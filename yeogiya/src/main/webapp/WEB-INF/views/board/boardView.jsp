@@ -90,6 +90,7 @@
 				<!-- 글내용 -->
 				<div class="row my-4 px-3 content-middle">
 					<div class="content_wrap w-100">
+						${test.content}
 					</div>
 					<div class="map_wrap w-100 mt-2">
 						<div id="map" class="rounded-sm border" style="width:100%;height:350px;"></div>

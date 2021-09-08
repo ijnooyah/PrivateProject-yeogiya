@@ -10,7 +10,7 @@
  		</selectKey>
 		insert into test 
 		values 
-			(#{content}, seq_test_no.nextval)
+			(#{content}, #{test_no})
 	</insert>
 	<insert id="insertImg" parameterType="list">
 		INSERT INTO test_img

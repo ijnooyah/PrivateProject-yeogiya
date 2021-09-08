@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,9 +40,10 @@ public class FileController {
 	private TestService testService;
 	
 	//이미지 출력
-	@RequestMapping(value="/yeogiyaImage", method=RequestMethod.GET)
-	public ResponseEntity<byte[]> yeogiyaImage(String file) throws Exception {
-		String fullFilePath = rootPath + "/" + file;
+	@RequestMapping(value="/display", method=RequestMethod.GET)
+	public ResponseEntity<byte[]> yeogiyaImage(/* @RequestParam("img") */ String img) throws Exception {
+		String fullFilePath = rootPath + "/" + img;
+		System.out.println(fullFilePath);
 		FileInputStream fis = new FileInputStream(fullFilePath);
 		HttpHeaders header = new HttpHeaders();
         header.setContentType(MediaType.IMAGE_JPEG);
@@ -57,19 +59,23 @@ public class FileController {
 	// filePath <- 루트경로 제외한 서버에 저장된 파일경로 리턴 
 	@RequestMapping(value="/uploadImage", method=RequestMethod.POST, produces="application/text;charset=utf-8")
 	public String uploadImg(MultipartFile file) throws Exception {
+		System.out.println(file);
 		JsonObject jsonObject = new JsonObject();
 		
-		String fileRoot = rootPath + "yeogiya/test/";
+		String fileRoot = rootPath + "/test/";
 		
 		String originalFileName = file.getOriginalFilename();	//오리지날 파일명
+		System.out.println("originalFileName:" + originalFileName);
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
 		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		System.out.println("savedFileName:" + savedFileName);
 		
 		File targetFile = new File(fileRoot + savedFileName);	
+		System.out.println("targetFile:" + targetFile);
 		try {
 			InputStream fileStream = file.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			jsonObject.addProperty("url", "/yeogiyaImage?file="+ savedFileName); 
+			jsonObject.addProperty("filePath", "test/" + savedFileName); 
 			jsonObject.addProperty("returnCode", "200");
 				
 		} catch (IOException e) {
@@ -77,6 +83,7 @@ public class FileController {
 			e.printStackTrace();
 		}
 		String a = jsonObject.toString();
+		System.out.println("a:" + a);
 		return a;
 	}
 	

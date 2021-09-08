@@ -16,17 +16,17 @@ import com.yj.yeogiya.model.vo.Sort;
 
 
 @Controller
-@RequestMapping("/{sortLocalPEngName}")
+//@RequestMapping("/{sortLocalPEngName}")
 public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Inject
 	private BoardService boardService;
-	@ModelAttribute("sortLocalP")
-	public Sort sortLocalP(@PathVariable("sortLocalPEngName") String sortLocalPEngName) {
-		return boardService.selectSortLocalPByEngName(sortLocalPEngName);
-	}
+//	@ModelAttribute("sortLocalP")
+//	public Sort sortLocalP(@PathVariable("sortLocalPEngName") String sortLocalPEngName) {
+//		return boardService.selectSortLocalPByEngName(sortLocalPEngName);
+//	}
 	@RequestMapping(value = "/view")
 	public String content() {
 		

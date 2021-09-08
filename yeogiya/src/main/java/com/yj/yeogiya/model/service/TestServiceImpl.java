@@ -21,20 +21,20 @@ public class TestServiceImpl implements TestService {
 	public int insertTest(TestVo testVo) {
 		
 		int test_no = testDao.insert(testVo);
-		List<TestImg> imgs = testVo.getImgs();
-		for(TestImg img : imgs) {
-			img.setTest_no(test_no);
-		}
-		int result = testDao.insertImg(imgs);
-		
-		return result;
+//		List<TestImg> imgs = testVo.getImgs();
+//		for(TestImg img : imgs) {
+//			img.setTest_no(test_no);
+//		}
+//		int result = testDao.insertImg(imgs);
+		System.out.println("test_no:" + test_no);
+		return test_no;
 	}
 
 	@Override
 	public TestVo selectTest(int test_no) {
 		TestVo test = testDao.select(test_no);
-		List<TestImg> imgs = testDao.selectImg(test_no);
-		test.setImgs(imgs);
+//		List<TestImg> imgs = testDao.selectImg(test_no);
+//		test.setImgs(imgs);
 		return test;
 	}
 

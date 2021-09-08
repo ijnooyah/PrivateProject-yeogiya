@@ -21,7 +21,8 @@ public class TestDaoImpl implements TestDao {
 
 	@Override
 	public int insert(TestVo testVo) {
-		return sqlSession.insert(NAMESPACE + "insert", testVo);
+		sqlSession.insert(NAMESPACE + "insert", testVo);
+		return testVo.getTest_no();
 	}
 
 	@Override
