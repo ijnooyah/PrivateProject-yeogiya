@@ -8,7 +8,7 @@ public class Place {
 	private String place_address;
 	private double place_lat;
 	private double place_long;
-	private int kakao_id;
+	private int place_id;
 	private String sort_place;
 	private String sort_local;
 	private String sub_local;
@@ -64,15 +64,15 @@ public class Place {
 		this.place_long = place_long;
 	}
 
-	public int getKakao_id() {
-		return kakao_id;
+
+
+	public int getPlace_id() {
+		return place_id;
 	}
 
-	public void setKakao_id(int kakao_id) {
-		this.kakao_id = kakao_id;
+	public void setPlace_id(int place_id) {
+		this.place_id = place_id;
 	}
-
-
 
 	public int getMent_cnt() {
 		return ment_cnt;
