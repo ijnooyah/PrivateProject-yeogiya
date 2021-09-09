@@ -12,6 +12,12 @@ public class BoardTag {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public BoardTag(int board_no, String tag_name) {
+		super();
+		this.board_no = board_no;
+		this.tag_name = tag_name;
+	}
 
 	public int getBoard_no() {
 		return board_no;

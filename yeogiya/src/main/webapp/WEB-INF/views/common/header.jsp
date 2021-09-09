@@ -3,27 +3,9 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	List<Sort> sortLocalList = (List<Sort>) request.getAttribute("sortLocalList");
-	List<Sort> sortLocalPArr = new ArrayList<>();	
-	for (Sort sortLocalP : sortLocalList) {
-		 if(sortLocalP.getSort_level() == 1) {
-			 sortLocalPArr.add(sortLocalP);
-		 }
-	}
-	List<Sort> sortLocalCArr = new ArrayList<>();	
-	for (Sort sortLocalC : sortLocalList) {
-		 if(sortLocalC.getSort_level() == 2) {
-			 sortLocalCArr.add(sortLocalC);
-		 }
-	}
-	
-%>
-<c:set var="slpArr" value="<%=sortLocalPArr%>"/>
-<c:set var="slcArr" value="<%=sortLocalCArr%>"/>
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-    <a href="${contextPath}/${slp.eng_name}" class="logo text-pink ml-3 mr-4" style="font-size:1rem;">여기야!</a>
+    <a href="${contextPath}/${sortLocalP.eng_name}" class="logo text-pink ml-3 mr-4" style="font-size:1rem;">여기야!</a>
     <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,12 +15,12 @@
 	          <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 	          	 class="nav-link dropdown-toggle">지역</a>
 	          <ul aria-labelledby="" class="dropdown-menu">
-	            <c:forEach var="slp" items="${slpArr}">
+	            <c:forEach var="slp" items="${sortLocalPArr}">
 		            <li class="dropdown-submenu dropright">
 		              <a id="" href="${contextPath}/${slp.eng_name}/main" data-toggle="dropdown" aria-haspopup="true" 
 		              	aria-expanded="false" class="dropdown-item dropdown-toggle">${slp.sort_name}</a>
 		              <ul aria-labelledby="" class="dropdown-menu">
-		              	<c:forEach var="slc" items="${slcArr}">
+		              	<c:forEach var="slc" items="${sortLocalCArr}">
 			              	<c:if test="${slp.sort_no == slc.parent_sort }">
 				                <li><a href="${contextPath}/${slp.eng_name}/list?subLocal=${slc.sort_no}" class="dropdown-item">${slc.sort_name }</a></li>
 			              	</c:if>

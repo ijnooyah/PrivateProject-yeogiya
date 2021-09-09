@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.yj.yeogiya.controller.BoardController;
-import com.yj.yeogiya.controller.TestController;
 import com.yj.yeogiya.model.service.BoardService;
 import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.Sort;
 
 
-@ControllerAdvice(assignableTypes = {BoardController.class, TestController.class})
+@ControllerAdvice(assignableTypes = {BoardController.class})
 public class CommonDataAdvice {
 	@Inject
 	private BoardService boardService;
@@ -34,6 +33,7 @@ public class CommonDataAdvice {
 	
 	@ModelAttribute("bs")
 	public BoardSearch boardSearch(BoardSearch bs) {
+		System.out.println(bs);
 		return bs;
 	}
 

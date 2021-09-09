@@ -178,7 +178,11 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 					</div>
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
-						<input type="hidden" name="sort_local"/>
+						<input type="hidden" name="user_id" value="ijnooyah"/>
+						<input type="hidden" name="sort_local" value="${sortLocalP.sort_no}"/>
+						<input type="hidden" name="sub_local" value="7"/>
+						<input type="hidden" name="sort_board" value="1"/>
+						<input type="hidden" name="sort_plae" value="1"/>
 						<select class="form-control mr-1" id="subLocal">
 							<option value="">동구</option>
 						</select>
@@ -190,10 +194,10 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 							<option value="">맛집</option>
 						</select>
 					</div>
-					<input type="hidden" name="test_no" value="${test.test_no}"/>
+					<input type="hidden" name="test_no" value="${board.board_no}"/>
 					<!-- 제목 -->
 					<div class="row mb-2">
-						<input class="form-control" placeholder="제목을 입력해 주세요." autocomplete="off" spellcheck="false"></input>
+						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" value="${board.board_title}" id="board_title" autocomplete="off" spellcheck="false"></input>
 					</div>
 					<!-- 내용 -->
 					<div class="row mb-2">
@@ -321,7 +325,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
     	};
 		
 		
-		$('#summernote').val('${test.content}');
+		$('#summernote').val('${board.board_content}');
 		$('#summernote').summernote(setting);
 		
 	    function uploadFiles(files, el) {

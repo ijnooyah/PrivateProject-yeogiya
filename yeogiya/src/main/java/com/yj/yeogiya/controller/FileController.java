@@ -28,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.yj.yeogiya.model.service.TestService;
+import com.yj.yeogiya.model.service.BoardService;
 import com.yj.yeogiya.util.FileUploadUtil;
 
 
@@ -41,7 +41,7 @@ public class FileController {
 	@Value("#{property['file.rootPath']}") 
 	private String rootPath;
 	@Inject
-	private TestService testService;
+	private BoardService boardService;
 	
 	//이미지 출력
 	@RequestMapping(value="/display", method=RequestMethod.GET)

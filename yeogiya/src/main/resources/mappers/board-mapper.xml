@@ -20,4 +20,60 @@
  		SELECT * FROM tbl_sort_local
  		where eng_name = #{eng_name}
  	</select>
+ 	
+<!-- board 테이블 insert -->
+	<insert id="insertBoard" parameterType="Board">
+		<selectKey keyProperty="board_no" resultType="int" order="BEFORE">
+ 			SELECT seq_board_no.NEXTVAL FROM dual
+ 		</selectKey>
+		insert into tbl_board 
+			 (board_no, user_id, board_title, board_content,
+			 sort_local, sub_local, sort_board, has_img)
+		values 
+			(#{board_no}, #{user_id}, #{board_title}, #{board_content},
+			#{sort_local}, #{sub_local}, #{sort_board}, #{has_img})
+	</insert>
+	
+<!-- board 상세조회 -->
+	<select id="selectBoard" resultType="Board">
+		select * from tbl_board 
+		where board_no = #{board_no} and is_del = 'N'
+	</select>
+	
+	<update id="updateBoard" parameterType="Board">
+ 		UPDATE tbl_board
+ 		SET board_title = #{board_title}.
+ 			board_content = #{board_content},
+ 			sort_local = #{sort_local},
+ 			sub_local = #{sub_local},
+ 			sort_board = #{sort_board}
+ 		WHERE board_no = #{board_no}
+	</update>
+	
+	<!-- tbl_tag insert -->
+	<insert id="insertTag" parameterType="java.util.List">
+	    INSERT INTO tbl_tag (tag_no, tag_name)
+	    SELECT SEQ_TAG_NO.NEXTVAL, A.* FROM (
+	    <foreach item="item" collection="list" separator="UNION ALL" >
+	        select #{item.tag_name} TAG_NAME
+	        from dual
+	         WHERE NOT EXISTS (
+			  SELECT TAG_NAME FROM tbl_tag
+			  WHERE TAG_NAME = #{item.tag_name}
+			)
+	    </foreach>) A
+	</insert>
+	
+	<!-- tbl_board_tag insert -->
+	<insert id="insertBoardTag"  parameterType="java.util.List">
+		INSERT INTO 
+			tbl_board_tag (board_no, tag_no)
+	    SELECT A.* FROM (
+	    <foreach item="item" collection="list" separator="UNION ALL" >
+			select #{item.board_no} BOARD_NO,
+	        (select tag_no from tbl_tag
+			 where tag_name = #{item.tag_name}) TAG_NO
+	        from dual
+	    </foreach>) A
+	</insert>
 </mapper>

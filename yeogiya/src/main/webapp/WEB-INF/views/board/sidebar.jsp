@@ -3,25 +3,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	Sort sortLocalP = (Sort) request.getAttribute("sortLocalP");
-	List<Sort> sortLocalList = (List<Sort>) request.getAttribute("sortLocalList");
-	List<Sort> sortBoardArr = (List<Sort>) request.getAttribute("sortBoardList");
-	List<Sort> sortPlaceArr = (List<Sort>) request.getAttribute("sortPlaceList");
-	List<Sort> sortLocalCArr = new ArrayList<>();	
-	for (Sort sortLocalC : sortLocalList) {
-		if (sortLocalC.getParent_sort() != null) {
-			 if(sortLocalC.getParent_sort().equals(sortLocalP.getSort_no())) {
-				 sortLocalCArr.add(sortLocalC);
-			 }
-		}
-	}
-	
-%>
-<c:set var="slcArr" value="<%=sortLocalCArr%>"/>
-<c:set var="sbArr" value="<%=sortBoardArr%>"/>
-<c:set var="spArr" value="<%=sortPlaceArr%>"/>
-<c:set var="listPath" value="${contextPath}/${sortLocalP.eng_name}/list"/>
 <style>
 li.sideMenu > div.active > a {
 	color:var(--pink) !important;
@@ -37,7 +18,7 @@ li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
 		</div>
 		<div class="menu_wrap">
 			<ul class="list-unstyled components">
-			  <c:forEach var="slc" items="${slcArr}">
+			  <c:forEach var="slc" items="${subLocalArr}">
 			  	  <!-- url설정 -->
 				  <c:if test="${not empty slc.sort_no}">
 					<c:set var="subLocal" value="subLocal=${slc.sort_no}" />
@@ -50,7 +31,7 @@ li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
 							</a>
 						</div>
 						<ul class="collapse list-unstyled ${slc.sort_no == bs.subLocal ? 'show' : ''}" id="">
-							<c:forEach var="sb" items="${sbArr}">
+							<c:forEach var="sb" items="${sortBoardArr}">
 							<!-- url설정 -->
 							  <c:if test="${not empty sb.sort_no}">
 								<c:set var="sortBoard" value="&sortBoard=${sb.sort_no}" />
@@ -75,7 +56,7 @@ li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
 									</div>
 									<c:if test="${sb.has_sort_place == 'Y'}">
 										<ul class="collapse ${sb.sort_no == bs.sortBoard && slc.sort_no == bs.subLocal ? 'show' : ''} list-unstyled" id="">
-											<c:forEach var="sp" items="${spArr}">
+											<c:forEach var="sp" items="${sortPlaceArr}">
 											<!-- url설정 -->
 											  <c:if test="${not empty sp.sort_no}">
 												<c:set var="sortPlace" value="&sortPlace=${sp.sort_no}" />

@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.yj.yeogiya.model.vo.Sort"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -161,7 +164,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
-			<form action="testRun" method="post" id="istFrm">
+			<form action="insertRun" method="post" id="instFrm" name="instFrm">
 				<div class="">
 					<!-- 카카오맵 모달 -->
 					<div class="row mb-2">
@@ -178,25 +181,32 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 					</div>
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
-						<input type="hidden" name="sort_local"/>
-						<select class="form-control mr-1" id="subLocal">
-							<option value="">동구</option>
+						<select class="form-control mr-1" name="sub_local" id="subLocal">
+							<option value="" ${empty bs.subLocal ? 'selected' : ''}>지역</option>
+							<c:forEach var="subLocal" items="${subLocalArr}">
+								<option value="${subLocal.sort_no}" ${subLocal.sort_no == bs.subLocal ? 'selected' : ''}>
+								${subLocal.sort_name}
+								</option>
+							</c:forEach>
 						</select>
-						<select class="form-control mr-1" id="sortBoard">
-							<option value="">추천</option>
-							<option value="">사담</option>
-						</select>
-						<select class="form-control" id="sortPlace">
-							<option value="">맛집</option>
+						<select class="form-control mr-1" name="sort_board" id="sortBoard" onchange="selectSortBoard(this)">
+							<option value="0" ${empty bs.sortBoard ? 'selected' : ''} data-haschild="false">분류</option>
+							<c:forEach var="sortBoard" items="${sortBoardArr}">
+								<option value="${sortBoard.sort_no}" 
+										${sortBoard.sort_no == bs.sortBoard ? 'selected' : ''}
+										data-haschild="${sortBoard.has_sort_place == 'Y' ? true : false }">
+								${sortBoard.sort_name}
+								</option>
+							</c:forEach>
 						</select>
 					</div>
 					<!-- 제목 -->
 					<div class="row mb-2">
-						<input class="form-control" placeholder="제목을 입력해 주세요." autocomplete="off" spellcheck="false"></input>
+						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" id="board_title" autocomplete="off" spellcheck="false"></input>
 					</div>
 					<!-- 내용 -->
 					<div class="row mb-2">
-						<textarea class="form-control" name="content" id="summernote" rows="10" style="resize: none;"></textarea>
+						<textarea class="form-control" name="board_content" id="summernote" rows="10" style="resize: none;"></textarea>
 					</div>
 					<!-- 해시태그 -->
 					<div class="row mb-2">
@@ -212,6 +222,13 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 						<button class="btn btn-pink-outline">취소</button>
 					</div>
 				</div>
+				<input type="hidden" name="user_id" value="ijnooyah"/>
+				<input type="hidden" name="sort_local" value="${sortLocalP.sort_no}"/>
+				<input type="hidden" name="has_img" value=""/>
+				<input type="hidden" id="place_name" name="place_name" value="">
+				<input type="hidden" id="place_id" name="place_id" value="">
+				<input type="hidden" id="latitude" name="latitude" value="">
+				<input type="hidden" id="longitude" name="longitude" value="">			
 			</form>
 		</div>
 	</div>
@@ -266,18 +283,34 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 				        <ul id="placesList"></ul>
 				        <div id="pagination"></div>
 				    </div>
-	 				<input type="hidden" id="place_name" name="place_name" value="">
-					<input type="hidden" id="place_id" name="place_id" value="">
-					<input type="hidden" id="latitude" name="latitude" value="">
-					<input type="hidden" id="longitude" name="longitude" value="">
 				</div>
 				<!-- 지도끝 -->
 	        </div>
 	      </div>
 	    </div>
-	  </div>						
+	  </div>			
+	   
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
+	<script>
+	function selectSortBoard(el) {
+		let html = 
+			'<select class="form-control" id="sortPlace" name="sort_place">'
+				+'<option value="0" ${empty bs.sortPlace ? "selected" : ""}>말머리</option>'
+				+'<c:forEach var="sortPlace" items="${sortPlaceArr}">'
+					+'<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == bs.sortPlace ? "selected" : ""}>'
+						+'${sortPlace.sort_name}'
+					+'</option>'
+				+'</c:forEach>'
+			+ '</select>';
+		if(el.options[el.selectedIndex].dataset['haschild'] == 'true') {
+			$(el).after(html);
+		} else {
+			if(document.querySelector('#sortPlace') != null)
+			document.querySelector('#sortPlace').remove();
+		}
+	}
+	</script>
 	<script>
 	
 	var isShown = false; 
@@ -381,11 +414,6 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	    
 	    
 	    
-	    
-	    
-	    
-	    
-	    
 	    // 카카오맵 잘림 현상 해결
 	    $('#modalMap').on('shown.bs.modal', function (e) {
 	    	$("#keyword").focus();
@@ -405,7 +433,6 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	    	});
 		});
 	    
-	    var cache = {};
 	    $("#tag").tagit({
 	        singleField: false,
 	        singleFieldNode: $('#tag'),
@@ -423,11 +450,28 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	
 	
 	function doSubmit() {
+		let summernote = document.querySelector('#summernote')
+		if (summernote.value == '') {
+			console.log("빔");
+// 			return false;
+		}
 		if ($('#summernote').summernote('isEmpty')) {
 	    	  alert('editor content is empty');
-	    	  return false
+// 	    	  return false
 	    }
-		$("#istFrm").submit();
+		
+		let div = document.createElement('div'); //임의의 div
+		div.innerHTML = summernote.value;
+		if (div.querySelector('img') != null) {
+			console.log("이미지 있음");
+			document.forms['instFrm'].elements['has_img'].value = 'Y';
+		} else {
+			console.log("이미지 없음");
+			document.forms['instFrm'].elements['has_img'].value = 'N';
+		}
+		console.log(document.forms['instFrm']);
+// 		console.log(summernote.value.querySelector('img'));
+// 		$("#istFrm").submit();
 	}
 	
 	
@@ -541,7 +585,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	                
 	                return function() {
 	                	selectedPlace.innerHTML = '선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다';
-	                    console.log(place.id);
+	                	console.log(place.id)
 	                }
 	                
 	            })(placePosition));
@@ -552,6 +596,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	            	return function() {
 	            		selectedPlace.innerHTML = '선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다';
 	                    console.log(place.address_name);
+	                    console.log(place.id)
 	                }
 	            	
 	            })(placePosition);

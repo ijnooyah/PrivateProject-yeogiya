@@ -12,61 +12,67 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yj.yeogiya.model.service.BoardService;
+import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.Sort;
 
 
 @Controller
-//@RequestMapping("/{sortLocalPEngName}")
+@RequestMapping("/{sortLocalPEngName}")
 public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Inject
 	private BoardService boardService;
-//	@ModelAttribute("sortLocalP")
-//	public Sort sortLocalP(@PathVariable("sortLocalPEngName") String sortLocalPEngName) {
-//		return boardService.selectSortLocalPByEngName(sortLocalPEngName);
-//	}
-	@RequestMapping(value = "/view")
-	public String content() {
-		
-		return "board/boardView";
+	
+	@ModelAttribute("sortLocalP")
+	public Sort sortLocalP(@PathVariable("sortLocalPEngName") String sortLocalPEngName) {
+		return boardService.selectSortLocalPByEngName(sortLocalPEngName);
 	}
 	
-	@RequestMapping(value = "insert", method = RequestMethod.GET)
-	public String insert(Model model) {
-		
+	//글작성페이지
+	@RequestMapping(value = "insert")
+	public String insert() throws Exception {
 		return "board/boardInsert";
 	}
 	
-	@RequestMapping(value = "insertRun", method = RequestMethod.GET)
-	public String insertRun() {
-		
-		return "redirect:/board/boardList";
+	//글수정페이지
+	@RequestMapping(value = "update/{board_no}")
+	public String update(Model model, @PathVariable("board_no") int board_no) throws Exception {
+		Board board = boardService.selectBoardArticle(board_no);
+		model.addAttribute("board", board);
+		return "board/boardUpdate";
 	}
 	
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String boardMain(Model model) {
-//		Sort sortLocalP = boardService.selectSortLocalByEngName(sortLocalPEngName);
-//		model.addAttribute("sortLocalP", sortLocalP );
-		
-		return "board/boardMain";
+	//글상세보기페이지
+	@RequestMapping(value = "content/{board_no}")
+	public String content(Model model, @PathVariable("board_no") int board_no) throws Exception {
+		Board board = boardService.selectBoardArticle(board_no);
+		model.addAttribute("board", board);
+		return "board/boardView";
 	}
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list() {
-//		System.out.println(bs);
+	
+	//글목록페이지
+	@RequestMapping(value = "list")
+	public String list() throws Exception {
 		return "board/boardList";
 	}
 	
-	@RequestMapping(value = "boardView", method = RequestMethod.GET)
-	public String boardView() {
-		
-		return "board/boardView";
+	//글작성작업
+	@RequestMapping(value = "insertRun", method = RequestMethod.POST)
+	public String insertRun(Board board) throws Exception {
+		System.out.println(board);
+		int board_no = boardService.insertBoardArticle(board);
+		return "redirect:content/" + board_no;
 	}
 	
-	@RequestMapping(value = "content/{test_no}", method = RequestMethod.GET)
-	public String content(Model model) {
-		return "board/boardView";
+	//글수정작업
+	@RequestMapping(value = "updateRun", method = RequestMethod.POST)
+	public String updateRun(Board board) throws Exception {
+		System.out.println(board);
+		boardService.updateBoardArticle(board);
+		return "redirect:content/" + board.getBoard_no();
 	}
+	
 	
 }

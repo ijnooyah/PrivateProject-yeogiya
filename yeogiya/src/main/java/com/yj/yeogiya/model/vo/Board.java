@@ -11,6 +11,7 @@ public class Board {
 	private String sort_local;
 	private String sub_local;
 	private String sort_board;
+	private String has_img;
 	private int cmt_cnt;
 	private int like_cnt;
 	private int bmk_cnt;
@@ -29,6 +30,8 @@ public class Board {
 	
 	private String like_board; // 좋아요: 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
 	private String bm_board; // 북마크 : 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
+	
+	private String tag;
 	
 	public Board() {
 		super();
@@ -213,15 +216,31 @@ public class Board {
 		this.mod_date = mod_date;
 	}
 
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	public String getHas_img() {
+		return has_img;
+	}
+
+	public void setHas_img(String has_img) {
+		this.has_img = has_img;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", board_title=" + board_title
 				+ ", board_content=" + board_content + ", sort_local=" + sort_local + ", sub_local=" + sub_local
-				+ ", sort_board=" + sort_board + ", cmt_cnt=" + cmt_cnt + ", like_cnt=" + like_cnt + ", bmk_cnt="
-				+ bmk_cnt + ", view_cnt=" + view_cnt + ", rp_cnt=" + rp_cnt + ", is_notice=" + is_notice + ", reg_date="
-				+ reg_date + ", is_del=" + is_del + ", del_date=" + del_date + ", mod_date=" + mod_date + ", place="
-				+ place + ", boardTags=" + boardTags + ", boardImgs=" + boardImgs + ", like_board=" + like_board
-				+ ", bm_board=" + bm_board + "]";
+				+ ", sort_board=" + sort_board + ", has_img=" + has_img + ", cmt_cnt=" + cmt_cnt + ", like_cnt="
+				+ like_cnt + ", bmk_cnt=" + bmk_cnt + ", view_cnt=" + view_cnt + ", rp_cnt=" + rp_cnt + ", is_notice="
+				+ is_notice + ", reg_date=" + reg_date + ", is_del=" + is_del + ", del_date=" + del_date + ", mod_date="
+				+ mod_date + ", place=" + place + ", boardTags=" + boardTags + ", boardImgs=" + boardImgs
+				+ ", like_board=" + like_board + ", bm_board=" + bm_board + ", tag=" + tag + "]";
 	}
 
 
