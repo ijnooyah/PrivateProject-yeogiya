@@ -21,18 +21,110 @@
  		where eng_name = #{eng_name}
  	</select>
  	
-<!-- board 테이블 insert -->
+ 	
+<!--  ************CREATE************ -->
+	<!-- 1. board -->
+	<!-- 1-1. tbl_board insert -->
 	<insert id="insertBoard" parameterType="Board">
 		<selectKey keyProperty="board_no" resultType="int" order="BEFORE">
  			SELECT seq_board_no.NEXTVAL FROM dual
  		</selectKey>
 		insert into tbl_board 
 			 (board_no, user_id, board_title, board_content,
-			 sort_local, sub_local, sort_board, has_img)
+			 sort_local, sub_local, sort_board, sort_place, has_img)
 		values 
 			(#{board_no}, #{user_id}, #{board_title}, #{board_content},
-			#{sort_local}, #{sub_local}, #{sort_board}, #{has_img})
+			#{sort_local}, #{sub_local}, #{sort_board}, 
+			#{sort_place, jdbcType=VARCHAR}, #{has_img})
 	</insert>
+	
+	<!-- 1-2. tag -->
+	<!-- tbl_tag insert -->
+	<insert id="insertTag" parameterType="java.util.List">
+	    INSERT INTO tbl_tag (tag_no, tag_name)
+	    SELECT SEQ_TAG_NO.NEXTVAL, A.* FROM (
+	    <foreach item="item" collection="list" separator="UNION ALL" >
+	        select #{item.tag_name} TAG_NAME
+	        from dual
+	         WHERE NOT EXISTS (
+			  SELECT TAG_NAME FROM tbl_tag
+			  WHERE TAG_NAME = #{item.tag_name}
+			)
+	    </foreach>) A
+	</insert>
+	<!-- tbl_board_tag insert -->
+	<insert id="insertBoardTag"  parameterType="java.util.List">
+		INSERT INTO 
+			tbl_board_tag (board_no, tag_no)
+	    SELECT A.* FROM (
+	    <foreach item="item" collection="list" separator="UNION ALL" >
+			select #{item.board_no} BOARD_NO,
+	        (select tag_no from tbl_tag
+			 where tag_name = #{item.tag_name}) TAG_NO
+	        from dual
+	    </foreach>) A
+	</insert>
+	
+	<!-- 1-3. place -->
+	<!-- tbl_place insert -->
+	<update id="insertPlace" parameterType="BoardPlace">
+		MERGE INTO tbl_place A
+		USING (
+				SELECT
+					#{place_no} as place_no,
+					#{place_name} as place_name,
+					#{place_address} as place_address,
+					#{place_lat} as place_lat,
+					#{place_long} as place_long,
+					#{place_id} as place_id,
+					#{sort_local} as sort_local,
+					#{sub_local} as sub_local,
+					#{sort_place} as sort_place
+				FROM DUAL
+		) B
+		ON (A.place_no = B.place_no)
+		WHEN MATCHED THEN
+		UPDATE 
+			SET A.ment_cnt = A.ment_cnt + 1
+			WHERE A.place_no = B.place_no
+		WHEN NOT MATCHED THEN
+		INSERT (
+			place_no,
+			place_name,
+			place_address,
+			place_lat,
+			place_long,
+			place_id,
+			sort_local,
+			sub_local,
+			sort_place,
+			ment_cnt
+		)
+		VALUES (
+			seq_place_no.nextval,
+			B.place_name,
+			B.place_address,
+			B.place_lat,
+			B.place_long,
+			B.place_id,
+			B.sort_local,
+			B.sub_local,
+			B.sort_place,
+			1
+		)
+	</update>
+	<!-- tbl_board_place insert -->
+	<insert id="insertBoardPlace"  parameterType="java.util.List">
+		INSERT INTO 
+			tbl_board_place (board_no, place_no)
+	    SELECT A.* FROM (
+			select #{board_no} BOARD_NO,
+	        (select place_no from tbl_tag
+			 where place_id = #{place_id}) PLACE_NO
+	        from dual
+	         ) A
+	</insert>
+	
 	
 <!-- board 상세조회 -->
 	<select id="selectBoard" resultType="Board">
@@ -50,30 +142,6 @@
  		WHERE board_no = #{board_no}
 	</update>
 	
-	<!-- tbl_tag insert -->
-	<insert id="insertTag" parameterType="java.util.List">
-	    INSERT INTO tbl_tag (tag_no, tag_name)
-	    SELECT SEQ_TAG_NO.NEXTVAL, A.* FROM (
-	    <foreach item="item" collection="list" separator="UNION ALL" >
-	        select #{item.tag_name} TAG_NAME
-	        from dual
-	         WHERE NOT EXISTS (
-			  SELECT TAG_NAME FROM tbl_tag
-			  WHERE TAG_NAME = #{item.tag_name}
-			)
-	    </foreach>) A
-	</insert>
 	
-	<!-- tbl_board_tag insert -->
-	<insert id="insertBoardTag"  parameterType="java.util.List">
-		INSERT INTO 
-			tbl_board_tag (board_no, tag_no)
-	    SELECT A.* FROM (
-	    <foreach item="item" collection="list" separator="UNION ALL" >
-			select #{item.board_no} BOARD_NO,
-	        (select tag_no from tbl_tag
-			 where tag_name = #{item.tag_name}) TAG_NO
-	        from dual
-	    </foreach>) A
-	</insert>
+	
 </mapper>

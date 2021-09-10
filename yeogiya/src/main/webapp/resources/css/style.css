@@ -24,7 +24,7 @@
 	--darkPink : #E69CBB !important;
 }
 /* color */
-.text-pink{color:var(--pink)}.text-black{color:var(--black)!important}.text-grayEF{color:var(--grayEF)}.text-whiteGray{color:var(--whiteGray)}.text-green{color:var(--green)}
+.text-pink{color:var(--pink)}.text-black{color:var(--black)!important}.text-grayEF{color:var(--grayEF)}.text-whiteGray{color:var(--whiteGray)}.text-gray9{color:var(--gray9)!important}.text-green{color:var(--green)}
 .bg-pink{background:var(--pink)} .bg-WhiteGray{background:var(--whiteGray);}
 /* font-weight */.font-weight-300{font-weight:300!important}.font-weight-400{font-weight:400!important}.font-weight-500{font-weight:500!important}.font-weight-600{font-weight:600!important}.font-weight-700{font-weight:700!important}
 /* font-size */.font-size-060{font-size:.6rem!important}.font-size-065{font-size:.65rem!important}.font-size-070{font-size:.7rem!important}.font-size-075{font-size:.75rem!important}.font-size-080{font-size:.8rem!important}.font-size-085{font-size:.85rem!important}.font-size-090{font-size:.9rem}.font-size-095{font-size:.95rem!important}.font-size-105{font-size:1.05rem!important}.font-size-110{font-size:1.1rem!important}.font-size-115{font-size:1.15rem!important}.font-size-120{font-size:1.2rem!important}.font-size-125{font-size:1.25rem!important}.font-size-130{font-size:1.3rem!important}.font-size-135{font-size:1.35rem!important}.font-size-140{font-size:1.4rem!important}.font-size-145{font-size:1.45rem!important}.font-size-150{font-size:1.5rem!important}

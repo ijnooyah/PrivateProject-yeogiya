@@ -99,6 +99,14 @@ public class BoardPlace {
 		this.sub_local = sub_local;
 	}
 
+	@Override
+	public String toString() {
+		return "BoardPlace [board_no=" + board_no + ", place_no=" + place_no + ", place_name=" + place_name
+				+ ", place_address=" + place_address + ", place_lat=" + place_lat + ", place_long=" + place_long
+				+ ", place_id=" + place_id + ", sort_place=" + sort_place + ", sort_local=" + sort_local
+				+ ", sub_local=" + sub_local + "]";
+	}
+
 
 
 	

@@ -11,6 +11,7 @@ public class Board {
 	private String sort_local;
 	private String sub_local;
 	private String sort_board;
+	private String sort_place;
 	private String has_img;
 	private int cmt_cnt;
 	private int like_cnt;
@@ -232,11 +233,23 @@ public class Board {
 		this.has_img = has_img;
 	}
 
+	public String getSort_place() {
+		return sort_place;
+	}
+
+	public void setSort_place(String sort_place) {
+		this.sort_place = sort_place;
+	}
+
 	@Override
 	public String toString() {
-		return "Board [user_id=" + user_id + ", board_title=" + board_title + ", board_content=" + board_content
-				+ ", sort_local=" + sort_local + ", sub_local=" + sub_local + ", sort_board=" + sort_board
-				+ ", has_img=" + has_img + ", place=" + place + ", tag=" + tag + "]";
+		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", board_title=" + board_title
+				+ ", board_content=" + board_content + ", sort_local=" + sort_local + ", sub_local=" + sub_local
+				+ ", sort_board=" + sort_board + ", sort_place=" + sort_place + ", has_img=" + has_img + ", cmt_cnt="
+				+ cmt_cnt + ", like_cnt=" + like_cnt + ", bmk_cnt=" + bmk_cnt + ", view_cnt=" + view_cnt + ", rp_cnt="
+				+ rp_cnt + ", is_notice=" + is_notice + ", reg_date=" + reg_date + ", is_del=" + is_del + ", del_date="
+				+ del_date + ", mod_date=" + mod_date + ", place=" + place + ", boardTags=" + boardTags + ", boardImgs="
+				+ boardImgs + ", like_board=" + like_board + ", bm_board=" + bm_board + ", tag=" + tag + "]";
 	}
 
 

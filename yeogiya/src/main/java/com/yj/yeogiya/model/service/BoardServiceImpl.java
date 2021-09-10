@@ -45,14 +45,17 @@ public class BoardServiceImpl implements BoardService {
 		int board_no = boardDao.insertBoard(board);
 		// tag 테이블 insert
 		String tag = board.getTag(); // "콤마로 연결되어 있는 상태"
-		String[] tags = tag.split(",");
-		List<BoardTag> tagList = new ArrayList<BoardTag>();
-		for (String splittedTag : tags) {
-			BoardTag boardTag = new BoardTag(board_no, splittedTag);
-			tagList.add(boardTag);
+		if(tag != null && tag.trim() != "") {
+			String[] tags = tag.split(",");
+			List<BoardTag> tagList = new ArrayList<BoardTag>();
+			for (String splittedTag : tags) {
+				BoardTag boardTag = new BoardTag(board_no, splittedTag);
+				tagList.add(boardTag);
+			}
+			boardDao.insertTag(tagList);
+			boardDao.insertBoardTag(tagList);
 		}
-		boardDao.insertTag(tagList);
-		boardDao.insertBoardTag(tagList);
+		
 		return board_no;
 	}
 

@@ -178,6 +178,13 @@ span.modalMapToggle::after {
     top:8px;
     right:0;
 }
+
+
+/* 모달닫기버튼 포커스시 아웃라인없애기 */
+#modalMap button.close:focus {
+     outline: none; 
+     outline: none; 
+}
 	</style>
 </head>
 <body>
@@ -186,17 +193,7 @@ span.modalMapToggle::after {
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 			<form action="insertRun" method="post" id="instFrm" name="instFrm">
-				<div class="">
-					<!-- 지도  -->
-					<div class="row mb-2">
-						<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink my-auto mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-						  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-						</svg>
-						<span class="modalMapToggle" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
-							장소 선택
-						</span>
-						<small class="text-muted my-auto" id="resultPlace">선택된 장소가 없습니다.</small>
-					</div>
+				<div class="inner_form">
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
 						<select class="form-control mr-1" name="sub_local" id="subLocal">
@@ -207,7 +204,7 @@ span.modalMapToggle::after {
 								</option>
 							</c:forEach>
 						</select>
-						<select class="form-control mr-1" name="sort_board" id="sortBoard" onchange="selectSortBoard(this)">
+						<select class="form-control mr-1" name="sort_board" id="sortBoard" onchange="selectSortBoard(this);">
 							<option value="0" ${empty bs.sortBoard ? 'selected' : ''} data-haschild="false">분류</option>
 							<c:forEach var="sortBoard" items="${sortBoardArr}">
 								<option value="${sortBoard.sort_no}" 
@@ -245,9 +242,9 @@ span.modalMapToggle::after {
 				<input type="hidden" name="has_img" value=""/>
 				<input type="hidden" id="place_name" name="place.place_name" value="">
 				<input type="hidden" id="place_address" name="place.place_address" value="">
-				<input type="hidden" id="place_lat" name="place.place_lat" value="">
-				<input type="hidden" id="place_long" name="place.place_long" value="">
-				<input type="hidden" id="place_id" name="place.place_id" value="">
+				<input type="hidden" id="place_lat" name="place.place_lat" value="0">
+				<input type="hidden" id="place_long" name="place.place_long" value="0">
+				<input type="hidden" id="place_id" name="place.place_id" value="0">
 			</form>
 		</div>
 	</div>
@@ -264,20 +261,16 @@ span.modalMapToggle::after {
 					</svg>
 					지도에서 장소 선택	
 				</span>	
-	          <button type="button" class="close" onclick="closeModal();">&times;</button>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	        </div>
 	        <!-- Modal body -->
 	        <div class="modal-body p-4">
-	        	<div class="row ml-2 mb-2">
-	        		<span class="pt-1 mr-1 text-pink font-size-080 cursor-pointer">
-						<svg width="16" height="16" viewBox="0 0 16 17" class="bi bi-compass" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							  <path fill-rule="evenodd" d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-							  <path d="M6.94 7.44l4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
-							</svg>		
-						현재 위치 자동선택 
-					</span>
+				<div class="row ml-1 text-gray9">
+					<span class="fa fa-info-circle my-auto mr-1"></span>
+					<span class="font-size-075 font-weight-500" style="letter-spacing: 1px;">
+						장소 선택 후 완료 버튼까지 눌러야 변경사항이 적용됩니다!</span>
 				</div>
-				<div class="row mx-3 mb-3 font-size-080">
+				<div class="row mx-3 mb-3">
 					<span class="pt-1 mr-1">선택한 장소
 						<svg width="16" height="16" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
@@ -285,7 +278,7 @@ span.modalMapToggle::after {
 						</svg>
 					</span>
 					<span id="selectedPlace" class="text-muted pt-1">선택한 장소가 없습니다.</span>
-					<button class="btn btn-pink btn-sm ml-2 my-auto font-size-075" style="padding:.1rem .3rem;" onclick="done();">완료</button>
+					<button class="btn btn-pink btn-sm ml-2 mt-auto font-size-085" style="padding:.1rem .3rem; height:23px; line-height:.7;" onclick="doComplete();">완료</button>
 				</div>
 	       		 <!--지도 -->
 				<div class="map_wrap">
@@ -312,21 +305,50 @@ span.modalMapToggle::after {
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
 	<script>
+	let sortPlace = 
+		'<select class="form-control" id="sortPlace" name="sort_place">'
+			+'<option value="0" ${empty bs.sortPlace ? "selected" : ""}>말머리</option>'
+			+'<c:forEach var="sortPlace" items="${sortPlaceArr}">'
+				+'<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == bs.sortPlace ? "selected" : ""}>'
+					+'${sortPlace.sort_name}'
+				+'</option>'
+			+'</c:forEach>'
+		+ '</select>';
+		
+	let divPlace = 
+		'<div class="row mb-2" id="divPlace">'
+			+'<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink my-auto mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
+				+'<path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>'
+			+'</svg>'
+			+'<span class="modalMapToggle" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">'
+				+'장소 선택'
+			+'</span>'
+			+'<small class="text-muted my-auto" id="resultPlace">선택된 장소가 없습니다.</small>'
+		+ '</div>';
+		
+	//뒤로가기 할때 자식있는게 선택된 상태에 말머리 박스 안나오는 거 해결 
+	$(document).ready(function() {
+		let sortBoard = document.querySelector('#sortBoard');
+		let i = sortBoard.selectedIndex;
+		console.log(sortBoard.options[i]);
+		if(sortBoard.options[i].dataset['haschild'] == 'true') {
+			console.log('ready');
+			$(sortBoard).after(sortPlace);
+			$('.inner_form').prepend(divPlace);
+		} 
+	})
 	function selectSortBoard(el) {
-		let html = 
-			'<select class="form-control" id="sortPlace" name="place.sort_place">'
-				+'<option value="0" ${empty bs.sortPlace ? "selected" : ""}>말머리</option>'
-				+'<c:forEach var="sortPlace" items="${sortPlaceArr}">'
-					+'<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == bs.sortPlace ? "selected" : ""}>'
-						+'${sortPlace.sort_name}'
-					+'</option>'
-				+'</c:forEach>'
-			+ '</select>';
 		if(el.options[el.selectedIndex].dataset['haschild'] == 'true') {
-			$(el).after(html);
+			$(el).after(sortPlace);
+			$('.inner_form').prepend(divPlace);
 		} else {
-			if(document.querySelector('#sortPlace') != null)
-			document.querySelector('#sortPlace').remove();
+			if(document.querySelector('#sortPlace') != null) {
+				document.querySelector('#sortPlace').remove();
+			}
+			if(document.querySelector('#divPlace') != null) {
+				document.querySelector('#divPlace').remove();
+			}
+			
 		}
 	}
 	</script>
@@ -341,7 +363,7 @@ span.modalMapToggle::after {
 	        lang : 'ko-KR',
 // 	        disableResizeEditor: true,
 	        spellCheck:false,
-	        focus:true,
+// 	        focus:true,
 	        toolbar: [
 			    ['fontname', ['fontname']],
 			    ['fontsize', ['fontsize']],
@@ -505,25 +527,15 @@ span.modalMapToggle::after {
 	
 	
 	
-	var isChange = false;
+	var isChange = null; // input에 값 다 담기기전에 완료버튼 누르는거 방지
+	var isClick = false; // 완료버튼 클릭 여부
+	//원래 클릭여부에 따라 닫기 창 누르는 상황 다르게 했는데 사용자를 
+	// 너무 귀찮게 하는것 같아서 없앰
+	
 	//카카오 지도
-	function closeModal() {
-		console.log("닫기");
-		Swal.fire({
-			text: '장소 변경을 적용하지 않고 나가시겠습니까?', 
-			allowOutsideClick: false,
-			icon: 'error', 
-			confirmButtonText: "나가기",
-			cancelButtonText: "취소",
-			showCancelButton: true,
-		}).then(function(result) {
-			if(result.isConfirmed) {
-				$('#modalMap').modal('hide')
-			} 
-		});
-	}
 	function selectPlace(place) {
 		//장소 표시될 span
+		isClick = false; // 장소 선택할때마다 완료버튼 누른거 초기화
 		isChange = false;
 		console.log("1input변경전", isChange);
     	var selectedPlace = document.getElementById('selectedPlace');
@@ -537,9 +549,10 @@ span.modalMapToggle::after {
     	isChange = true;
     	console.log("3 isChangetrue후", isChange);
 	}
-	function done() {
+	function doComplete() {
 		console.log("4완료버튼클릭",isChange)
-		if(!isChange) {
+		isClick = true;
+		if(isChange == null) {
 			Swal.fire({
 	        	title: '장소를 선택하지 않으셨어요!',
 // 	        	html: '장소를 선택하지 않으셨어요!', 
@@ -550,10 +563,9 @@ span.modalMapToggle::after {
 					console.log("에러후", isChange);
 				}
 			});
-		} else {
+		} else if (isChange) {
 			Swal.fire({
 	        	title: '장소 선택 완료',
-// 	        	html: '장소를 선택하지 않으셨어요!', 
 				allowOutsideClick: false,
 				icon: 'success', 
 				confirmButtonText: "확인",
