@@ -4,12 +4,18 @@ public class BoardImg {
 	private int img_no;
 	private int board_no;
 	private String img_path;
-	private String org_name;
-	private String saved_name;
+	private String img_name;
 	
 	public BoardImg() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public BoardImg(int board_no, String img_path, String img_name) {
+		super();
+		this.board_no = board_no;
+		this.img_path = img_path;
+		this.img_name = img_name;
 	}
 
 	public int getImg_no() {
@@ -36,26 +42,19 @@ public class BoardImg {
 		this.img_path = img_path;
 	}
 
-	public String getOrg_name() {
-		return org_name;
+	public String getImg_name() {
+		return img_name;
 	}
 
-	public void setOrg_name(String org_name) {
-		this.org_name = org_name;
-	}
-
-	public String getSaved_name() {
-		return saved_name;
-	}
-
-	public void setSaved_name(String saved_name) {
-		this.saved_name = saved_name;
+	public void setImg_name(String img_name) {
+		this.img_name = img_name;
 	}
 
 	@Override
 	public String toString() {
-		return "BoardImg [img_no=" + img_no + ", board_no=" + board_no + ", img_path=" + img_path + ", org_name="
-				+ org_name + ", saved_name=" + saved_name + "]";
+		return "BoardImg [img_no=" + img_no + ", board_no=" + board_no + ", img_path=" + img_path + ", img_name="
+				+ img_name + "]";
 	}
+
 
 }

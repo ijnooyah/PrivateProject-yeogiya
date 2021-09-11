@@ -58,8 +58,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int insertImg(List<BoardImg> imgList) {
-		return sqlSession.insert(NAMESPACE + "insertImg", imgList);
+	public int insertBoardImg(List<BoardImg> imgList) {
+		return sqlSession.insert(NAMESPACE + "insertBoardImg", imgList);
 	}
 
 	@Override

@@ -125,7 +125,18 @@
 	        from dual
 	         ) A
 	</insert>
-	
+	<!-- 1-4. img -->
+	<insert id="insertBoardImg" parameterType="java.util.List">
+		INSERT INTO tbl_board_img
+		SELECT seq_img_no.NEXTVAL, A.* FROM (
+			<foreach collection="list" item="item" separator="UNION ALL">
+				SELECT #{item.board_no} BOARD_NO,
+					   #{item.img_path} IMG_PATH,
+					   #{item.img_name} IMG_NAME
+				FROM DUAL
+			</foreach>
+			)A
+	</insert>
 	
 <!-- board 상세조회 -->
 	<select id="selectBoard" resultType="Board">

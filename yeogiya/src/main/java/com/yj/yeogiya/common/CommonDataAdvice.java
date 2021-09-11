@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -15,6 +16,7 @@ import com.yj.yeogiya.model.vo.Sort;
 
 @ControllerAdvice(assignableTypes = {BoardController.class})
 public class CommonDataAdvice {
+	
 	@Inject
 	private BoardService boardService;
 	

@@ -71,6 +71,7 @@ public class BoardController {
 	public String insertRun(Board board) throws Exception {
 		System.out.println(board);
 		int board_no = boardService.insertBoardArticle(board);
+		System.out.println("board_no: " + board_no);
 		return "redirect:content/" + board_no;
 	}
 	

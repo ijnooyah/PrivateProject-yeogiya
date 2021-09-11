@@ -11,7 +11,7 @@ import com.yj.yeogiya.model.vo.Sort;
 
 public interface BoardDao {
 	
-	//************CREATE************
+//************CREATE************
 	// 1. 게시글
 	// 1-1.board
 	public int insertBoard(Board board);
@@ -21,9 +21,17 @@ public interface BoardDao {
 	// 1-3. place
 	public int insertPlace (BoardPlace place);
 	public int insertBoardPlace (BoardPlace place);
+	
 	// 1-4. img
-	public int insertImg (List<BoardImg> imgList);
-	//************READ************
+	public int insertBoardImg (List<BoardImg> imgList);
+	// 2. 카테고리 
+	
+	// 3. 이미지
+	
+	
+	
+	
+//************READ************
 	// 1. 게시글
 	// 1-1.board
 	// 1-2.tag
@@ -35,14 +43,24 @@ public interface BoardDao {
 	public List<Sort> selectSortPlace();
 	public List<Sort> selectSortBoard();
 	public Sort selectSortLocalPByEngName(String eng_name);
-	//************UPDATE************
+	
+	
+	
+	
+//************UPDATE************
 	// 1. 게시글
 	// 1-1.board
 	public int updateBoard(Board board);
 	// 1-2.tag
 	// 1-3. place
 	// 1-4. img
-	//************DELETE************
+	
+	
+	
+	
+	
+	
+//************DELETE************
 	// 1. 게시글
 	// 1-1.board
 	// 1-2.tag
