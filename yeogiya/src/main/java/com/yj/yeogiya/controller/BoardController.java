@@ -15,6 +15,8 @@ import com.yj.yeogiya.model.service.BoardService;
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.Sort;
 
+import net.sf.json.JSONArray;
+
 
 @Controller
 @RequestMapping("/{sortLocalPEngName}")
@@ -47,6 +49,7 @@ public class BoardController {
 	public String update(Model model, @PathVariable("board_no") int board_no) throws Exception {
 		Board board = boardService.selectBoardArticle(board_no);
 		model.addAttribute("board", board);
+		model.addAttribute("tagList", JSONArray.fromObject(board.getTagList()));
 		return "board/boardUpdate";
 	}
 	

@@ -32,13 +32,17 @@ public interface BoardDao {
 	
 	
 //************READ************
-	// 1. 게시글
+	// 1. 게시글 상세보기
 	// 1-1.board
-	// 1-2.tag
-	// 1-3. place
-	// 1-4. img
-	// 2. 카테고리
 	public Board selectBoard(int board_no);
+	// 1-2.tag
+	public List<BoardTag> selectBoardTag(int board_no);
+	// 1-3. place
+	public BoardPlace selectBoardPlace(int board_no);
+	
+	
+	// 2. 글목록
+	// 3. 카테고리
 	public List<Sort> selectSortLocal();
 	public List<Sort> selectSortPlace();
 	public List<Sort> selectSortBoard();

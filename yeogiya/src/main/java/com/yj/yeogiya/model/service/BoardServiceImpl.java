@@ -134,6 +134,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Board selectBoardArticle(int board_no) {
 		Board board = boardDao.selectBoard(board_no);
+		BoardPlace place = boardDao.selectBoardPlace(board_no);
+		List<BoardTag> tagList = boardDao.selectBoardTag(board_no);
+		board.setPlace(place);
+		board.setTagList(tagList);
 		return board;
 	}
 	

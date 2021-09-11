@@ -49,7 +49,9 @@
 	.note-fontname .note-icon-caret, .note-fontsize .note-icon-caret, .note-para .note-icon-caret, .note-height .note-icon-caret{
 	 display:none;
 	}
-
+	.note-editor.note-frame {
+    border: 1px solid #ced4da;
+	}
 	/* 카카오 */
 	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Noto Sans KR', sans-serif; font-size:12px;}
 	.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -197,7 +199,7 @@ span.modalMapToggle::after {
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
 						<select class="form-control mr-1" name="sub_local" id="subLocal">
-							<option value="" ${empty bs.subLocal ? 'selected' : ''}>지역</option>
+							<option value="0" ${empty bs.subLocal ? 'selected' : ''}>지역</option>
 							<c:forEach var="subLocal" items="${subLocalArr}">
 								<option value="${subLocal.sort_no}" ${subLocal.sort_no == bs.subLocal ? 'selected' : ''}>
 								${subLocal.sort_name}
@@ -323,7 +325,7 @@ span.modalMapToggle::after {
 			+'<span class="modalMapToggle" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">'
 				+'장소 선택'
 			+'</span>'
-			+'<small class="text-muted my-auto" id="resultPlace">선택된 장소가 없습니다.</small>'
+			+'<small class="text-muted my-auto" id="resultPlace" data-isexist="N">선택된 장소가 없습니다.</small>'
 		+ '</div>';
 		
 	//뒤로가기 할때 자식있는게 선택된 상태에 말머리 박스 안나오는 거 해결 
@@ -353,8 +355,6 @@ span.modalMapToggle::after {
 	}
 	</script>
 	<script>
-	
-	var isShown = false; 
 	$(document).ready(function() {
 	    $('#summernote').summernote({
 	        width : 1110,   
@@ -385,7 +385,14 @@ span.modalMapToggle::after {
 	                }
 					
 	                uploadFiles(fileList, this);
+	         	},
+	         	onFocus: function() {
+	         		$('.note-editor.note-frame').css('border-color', 'var(--pink)');
+	         	},
+	         	onBlur: function() {
+	         		$('.note-editor.note-frame').css('border-color', '#ced4da');
 	         	}
+	         	
 	    	}
 	    });
 	    
@@ -446,15 +453,146 @@ span.modalMapToggle::after {
 		            }
 			});
 	    }
+	});
+	</script>
+	<script>
+	$(document).ready(function() {
+	    //태그
+	    $("#tag").tagit({
+	        singleField: false,
+	        singleFieldNode: $('#tag'),
+	        singleFieldDelimiter: ',',
+	        allowSpaces: false,
+// 	        placeholderText:"콤마나 스페이스로 태그를 구분하세요.",
+	        preprocessTag : function(val) {
+	            return val.replace(",","").replace("#","");
+	        },
+	        autocomplete : {
+	            source: ['사과', '배', '사진', '사랑', '사랑니', '사진기']
+	        }
+	    });
 	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
+	   	//태그 포커스 css
+	   	$('.ui-autocomplete-input').on('focus' , function() {
+	   		$('.ui-widget.ui-widget-content').css('border-color', 'var(--pink)');
+	   	}); 
+	   	$('.ui-autocomplete-input').on('blur' , function() {
+	   		$('.ui-widget.ui-widget-content').css('border-color', '#ced4da');
+	   	});
+	});
+	</script>
+	<script>
+	let form = document.forms['instFrm'];
+	let summernote = document.querySelector('#summernote');
+	function validate() {
+		let msg = null;
+		// 1. 카테고리
+		if($('#subLocal').val() == 0) {
+			Swal.fire({
+	        	title: '지역을 선택해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#subLocal').focus();
+				}
+			});
+			return false;
+		}
+		if($('#sortBoard').val() == 0) {
+			Swal.fire({
+	        	title: '분류를 선택해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#sortBoard').focus();
+				}
+			});
+			return false;
+		}
+		if (document.querySelector('#sortPlace') != null && $('#sortPlace').val() == 0) {
+			Swal.fire({
+	        	title: '말머리를 선택해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#sortPlace').focus();
+				}
+			});
+			return false;
+		}
+		// 2. 장소
+		if (document.querySelector('#sortPlace') != null && $("#resultPlace").data('isexist') == 'N') {
+			console.log($("#resultPlace").data('isexist'));
+			Swal.fire({
+	        	title: '장소를 선택해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					document.querySelector('#resultPlace').scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+					document.querySelector('#resultPlace').classList.replace('text-muted', 'text-pink');
+					setTimeout(function() { $("#resultPlace").removeClass("text-pink").addClass("text-muted") },3000);
+				}
+			});
+			return false;
+		} 
+		
+		// 3. 제목
+		if ($('#board_title').val() == null || $('#board_title').val().trim() == '') {
+			Swal.fire({
+	        	title: '제목을 입력해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#board_title').focus();
+				}
+			});
+			return false;
+		}
+		// 4. 내용
+		if (summernote.value == '' || $(summernote).summernote('isEmpty')) {
+			Swal.fire({
+	        	title: '내용을 입력해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					console.log('내용')
+					$('#summernote').summernote('focus');
+				}
+			});
+			return false;
+		}
+		return true;
+	}
+	
+	function doSubmit() {
+		
+		valResult = validate();
+		console.log("유효성결과", valResult);
+	    if (!valResult) {
+	        return false;
+	    } 
+	    let div = document.createElement('div'); //임의의 div
+		div.innerHTML = summernote.value;
+		if (div.querySelector('img') != null) {
+			console.log("이미지 있음");
+			form.elements['has_img'].value = 'Y';
+		} else {
+			console.log("이미지 없음");
+			form.elements['has_img'].value = 'N';
+		}
+		form.submit();
+	}
+	</script>
+	<script>
+	
+	var isShown = false; 
+	$(document).ready(function() {
 	    // 카카오맵 잘림 현상 해결
 	    $('#modalMap').on('shown.bs.modal', function (e) {
 	    	$("#keyword").focus();
@@ -474,57 +612,7 @@ span.modalMapToggle::after {
 	    	});
 		});
 	    
-	    $("#tag").tagit({
-	        singleField: false,
-	        singleFieldNode: $('#tag'),
-	        singleFieldDelimiter: ',',
-	        allowSpaces: false,
-// 	        placeholderText:"콤마나 스페이스로 태그를 구분하세요.",
-	        preprocessTag : function(val) {
-	            return val.replace(",","").replace("#","");
-	        },
-	        autocomplete : {
-	            source: ['사과', '배', '사진', '사랑', '사랑니', '사진기']
-	        }
-	    });
 	});
-	
-	
-	function doSubmit() {
-		let form = document.forms['instFrm'];
-		let summernote = document.querySelector('#summernote')
-		if (summernote.value == '') {
-			console.log("빔");
-// 			return false;
-		}
-		if ($('#summernote').summernote('isEmpty')) {
-	    	  alert('editor content is empty');
-// 	    	  return false
-	    }
-		
-		let div = document.createElement('div'); //임의의 div
-		div.innerHTML = summernote.value;
-		if (div.querySelector('img') != null) {
-			console.log("이미지 있음");
-			form.elements['has_img'].value = 'Y';
-		} else {
-			console.log("이미지 없음");
-			form.elements['has_img'].value = 'N';
-		}
-		console.log(form);
-		form.submit();
-// 		console.log(summernote.value.querySelector('img'));
-// 		$("#istFrm").submit();
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	var isChange = null; // input에 값 다 담기기전에 완료버튼 누르는거 방지
@@ -570,7 +658,7 @@ span.modalMapToggle::after {
 				icon: 'success', 
 				confirmButtonText: "확인",
 				didClose: function() {
-					console.log("swal 닫힘");
+					$("#resultPlace").data('isexist', 'Y');
 					$("#resultPlace").text($("#selectedPlace").text());
 				}
 			});

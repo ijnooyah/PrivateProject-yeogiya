@@ -80,6 +80,16 @@ public class BoardDaoImpl implements BoardDao {
 	public int insertBoardPlace(BoardPlace place) {
 		return sqlSession.update(NAMESPACE + "insertBoardPlace", place);
 	}
+
+	@Override
+	public List<BoardTag> selectBoardTag(int board_no) {
+		return sqlSession.selectList(NAMESPACE + "selectBoardTag", board_no);
+	}
+
+	@Override
+	public BoardPlace selectBoardPlace(int board_no) {
+		return sqlSession.selectOne(NAMESPACE + "selectBoardPlace", board_no);
+	}
 	
 
 }

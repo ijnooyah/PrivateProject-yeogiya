@@ -49,7 +49,9 @@
 	.note-fontname .note-icon-caret, .note-fontsize .note-icon-caret, .note-para .note-icon-caret, .note-height .note-icon-caret{
 	 display:none;
 	}
-
+	.note-editor.note-frame {
+    border: 1px solid #ced4da;
+	}
 	/* 카카오 */
 	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Noto Sans KR', sans-serif; font-size:12px;}
 	.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -192,32 +194,42 @@ span.modalMapToggle::after {
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
-			<form action="insertRun" method="post" id="instFrm" name="instFrm">
+			<form action="updateRun" method="post" id="updtFrm" name="updtFrm">
 				<div class="inner_form">
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
 						<select class="form-control mr-1" name="sub_local" id="subLocal">
-							<option value="" ${empty bs.subLocal ? 'selected' : ''}>지역</option>
+							<option value="0">지역</option>
 							<c:forEach var="subLocal" items="${subLocalArr}">
-								<option value="${subLocal.sort_no}" ${subLocal.sort_no == bs.subLocal ? 'selected' : ''}>
+								<option value="${subLocal.sort_no}" ${subLocal.sort_no == board.sub_local ? 'selected' : ''}>
 								${subLocal.sort_name}
 								</option>
 							</c:forEach>
 						</select>
 						<select class="form-control mr-1" name="sort_board" id="sortBoard" onchange="selectSortBoard(this);">
-							<option value="0" ${empty bs.sortBoard ? 'selected' : ''} data-haschild="false">분류</option>
+							<option value="0" data-haschild="false">분류</option>
 							<c:forEach var="sortBoard" items="${sortBoardArr}">
 								<option value="${sortBoard.sort_no}" 
-										${sortBoard.sort_no == bs.sortBoard ? 'selected' : ''}
+										${sortBoard.sort_no == board.sort_board ? 'selected' : ''}
 										data-haschild="${sortBoard.has_sort_place == 'Y' ? true : false }">
 								${sortBoard.sort_name}
 								</option>
 							</c:forEach>
 						</select>
+<%-- 						<c:if test="${not empty board.sort_place}"> --%>
+<!-- 							<select class="form-control mr-1" name="sort_place" id="sortPlace"> -->
+<!-- 								<option value="0">말머리</option> -->
+<%-- 								<c:forEach var="sortPlace" items="${sortPlaceArr}"> --%>
+<%-- 									<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == board.sort_place ? 'selected' : ''}> --%>
+<%-- 									${sortBoard.sort_name} --%>
+<!-- 									</option> -->
+<%-- 								</c:forEach> --%>
+<!-- 							</select> -->
+<%-- 						</c:if> --%>
 					</div>
 					<!-- 제목 -->
 					<div class="row mb-2 border-0">
-						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" id="board_title" autocomplete="off" spellcheck="false"></input>
+						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" id="board_title" value="${board.board_title}" autocomplete="off" spellcheck="false"></input>
 					</div>
 					<!-- 내용 -->
 					<div class="row mb-2">
@@ -238,13 +250,13 @@ span.modalMapToggle::after {
 					</div>
 				</div>
 				<input type="hidden" name="user_id" value="ijnooyah"/>
-				<input type="hidden" name="sort_local" value="${sortLocalP.sort_no}"/>
-				<input type="hidden" name="has_img" value=""/>
-				<input type="hidden" id="place_name" name="place.place_name" value="">
-				<input type="hidden" id="place_address" name="place.place_address" value="">
-				<input type="hidden" id="place_lat" name="place.place_lat" value="0">
-				<input type="hidden" id="place_long" name="place.place_long" value="0">
-				<input type="hidden" id="place_id" name="place.place_id" value="0">
+				<input type="hidden" name="sort_local" value="${board.sort_local}"/>
+				<input type="hidden" name="has_img" value="${board.has_img}"/>
+				<input type="hidden" id="place_name" name="place.place_name" value="${board.place.place_name}">
+				<input type="hidden" id="place_address" name="place.place_address" value="${board.place.place_address}">
+				<input type="hidden" id="place_lat" name="place.place_lat" value="${board.place.place_lat}">
+				<input type="hidden" id="place_long" name="place.place_long" value="${board.place.place_long}">
+				<input type="hidden" id="place_id" name="place.place_id" value="${board.place.place_id}">
 			</form>
 		</div>
 	</div>
@@ -307,14 +319,20 @@ span.modalMapToggle::after {
 	<script>
 	let sortPlace = 
 		'<select class="form-control" id="sortPlace" name="sort_place">'
-			+'<option value="0" ${empty bs.sortPlace ? "selected" : ""}>말머리</option>'
+			+'<option value="0">말머리</option>'
 			+'<c:forEach var="sortPlace" items="${sortPlaceArr}">'
-				+'<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == bs.sortPlace ? "selected" : ""}>'
+				+'<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == board.sort_place ? "selected" : ""}>'
 					+'${sortPlace.sort_name}'
 				+'</option>'
 			+'</c:forEach>'
 		+ '</select>';
 		
+	let resultPlaceText = null;
+	if ('${board.place}' == '') {
+		resultPlaceText = '선택된 장소가 없습니다.';
+	} else {
+		resultPlaceText = '${board.place.place_name} (${board.place.place_address})';
+	}
 	let divPlace = 
 		'<div class="row mb-2" id="divPlace">'
 			+'<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink my-auto mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
@@ -323,7 +341,9 @@ span.modalMapToggle::after {
 			+'<span class="modalMapToggle" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">'
 				+'장소 선택'
 			+'</span>'
-			+'<small class="text-muted my-auto" id="resultPlace">선택된 장소가 없습니다.</small>'
+			+'<small class="text-muted my-auto" id="resultPlace" data-isexist="N">'
+		    	+ resultPlaceText
+	    	+'</small>'
 		+ '</div>';
 		
 	//뒤로가기 할때 자식있는게 선택된 상태에 말머리 박스 안나오는 거 해결 
@@ -353,8 +373,6 @@ span.modalMapToggle::after {
 	}
 	</script>
 	<script>
-	
-	var isShown = false; 
 	$(document).ready(function() {
 		var fontSizes = ['8','9','10','11','12', '13', '14','16','18','20','22','24','28','30','36','50','72'];
 		var fontNames = ['Noto Sans KR', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'];
@@ -456,15 +474,152 @@ span.modalMapToggle::after {
 		            }
 			});
 	    }
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
+	});
+	</script>
+	<script>
+	$(document).ready(function() {
+	    //태그
+	    $("#tag").tagit({
+	        singleField: false,
+	        singleFieldNode: $('#tag'),
+	        singleFieldDelimiter: ',',
+	        allowSpaces: false,
+// 	        placeholderText:"콤마나 스페이스로 태그를 구분하세요.",
+	        preprocessTag : function(val) {
+	            return val.replace(",","").replace("#","");
+	        },
+	        autocomplete : {
+	            source: ['사과', '배', '사진', '사랑', '사랑니', '사진기']
+	        }
+	    });
+	    // 작성했던 태그들 
+	    var tagList = JSON.parse('${tagList}');
+	    $.each(tagList, function(index, obj) {
+	        console.log(index + " : " + obj.tag_name);
+	        $("#tag").tagit("createTag", obj.tag_name);
+	  	});
+
+	   	//태그 포커스 css
+	   	$('.ui-autocomplete-input').on('focus' , function() {
+	   		$('.ui-widget.ui-widget-content').css('border-color', 'var(--pink)');
+	   	}); 
+	   	$('.ui-autocomplete-input').on('blur' , function() {
+	   		$('.ui-widget.ui-widget-content').css('border-color', '#ced4da');
+	   	});
+	});
+	</script>
+	<script>
+	let form = document.forms['updtFrm'];
+	let summernote = document.querySelector('#summernote');
+	function validate() {
+		let msg = null;
+		// 1. 카테고리
+		if($('#subLocal').val() == 0) {
+			Swal.fire({
+	        	title: '지역을 선택해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#subLocal').focus();
+				}
+			});
+			return false;
+		}
+		if($('#sortBoard').val() == 0) {
+			Swal.fire({
+	        	title: '분류를 선택해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#sortBoard').focus();
+				}
+			});
+			return false;
+		}
+		if (document.querySelector('#sortPlace') != null && $('#sortPlace').val() == 0) {
+			Swal.fire({
+	        	title: '말머리를 선택해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#sortPlace').focus();
+				}
+			});
+			return false;
+		}
+		// 2. 장소
+		if (document.querySelector('#sortPlace') != null && $("#resultPlace").data('isexist') == 'N') {
+			console.log($("#resultPlace").data('isexist'));
+			Swal.fire({
+	        	title: '장소를 선택해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					document.querySelector('#resultPlace').scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+					document.querySelector('#resultPlace').classList.replace('text-muted', 'text-pink');
+					setTimeout(function() { $("#resultPlace").removeClass("text-pink").addClass("text-muted") },3000);
+				}
+			});
+			return false;
+		} 
+		
+		// 3. 제목
+		if ($('#board_title').val() == null || $('#board_title').val().trim() == '') {
+			Swal.fire({
+	        	title: '제목을 입력해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#board_title').focus();
+				}
+			});
+			return false;
+		}
+		// 4. 내용
+		if (summernote.value == '' || $(summernote).summernote('isEmpty')) {
+			Swal.fire({
+	        	title: '내용을 입력해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					console.log('내용')
+					$('#summernote').summernote('focus');
+				}
+			});
+			return false;
+		}
+		return true;
+	}
+	
+	function doSubmit() {
+		
+		valResult = validate();
+		console.log("유효성결과", valResult);
+	    if (!valResult) {
+	        return false;
+	    } 
+	    let div = document.createElement('div'); //임의의 div
+		div.innerHTML = summernote.value;
+		if (div.querySelector('img') != null) {
+			console.log("이미지 있음");
+			form.elements['has_img'].value = 'Y';
+		} else {
+			console.log("이미지 없음");
+			form.elements['has_img'].value = 'N';
+		}
+		form.submit();
+	}
+	</script>
+	<script>
+	
+	var isShown = false; 
+	$(document).ready(function() {
 	    // 카카오맵 잘림 현상 해결
 	    $('#modalMap').on('shown.bs.modal', function (e) {
 	    	$("#keyword").focus();
@@ -484,57 +639,7 @@ span.modalMapToggle::after {
 	    	});
 		});
 	    
-	    $("#tag").tagit({
-	        singleField: false,
-	        singleFieldNode: $('#tag'),
-	        singleFieldDelimiter: ',',
-	        allowSpaces: false,
-// 	        placeholderText:"콤마나 스페이스로 태그를 구분하세요.",
-	        preprocessTag : function(val) {
-	            return val.replace(",","").replace("#","");
-	        },
-	        autocomplete : {
-	            source: ['사과', '배', '사진', '사랑', '사랑니', '사진기']
-	        }
-	    });
 	});
-	
-	
-	function doSubmit() {
-		let form = document.forms['instFrm'];
-		let summernote = document.querySelector('#summernote')
-		if (summernote.value == '') {
-			console.log("빔");
-// 			return false;
-		}
-		if ($('#summernote').summernote('isEmpty')) {
-	    	  alert('editor content is empty');
-// 	    	  return false
-	    }
-		
-		let div = document.createElement('div'); //임의의 div
-		div.innerHTML = summernote.value;
-		if (div.querySelector('img') != null) {
-			console.log("이미지 있음");
-			form.elements['has_img'].value = 'Y';
-		} else {
-			console.log("이미지 없음");
-			form.elements['has_img'].value = 'N';
-		}
-		console.log(form);
-		form.submit();
-// 		console.log(summernote.value.querySelector('img'));
-// 		$("#istFrm").submit();
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	var isChange = null; // input에 값 다 담기기전에 완료버튼 누르는거 방지
@@ -580,7 +685,7 @@ span.modalMapToggle::after {
 				icon: 'success', 
 				confirmButtonText: "확인",
 				didClose: function() {
-					console.log("swal 닫힘");
+					$("#resultPlace").data('isexist', 'Y');
 					$("#resultPlace").text($("#selectedPlace").text());
 				}
 			});

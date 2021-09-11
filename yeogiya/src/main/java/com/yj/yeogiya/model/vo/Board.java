@@ -26,8 +26,8 @@ public class Board {
 	
 	// has a
 	private BoardPlace place;
-	private List<BoardTag> boardTags;
-	private List<BoardImg> boardImgs;
+	private List<BoardTag> tagList;
+	private List<BoardImg> imgList;
 	
 	private String like_board; // 좋아요: 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
 	private String bm_board; // 북마크 : 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
@@ -181,21 +181,6 @@ public class Board {
 		this.place = place;
 	}
 
-	public List<BoardTag> getBoardTags() {
-		return boardTags;
-	}
-
-	public void setBoardTags(List<BoardTag> boardTags) {
-		this.boardTags = boardTags;
-	}
-
-	public List<BoardImg> getBoardImgs() {
-		return boardImgs;
-	}
-
-	public void setBoardImgs(List<BoardImg> boardImgs) {
-		this.boardImgs = boardImgs;
-	}
 
 	public String getLike_board() {
 		return like_board;
@@ -241,6 +226,22 @@ public class Board {
 		this.sort_place = sort_place;
 	}
 
+	public List<BoardTag> getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(List<BoardTag> tagList) {
+		this.tagList = tagList;
+	}
+
+	public List<BoardImg> getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(List<BoardImg> imgList) {
+		this.imgList = imgList;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", board_title=" + board_title
@@ -248,9 +249,10 @@ public class Board {
 				+ ", sort_board=" + sort_board + ", sort_place=" + sort_place + ", has_img=" + has_img + ", cmt_cnt="
 				+ cmt_cnt + ", like_cnt=" + like_cnt + ", bmk_cnt=" + bmk_cnt + ", view_cnt=" + view_cnt + ", rp_cnt="
 				+ rp_cnt + ", is_notice=" + is_notice + ", reg_date=" + reg_date + ", is_del=" + is_del + ", del_date="
-				+ del_date + ", mod_date=" + mod_date + ", place=" + place + ", boardTags=" + boardTags + ", boardImgs="
-				+ boardImgs + ", like_board=" + like_board + ", bm_board=" + bm_board + ", tag=" + tag + "]";
+				+ del_date + ", mod_date=" + mod_date + ", place=" + place + ", tagList=" + tagList + ", imgList="
+				+ imgList + ", like_board=" + like_board + ", bm_board=" + bm_board + ", tag=" + tag + "]";
 	}
+
 
 
 
