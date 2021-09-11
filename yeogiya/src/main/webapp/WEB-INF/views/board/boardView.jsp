@@ -50,7 +50,9 @@
 				<!-- 글정보 -->
 				<div class="row mb-2 content-top">
 					<div class="d-flex w-100 h5">
-						<span class="text-pink mr-1 font-weight-500">[맛집]</span>
+						<span class="sort_board my-auto text-gray9 font-size-100" 
+							  style="opacity:.35; margin-left: -7px;margin-right: 7px;">추천</span>
+						<span class="text-pink mr-1 font-weight-500 sort_place">[맛집]</span>
 						<span>여기 브라우니 진짜 맛있어요!!</span>
 						<!-- 수정 삭제 버튼 -->
 						<svg class="bi bi-three-dots-vertical cursor-pointer ml-auto my-auto" data-toggle="dropdown" width="1.2rem" height="1.2rem" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">

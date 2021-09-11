@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardImg;
+import com.yj.yeogiya.model.vo.BoardPlace;
 import com.yj.yeogiya.model.vo.BoardTag;
 import com.yj.yeogiya.model.vo.Sort;
 
@@ -68,6 +69,16 @@ public class BoardDaoImpl implements BoardDao {
 
 	public int insertBoardTag(List<BoardTag> tagList) {
 		return sqlSession.insert(NAMESPACE + "insertBoardTag", tagList);
+	}
+
+	@Override
+	public int insertPlace(BoardPlace place) {
+		return sqlSession.update(NAMESPACE + "insertPlace", place);
+	}
+
+	@Override
+	public int insertBoardPlace(BoardPlace place) {
+		return sqlSession.update(NAMESPACE + "insertBoardPlace", place);
 	}
 	
 

@@ -287,7 +287,7 @@ span.modalMapToggle::after {
 				    <div id="menu_wrap" class="bg_white">
 				        <div class="option">
 				            <div>
-				                    키워드 : <input type="text" value="울산 동구" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
+				                    키워드 : <input type="text" value="${sortLocalP.sort_name}" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
 				                  <input type="button" id="btnSearch" onclick="searchPlaces()" value="검색">
 				            </div>
 				        </div>

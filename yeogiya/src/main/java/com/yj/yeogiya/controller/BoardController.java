@@ -30,6 +30,12 @@ public class BoardController {
 		return boardService.selectSortLocalPByEngName(sortLocalPEngName);
 	}
 	
+	//지역별페이지
+	@RequestMapping(value = "main")
+	public String main() throws Exception {
+		return "board/boardMain";
+	}
+	
 	//글작성페이지
 	@RequestMapping(value = "insert")
 	public String insert() throws Exception {
@@ -57,6 +63,8 @@ public class BoardController {
 	public String list() throws Exception {
 		return "board/boardList";
 	}
+	
+	
 	
 	//글작성작업
 	@RequestMapping(value = "insertRun", method = RequestMethod.POST)

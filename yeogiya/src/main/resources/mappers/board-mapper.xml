@@ -9,20 +9,21 @@
  		SELECT * FROM tbl_sort_local
  		order by sort_name asc
  	</select>
-	<select id="selectSortPlace" resultType="Sort">
- 		SELECT * FROM tbl_sort_place
- 	</select>
 	<select id="selectSortBoard" resultType="Sort">
  		SELECT * FROM tbl_sort_board
+ 		order by sort_no asc
  	</select>
- 	<!-- 상위지역 영어이름으로 select 하기 -->
+	<select id="selectSortPlace" resultType="Sort">
+ 		SELECT * FROM tbl_sort_place
+ 		order by sort_name asc
+ 	</select>
  	<select id="selectSortLocalPByEngName" resultType="Sort">
  		SELECT * FROM tbl_sort_local
  		where eng_name = #{eng_name}
  	</select>
  	
  	
-<!--  ************CREATE************ -->
+<!-- ************CREATE************ -->
 	<!-- 1. board -->
 	<!-- 1-1. tbl_board insert -->
 	<insert id="insertBoard" parameterType="Board">
@@ -82,11 +83,11 @@
 					#{sort_place} as sort_place
 				FROM DUAL
 		) B
-		ON (A.place_no = B.place_no)
+		ON (A.place_id = B.place_id)
 		WHEN MATCHED THEN
 		UPDATE 
 			SET A.ment_cnt = A.ment_cnt + 1
-			WHERE A.place_no = B.place_no
+			WHERE A.place_id = B.place_id
 		WHEN NOT MATCHED THEN
 		INSERT (
 			place_no,
@@ -114,12 +115,12 @@
 		)
 	</update>
 	<!-- tbl_board_place insert -->
-	<insert id="insertBoardPlace"  parameterType="java.util.List">
+	<insert id="insertBoardPlace"  parameterType="BoardPlace">
 		INSERT INTO 
 			tbl_board_place (board_no, place_no)
 	    SELECT A.* FROM (
 			select #{board_no} BOARD_NO,
-	        (select place_no from tbl_tag
+	        (select place_no from tbl_place
 			 where place_id = #{place_id}) PLACE_NO
 	        from dual
 	         ) A
@@ -141,7 +142,4 @@
  			sort_board = #{sort_board}
  		WHERE board_no = #{board_no}
 	</update>
-	
-	
-	
 </mapper>

@@ -4,7 +4,7 @@
 	<div class="card cursor-pointer" onclick="location.href=''">
 		<div class="card-body">
 			<div class="card-title">
-				<p class="h5 text-truncate" style="max-width:530px"><span class="text-pink mr-1">[맛집]</span>브라우니 맛있음!! 맛있엉</p>
+				<p class="h5" style="max-width:530px"><span class="text-pink mr-1">[맛집]</span>브라우니 맛있음!! 맛있엉</p>
 				<div class="d-flex">
 					<div class="d-table-cell mr-2 set-bg rounded-circle border" 
 						 data-setbg="${contextPath}/resources/image/profile.jpg"
