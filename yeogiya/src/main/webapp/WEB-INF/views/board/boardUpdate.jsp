@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.yj.yeogiya.model.vo.Sort"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,7 +11,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<%@ include file="../cdn/css.jsp" %>
-	<title>boardUpate</title>
+	<title>boardUpdate</title>
 	
 	<style>
 	@media (min-width: 1200px) {
@@ -154,6 +157,34 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 .swal2-styled.swal2-default-outline:focus, .swal2-styled.swal2-confirm:focus {
     box-shadow: unset !important;
 }
+
+/* 모달열기버튼 */
+span.modalMapToggle {
+position: relative;
+width: 80px;
+margin-right: 10px;
+cursor:pointer;
+}
+span.modalMapToggle::after {
+    content: '';
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQ1MS44NDdweCIgaGVpZ2h0PSI0NTEuODQ2cHgiIHZpZXdCb3g9IjAgMCA0NTEuODQ3IDQ1MS44NDYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ1MS44NDcgNDUxLjg0NjsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggZD0iTTI0OC4yOTIsMTA2LjQwNmwxOTQuMjgxLDE5NC4yOWMxMi4zNjUsMTIuMzU5LDEyLjM2NSwzMi4zOTEsMCw0NC43NDRjLTEyLjM1NCwxMi4zNTQtMzIuMzkxLDEyLjM1NC00NC43NDQsMA0KCQlMMjI1LjkyMywxNzMuNTI5TDU0LjAxOCwzNDUuNDRjLTEyLjM2LDEyLjM1NC0zMi4zOTUsMTIuMzU0LTQ0Ljc0OCwwYy0xMi4zNTktMTIuMzU0LTEyLjM1OS0zMi4zOTEsMC00NC43NUwyMDMuNTU0LDEwNi40DQoJCWM2LjE4LTYuMTc0LDE0LjI3MS05LjI1OSwyMi4zNjktOS4yNTlDMjM0LjAxOCw5Ny4xNDEsMjQyLjExNSwxMDAuMjMyLDI0OC4yOTIsMTA2LjQwNnoiLz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K) !important;
+    width: 10px !important;
+    height: 10px !important;
+    background-size: 10px !important;
+    opacity: .7;
+    display: inline-block;
+    transform: rotate(90deg);
+    position:absolute;
+    top:8px;
+    right:0;
+}
+
+
+/* 모달닫기버튼 포커스시 아웃라인없애기 */
+#modalMap button.close:focus {
+     outline: none; 
+     outline: none; 
+}
 	</style>
 </head>
 <body>
@@ -161,47 +192,36 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
-			<form action="${contextPath}/${sortLocalP.eng_name}/updateRun" method="post" id="updateFrm">
-				<div class="">
-					<!-- 카카오맵 모달 -->
-					<div class="row mb-2">
-						<span class="h6 cursor-pointer" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
-							<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-							</svg>
-							장소 선택
-							<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				  			<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-							</svg>
-							<small class="text-muted">선택된 장소가 없습니다.</small>
-						</span>
-					</div>
+			<form action="insertRun" method="post" id="instFrm" name="instFrm">
+				<div class="inner_form">
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
-						<input type="hidden" name="user_id" value="ijnooyah"/>
-						<input type="hidden" name="sort_local" value="${sortLocalP.sort_no}"/>
-						<input type="hidden" name="sub_local" value="7"/>
-						<input type="hidden" name="sort_board" value="1"/>
-						<input type="hidden" name="sort_plae" value="1"/>
-						<select class="form-control mr-1" id="subLocal">
-							<option value="">동구</option>
+						<select class="form-control mr-1" name="sub_local" id="subLocal">
+							<option value="" ${empty bs.subLocal ? 'selected' : ''}>지역</option>
+							<c:forEach var="subLocal" items="${subLocalArr}">
+								<option value="${subLocal.sort_no}" ${subLocal.sort_no == bs.subLocal ? 'selected' : ''}>
+								${subLocal.sort_name}
+								</option>
+							</c:forEach>
 						</select>
-						<select class="form-control mr-1" id="sortBoard">
-							<option value="">추천</option>
-							<option value="">사담</option>
-						</select>
-						<select class="form-control" id="sortPlace">
-							<option value="">맛집</option>
+						<select class="form-control mr-1" name="sort_board" id="sortBoard" onchange="selectSortBoard(this);">
+							<option value="0" ${empty bs.sortBoard ? 'selected' : ''} data-haschild="false">분류</option>
+							<c:forEach var="sortBoard" items="${sortBoardArr}">
+								<option value="${sortBoard.sort_no}" 
+										${sortBoard.sort_no == bs.sortBoard ? 'selected' : ''}
+										data-haschild="${sortBoard.has_sort_place == 'Y' ? true : false }">
+								${sortBoard.sort_name}
+								</option>
+							</c:forEach>
 						</select>
 					</div>
-					<input type="hidden" name="test_no" value="${board.board_no}"/>
 					<!-- 제목 -->
-					<div class="row mb-2">
-						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" value="${board.board_title}" id="board_title" autocomplete="off" spellcheck="false"></input>
+					<div class="row mb-2 border-0">
+						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" id="board_title" autocomplete="off" spellcheck="false"></input>
 					</div>
 					<!-- 내용 -->
 					<div class="row mb-2">
-						<textarea class="form-control" name="content" id="summernote" rows="10" style="resize: none;" ></textarea>
+						<textarea class="form-control" name="board_content" id="summernote" rows="10" style="resize: none;"></textarea>
 					</div>
 					<!-- 해시태그 -->
 					<div class="row mb-2">
@@ -217,6 +237,14 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 						<button class="btn btn-pink-outline">취소</button>
 					</div>
 				</div>
+				<input type="hidden" name="user_id" value="ijnooyah"/>
+				<input type="hidden" name="sort_local" value="${sortLocalP.sort_no}"/>
+				<input type="hidden" name="has_img" value=""/>
+				<input type="hidden" id="place_name" name="place.place_name" value="">
+				<input type="hidden" id="place_address" name="place.place_address" value="">
+				<input type="hidden" id="place_lat" name="place.place_lat" value="0">
+				<input type="hidden" id="place_long" name="place.place_long" value="0">
+				<input type="hidden" id="place_id" name="place.place_id" value="0">
 			</form>
 		</div>
 	</div>
@@ -237,16 +265,12 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	        </div>
 	        <!-- Modal body -->
 	        <div class="modal-body p-4">
-	        	<div class="row ml-2 mb-2">
-	        		<span class="pt-1 mr-1 text-pink font-size-080 cursor-pointer">
-						<svg width="16" height="16" viewBox="0 0 16 17" class="bi bi-compass" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							  <path fill-rule="evenodd" d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-							  <path d="M6.94 7.44l4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
-							</svg>		
-						현재 위치 자동선택 
-					</span>
+				<div class="row ml-1 text-gray9">
+					<span class="fa fa-info-circle my-auto mr-1"></span>
+					<span class="font-size-075 font-weight-500" style="letter-spacing: 1px;">
+						장소 선택 후 완료 버튼까지 눌러야 변경사항이 적용됩니다!</span>
 				</div>
-				<div class="row mx-3 mb-3 font-size-080">
+				<div class="row mx-3 mb-3">
 					<span class="pt-1 mr-1">선택한 장소
 						<svg width="16" height="16" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
@@ -254,7 +278,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 						</svg>
 					</span>
 					<span id="selectedPlace" class="text-muted pt-1">선택한 장소가 없습니다.</span>
-					<button id="setPlace" class="btn btn-pink btn-sm ml-2 my-auto font-size-075" style="padding:.1rem .3rem;">완료</button>
+					<button class="btn btn-pink btn-sm ml-2 mt-auto font-size-085" style="padding:.1rem .3rem; height:23px; line-height:.7;" onclick="doComplete();">완료</button>
 				</div>
 	       		 <!--지도 -->
 				<div class="map_wrap">
@@ -263,7 +287,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 				    <div id="menu_wrap" class="bg_white">
 				        <div class="option">
 				            <div>
-				                    키워드 : <input type="text" value="울산 동구" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
+				                    키워드 : <input type="text" value="${sortLocalP.sort_name}" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
 				                  <input type="button" id="btnSearch" onclick="searchPlaces()" value="검색">
 				            </div>
 				        </div>
@@ -271,18 +295,63 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 				        <ul id="placesList"></ul>
 				        <div id="pagination"></div>
 				    </div>
-	 				<input type="hidden" id="place_name" name="place_name" value="">
-					<input type="hidden" id="place_id" name="place_id" value="">
-					<input type="hidden" id="latitude" name="latitude" value="">
-					<input type="hidden" id="longitude" name="longitude" value="">
 				</div>
 				<!-- 지도끝 -->
 	        </div>
 	      </div>
 	    </div>
-	  </div>						
+	  </div>			
+	   
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
+	<script>
+	let sortPlace = 
+		'<select class="form-control" id="sortPlace" name="sort_place">'
+			+'<option value="0" ${empty bs.sortPlace ? "selected" : ""}>말머리</option>'
+			+'<c:forEach var="sortPlace" items="${sortPlaceArr}">'
+				+'<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == bs.sortPlace ? "selected" : ""}>'
+					+'${sortPlace.sort_name}'
+				+'</option>'
+			+'</c:forEach>'
+		+ '</select>';
+		
+	let divPlace = 
+		'<div class="row mb-2" id="divPlace">'
+			+'<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink my-auto mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
+				+'<path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>'
+			+'</svg>'
+			+'<span class="modalMapToggle" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">'
+				+'장소 선택'
+			+'</span>'
+			+'<small class="text-muted my-auto" id="resultPlace">선택된 장소가 없습니다.</small>'
+		+ '</div>';
+		
+	//뒤로가기 할때 자식있는게 선택된 상태에 말머리 박스 안나오는 거 해결 
+	$(document).ready(function() {
+		let sortBoard = document.querySelector('#sortBoard');
+		let i = sortBoard.selectedIndex;
+		console.log(sortBoard.options[i]);
+		if(sortBoard.options[i].dataset['haschild'] == 'true') {
+			console.log('ready');
+			$(sortBoard).after(sortPlace);
+			$('.inner_form').prepend(divPlace);
+		} 
+	})
+	function selectSortBoard(el) {
+		if(el.options[el.selectedIndex].dataset['haschild'] == 'true') {
+			$(el).after(sortPlace);
+			$('.inner_form').prepend(divPlace);
+		} else {
+			if(document.querySelector('#sortPlace') != null) {
+				document.querySelector('#sortPlace').remove();
+			}
+			if(document.querySelector('#divPlace') != null) {
+				document.querySelector('#divPlace').remove();
+			}
+			
+		}
+	}
+	</script>
 	<script>
 	
 	var isShown = false; 
@@ -306,7 +375,6 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 		        placeholder: '내용을 입력해 주세요.',
 		        lang : 'ko-KR',
 		        spellCheck:false,
-		        focus:true,
 		        toolbar : toolbar,
 	            fontSizes : fontSizes,
 	            fontNames : fontNames,
@@ -327,7 +395,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 		
 		$('#summernote').val('${board.board_content}');
 		$('#summernote').summernote(setting);
-		
+	    
 	    function uploadFiles(files, el) {
 	    	console.log(files);
 	    	let formData = new FormData();
@@ -350,7 +418,9 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	        }
 	        console.log(formData);
 	        console.log(fileSize);
+	        
 	        let maxSize = 10 * 1024 * 1024;
+	        
 	        if (fileSize > maxSize) {
 	        	console.log("크다")
 	        	Swal.fire({
@@ -362,6 +432,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 				});
 	            return;
 	        }
+	        
 			$.ajax({
 					enctype : 'multipart/form-data',
 					cache: false,
@@ -394,10 +465,6 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	    
 	    
 	    
-	    
-	    
-	    
-	    
 	    // 카카오맵 잘림 현상 해결
 	    $('#modalMap').on('shown.bs.modal', function (e) {
 	    	$("#keyword").focus();
@@ -417,7 +484,6 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	    	});
 		});
 	    
-	    var cache = {};
 	    $("#tag").tagit({
 	        singleField: false,
 	        singleFieldNode: $('#tag'),
@@ -435,11 +501,31 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	
 	
 	function doSubmit() {
+		let form = document.forms['instFrm'];
+		let summernote = document.querySelector('#summernote')
+		if (summernote.value == '') {
+			console.log("빔");
+// 			return false;
+		}
 		if ($('#summernote').summernote('isEmpty')) {
 	    	  alert('editor content is empty');
-	    	  return false
+// 	    	  return false
 	    }
-		$("#updateFrm").submit();
+		
+		let div = document.createElement('div'); //임의의 div
+		div.innerHTML = summernote.value;
+		if (div.querySelector('img') != null) {
+			console.log("이미지 있음");
+			form.elements['has_img'].value = 'Y';
+		} else {
+			console.log("이미지 없음");
+			form.elements['has_img'].value = 'N';
+		}
+		console.log(form);
+		form.submit();
+// 		console.log(summernote.value.querySelector('img'));
+// 		$("#istFrm").submit();
+		
 	}
 	
 	
@@ -451,8 +537,56 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	
 	
 	
+	var isChange = null; // input에 값 다 담기기전에 완료버튼 누르는거 방지
+	var isClick = false; // 완료버튼 클릭 여부
+	//원래 클릭여부에 따라 닫기 창 누르는 상황 다르게 했는데 사용자를 
+	// 너무 귀찮게 하는것 같아서 없앰
 	
 	//카카오 지도
+	function selectPlace(place) {
+		//장소 표시될 span
+		isClick = false; // 장소 선택할때마다 완료버튼 누른거 초기화
+		isChange = false;
+		console.log("1input변경전", isChange);
+    	var selectedPlace = document.getElementById('selectedPlace');
+		$("#place_name").val(place.place_name);
+    	$("#place_address").val(place.address_name);
+    	$("#place_lat").val(place.y);
+    	$("#place_long").val(place.x);
+    	$("#place_id").val(place.id);
+    	selectedPlace.innerHTML = place.place_name + ' (' + place.address_name + ')';
+    	console.log("2출력변경후", isChange);
+    	isChange = true;
+    	console.log("3 isChangetrue후", isChange);
+	}
+	function doComplete() {
+		console.log("4완료버튼클릭",isChange)
+		isClick = true;
+		if(isChange == null) {
+			Swal.fire({
+	        	title: '장소를 선택하지 않으셨어요!',
+// 	        	html: '장소를 선택하지 않으셨어요!', 
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					console.log("에러후", isChange);
+				}
+			});
+		} else if (isChange) {
+			Swal.fire({
+	        	title: '장소 선택 완료',
+				allowOutsideClick: false,
+				icon: 'success', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					console.log("swal 닫힘");
+					$("#resultPlace").text($("#selectedPlace").text());
+				}
+			});
+		}
+		
+	}
 	
 	// 마커를 담을 배열입니다
 	var markers = [];
@@ -546,14 +680,12 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	        (function(marker, place) {
 	        	var title = place.place_name;
 	        	
-	        	//장소 표시될 span
-	        	var selectedPlace = document.getElementById('selectedPlace');
+	        	
 	        	// 마커에 클릭 이벤트 설정
 	            kakao.maps.event.addListener(marker, 'click', (function(placePosition) {
 	                
 	                return function() {
-	                	selectedPlace.innerHTML = '선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다';
-	                    console.log(place.id);
+	                	selectPlace(place);
 	                }
 	                
 	            })(placePosition));
@@ -562,8 +694,7 @@ ul.tagit-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
 	            itemEl.onclick =  (function(placePosition) {
 
 	            	return function() {
-	            		selectedPlace.innerHTML = '선택하신 위치는 ' +'"'+title+'"' +placePosition+' 입니다';
-	                    console.log(place.address_name);
+	            		selectPlace(place);
 	                }
 	            	
 	            })(placePosition);
