@@ -4,6 +4,8 @@ public class BoardImg {
 	private int img_no;
 	private int board_no;
 	private String img_path;
+	private String org_name;
+	private String saved_name;
 	
 	public BoardImg() {
 		super();
@@ -34,10 +36,26 @@ public class BoardImg {
 		this.img_path = img_path;
 	}
 
+	public String getOrg_name() {
+		return org_name;
+	}
+
+	public void setOrg_name(String org_name) {
+		this.org_name = org_name;
+	}
+
+	public String getSaved_name() {
+		return saved_name;
+	}
+
+	public void setSaved_name(String saved_name) {
+		this.saved_name = saved_name;
+	}
+
 	@Override
 	public String toString() {
-		return "BoardImg [img_no=" + img_no + ", board_no=" + board_no + ", img_path=" + img_path + "]";
+		return "BoardImg [img_no=" + img_no + ", board_no=" + board_no + ", img_path=" + img_path + ", org_name="
+				+ org_name + ", saved_name=" + saved_name + "]";
 	}
-	
-	
+
 }
