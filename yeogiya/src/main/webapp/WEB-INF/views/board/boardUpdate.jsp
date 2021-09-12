@@ -580,7 +580,7 @@ span.modalMapToggle::after {
 	});
 	
 	
-	var isChange = null; // input에 값 다 담기기전에 완료버튼 누르는거 방지
+	var isChange = false; // 장소선택여부
 	var isClick = false; // 완료버튼 클릭 여부
 	//원래 클릭여부에 따라 닫기 창 누르는 상황 다르게 했는데 사용자를 
 	// 너무 귀찮게 하는것 같아서 없앰
@@ -588,41 +588,41 @@ span.modalMapToggle::after {
 	//카카오 지도
 	function selectPlace(place) {
 		//장소 표시될 span
+		isChange = true;
 		isClick = false; // 장소 선택할때마다 완료버튼 누른거 초기화
-		isChange = false;
-		console.log("1input변경전", isChange);
     	var selectedPlace = document.getElementById('selectedPlace');
-		$("#place_name").val(place.place_name);
-    	$("#place_address").val(place.address_name);
-    	$("#place_lat").val(place.y);
-    	$("#place_long").val(place.x);
-    	$("#place_id").val(place.id);
+    	setPlace(place);
     	selectedPlace.innerHTML = place.place_name + ' (' + place.address_name + ')';
-    	console.log("2출력변경후", isChange);
-    	isChange = true;
-    	console.log("3 isChangetrue후", isChange);
+	}
+	let finalPlace = null;
+	function setPlace(place) {
+		finalPlace = place;
 	}
 	function doComplete() {
-		console.log("4완료버튼클릭",isChange)
+		console.log('doComplete',finalPlace);
 		isClick = true;
-		if(isChange == null) {
+		if(!isChange) {
 			Swal.fire({
 	        	title: '장소를 선택하지 않으셨어요!',
-// 	        	html: '장소를 선택하지 않으셨어요!', 
 				allowOutsideClick: false,
 				icon: 'error', 
 				confirmButtonText: "확인",
 				didClose: function() {
-					console.log("에러후", isChange);
+					console.log("isChange", isChange);
 				}
 			});
-		} else if (isChange) {
+		} else {
 			Swal.fire({
 	        	title: '장소 선택 완료',
 				allowOutsideClick: false,
 				icon: 'success', 
 				confirmButtonText: "확인",
 				didClose: function() {
+					$("#place_name").val(finalPlace.place_name);
+			    	$("#place_address").val(finalPlace.address_name);
+			    	$("#place_lat").val(finalPlace.y);
+			    	$("#place_long").val(finalPlace.x);
+			    	$("#place_id").val(finalPlace.id);
 					$("#resultPlace").data('isexist', 'Y');
 					$("#resultPlace").text($("#selectedPlace").text());
 				}
