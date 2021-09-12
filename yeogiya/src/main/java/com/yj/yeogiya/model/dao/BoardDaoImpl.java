@@ -110,6 +110,11 @@ public class BoardDaoImpl implements BoardDao {
 	public int deleteBoardImg(int board_no) {
 		return sqlSession.delete(NAMESPACE + "deleteBoardImg", board_no);
 	}
+
+	@Override
+	public List<BoardTag> searchTag(String keyword) {
+		return sqlSession.selectList(NAMESPACE + "searchTag", keyword);
+	}
 	
 
 }

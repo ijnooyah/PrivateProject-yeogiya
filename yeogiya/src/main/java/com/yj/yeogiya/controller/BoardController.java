@@ -1,5 +1,7 @@
 package com.yj.yeogiya.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -10,12 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.yj.yeogiya.model.service.BoardService;
 import com.yj.yeogiya.model.vo.Board;
+import com.yj.yeogiya.model.vo.BoardTag;
 import com.yj.yeogiya.model.vo.Sort;
-
-import net.sf.json.JSONArray;
 
 
 @Controller
@@ -50,7 +53,8 @@ public class BoardController {
 		logger.info("update");
 		Board board = boardService.selectBoardArticle(board_no);
 		model.addAttribute("board", board);
-		model.addAttribute("tagList", JSONArray.fromObject(board.getTagList()));
+		Gson gson = new Gson();
+		model.addAttribute("tagList", gson.toJson(board.getTagList()));
 		return "board/boardUpdate";
 	}
 	
@@ -92,5 +96,15 @@ public class BoardController {
 		return "redirect:content/" + board.getBoard_no();
 	}
 	
+	//태그
+	@RequestMapping(value = "searchTag", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String json(String keyword) {    
+		System.out.println("keyword" + keyword);
+		List<BoardTag> tagList = boardService.searchTag(keyword);
+	    
+	    Gson gson = new Gson();
+	    return gson.toJson(tagList); 
+	}
 	
 }

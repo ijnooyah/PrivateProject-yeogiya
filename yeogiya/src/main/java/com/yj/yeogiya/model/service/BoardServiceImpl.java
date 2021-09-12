@@ -272,4 +272,9 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
+	@Override
+	public List<BoardTag> searchTag(String keyword) {
+		return boardDao.searchTag(keyword);
+	}
+
 }

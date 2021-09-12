@@ -354,6 +354,7 @@ span.modalMapToggle::after {
 		}
 	}
 	</script>
+	<!-- summernote -->
 	<script>
 	$(document).ready(function() {
 	    $('#summernote').summernote({
@@ -455,6 +456,7 @@ span.modalMapToggle::after {
 	    }
 	});
 	</script>
+	<!-- tag -->
 	<script>
 	$(document).ready(function() {
 	    //태그
@@ -468,7 +470,26 @@ span.modalMapToggle::after {
 	            return val.replace(",","").replace("#","");
 	        },
 	        autocomplete : {
-	            source: ['사과', '배', '사진', '사랑', '사랑니', '사진기']
+	        	 source: function(request, response) {
+	                 $.ajax({
+	                     type : 'get',
+	                     url: '${localPath}/searchTag',
+	                     dataType : 'json',
+	                     data : {keyword: request.term},
+	                     success : function(data) {
+	                         console.log(data);
+	                         response(
+	                             $.map(data, function(item) {
+	                                 return {
+	                                     label : item.tag_name,
+	                                     value : item.tag_name
+	                                 }
+	                             })
+	                         );
+	                     }
+	                 })
+	        	 },
+	            focus: function(event, ui){ return false;},
 	        }
 	    });
 	    
@@ -481,6 +502,7 @@ span.modalMapToggle::after {
 	   	});
 	});
 	</script>
+	<!-- form -->
 	<script>
 	let form = document.forms['instFrm'];
 	let summernote = document.querySelector('#summernote');
@@ -589,8 +611,8 @@ span.modalMapToggle::after {
 		form.submit();
 	}
 	</script>
+	<!-- kakaoMap -->
 	<script>
-	
 	var isShown = false; 
 	$(document).ready(function() {
 	    // 카카오맵 잘림 현상 해결

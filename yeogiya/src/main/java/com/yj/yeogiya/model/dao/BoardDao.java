@@ -48,7 +48,8 @@ public interface BoardDao {
 	public List<Sort> selectSortBoard();
 	public Sort selectSortLocalPByEngName(String eng_name);
 	
-	
+	// 4. tag 비동기 자동완성 
+	public List<BoardTag> searchTag(String keyword);
 	
 	
 //************UPDATE************

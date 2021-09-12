@@ -190,6 +190,21 @@ span.modalMapToggle::after {
 	</style>
 </head>
 <body>
+<!-- subLocal -->
+<c:set var="subLocalName" value=""/>
+<c:forEach var="subLocal" items="${subLocalArr}">
+	<c:if test="${subLocal.sort_no == board.sub_local}">
+		<c:set var="subLocalName" value="${subLocal.sort_name}"/>
+	</c:if>
+</c:forEach>
+<!-- sortBoard -->
+<c:set var="sortBoardName" value=""/>
+<c:forEach var="sortBoard" items="${sortBoardArr}">
+	<c:if test="${sortBoard.sort_no == board.sort_board}">
+		<c:set var="sortBoardName" value="${sortBoard.sort_name}"/>
+	</c:if>
+</c:forEach>
+
 	<jsp:include page="../common/header.jsp" flush="false"/>
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
@@ -308,7 +323,7 @@ span.modalMapToggle::after {
 				    <div id="menu_wrap" class="bg_white">
 				        <div class="option">
 				            <div>
-				                    키워드 : <input type="text" value="${sortLocalP.sort_name}" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
+				                    키워드 : <input type="text" value="${sortLocalP.sort_name} ${subLocalName} ${board.place.place_name}" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
 				                  <input type="button" id="btnSearch" onclick="searchPlaces()" value="검색">
 				            </div>
 				        </div>
@@ -442,7 +457,26 @@ span.modalMapToggle::after {
 	            return val.replace(",","").replace("#","");
 	        },
 	        autocomplete : {
-	            source: ['사과', '배', '사진', '사랑', '사랑니', '사진기']
+	        	 source: function(request, response) {
+	                 $.ajax({
+	                     type : 'get',
+	                     url: '${localPath}/searchTag',
+	                     dataType : 'json',
+	                     data : {keyword: request.term},
+	                     success : function(data) {
+	                         console.log(data);
+	                         response(
+	                             $.map(data, function(item) {
+	                                 return {
+	                                     label : item.tag_name,
+	                                     value : item.tag_name
+	                                 }
+	                             })
+	                         );
+	                     }
+	                 })
+	        	 },
+	            focus: function(event, ui){ return false;},
 	        }
 	    });
 	    // 작성했던 태그들 

@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardImg;
+import com.yj.yeogiya.model.vo.BoardTag;
 import com.yj.yeogiya.model.vo.Sort;
 
 public interface BoardService {
@@ -25,7 +26,8 @@ public interface BoardService {
 	public List<Sort> selectSortPlace();
 	public List<Sort> selectSortBoard();
 	public Sort selectSortLocalPByEngName(String eng_name);
-	
+	// 3. tag 비동기 자동완성 
+	public List<BoardTag> searchTag(String keyword);
 	
 	
 	
