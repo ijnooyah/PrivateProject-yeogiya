@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
 import com.yj.yeogiya.controller.BoardController;
 import com.yj.yeogiya.model.dao.BoardDao;
 import com.yj.yeogiya.model.vo.Board;
@@ -147,6 +148,8 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("board:" + board);
 		board.setPlace(place);
 		board.setTagList(tagList);
+		Gson gson = new Gson();
+		board.setJsonTagList(gson.toJson(tagList));
 		return board;
 	}
 	

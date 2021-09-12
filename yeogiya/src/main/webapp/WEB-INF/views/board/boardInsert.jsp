@@ -198,16 +198,8 @@ span.modalMapToggle::after {
 				<div class="inner_form">
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
-						<select class="form-control mr-1" name="sub_local" id="subLocal">
-							<option value="0" ${empty bs.subLocal ? 'selected' : ''}>지역</option>
-							<c:forEach var="subLocal" items="${subLocalArr}">
-								<option value="${subLocal.sort_no}" ${subLocal.sort_no == bs.subLocal ? 'selected' : ''}>
-								${subLocal.sort_name}
-								</option>
-							</c:forEach>
-						</select>
 						<select class="form-control mr-1" name="sort_board" id="sortBoard" onchange="selectSortBoard(this);">
-							<option value="0" ${empty bs.sortBoard ? 'selected' : ''} data-haschild="false">분류</option>
+							<option value="0" ${empty bs.sortBoard ? 'selected' : ''} data-haschild="false">게시판</option>
 							<c:forEach var="sortBoard" items="${sortBoardArr}">
 								<option value="${sortBoard.sort_no}" 
 										${sortBoard.sort_no == bs.sortBoard ? 'selected' : ''}
@@ -216,10 +208,20 @@ span.modalMapToggle::after {
 								</option>
 							</c:forEach>
 						</select>
+						<select class="form-control mr-1" name="sub_local" id="subLocal">
+							<option value="0" ${empty bs.subLocal ? 'selected' : ''}>지역</option>
+							<c:forEach var="subLocal" items="${subLocalArr}">
+								<c:if test="${subLocal.sort_no != 'all'}">
+									<option value="${subLocal.sort_no}" ${subLocal.sort_no == bs.subLocal ? 'selected' : ''}>
+									${subLocal.sort_name}
+									</option>
+								</c:if>
+							</c:forEach>
+						</select>
 					</div>
 					<!-- 제목 -->
 					<div class="row mb-2 border-0">
-						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" id="board_title" autocomplete="off" spellcheck="false"></input>
+						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" id="board_title" maxlength="70" autocomplete="off" spellcheck="false"></input>
 					</div>
 					<!-- 내용 -->
 					<div class="row mb-2">
@@ -329,19 +331,20 @@ span.modalMapToggle::after {
 		+ '</div>';
 		
 	//뒤로가기 할때 자식있는게 선택된 상태에 말머리 박스 안나오는 거 해결 
+	let sortBoard = document.querySelector('#sortBoard');
+	let subLocal = document.querySelector('#subLocal');
 	$(document).ready(function() {
-		let sortBoard = document.querySelector('#sortBoard');
 		let i = sortBoard.selectedIndex;
 		console.log(sortBoard.options[i]);
 		if(sortBoard.options[i].dataset['haschild'] == 'true') {
 			console.log('ready');
-			$(sortBoard).after(sortPlace);
+			$(subLocal).after(sortPlace);
 			$('.inner_form').prepend(divPlace);
 		} 
 	})
 	function selectSortBoard(el) {
 		if(el.options[el.selectedIndex].dataset['haschild'] == 'true') {
-			$(el).after(sortPlace);
+			$(subLocal).after(sortPlace);
 			$('.inner_form').prepend(divPlace);
 		} else {
 			if(document.querySelector('#sortPlace') != null) {
@@ -504,6 +507,18 @@ span.modalMapToggle::after {
 	</script>
 	<!-- form -->
 	<script>
+	$("#board_title").on("input", function(){
+		var cnt = $(this).val();
+		if(cnt.length == 70){
+			Swal.fire({
+	        	title: '제목은 최대 70자 입니다.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인"
+			});
+		}
+	});
+	
 	let form = document.forms['instFrm'];
 	let summernote = document.querySelector('#summernote');
 	function validate() {

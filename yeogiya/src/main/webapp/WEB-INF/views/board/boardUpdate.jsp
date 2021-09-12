@@ -190,36 +190,12 @@ span.modalMapToggle::after {
 	</style>
 </head>
 <body>
-<!-- subLocal -->
-<c:set var="subLocalName" value=""/>
-<c:forEach var="subLocal" items="${subLocalArr}">
-	<c:if test="${subLocal.sort_no == board.sub_local}">
-		<c:set var="subLocalName" value="${subLocal.sort_name}"/>
-	</c:if>
-</c:forEach>
-<!-- sortBoard -->
-<c:set var="sortBoardName" value=""/>
-<c:forEach var="sortBoard" items="${sortBoardArr}">
-	<c:if test="${sortBoard.sort_no == board.sort_board}">
-		<c:set var="sortBoardName" value="${sortBoard.sort_name}"/>
-	</c:if>
-</c:forEach>
-
 	<jsp:include page="../common/header.jsp" flush="false"/>
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 			<form action="${localPath}/updateRun" method="post" id="updtFrm" name="updtFrm">
 				<div class="inner_form">
-<!-- 					<div class="row mb-2 text-gray9" style="opacity:.5;"> -->
-<%-- 						<c:set var="sortBoardName" value=""/> --%>
-<%-- 						<c:forEach var="sortBoard" items="${sortBoardArr}"> --%>
-<%-- 							<c:if test="${sortBoard.sort_no == board.sort_board}"> --%>
-<%-- 								<c:set var="sortBoardName" value="${sortBoard.sort_name}"/> --%>
-<%-- 							</c:if> --%>
-<%-- 						</c:forEach> --%>
-<%-- 						${sortBoardName} --%>
-<!-- 					</div> -->
 					<div class="row mb-2" id="divPlace">
 						<c:if test="${not empty board.sort_place}">
 							<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink my-auto mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -248,7 +224,7 @@ span.modalMapToggle::after {
 					</div>
 					<!-- 제목 -->
 					<div class="row mb-2 border-0">
-						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" id="board_title" value="${board.board_title}" autocomplete="off" spellcheck="false"></input>
+						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" id="board_title" maxlength="70" value="${board.board_title}" autocomplete="off" spellcheck="false"></input>
 					</div>
 					<!-- 내용 -->
 					<div class="row mb-2">
@@ -323,7 +299,8 @@ span.modalMapToggle::after {
 				    <div id="menu_wrap" class="bg_white">
 				        <div class="option">
 				            <div>
-				                    키워드 : <input type="text" value="${sortLocalP.sort_name} ${subLocalName} ${board.place.place_name}" id="keyword" size="15" autocomplete="off" spellcheck="false"> 
+				                    키워드 : <input type="text" id="keyword" size="15" autocomplete="off" spellcheck="false"
+				                   		 value="${sortLocalP.sort_name} ${board.subLocalName} ${board.place.place_name}"> 
 				                  <input type="button" id="btnSearch" onclick="searchPlaces()" value="검색">
 				            </div>
 				        </div>
@@ -340,6 +317,7 @@ span.modalMapToggle::after {
 	   
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
+	<!-- summernote -->
 	<script>
 	$(document).ready(function() {
 		var fontSizes = ['8','9','10','11','12', '13', '14','16','18','20','22','24','28','30','36','50','72'];
@@ -444,6 +422,7 @@ span.modalMapToggle::after {
 	    }
 	});
 	</script>
+	<!-- tag -->
 	<script>
 	$(document).ready(function() {
 	    //태그
@@ -480,7 +459,7 @@ span.modalMapToggle::after {
 	        }
 	    });
 	    // 작성했던 태그들 
-	    var tagList = JSON.parse('${tagList}');
+	    var tagList = JSON.parse('${board.jsonTagList}');
 	    console.log(tagList);
 // 	    for(var i=tagList.length - 1; i >= 0; i--) {
 // 	    	 console.log(i + " : " + tagList[i].tag_name);
@@ -504,7 +483,19 @@ span.modalMapToggle::after {
 	   	});
 	});
 	</script>
+	<!-- form -->
 	<script>
+	$("#board_title").on("input", function(){
+		var cnt = $(this).val();
+		if(cnt.length == 70){
+			Swal.fire({
+	        	title: '제목은 최대 70자 입니다.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인"
+			});
+		}
+	});
 	let form = document.forms['updtFrm'];
 	let summernote = document.querySelector('#summernote');
 	function validate() {
@@ -588,6 +579,7 @@ span.modalMapToggle::after {
 		form.submit();
 	}
 	</script>
+	<!-- kakaoMap -->
 	<script>
 	
 	var isShown = false; 

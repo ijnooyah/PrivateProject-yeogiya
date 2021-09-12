@@ -22,7 +22,7 @@
 	}
 	
 	/* 	상세보기 */
-	.board-container .content-top a:hover {
+	.board-container .content-info a:hover {
 		color:unset;
 	}
 	/* 	카카오 */
@@ -36,46 +36,68 @@
 		text-decoration:none;
 		color:var(--pink);
 	}
+	
+	.content-info {
+   	border-bottom: 1px solid var(--grayE1);
+    padding-bottom: .7rem;
+	}
+	
+	.content-top a.sort_board::after{
+	background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDQ1MS44NDcgNDUxLjg0NiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8cGF0aCBkPSJNMjQ4LjI5MiwxMDYuNDA2bDE5NC4yODEsMTk0LjI5YzEyLjM2NSwxMi4zNTksMTIuMzY1LDMyLjM5MSwwLDQ0Ljc0NGMtMTIuMzU0LDEyLjM1NC0zMi4zOTEsMTIuMzU0LTQ0Ljc0NCwwICAgTDIyNS45MjMsMTczLjUyOUw1NC4wMTgsMzQ1LjQ0Yy0xMi4zNiwxMi4zNTQtMzIuMzk1LDEyLjM1NC00NC43NDgsMGMtMTIuMzU5LTEyLjM1NC0xMi4zNTktMzIuMzkxLDAtNDQuNzVMMjAzLjU1NCwxMDYuNCAgIGM2LjE4LTYuMTc0LDE0LjI3MS05LjI1OSwyMi4zNjktOS4yNTlDMjM0LjAxOCw5Ny4xNDEsMjQyLjExNSwxMDAuMjMyLDI0OC4yOTIsMTA2LjQwNnoiIGZpbGw9IiNmM2E2YzYiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8L2c+PC9zdmc+);
+    width: 10px !important;
+    height: 10px !important;
+    background-size: 10px !important;
+    opacity: 1;
+    content: '';
+    border: 0;
+    transform: rotate(90deg);
+    position: absolute;
+    margin-left: 5px;
+    top: 7px;
+	}
 	</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" flush="false"/>
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
-		<div class="row card ml-auto">
-			<!-- 탑 -->
-			<jsp:include page="./top.jsp" flush="false"/>
-			<!-- 상세보기 -->
+		<div class="row card ml-auto content-top">
 			<div class="col-md-12 pt-4 px-5 pb-5" style="flex:none;">
+				<div class="row mb-2">
+					<a class="sort_board text-pink" href=""
+						  style="position:relative;">${board.sortBoardName}</a>
+				</div>
 				<!-- 글정보 -->
-				<div class="row mb-2 content-top">
+				<div class="row mb-2 content-info">
 					<div class="d-flex w-100 h5">
-						<span class="sort_board my-auto text-gray9" 
-							  style="opacity:.5; margin-left: -7px;margin-right: 7px;">추천</span>
-						<span class="text-gray9 mr-1 font-weight-500 sort_place">[맛집]</span>
-						<span>여기 브라우니 진짜 맛있어요!!</span>
-						<!-- 수정 삭제 버튼 -->
-						<svg class="bi bi-three-dots-vertical cursor-pointer ml-auto my-auto" data-toggle="dropdown" width="1.2rem" height="1.2rem" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-							<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-						</svg>
-						<div class="dropdown-menu dropdown-menu-right" style="min-width:4rem; font-size:0.8rem;">
-							 <a class="dropdown-item" href="">수정</a> 
-							 <a class="dropdown-item" href="">삭제</a>
+						<div style="line-height: 1.4;">
+							<c:if test="${not empty board.sort_place}">
+								<span class="text-gray9 mr-1 font-weight-500 sort_place">[${board.sortPlaceName}]</span>
+							</c:if>
+							${board.board_title}
 						</div>
 					</div>
 					<div class="d-flex w-100 font-size-085 mt-1">
 						<div class="d-flex">
 							<div class="d-table-cell mr-2 set-bg rounded-circle border" 
-								 data-setbg="${contextPath}/resources/image/profile.jpg"
+								 data-setbg="${empty board.userImg ? noProfile : board.userImg}"
 								 style="width:30px; height:30px;"></div>
 							<div class="d-table-cell mr-2">
-								<a href="" class="align-middle text-black">미미</a>
+								<a href="" class="align-middle text-black">${board.userNick}</a>
 							</div>
 							<div class="d-table-cell mr-2">
-								<span class="align-middle text-muted" >21.09.02 00:38</span> 
+								<span class="align-middle text-muted">
+									<fmt:formatDate value="${board.reg_date}" pattern="yy.MM.dd HH:mm"/>
+								</span> 
 							</div>
-							<div class="d-table-cell">
-								<span class="align-middle text-muted">조회 2769</span> 
+							<div class="d-table-cell mr-2">
+								<span class="align-middle text-muted">조회 ${board.view_cnt}</span> 
+							</div>
+							<div class="d-table-cell mr-2">
+								<span class="align-middle text-muted">좋아요 ${board.like_cnt}</span> 
+							</div>
+							<div class="d-table-cell mr-2">
+								<span class="align-middle text-muted">댓글 ${board.cmt_cnt}</span> 
 							</div>
 						</div>
 						<div class="ml-auto mr-2">
@@ -85,7 +107,14 @@
 							<svg xmlns="http://www.w3.org/2000/svg" width="0.98rem" height="0.98rem" fill="currentColor" class="bi bi-share text-muted cursor-pointer" viewBox="0 0 16 16">
 							  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
 							</svg>
-<!-- 							<a href="" class="text-muted align-middle">URL 복사</a> -->
+							<!-- 수정 삭제 버튼 -->
+							<svg class="bi bi-three-dots-vertical cursor-pointer ml-2" style="opacity:.7;" data-toggle="dropdown" width="1.2rem" height="1.2rem" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+								<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+							</svg>
+							<div class="dropdown-menu dropdown-menu-right" style="min-width:4rem; font-size:0.8rem;">
+								 <a class="dropdown-item" href="">수정</a> 
+								 <a class="dropdown-item" href="">삭제</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -94,22 +123,24 @@
 					<div class="content_wrap w-100">
 						${board.board_content}
 					</div>
-					<div class="map_wrap w-100 mt-2">
-						<div id="map" class="rounded-sm border" style="width:100%;height:350px;"></div>
-					</div>
+					<c:if test="${not empty board.sort_place}">
+						<div class="map_wrap w-100 mt-4">
+							<div id="map" class="rounded-sm border" style="width:100%;height:350px;"></div>
+						</div>
+					</c:if>
 				</div>
 				<!-- 해시태그 -->
 				<div class="row mb-1">
-					<c:forEach begin="1" end="4">
-						<a href="" class="mr-2 text-pink">&num;해시태그</a>
+					<c:forEach var="tag" items="${board.tagList}">
+						<a href="" class="mr-2 text-pink">&num;${tag.tag_name}</a>
 					</c:forEach>
 				</div>
 				<!-- 글버튼 -->
 				<div class="row mb-2 content-bottom text-muted">
 					<span class="fa fa-heart-o mr-1 cursor-pointer" style="line-height: 1.5;"></span>
-					<span class="mr-2" id="like_cnt">0</span>  
+					<span class="mr-2" id="like_cnt">${board.like_cnt}</span>  
 					<span class="fa fa-comment-o ml-2 mr-1 cursor-pointer" style="line-height: 1.4;"></span>
-					<span id="cmt_cnt">30</span> 
+					<span id="cmt_cnt">${board.cmt_cnt}</span> 
 					<a href="" class="text-muted ml-auto font-size-090">신고</a>
 				</div>
 			</div>
@@ -128,6 +159,7 @@
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
 	<script>
+	<c:if test="${not empty board.sort_place}">
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -141,7 +173,7 @@
 	var geocoder = new kakao.maps.services.Geocoder();
 	
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+	geocoder.addressSearch('${board.place.place_address}', function(result, status) {
 	
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === kakao.maps.services.Status.OK) {
@@ -164,8 +196,8 @@
 	        
 	    	// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	        var content = '<div class="customoverlay">' +
-	            '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-	            '    <span class="title">장소명</span>' +
+	            '  <a href="https://map.kakao.com/link/map/${board.place.place_id}" target="_blank">' +
+	            '    <span class="title">${board.place.place_name}</span>' +
 	            '  </a>' +
 	            '</div>';
 
@@ -181,6 +213,7 @@
 	        map.setCenter(coords);
 	    } 
 	});   
+	</c:if>
 	</script>
 </body>
 </html>

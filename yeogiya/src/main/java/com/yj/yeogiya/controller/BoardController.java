@@ -53,8 +53,6 @@ public class BoardController {
 		logger.info("update");
 		Board board = boardService.selectBoardArticle(board_no);
 		model.addAttribute("board", board);
-		Gson gson = new Gson();
-		model.addAttribute("tagList", gson.toJson(board.getTagList()));
 		return "board/boardUpdate";
 	}
 	
@@ -74,8 +72,6 @@ public class BoardController {
 		return "board/boardList";
 	}
 	
-	
-	
 	//글작성작업
 	@RequestMapping(value = "insertRun", method = RequestMethod.POST)
 	public String insertRun(Board board) throws Exception {
@@ -83,7 +79,15 @@ public class BoardController {
 		System.out.println(board);
 		int board_no = boardService.insertBoardArticle(board);
 		System.out.println("board_no: " + board_no);
-		return "redirect:content/" + board_no;
+		
+		String sortBoard = "sortBoard=" + board.getSort_board();
+		String subLocal = "&subLocal=" + board.getSub_local();
+		String url = "redirect:content/" + board_no + "?" + sortBoard + subLocal;
+		if (board.getSort_place() != null) {
+			url += "&sortPlace=" + board.getSort_place();
+		} 
+		
+		return url;
 	}
 	
 	//글수정작업
@@ -92,8 +96,15 @@ public class BoardController {
 		logger.info("updateRun");
 		System.out.println(board);
 		int result = boardService.updateBoardArticle(board);
+		int board_no = board.getBoard_no();
+		String sortBoard = "sortBoard=" + board.getSort_board();
+		String subLocal = "&subLocal=" + board.getSub_local();
+		String url = "redirect:content/" + board_no + "?" + sortBoard + subLocal;
+		if (board.getSort_place() != null) {
+			url += "&sortPlace=" + board.getSort_place();
+		} 
 		
-		return "redirect:content/" + board.getBoard_no();
+		return url;
 	}
 	
 	//태그

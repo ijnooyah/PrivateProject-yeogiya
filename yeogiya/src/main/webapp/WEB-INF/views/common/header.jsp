@@ -17,13 +17,11 @@
 	          <ul aria-labelledby="" class="dropdown-menu">
 	            <c:forEach var="slp" items="${sortLocalPArr}">
 		            <li class="dropdown-submenu dropright">
-		              <a id="" href="${contextPath}/${slp.eng_name}/main" data-toggle="dropdown" aria-haspopup="true" 
+		              <a id="" href="${contextPath}/${slp.eng_name}/list?sortBoard=all" data-toggle="dropdown" aria-haspopup="true" 
 		              	aria-expanded="false" class="dropdown-item dropdown-toggle">${slp.sort_name}</a>
 		              <ul aria-labelledby="" class="dropdown-menu">
-		              	<c:forEach var="slc" items="${sortLocalCArr}">
-			              	<c:if test="${slp.sort_no == slc.parent_sort }">
-				                <li><a href="${contextPath}/${slp.eng_name}/list?subLocal=${slc.sort_no}" class="dropdown-item">${slc.sort_name }</a></li>
-			              	</c:if>
+		              	<c:forEach var="sb" items="${sortBoardArr}">
+				             <li><a href="${contextPath}/${slp.eng_name}/list?sortBoard=${sb.sort_no}" class="dropdown-item">${sb.sort_name}</a></li>
 		              	</c:forEach>
 		              </ul>
 		            </li>

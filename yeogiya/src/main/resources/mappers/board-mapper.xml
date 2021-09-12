@@ -126,8 +126,17 @@
 <!-- 1. 상세보기 -->
 	<!-- 1-1. -->
 	<select id="selectBoard" resultType="Board">
-		select * from tbl_board 
-		where board_no = #{board_no} and is_del = 'N'
+		SELECT 
+		    a.*, b.sort_name sortLocalName, c.sort_name subLocalName,
+		    d.sort_name sortBoardName, e.sort_name sortPlaceName,
+		    f.user_nick userNick, f.user_img userImg
+		FROM tbl_board a
+		JOIN tbl_sort_local b ON a.sort_local = b.sort_no
+		JOIN tbl_sort_local c ON a.sub_local = c.sort_no
+		JOIN tbl_sort_board d ON a.sort_board = d.sort_no
+		LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
+		JOIN tbl_member f ON a.user_id = f.user_id
+		WHERE a.board_no = #{board_no} and a.is_del = 'N'
 	</select>
 	<!-- 1-2. -->
 	<select id="selectBoardTag" resultType="BoardTag">
@@ -148,7 +157,7 @@
  	</select>
 	<select id="selectSortBoard" resultType="Sort">
  		SELECT * FROM tbl_sort_board
- 		order by sort_no asc
+ 		order by has_sort_place desc, sort_no asc
  	</select>
 	<select id="selectSortPlace" resultType="Sort">
  		SELECT * FROM tbl_sort_place

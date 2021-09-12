@@ -9,6 +9,20 @@ public class Sort {
 	private String eng_name;
 	private String has_sort_place;
 	
+	
+	public Sort() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Sort(String sort_no, String sort_name, int sort_level, String parent_sort) {
+		super();
+		this.sort_no = sort_no;
+		this.sort_name = sort_name;
+		this.sort_level = sort_level;
+		this.parent_sort = parent_sort;
+	}
+
 	public String getSort_no() {
 		return sort_no;
 	}

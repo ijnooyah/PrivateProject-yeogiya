@@ -28,8 +28,14 @@
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
-			<jsp:include page="./top.jsp" flush="false"/>
-			<jsp:include page="./list.jsp" flush="false"/>
+		<c:choose>
+			<c:when test="${bs.sortBoard == 'all'}">
+				<jsp:include page="./listAll.jsp" flush="false"/>
+			</c:when>
+			<c:otherwise>
+				<jsp:include page="./list.jsp" flush="false"/>
+			</c:otherwise>
+		</c:choose>
 		</div>
 	</div>
 	<jsp:include page="../common/footer.jsp" flush="false"/>

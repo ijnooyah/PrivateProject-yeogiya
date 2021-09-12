@@ -29,8 +29,15 @@ public class Board {
 	private List<BoardTag> tagList;
 	private List<BoardImg> imgList;
 	
-	private String like_board; // 좋아요: 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
-	private String bm_board; // 북마크 : 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
+	private String likeBoard; // 좋아요: 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
+	private String bmBoard; // 북마크 : 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
+	private String sortLocalName;
+	private String subLocalName;
+	private String sortBoardName;
+	private String sortPlaceName;
+	private String userNick;
+	private String userImg;
+	private String jsonTagList;
 	
 	private String tag;
 	
@@ -181,23 +188,6 @@ public class Board {
 		this.place = place;
 	}
 
-
-	public String getLike_board() {
-		return like_board;
-	}
-
-	public void setLike_board(String like_board) {
-		this.like_board = like_board;
-	}
-
-	public String getBm_board() {
-		return bm_board;
-	}
-
-	public void setBm_board(String bm_board) {
-		this.bm_board = bm_board;
-	}
-
 	public void setMod_date(Timestamp mod_date) {
 		this.mod_date = mod_date;
 	}
@@ -242,6 +232,78 @@ public class Board {
 		this.imgList = imgList;
 	}
 
+	public String getLikeBoard() {
+		return likeBoard;
+	}
+
+	public void setLikeBoard(String likeBoard) {
+		this.likeBoard = likeBoard;
+	}
+
+	public String getBmBoard() {
+		return bmBoard;
+	}
+
+	public void setBmBoard(String bmBoard) {
+		this.bmBoard = bmBoard;
+	}
+
+	public String getSortLocalName() {
+		return sortLocalName;
+	}
+
+	public void setSortLocalName(String sortLocalName) {
+		this.sortLocalName = sortLocalName;
+	}
+
+	public String getSubLocalName() {
+		return subLocalName;
+	}
+
+	public void setSubLocalName(String subLocalName) {
+		this.subLocalName = subLocalName;
+	}
+
+	public String getSortBoardName() {
+		return sortBoardName;
+	}
+
+	public void setSortBoardName(String sortBoardName) {
+		this.sortBoardName = sortBoardName;
+	}
+
+	public String getSortPlaceName() {
+		return sortPlaceName;
+	}
+
+	public void setSortPlaceName(String sortPlaceName) {
+		this.sortPlaceName = sortPlaceName;
+	}
+
+	public String getUserNick() {
+		return userNick;
+	}
+
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+
+	public String getUserImg() {
+		return userImg;
+	}
+
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
+
+	public String getJsonTagList() {
+		return jsonTagList;
+	}
+
+	public void setJsonTagList(String jsonTagList) {
+		this.jsonTagList = jsonTagList;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", board_title=" + board_title
@@ -250,7 +312,10 @@ public class Board {
 				+ cmt_cnt + ", like_cnt=" + like_cnt + ", bmk_cnt=" + bmk_cnt + ", view_cnt=" + view_cnt + ", rp_cnt="
 				+ rp_cnt + ", is_notice=" + is_notice + ", reg_date=" + reg_date + ", is_del=" + is_del + ", del_date="
 				+ del_date + ", mod_date=" + mod_date + ", place=" + place + ", tagList=" + tagList + ", imgList="
-				+ imgList + ", like_board=" + like_board + ", bm_board=" + bm_board + ", tag=" + tag + "]";
+				+ imgList + ", likeBoard=" + likeBoard + ", bmBoard=" + bmBoard + ", sortLocalName=" + sortLocalName
+				+ ", subLocalName=" + subLocalName + ", sortBoardName=" + sortBoardName + ", sortPlaceName="
+				+ sortPlaceName + ", userNick=" + userNick + ", userImg=" + userImg + ", jsonTagList=" + jsonTagList
+				+ ", tag=" + tag + "]";
 	}
 
 

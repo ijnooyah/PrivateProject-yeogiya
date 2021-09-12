@@ -4,10 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 td.td_title {
-min-width:400px;
+min-width:300px;
 }
 td.td_title .short_title {
-width:300px;
+width:230px;
 }
 
 .board-container .dropdown-menu {
@@ -37,45 +37,15 @@ width:300px;
 .dropdown-chevron > .dropdown-toggle, .dropdown-plain > .dropdown-toggle {
 	font-weight:500;
 }
-div.subLocal_wrap {
-	border:1px solid var(--pink);
-}
-div.subLocal_wrap a {
-	color:var(--gray);
-}
-div.subLocal_wrap a:hover {
-	text-decoration:none;
-	color:var(--pink);
-}
-div.subLocal_wrap a.active {
-	text-decoration:none;
-	color:var(--pink);
-}
 </style>
-<%-- url설정 --%>
-<c:set var="sortBoard" value="sortBoard=${bs.sortBoard}"/>
-
 <div class="px-4 pt-4">
-	<div class="h3 logo mt-2" style="color:var(--pink);">
-	<c:forEach var="sb" items="${sortBoardArr}">
-		<c:if test="${bs.sortBoard == sb.sort_no}">
-			${sb.sort_name}
-		</c:if>
-	</c:forEach>
-	</div>
-	<div class="d-flex flex-wrap px-3 py-4 mx-1 mb-5 subLocal_wrap rounded-sm">
-		<c:forEach var="sbl" items="${subLocalArr}">
-			<div class="col-sm-2 my-1">
-			<a href="${listPath}?${sortBoard}&subLocal=${sbl.sort_no}" 
-			   class="${bs.subLocal == sbl.sort_no ? 'active' : ''}">${sbl.sort_name}</a>
-			</div>
-		</c:forEach>
+	<div class="h3 logo mt-2 mb-4" style="color:var(--pink);">
+	울산
 	</div>
 	<div class="d-flex mb-1">
-<!-- 		<span class="text-muted font-size-090 my-auto">울산 전체</span> -->
 		<div class="dropdown ml-auto">
 			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  말머리
+			  최신순
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
 				<a class="dropdown-item" href="#">최신순</a>
@@ -86,7 +56,7 @@ div.subLocal_wrap a.active {
 		</div>
 		<div class="dropdown">
 			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  최신순
+			  15개씩
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
 				<a class="dropdown-item" href="#">최신순</a>
@@ -102,6 +72,7 @@ div.subLocal_wrap a.active {
 			<thead>
 				<tr>
 					<th>번호</th>
+					<th>게시판</th>
 					<th>지역</th>
 					<th>제목</th>
 					<th>작성자</th>
@@ -112,54 +83,17 @@ div.subLocal_wrap a.active {
 			</thead>
 			<tbody>
 				<!--조회된 게시글 목록 있을 때 -->
-					<!-- 공지목록 -->
-				<c:forEach var="v" begin="1" end="3">
-					<tr class="tr_notice">
-						<!-- 번호 -->
-						<td class="td_no td_notice">
-							<div class='badge badge-pink p-1'>
-							공지
-							</div>
-						</td>
-						<!-- 지역 -->
-						<td class="td_subLocal">
-							<a href="" class="">	
-								강남구
-							</a>
-						</td>
-						<!-- 제목 -->
-						<td class="td_title d-flex">
-							<span class="place_sort mr-1 text-muted font-weight-400">[맛집]</span>
-							<a href="" class="short_title">
-								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
-							</a>
-							<span class="text-pink mx-1">[3]</span>
-							<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image" viewBox="0 0 16 16" style="margin-top:2px;">
-							  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-							  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-							</svg>
-						</td>
-						<!-- 글쓴이 -->
-						<td class="td_writer">
-							<a href=""  class="">
-								관리자
-							</a>
-						</td>
-						<!-- 날짜 -->
-						<td  class="td_date">
-						21.08.27
-						</td>
-						<!-- 좋아요 -->
-						<td  class="td_like">113</td>
-						<!-- 조회 -->
-						<td  class="td_view">1003</td>
-					</tr>
-				</c:forEach>
-				<c:forEach var="v" begin="1" end="10">
+				<c:forEach var="v" begin="1" end="15">
 					<tr>
 						<!-- 번호 -->
 						<td  class="td_no">
 							${v}
+						</td>
+						<!-- 게시판 -->
+						<td class="td_sortBoard">
+							<a href="" class="">	
+								사담 게시판
+							</a>
 						</td>
 						<!-- 지역 -->
 						<td class="td_subLocal">

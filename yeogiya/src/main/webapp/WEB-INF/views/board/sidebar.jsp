@@ -14,34 +14,34 @@ li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
 </style>
 	<nav class="sidebar">
 		<div class="title_wrap">
-			<a href="${listPath}?subLocal=all" class="sideMenuTitle">${sortLocalP.sort_name}</a>
+			<a href="${listPath}?sortBoard=all" class="sideMenuTitle">${sortLocalP.sort_name}</a>
 		</div>
 		<div class="menu_wrap">
 			<ul class="list-unstyled components">
-			  <c:forEach var="slc" items="${subLocalArr}">
+			  <c:forEach var="sb" items="${sortBoardArr}">
 			  	  <!-- url설정 -->
-				  <c:if test="${not empty slc.sort_no}">
-					<c:set var="subLocal" value="subLocal=${slc.sort_no}" />
+				  <c:if test="${not empty sb.sort_no}">
+					<c:set var="sbQuery" value="sortBoard=${sb.sort_no}" />
 				  </c:if>
-					<li class="sideMenu" >
-						<div data-toggle="collapse" ${slc.sort_no == bs.subLocal ? 'aria-expanded="true"' : 'aria-expanded="false"'}
-							  class="${slc.sort_no == bs.subLocal ? 'active' : ''}">
-							<a href="${listPath}?${subLocal}&sortBoard=all">
-								${slc.sort_name}
+					<li class="sideMenu">
+						<div data-toggle="collapse" ${sb.sort_no == bs.sortBoard ? 'aria-expanded="true"' : 'aria-expanded="false"'}
+							  class="${sb.sort_no == bs.sortBoard ? 'active' : ''}">
+							<a href="${listPath}?${sbQuery}&subLocal=all">
+								${sb.sort_name}
 							</a>
 						</div>
-						<ul class="collapse list-unstyled ${slc.sort_no == bs.subLocal ? 'show' : ''}" id="">
-							<c:forEach var="sb" items="${sortBoardArr}">
+						<ul class="collapse list-unstyled ${sb.sort_no == bs.sortBoard ? 'show' : ''}" id="">
+							<c:forEach var="sbl" items="${subLocalArr}">
 							<!-- url설정 -->
-							  <c:if test="${not empty sb.sort_no}">
-								<c:set var="sortBoard" value="&sortBoard=${sb.sort_no}" />
+							  <c:if test="${not empty sbl.sort_no}">
+								<c:set var="sblQuery" value="&subLocal=${sbl.sort_no}" />
 							  </c:if>
 								<li class="sideSubMenu">
-									<div ${sb.sort_no == bs.sortBoard && slc.sort_no == bs.subLocal ? 'class="active"' : ''}
+									<div ${sb.sort_no == bs.sortBoard && sbl.sort_no == bs.subLocal ? 'class="active"' : ''}
 										<c:if test="${sb.has_sort_place == 'Y'}">
 											data-toggle="collapse"
 											<c:choose>
-												<c:when test="${sb.sort_no == bs.sortBoard && slc.sort_no == bs.subLocal}">
+												<c:when test="${sb.sort_no == bs.sortBoard && sbl.sort_no == bs.subLocal}">
 												aria-expanded="true"
 												</c:when>
 												<c:otherwise>
@@ -50,19 +50,19 @@ li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
 											</c:choose>
 										</c:if>
 									>
-										<a href="${listPath}?${subLocal}${sortBoard}${sb.has_sort_place == 'Y' ? '&sortPlace=all' : ''}">
-											${sb.sort_name}
+										<a href="${listPath}?${sbQuery}${sblQuery}${sb.has_sort_place == 'Y' ? '&sortPlace=all' : ''}">
+											${sbl.sort_name}
 										</a>
 									</div>
 									<c:if test="${sb.has_sort_place == 'Y'}">
-										<ul class="collapse ${sb.sort_no == bs.sortBoard && slc.sort_no == bs.subLocal ? 'show' : ''} list-unstyled" id="">
+										<ul class="collapse ${sb.sort_no == bs.sortBoard && sbl.sort_no == bs.subLocal ? 'show' : ''} list-unstyled" id="">
 											<c:forEach var="sp" items="${sortPlaceArr}">
 											<!-- url설정 -->
 											  <c:if test="${not empty sp.sort_no}">
-												<c:set var="sortPlace" value="&sortPlace=${sp.sort_no}" />
+												<c:set var="spQuery" value="&sortPlace=${sp.sort_no}" />
 											  </c:if>
-												<li ${sb.sort_no == bs.sortBoard && slc.sort_no == bs.subLocal && sp.sort_no == bs.sortPlace ? 'class="active"' : ''}>
-													<a href="${listPath}?${subLocal}${sortBoard}${sortPlace}">${sp.sort_name}</a>
+												<li ${sb.sort_no == bs.sortBoard && sbl.sort_no == bs.subLocal && sp.sort_no == bs.sortPlace ? 'class="active"' : ''}>
+													<a href="${listPath}?${sbQuery}${sblQuery}${spQuery}">${sp.sort_name}</a>
 												</li>
 											</c:forEach>
 										</ul>
