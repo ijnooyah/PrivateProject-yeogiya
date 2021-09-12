@@ -56,12 +56,14 @@
 	<!-- tbl_board_tag insert -->
 	<insert id="insertBoardTag"  parameterType="java.util.List">
 		INSERT INTO 
-			tbl_board_tag (board_no, tag_no)
+			tbl_board_tag (board_no, tag_no, reg_date)
 	    SELECT A.* FROM (
 	    <foreach item="item" collection="list" separator="UNION ALL" >
 			select #{item.board_no} BOARD_NO,
 	        (select tag_no from tbl_tag
-			 where tag_name = #{item.tag_name}) TAG_NO
+			 where tag_name = #{item.tag_name}) TAG_NO,
+			(select reg_date from tbl_board
+			 where board_no = #{item.board_no}) REG_DATE
 	        from dual
 	    </foreach>) A
 	</insert>
@@ -161,11 +163,13 @@
 	<!-- 1-1. board -->
 	<update id="updateBoard" parameterType="Board">
  		UPDATE tbl_board
- 		SET board_title = #{board_title}.
+ 		SET board_title = #{board_title},
  			board_content = #{board_content},
  			sort_local = #{sort_local},
  			sub_local = #{sub_local},
- 			sort_board = #{sort_board}
+ 			sort_board = #{sort_board},
+ 			has_img = #{has_img},
+ 			mod_date = sysdate
  		WHERE board_no = #{board_no}
 	</update>
 	<!-- 1-2. boardPlace -->
@@ -175,9 +179,15 @@
 			 			where place_id = #{place_id})
 		WHERE board_no = #{board_no}
 	</update>
-	<!-- 1-3. boardTag -->
-	<update id="updateBoardTag"  parameterType="java.util.List">
-	</update>
+	<!-- 1-3. tag -->
+	<delete id="deleteBoardTag"  parameterType="java.util.List">
+		DELETE FROM tbl_board_tag
+		<where>
+			<foreach collection="list" item="item" open="" close="" separator="OR">
+				(board_no = #{item.board_no} and tag_no = ${item.tag_no})
+			</foreach>
+		</where>
+	</delete>
 	<!-- 1-4. boardImg -->
 <!-- ************DELETE************ -->
 	

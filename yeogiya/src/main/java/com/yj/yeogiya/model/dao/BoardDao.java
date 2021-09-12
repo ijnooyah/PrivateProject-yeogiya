@@ -56,7 +56,9 @@ public interface BoardDao {
 	// 1-1.board
 	public int updateBoard(Board board);
 	// 1-2.tag
+	public int deleteBoardTag(List<BoardTag> oldTagList);
 	// 1-3. place
+	public int updateBoardPlace(BoardPlace boardPlace);
 	// 1-4. img
 	
 	

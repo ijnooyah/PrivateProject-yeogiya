@@ -47,6 +47,7 @@ public class BoardController {
 	//글수정페이지
 	@RequestMapping(value = "update/{board_no}")
 	public String update(Model model, @PathVariable("board_no") int board_no) throws Exception {
+		logger.info("update");
 		Board board = boardService.selectBoardArticle(board_no);
 		model.addAttribute("board", board);
 		model.addAttribute("tagList", JSONArray.fromObject(board.getTagList()));
@@ -56,6 +57,7 @@ public class BoardController {
 	//글상세보기페이지
 	@RequestMapping(value = "content/{board_no}")
 	public String content(Model model, @PathVariable("board_no") int board_no) throws Exception {
+		logger.info("content");
 		Board board = boardService.selectBoardArticle(board_no);
 		model.addAttribute("board", board);
 		return "board/boardView";
@@ -64,6 +66,7 @@ public class BoardController {
 	//글목록페이지
 	@RequestMapping(value = "list")
 	public String list() throws Exception {
+		logger.info("list");
 		return "board/boardList";
 	}
 	
@@ -72,6 +75,7 @@ public class BoardController {
 	//글작성작업
 	@RequestMapping(value = "insertRun", method = RequestMethod.POST)
 	public String insertRun(Board board) throws Exception {
+		logger.info("insertRun");
 		System.out.println(board);
 		int board_no = boardService.insertBoardArticle(board);
 		System.out.println("board_no: " + board_no);
@@ -81,8 +85,10 @@ public class BoardController {
 	//글수정작업
 	@RequestMapping(value = "updateRun", method = RequestMethod.POST)
 	public String updateRun(Board board) throws Exception {
+		logger.info("updateRun");
 		System.out.println(board);
-		boardService.updateBoardArticle(board);
+		int result = boardService.updateBoardArticle(board);
+		
 		return "redirect:content/" + board.getBoard_no();
 	}
 	

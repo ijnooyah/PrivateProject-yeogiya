@@ -194,38 +194,42 @@ span.modalMapToggle::after {
 	<div class="container board-container d-md-flex my-4">
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
-			<form action="updateRun" method="post" id="updtFrm" name="updtFrm">
+			<form action="${localPath}/updateRun" method="post" id="updtFrm" name="updtFrm">
 				<div class="inner_form">
+<!-- 					<div class="row mb-2 text-gray9" style="opacity:.5;"> -->
+<%-- 						<c:set var="sortBoardName" value=""/> --%>
+<%-- 						<c:forEach var="sortBoard" items="${sortBoardArr}"> --%>
+<%-- 							<c:if test="${sortBoard.sort_no == board.sort_board}"> --%>
+<%-- 								<c:set var="sortBoardName" value="${sortBoard.sort_name}"/> --%>
+<%-- 							</c:if> --%>
+<%-- 						</c:forEach> --%>
+<%-- 						${sortBoardName} --%>
+<!-- 					</div> -->
+					<div class="row mb-2" id="divPlace">
+						<c:if test="${not empty board.sort_place}">
+							<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink my-auto mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+							</svg>
+							<span class="modalMapToggle" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
+								장소 선택
+							</span>
+							<small class="text-muted my-auto" id="resultPlace" data-isexist="Y">
+						    	${board.place.place_name} (${board.place.place_address})
+					    	</small>
+				    	</c:if>
+					</div>
 					<!--셀렉트박스 -->
 					<div class="row mb-2">
-						<select class="form-control mr-1" name="sub_local" id="subLocal">
-							<option value="0">지역</option>
-							<c:forEach var="subLocal" items="${subLocalArr}">
-								<option value="${subLocal.sort_no}" ${subLocal.sort_no == board.sub_local ? 'selected' : ''}>
-								${subLocal.sort_name}
-								</option>
-							</c:forEach>
-						</select>
-						<select class="form-control mr-1" name="sort_board" id="sortBoard" onchange="selectSortBoard(this);">
-							<option value="0" data-haschild="false">분류</option>
-							<c:forEach var="sortBoard" items="${sortBoardArr}">
-								<option value="${sortBoard.sort_no}" 
-										${sortBoard.sort_no == board.sort_board ? 'selected' : ''}
-										data-haschild="${sortBoard.has_sort_place == 'Y' ? true : false }">
-								${sortBoard.sort_name}
-								</option>
-							</c:forEach>
-						</select>
-<%-- 						<c:if test="${not empty board.sort_place}"> --%>
-<!-- 							<select class="form-control mr-1" name="sort_place" id="sortPlace"> -->
-<!-- 								<option value="0">말머리</option> -->
-<%-- 								<c:forEach var="sortPlace" items="${sortPlaceArr}"> --%>
-<%-- 									<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == board.sort_place ? 'selected' : ''}> --%>
-<%-- 									${sortBoard.sort_name} --%>
-<!-- 									</option> -->
-<%-- 								</c:forEach> --%>
-<!-- 							</select> -->
-<%-- 						</c:if> --%>
+						<c:if test="${not empty board.sort_place}">
+							<select class="form-control mr-1" name="sort_place" id="sortPlace">
+								<option value="0">말머리</option>
+								<c:forEach var="sortPlace" items="${sortPlaceArr}">
+									<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == board.sort_place ? 'selected' : ''}>
+									${sortPlace.sort_name}
+									</option>
+								</c:forEach>
+							</select>
+						</c:if>
 					</div>
 					<!-- 제목 -->
 					<div class="row mb-2 border-0">
@@ -249,14 +253,19 @@ span.modalMapToggle::after {
 						<button class="btn btn-pink-outline">취소</button>
 					</div>
 				</div>
-				<input type="hidden" name="user_id" value="ijnooyah"/>
+				<input type="hidden" name="board_no" value="${board.board_no}"/>
+				<input type="hidden" name="user_id" value="${board.user_id}"/>
 				<input type="hidden" name="sort_local" value="${board.sort_local}"/>
+				<input type="hidden" name="sub_local" value="${board.sub_local}"/>
+				<input type="hidden" name="sort_board" value="${board.sort_board}"/>
 				<input type="hidden" name="has_img" value="${board.has_img}"/>
-				<input type="hidden" id="place_name" name="place.place_name" value="${board.place.place_name}">
-				<input type="hidden" id="place_address" name="place.place_address" value="${board.place.place_address}">
-				<input type="hidden" id="place_lat" name="place.place_lat" value="${board.place.place_lat}">
-				<input type="hidden" id="place_long" name="place.place_long" value="${board.place.place_long}">
-				<input type="hidden" id="place_id" name="place.place_id" value="${board.place.place_id}">
+				<c:if test="${not empty board.sort_place}">
+					<input type="hidden" id="place_name" name="place.place_name" value="${board.place.place_name}">
+					<input type="hidden" id="place_address" name="place.place_address" value="${board.place.place_address}">
+					<input type="hidden" id="place_lat" name="place.place_lat" value="${board.place.place_lat}">
+					<input type="hidden" id="place_long" name="place.place_long" value="${board.place.place_long}">
+					<input type="hidden" id="place_id" name="place.place_id" value="${board.place.place_id}">
+				</c:if>
 			</form>
 		</div>
 	</div>
@@ -289,7 +298,7 @@ span.modalMapToggle::after {
 						  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
 						</svg>
 					</span>
-					<span id="selectedPlace" class="text-muted pt-1">선택한 장소가 없습니다.</span>
+					<span id="selectedPlace" class="text-muted pt-1">${board.place.place_name} (${board.place.place_address})</span>
 					<button class="btn btn-pink btn-sm ml-2 mt-auto font-size-085" style="padding:.1rem .3rem; height:23px; line-height:.7;" onclick="doComplete();">완료</button>
 				</div>
 	       		 <!--지도 -->
@@ -316,62 +325,6 @@ span.modalMapToggle::after {
 	   
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
-	<script>
-	let sortPlace = 
-		'<select class="form-control" id="sortPlace" name="sort_place">'
-			+'<option value="0">말머리</option>'
-			+'<c:forEach var="sortPlace" items="${sortPlaceArr}">'
-				+'<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == board.sort_place ? "selected" : ""}>'
-					+'${sortPlace.sort_name}'
-				+'</option>'
-			+'</c:forEach>'
-		+ '</select>';
-		
-	let resultPlaceText = null;
-	if ('${board.place}' == '') {
-		resultPlaceText = '선택된 장소가 없습니다.';
-	} else {
-		resultPlaceText = '${board.place.place_name} (${board.place.place_address})';
-	}
-	let divPlace = 
-		'<div class="row mb-2" id="divPlace">'
-			+'<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink my-auto mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
-				+'<path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>'
-			+'</svg>'
-			+'<span class="modalMapToggle" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">'
-				+'장소 선택'
-			+'</span>'
-			+'<small class="text-muted my-auto" id="resultPlace" data-isexist="N">'
-		    	+ resultPlaceText
-	    	+'</small>'
-		+ '</div>';
-		
-	//뒤로가기 할때 자식있는게 선택된 상태에 말머리 박스 안나오는 거 해결 
-	$(document).ready(function() {
-		let sortBoard = document.querySelector('#sortBoard');
-		let i = sortBoard.selectedIndex;
-		console.log(sortBoard.options[i]);
-		if(sortBoard.options[i].dataset['haschild'] == 'true') {
-			console.log('ready');
-			$(sortBoard).after(sortPlace);
-			$('.inner_form').prepend(divPlace);
-		} 
-	})
-	function selectSortBoard(el) {
-		if(el.options[el.selectedIndex].dataset['haschild'] == 'true') {
-			$(el).after(sortPlace);
-			$('.inner_form').prepend(divPlace);
-		} else {
-			if(document.querySelector('#sortPlace') != null) {
-				document.querySelector('#sortPlace').remove();
-			}
-			if(document.querySelector('#divPlace') != null) {
-				document.querySelector('#divPlace').remove();
-			}
-			
-		}
-	}
-	</script>
 	<script>
 	$(document).ready(function() {
 		var fontSizes = ['8','9','10','11','12', '13', '14','16','18','20','22','24','28','30','36','50','72'];
@@ -494,10 +447,19 @@ span.modalMapToggle::after {
 	    });
 	    // 작성했던 태그들 
 	    var tagList = JSON.parse('${tagList}');
-	    $.each(tagList, function(index, obj) {
-	        console.log(index + " : " + obj.tag_name);
-	        $("#tag").tagit("createTag", obj.tag_name);
-	  	});
+	    console.log(tagList);
+// 	    for(var i=tagList.length - 1; i >= 0; i--) {
+// 	    	 console.log(i + " : " + tagList[i].tag_name);
+// 	    	 $("#tag").tagit("createTag", tagList[i].tag_name);
+// 	    }
+	    for(var i=0; i<tagList.length; i++) {
+	    	 console.log(i + " : " + tagList[i].tag_name);
+	    	 $("#tag").tagit("createTag", tagList[i].tag_name);
+	    }
+// 	    $.each(tagList, function(index, obj) {
+// 	        console.log(index + " : " + obj.tag_name);
+// 	        $("#tag").tagit("createTag", obj.tag_name);
+// 	  	});
 
 	   	//태그 포커스 css
 	   	$('.ui-autocomplete-input').on('focus' , function() {
@@ -514,30 +476,6 @@ span.modalMapToggle::after {
 	function validate() {
 		let msg = null;
 		// 1. 카테고리
-		if($('#subLocal').val() == 0) {
-			Swal.fire({
-	        	title: '지역을 선택해주세요.',
-				allowOutsideClick: false,
-				icon: 'error', 
-				confirmButtonText: "확인",
-				didClose: function() {
-					$('#subLocal').focus();
-				}
-			});
-			return false;
-		}
-		if($('#sortBoard').val() == 0) {
-			Swal.fire({
-	        	title: '분류를 선택해주세요.',
-				allowOutsideClick: false,
-				icon: 'error', 
-				confirmButtonText: "확인",
-				didClose: function() {
-					$('#sortBoard').focus();
-				}
-			});
-			return false;
-		}
 		if (document.querySelector('#sortPlace') != null && $('#sortPlace').val() == 0) {
 			Swal.fire({
 	        	title: '말머리를 선택해주세요.',

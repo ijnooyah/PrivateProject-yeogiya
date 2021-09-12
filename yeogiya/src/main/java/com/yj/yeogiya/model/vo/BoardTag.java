@@ -3,8 +3,7 @@ package com.yj.yeogiya.model.vo;
 public class BoardTag {
 	private int board_no;
 	private int tag_no;
-	private int seq;
-	private String is_del;
+	private int reg_date;
 	
 	private String tag_name;
 	
@@ -35,20 +34,12 @@ public class BoardTag {
 		this.tag_no = tag_no;
 	}
 
-	public int getSeq() {
-		return seq;
+	public int getReg_date() {
+		return reg_date;
 	}
 
-	public void setSeq(int seq) {
-		this.seq = seq;
-	}
-
-	public String getIs_del() {
-		return is_del;
-	}
-
-	public void setIs_del(String is_del) {
-		this.is_del = is_del;
+	public void setReg_date(int reg_date) {
+		this.reg_date = reg_date;
 	}
 
 	public String getTag_name() {
@@ -61,9 +52,10 @@ public class BoardTag {
 
 	@Override
 	public String toString() {
-		return "BoardTag [board_no=" + board_no + ", tag_no=" + tag_no + ", seq=" + seq + ", is_del=" + is_del
-				+ ", tag_name=" + tag_name + "]";
+		return "BoardTag [board_no=" + board_no + ", tag_no=" + tag_no + ", reg_date=" + reg_date + ", tag_name="
+				+ tag_name + "]";
 	}
+
 
 
 

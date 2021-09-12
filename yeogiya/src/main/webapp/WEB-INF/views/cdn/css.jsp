@@ -37,6 +37,7 @@
 <c:set var="subLocalArr" value="<%=subLocalArr%>" scope="application"/>
 <c:set var="sortBoardArr" value="<%=sortBoardArr%>" scope="application"/>
 <c:set var="sortPlaceArr" value="<%=sortPlaceArr%>" scope="application"/>
+<c:set var="localPath" value="${contextPath}/${sortLocalP.eng_name}" scope="application"/>
 <c:set var="listPath" value="${contextPath}/${sortLocalP.eng_name}/list" scope="application"/>
     <!-- font awsome-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

@@ -7,10 +7,13 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yj.yeogiya.controller.BoardController;
 import com.yj.yeogiya.model.dao.BoardDao;
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardImg;
@@ -24,6 +27,8 @@ import com.yj.yeogiya.model.vo.Sort;
 public class BoardServiceImpl implements BoardService {
 	@Value("#{property['file.rootPath']}") 
 	public String rootPath;
+	
+	private static final Logger logger = LoggerFactory.getLogger(BoardServiceImpl.class);
 	
 	@Inject
 	private BoardDao boardDao;
@@ -51,9 +56,11 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public int insertBoardArticle(Board board) {
+		logger.info("insertBoardArticle");
 		int result = 0; 
 		// 1. board
 		int board_no = boardDao.insertBoard(board);
+		
 		if (board_no > 0) {
 			// 2. tag 
 			String tag = board.getTag(); // "콤마로 연결되어 있는 상태"
@@ -133,9 +140,11 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public Board selectBoardArticle(int board_no) {
+		logger.info("selectBoardArticle");
 		Board board = boardDao.selectBoard(board_no);
 		BoardPlace place = boardDao.selectBoardPlace(board_no);
 		List<BoardTag> tagList = boardDao.selectBoardTag(board_no);
+		System.out.println("board:" + board);
 		board.setPlace(place);
 		board.setTagList(tagList);
 		return board;
@@ -144,7 +153,63 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public int updateBoardArticle(Board board) {
-		return boardDao.updateBoard(board);
+		logger.info("updateBoardArticle");
+		int board_no = board.getBoard_no();
+		
+		// 1. board
+		int result = boardDao.updateBoard(board);
+		
+		if (result > 0) {
+			// 2. tag 
+			
+			List<BoardTag> oldTagList = boardDao.selectBoardTag(board_no);
+			
+			if(!oldTagList.isEmpty()) { // 삭제할 이미지가 있다면
+				System.out.println("삭제할 태그 있음 = 기존 태그 존재");
+				result = boardDao.deleteBoardTag(oldTagList);
+				
+				if(result != oldTagList.size()) {
+					System.out.println("기존태그 삭제 제대로 안됨");
+					result = 0;
+				}
+				System.out.println("기존태그 삭제 제대로 됨");
+			}
+			System.out.println("삭제할 태그 없음 = 기존 태그 없음");
+			
+			String tag = board.getTag(); // "콤마로 연결되어 있는 상태"
+			if(tag != null && tag.trim() != "") {
+				System.out.println("새로운 태그 있음");
+				String[] tags = tag.split(",");
+				List<BoardTag> tagList = new ArrayList<BoardTag>();
+				for (String splittedTag : tags) {
+					BoardTag boardTag = new BoardTag(board_no, splittedTag);
+					tagList.add(boardTag);
+				}
+				boardDao.insertTag(tagList);
+				result = boardDao.insertBoardTag(tagList);
+				
+				if(result != tags.length) {
+					System.out.println("새로운 태그 insert 문제 생김");
+					result = 0;
+				}
+			} 
+			
+			// 3. place 
+			BoardPlace place = board.getPlace();
+			if (board.getSort_place() != null) {
+				System.out.println("장소 있음");
+				place.setBoard_no(board_no);
+				place.setSort_place(board.getSort_place());
+				place.setSort_local(board.getSort_local());
+				place.setSub_local(board.getSub_local());
+				boardDao.insertPlace(place);
+				result = boardDao.updateBoardPlace(place);
+				if (result != 1) {
+					result = 0;
+				}
+			} 
+		}
+		return result;
 	}
 
 }
