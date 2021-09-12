@@ -60,6 +60,8 @@ public interface BoardDao {
 	// 1-3. place
 	public int updateBoardPlace(BoardPlace boardPlace);
 	// 1-4. img
+	public List<BoardImg> selectBoardImg(int board_no);
+	public int deleteBoardImg(int board_no);
 	
 	
 	

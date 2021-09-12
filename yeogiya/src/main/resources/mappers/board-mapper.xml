@@ -189,6 +189,14 @@
 		</where>
 	</delete>
 	<!-- 1-4. boardImg -->
+	<select id="selectBoardImg" resultType="BoardImg">
+		select * from tbl_board_img
+		where board_no = #{board_no}
+	</select>
+	<delete id="deleteBoardImg"  parameterType="int">
+		DELETE FROM tbl_board_img
+		WHERE board_no = #{board_no}
+	</delete>
 <!-- ************DELETE************ -->
 	
 </mapper>

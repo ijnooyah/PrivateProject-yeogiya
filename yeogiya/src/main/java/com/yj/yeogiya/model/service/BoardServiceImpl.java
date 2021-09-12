@@ -161,10 +161,9 @@ public class BoardServiceImpl implements BoardService {
 		
 		if (result > 0) {
 			// 2. tag 
-			
 			List<BoardTag> oldTagList = boardDao.selectBoardTag(board_no);
 			
-			if(!oldTagList.isEmpty()) { // 삭제할 이미지가 있다면
+			if(!oldTagList.isEmpty()) { 
 				System.out.println("삭제할 태그 있음 = 기존 태그 존재");
 				result = boardDao.deleteBoardTag(oldTagList);
 				
@@ -174,7 +173,9 @@ public class BoardServiceImpl implements BoardService {
 				}
 				System.out.println("기존태그 삭제 제대로 됨");
 			}
-			System.out.println("삭제할 태그 없음 = 기존 태그 없음");
+			else {
+				System.out.println("삭제할 태그 없음 = 기존 태그 없음");
+			}
 			
 			String tag = board.getTag(); // "콤마로 연결되어 있는 상태"
 			if(tag != null && tag.trim() != "") {
@@ -193,6 +194,9 @@ public class BoardServiceImpl implements BoardService {
 					result = 0;
 				}
 			} 
+			else {
+				System.out.println("새로운 태그 없음");
+			}
 			
 			// 3. place 
 			BoardPlace place = board.getPlace();
@@ -205,10 +209,66 @@ public class BoardServiceImpl implements BoardService {
 				boardDao.insertPlace(place);
 				result = boardDao.updateBoardPlace(place);
 				if (result != 1) {
+					System.out.println("장소 업데이트 실패");
 					result = 0;
 				}
 			} 
+			else {
+				System.out.println("장소 없음");
+			}
+			
+			
+			// 4. img
+			List<BoardImg> oldImgList = boardDao.selectBoardImg(board_no);
+			
+			if(!oldImgList.isEmpty()) { 
+				System.out.println("삭제할 이미지 있음 = 기존 이미지 존재");
+				result = boardDao.deleteBoardImg(board_no);
+				
+				if(result != oldImgList.size()) {
+					System.out.println("기존이미지 삭제 제대로 안됨");
+					result = 0;
+				} 
+				System.out.println("기존이미지 삭제 제대로 됨");
+				
+			}
+			else {
+				System.out.println("삭제할 이미지 없음 = 기존 이미지 없음");
+			}
+			
+			List<BoardImg> imgList = new ArrayList<BoardImg>();
+
+			Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+			
+			String board_content = board.getBoard_content();
+			Matcher matcher = pattern.matcher(board_content);
+			
+			String src = null;
+			String img_path = null;
+			String img_name = null;
+			while (matcher.find()) {
+				src = matcher.group(1);
+				img_path = rootPath + "/" + src;
+				img_name = src.substring(src.lastIndexOf("/") + 1);
+				BoardImg img = new BoardImg(board_no, img_path, img_name);
+				imgList.add(img);
+			}
+			
+			// 서버에는 안올라갔는데 태그인척하는 img있는거 대비 has_img까지 체크 
+			// -> has_img는 프론트에서 점검했던거
+			if (!imgList.isEmpty() && board.getHas_img().equals("Y")) {
+				System.out.println("새로운 이미지 있음");
+				result = boardDao.insertBoardImg(imgList);
+				if (result != imgList.size()) {
+					System.out.println("새로운 이미지 insert 문제 생김");
+					result = 0;
+				}
+			} 
+			else {
+				System.out.println("새로운 이미지 없음");
+			}
 		}
+		
 		return result;
 	}
 
