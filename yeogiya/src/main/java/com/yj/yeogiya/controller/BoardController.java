@@ -51,7 +51,7 @@ public class BoardController {
 	@RequestMapping(value = "update/{board_no}")
 	public String update(Model model, @PathVariable("board_no") int board_no) throws Exception {
 		logger.info("update");
-		Board board = boardService.selectBoardArticle(board_no);
+		Board board = boardService.selectBoardArticle(board_no, true);
 		model.addAttribute("board", board);
 		return "board/boardUpdate";
 	}
@@ -60,7 +60,7 @@ public class BoardController {
 	@RequestMapping(value = "content/{board_no}")
 	public String content(Model model, @PathVariable("board_no") int board_no) throws Exception {
 		logger.info("content");
-		Board board = boardService.selectBoardArticle(board_no);
+		Board board = boardService.selectBoardArticle(board_no, false);
 		model.addAttribute("board", board);
 		return "board/boardView";
 	}

@@ -64,6 +64,9 @@ public interface BoardDao {
 	public List<BoardImg> selectBoardImg(int board_no);
 	public int deleteBoardImg(int board_no);
 	
+	//2.게시글 댓글수,조회수,좋아요수 등 증감
+	public int updateCmtCnt(int board_no, int count);
+	public int updateViewCnt(int board_no);
 	
 	
 	

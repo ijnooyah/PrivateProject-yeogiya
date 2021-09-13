@@ -94,10 +94,10 @@
 								<span class="align-middle text-muted">조회 ${board.view_cnt}</span> 
 							</div>
 							<div class="d-table-cell mr-2">
-								<span class="align-middle text-muted">좋아요 ${board.like_cnt}</span> 
+								<span class="align-middle text-muted">좋아요 <span class="like_cnt">${board.like_cnt}</span></span> 
 							</div>
 							<div class="d-table-cell mr-2">
-								<span class="align-middle text-muted">댓글 ${board.cmt_cnt}</span> 
+								<span class="align-middle text-muted">댓글 <span class="cmt_cnt">${board.cmt_cnt}</span></span> 
 							</div>
 						</div>
 						<div class="ml-auto mr-2">
@@ -138,9 +138,9 @@
 				<!-- 글버튼 -->
 				<div class="row mb-2 content-bottom text-muted">
 					<span class="fa fa-heart-o mr-1 cursor-pointer" style="line-height: 1.5;"></span>
-					<span class="mr-2" id="like_cnt">${board.like_cnt}</span>  
+					<span class="mr-2" id="like_cnt" class="like_cnt">${board.like_cnt}</span>  
 					<span class="fa fa-comment-o ml-2 mr-1 cursor-pointer" style="line-height: 1.4;"></span>
-					<span id="cmt_cnt">${board.cmt_cnt}</span> 
+					<span id="cmt_cnt" class="cmt_cnt">${board.cmt_cnt}</span> 
 					<a href="" class="text-muted ml-auto font-size-090">신고</a>
 				</div>
 			</div>
@@ -158,6 +158,7 @@
 	</div>
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
+	<!-- kakaoMap -->
 	<script>
 	<c:if test="${not empty board.sort_place}">
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -214,6 +215,321 @@
 	    } 
 	});   
 	</c:if>
+	</script>
+	
+	<!-- comment -->
+	<script>
+	$(document).ready(function() {
+		selectCommentList();
+	});
+	
+	// 일반 댓글 작성
+	function insertComment() {
+		var c_content = $("#c_content").val();
+		if (c_content.length < 1 || c_content.trim() == "") {
+			Swal.fire({
+			text: '댓글 내용을 입력하지 않았습니다.', 
+			allowOutsideClick: false,
+			icon: 'error', 
+			confirmButtonText: "확인",
+			}).then(function(){close()});
+			return false;
+		}
+		var b_no = parseInt("${board.board_no}");
+		var url = "${contextPath}/comment/insert";
+		var sendData = {
+				"c_content" : c_content,
+				"b_no" 	    : b_no,
+	 			"user_id"	: "mimi"
+		}
+		$.ajax({
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json"
+			},
+			"method" : "post",
+			"dataType" : "text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				if(rData == "success") {
+					selectCommentList();
+					$("#c_content").val("");
+				}
+			}
+		});
+		
+	}	
+	//답댓글 작성
+	function insertRecomment(el) {
+		var re_group = $(el).parent().parent().parent().parent().find(".re_group").val()
+		var parent_c_no = $("#parent_c_no").val();
+//	 	var user_id = $("#re_user_id").val()
+		var c_content = $("#re_c_content").val();
+		if (c_content.length < 1 || c_content.trim() == "") {
+			Swal.fire({
+			text: '댓글 내용을 입력하지 않았습니다.', 
+			allowOutsideClick: false,
+			icon: 'error', 
+			confirmButtonText: "확인",
+			}).then(function(){close()});
+			return false;
+		}
+		var b_no = parseInt("${board.board_no}");
+		var url = "${contextPath}/comment/insert";
+		var sendData = {
+				"c_content" : c_content,
+				"b_no" 	    : b_no,
+	 			"user_id"	: "mimi",
+				"parent_c_no" : parent_c_no,
+				"re_group" : re_group,
+		}
+		console.log(sendData);
+		$.ajax({
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json"
+			},
+			"method" : "post", 
+			"dataType" : "text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				console.log(rData);
+				if(rData == "success") {
+					var reply = '<div id="reply_div" style="display:none;">'+$('#reply_div').html()+'</div>';
+		            $('#comment').append(reply);
+					selectCommentList();
+				}
+			}
+		});
+	}
+
+	// 답글 버튼 누를때 
+	function doRecomment(c_no) {
+		var reply = '<div id="reply_div">'+$('#reply_div').html()+'</div>';
+		if ($("#reply_div").css("display") == "block") {
+	 		if($("#replyCommentDiv_"+ c_no).find("#reply_div").length == 0) {
+	  			$('#reply_div').remove();
+	     		$("#replyCommentDiv_"+ c_no).html(reply);
+			 } else {
+	  			$("#replyCommentDiv_"+ c_no).find("#reply_div").hide();
+	 		}
+		} else {
+			$('#reply_div').remove();
+			$("#replyCommentDiv_"+ c_no).html(reply);
+		}
+	    
+	    $("#parent_c_no").val(c_no);
+	}	
+
+	var board_writer = "${board.user_id}"; // 글작성자 id
+
+// 	if (loginVo != null) {
+// 		var login_id = "${loginVo.user_id}"; // 로그인한사람 id
+// 	}
+	// 댓글 리스트 조회
+	function selectCommentList() {
+		
+		$("#commentContainer > .comment-row:gt(0)").remove();
+		$("#moreViewDiv").empty();
+		var url = "${contextPath}/comment/list?board_no=${board.board_no}";
+		$.get(url, function(rData) {
+			if (rData.length < 4) {
+				$("#btnMoreComments").hide();
+			} else {
+				$("#btnMoreComments").show();
+			}
+			if(rData.length > 0) {
+				$("#noCmtDiv").hide();
+			} else {
+				$("#noCmtDiv").show();
+			}
+//	 		$("#comment_cnt").text(rData.length);
+			$(".cmt_cnt").text(rData.length);
+			$.each(rData, function(i) {
+				var cloneDiv = $("#commentContainer > .comment-row:eq(0)").clone();
+				if (this.c_depth == 1) {
+					cloneDiv.addClass("recomment-row");
+					cloneDiv.find(".c_parent_user_nick").show();
+				}
+				cloneDiv.show();
+				
+				//자기 댓글이 아닐경우 수정삭제 안보이게하기, 신고버튼은 보이게 하기(신고 기능 없음)
+				if(this.user_id != "mimi") {
+					cloneDiv.find(".dropdown").hide();
+//	 				cloneDiv.find(".report").show();
+				}
+				
+				//
+				cloneDiv.find(".view_comment").attr("id", "view_comment_" + this.c_no );
+				cloneDiv.find(".c_no").val(this.c_no);
+				cloneDiv.find(".re_group").val(this.re_group);
+				if (this.user_img != null && this.user_img.trim() != "") {
+					cloneDiv.find(".user_img").css("background-image", "url(${contextPath}/display?img="+this.user_img + ")");
+				} else {
+					cloneDiv.find(".user_img").css("background-image", "url(${noProfile})");
+				}
+				cloneDiv.find(".c_user_nick").text(this.user_nick);
+				if (this.user_id == board_writer) {
+					cloneDiv.find(".is_board_writer").show();
+				}
+				cloneDiv.find(".doUpdateComment").attr("onclick", "doUpdateComment(" + this.c_no + ")");
+				cloneDiv.find(".updateCommentDiv").attr("id", "updateCommentDiv_" + this.c_no);
+				// 댓글 수정 취소
+				cloneDiv.find(".cancel").attr("href", "javascript:cancelUpdate(" + this.c_no + ")");
+				cloneDiv.find(".updateBtn").attr("onclick", "updateComment(" + this.c_no + ")");
+				cloneDiv.find(".deleteComment").attr("onclick", "deleteComment(" + this.c_no + ")");
+				cloneDiv.find(".doRecomment").attr("onclick", "doRecomment(" + this.c_no + ")");
+				cloneDiv.find(".c_parent_user_nick").text("@" + this.parent_user_nick);
+				cloneDiv.find(".c_content").html(this.c_content);
+				var reg_date = changeDateString(this.reg_date);
+				cloneDiv.find(".c_reg_date").text(reg_date);
+				cloneDiv.find(".replyCommentDiv").attr("id", "replyCommentDiv_" + this.c_no);
+				$("#commentContainer > .comment-row:eq(1)").css('border-top', 'none');
+				// 댓글 3개까지는 전체보기 줄여보기 x, 4개부터 보일때 3개까지만 보이고 전체보기 버튼 눌러야 전체보임
+				if(i > 2) {
+					$("#moreViewDiv").append(cloneDiv);
+//	 				console.log(i + "," + "moreview" +  cloneDiv.html());
+					$("#moreViewDiv").insertAfter("#commentContainer > .comment-row:last"); 
+				} else {
+					$("#commentContainer").append(cloneDiv);
+//	 				console.log(i + "," + "일반" + cloneDiv.html());
+				}
+//	 			console.log("댓글들", $("#commentContainer > .comment-row:gt(3)"));
+			});
+		});
+		
+	}
+	// 댓글 수정 버튼 누를때
+	function doUpdateComment(c_no) {
+		$.get("${contextPath}/comment/select?c_no=" + c_no, function(cmt) {
+			$("#updateCommentDiv_" + c_no).show();
+			$("#view_comment_" + c_no).toggleClass("d-flex");
+			$("#view_comment_" + c_no).toggleClass("d-none");
+		    $("#updateCommentDiv_" + c_no).find(".c_content").val(cmt.c_content);
+		});
+	}
+
+	//수정 취소 누를때
+	function cancelUpdate(c_no) {
+		$("#updateCommentDiv_" + c_no).hide();
+		$("#view_comment_" + c_no).toggleClass("d-flex");
+		$("#view_comment_" + c_no).toggleClass("d-none");
+	}
+
+	function updateComment(c_no) {
+		var c_content = $("#updateCommentDiv_" + c_no).find(".c_content").val();
+		if (c_content.length < 1 || c_content.trim() == "") {
+			Swal.fire({
+			text: '1자 이상 입력해야 댓글을 등록할 수 있습니다.', 
+// 			padding:'2em',
+			allowOutsideClick: false,
+			icon: 'error', 
+			confirmButtonText: "확인",
+			}).then(function(){close()});
+			return false;
+		}
+		var url = "${contextPath}/comment/update";
+		var sendData = {
+				"c_content" : c_content,
+				"c_no"	: c_no,
+				"user_id" : "mimi"
+		}
+		
+		$.ajax({
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json"
+			},
+			"method" : "post",
+			"dataType" : "text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData) {
+				if(rData == "success") {
+					selectCommentList();
+				}
+			}
+		});
+	}
+	// 댓글 삭제  
+	function deleteComment(c_no) {
+		var url = "${contextPath}/comment/delete";
+		Swal.fire({
+			text: '삭제하시겠습니까?', 
+			allowOutsideClick: false,
+			icon: 'question', 
+			confirmButtonText: "확인",
+			cancelButtonText: "취소",
+			showCancelButton: true,
+		}).then(function(result) {
+			if(result.isConfirmed) {
+				var sendData = {
+						"b_no" : "${board.board_no}",
+						"c_no"	: c_no
+				}
+				
+				$.ajax({
+					"url" : url,
+					"headers" : {
+						"Content-Type" : "application/json"
+					},
+					"method" : "post",
+					"dataType" : "text",
+					"data" : JSON.stringify(sendData),
+					"success" : function(rData) {
+						if(rData == 0) {
+							Swal.fire({
+							text: '답댓이 있는 댓글은 삭제할 수 없습니다.', 
+							allowOutsideClick: false,
+							icon: 'error', 
+							confirmButtonText: "확인",
+							}).then(function(){close()});
+						} else {
+							selectCommentList();
+						}
+					}
+				});
+			} 
+		});
+	}
+	var commentOpens = 0;
+	function moreViewToggle() {
+		if(commentOpens == 0) {
+			$("#moreViewDiv").show();
+	        $("#btnMoreComments").html('줄여보기');
+	        commentOpens = 1;
+	    }
+	    else {
+	        $("#moreViewDiv").hide();
+	        $("#btnMoreComments").html('전체보기');
+	        commentOpens = 0;
+	    }
+	}
+	
+	function make2digits(num) {
+		if (num < 10) {
+			num = "0" +  num;
+		}
+		return num;
+	}
+
+	function changeDateString(timestamp) {
+		var d = new Date(timestamp);
+		var now = new Date();
+		var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+		var result = null;
+		
+		var year = d.getFullYear();
+		var month = d.getMonth() + 1;
+		var date = d.getDate();
+		var hour = make2digits(d.getHours());
+		var minute = make2digits(d.getMinutes());
+		if(d >= today) {
+			result = hour + ":" + minute;
+		} else {
+			result = year + "." + month + "." + date + " " + hour + ":" + minute;
+		}
+		return result;
+	}
 	</script>
 </body>
 </html>

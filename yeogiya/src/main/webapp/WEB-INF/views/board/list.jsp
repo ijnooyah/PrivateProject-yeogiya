@@ -41,6 +41,7 @@ div.subLocal_wrap {
 	border:1px solid var(--pink);
 }
 div.subLocal_wrap a {
+	font-size:.8rem;
 	color:var(--gray);
 }
 div.subLocal_wrap a:hover {

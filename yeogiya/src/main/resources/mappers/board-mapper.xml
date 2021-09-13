@@ -172,6 +172,9 @@
  		select * from tbl_tag
         where tag_name like '%'||#{keyword}||'%'
  	</select>
+ 	
+ 	
+ 	
 <!-- ************UPDATE************ -->
 	<!-- 1-1. board -->
 	<update id="updateBoard" parameterType="Board">
@@ -210,6 +213,19 @@
 		DELETE FROM tbl_board_img
 		WHERE board_no = #{board_no}
 	</delete>
+	
+	<!-- 조회수 증가-->
+	<update id="updateViewCnt">
+		UPDATE tbl_board
+		SET view_cnt = view_cnt + 1
+		WHERE board_no = #{board_no} 
+	</update>
+	<!-- 댓글수 증가 -->
+	<update id="updateCmtCnt">
+		UPDATE tbl_board
+		SET cmt_cnt = cmt_cnt + #{count}
+		WHERE board_no = #{board_no} 
+	</update>
 <!-- ************DELETE************ -->
 	
 </mapper>

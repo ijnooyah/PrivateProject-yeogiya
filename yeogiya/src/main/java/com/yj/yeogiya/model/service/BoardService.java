@@ -20,7 +20,7 @@ public interface BoardService {
 //************READ************
 	// 1. 게시글
 	// 1-2. 상세조회
-	public Board selectBoardArticle(int board_no);
+	public Board selectBoardArticle(int board_no, boolean isUpdate);
 	// 2. 카테고리
 	public List<Sort> selectSortLocal();
 	public List<Sort> selectSortPlace();

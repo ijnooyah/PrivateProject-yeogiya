@@ -140,8 +140,11 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Transactional
 	@Override
-	public Board selectBoardArticle(int board_no) {
+	public Board selectBoardArticle(int board_no, boolean isUpdate) {
 		logger.info("selectBoardArticle");
+		if (!isUpdate) {
+			boardDao.updateViewCnt(board_no);
+		}
 		Board board = boardDao.selectBoard(board_no);
 		BoardPlace place = boardDao.selectBoardPlace(board_no);
 		List<BoardTag> tagList = boardDao.selectBoardTag(board_no);

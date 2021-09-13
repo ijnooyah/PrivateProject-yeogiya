@@ -1,6 +1,8 @@
 package com.yj.yeogiya.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -114,6 +116,19 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<BoardTag> searchTag(String keyword) {
 		return sqlSession.selectList(NAMESPACE + "searchTag", keyword);
+	}
+
+	@Override
+	public int updateCmtCnt(int board_no, int count) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("board_no", board_no);
+		map.put("count", count);
+		return sqlSession.update(NAMESPACE + "updateCmtCnt", map);
+	}
+
+	@Override
+	public int updateViewCnt(int board_no) {
+		return sqlSession.update(NAMESPACE + "updateViewCnt", board_no);
 	}
 	
 
