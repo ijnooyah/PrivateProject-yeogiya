@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardImg;
 import com.yj.yeogiya.model.vo.BoardPlace;
+import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
 import com.yj.yeogiya.model.vo.Sort;
 
@@ -55,8 +56,11 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public Board selectBoard(int board_no) {
-		return sqlSession.selectOne(NAMESPACE + "selectBoard", board_no);
+	public Board selectBoard(String login_id, int board_no) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("login_id", login_id);
+		map.put("board_no", board_no);
+		return sqlSession.selectOne(NAMESPACE + "selectBoard", map);
 	}
 
 	@Override
@@ -130,6 +134,47 @@ public class BoardDaoImpl implements BoardDao {
 	public int updateViewCnt(int board_no) {
 		return sqlSession.update(NAMESPACE + "updateViewCnt", board_no);
 	}
+
+	@Override
+	public int updateLikeCnt(int board_no, int count) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("board_no", board_no);
+		map.put("count", count);
+		return sqlSession.update(NAMESPACE + "updateLikeCnt", map);
+	}
+
+	@Override
+	public int insertLike(int board_no, String user_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("board_no", board_no);
+		map.put("user_id", user_id);
+		return sqlSession.insert(NAMESPACE + "insertLike", map);
+	}
+
+	@Override
+	public int deleteLike(int board_no, String user_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("board_no", board_no);
+		map.put("user_id", user_id);
+		return sqlSession.delete(NAMESPACE + "deleteLike", map);
+	}
+
+	@Override
+	public int insertBookmark(int board_no, String user_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("board_no", board_no);
+		map.put("user_id", user_id);
+		return sqlSession.insert(NAMESPACE + "insertBookmark", map);
+	}
+
+	@Override
+	public int deleteBookmark(int board_no, String user_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("board_no", board_no);
+		map.put("user_id", user_id);
+		return sqlSession.delete(NAMESPACE + "deleteBookmark", map);
+	}
+
 	
 
 }

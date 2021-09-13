@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -51,7 +52,7 @@ public class BoardController {
 	@RequestMapping(value = "update/{board_no}")
 	public String update(Model model, @PathVariable("board_no") int board_no) throws Exception {
 		logger.info("update");
-		Board board = boardService.selectBoardArticle(board_no, true);
+		Board board = boardService.selectBoardArticle(null, board_no, true);
 		model.addAttribute("board", board);
 		return "board/boardUpdate";
 	}
@@ -60,7 +61,8 @@ public class BoardController {
 	@RequestMapping(value = "content/{board_no}")
 	public String content(Model model, @PathVariable("board_no") int board_no) throws Exception {
 		logger.info("content");
-		Board board = boardService.selectBoardArticle(board_no, false);
+		String login_id = "mimi";
+		Board board = boardService.selectBoardArticle(login_id, board_no, false);
 		model.addAttribute("board", board);
 		return "board/boardView";
 	}
@@ -76,9 +78,9 @@ public class BoardController {
 	@RequestMapping(value = "insertRun", method = RequestMethod.POST)
 	public String insertRun(Board board) throws Exception {
 		logger.info("insertRun");
-		System.out.println(board);
+//		System.out.println(board);
 		int board_no = boardService.insertBoardArticle(board);
-		System.out.println("board_no: " + board_no);
+//		System.out.println("board_no: " + board_no);
 		
 		String sortBoard = "sortBoard=" + board.getSort_board();
 		String subLocal = "&subLocal=" + board.getSub_local();
@@ -94,7 +96,7 @@ public class BoardController {
 	@RequestMapping(value = "updateRun", method = RequestMethod.POST)
 	public String updateRun(Board board) throws Exception {
 		logger.info("updateRun");
-		System.out.println(board);
+//		System.out.println(board);
 		int result = boardService.updateBoardArticle(board);
 		int board_no = board.getBoard_no();
 		String sortBoard = "sortBoard=" + board.getSort_board();
@@ -110,12 +112,38 @@ public class BoardController {
 	//태그
 	@RequestMapping(value = "searchTag", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String json(String keyword) {    
-		System.out.println("keyword" + keyword);
+	public String searchTag(String keyword) {    
+		logger.info("searchTag");
+//		System.out.println("keyword" + keyword);
 		List<BoardTag> tagList = boardService.searchTag(keyword);
 	    
 	    Gson gson = new Gson();
 	    return gson.toJson(tagList); 
 	}
 	
+	//좋아요
+	@RequestMapping(value = "like", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String like(@RequestParam int board_no) {    
+		logger.info("like");
+	    int result = boardService.likeBoard("mimi", board_no);
+	    
+	    if (result == 0) {
+	    	return "cancel";
+	    }
+	    return "like"; 
+	}
+	
+	//좋아요
+	@RequestMapping(value = "bookmark", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String bookmark(@RequestParam int board_no) {    
+		logger.info("bookmark");
+	    int result = boardService.bookmarkBoard("mimi", board_no);
+	    
+	    if (result == 0) {
+	    	return "cancel";
+	    }
+	    return "bookmark"; 
+	}
 }

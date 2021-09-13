@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardImg;
+import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
 import com.yj.yeogiya.model.vo.Sort;
 
@@ -20,7 +21,7 @@ public interface BoardService {
 //************READ************
 	// 1. 게시글
 	// 1-2. 상세조회
-	public Board selectBoardArticle(int board_no, boolean isUpdate);
+	public Board selectBoardArticle(String login_id, int board_no, boolean isUpdate);
 	// 2. 카테고리
 	public List<Sort> selectSortLocal();
 	public List<Sort> selectSortPlace();
@@ -45,7 +46,10 @@ public interface BoardService {
 	// 2. 카테고리
 	
 	
-	
+//좋아요
+public int likeBoard(String user_id, int board_no);
+//북마크
+public int bookmarkBoard(String user_id, int board_no);
 	
 	
 }

@@ -55,6 +55,10 @@
     margin-left: 5px;
     top: 7px;
 	}
+	
+	.content-bottom {
+		color:var(--gray);
+	}
 	</style>
 </head>
 <body>
@@ -64,7 +68,7 @@
 		<div class="row card ml-auto content-top">
 			<div class="col-md-12 pt-4 px-5 pb-5" style="flex:none;">
 				<div class="row mb-2">
-					<a class="sort_board text-pink" href=""
+					<a class="sort_board text-pink" href="${listPath}?${sortBoard}${subLocal}${sortPlace}"
 						  style="position:relative;">${board.sortBoardName}</a>
 				</div>
 				<!-- 글정보 -->
@@ -101,10 +105,11 @@
 							</div>
 						</div>
 						<div class="ml-auto mr-2">
-							<svg xmlns="http://www.w3.org/2000/svg" width="0.98rem" height="0.98rem" fill="currentColor" class="bi bi-bookmark text-muted mr-2 cursor-pointer" viewBox="0 0 16 16">
-							  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+							<svg xmlns="http://www.w3.org/2000/svg" width="0.98rem" height="0.98rem" fill="currentColor" id="bookmark" class="bi bi-bookmark mr-2 cursor-pointer" viewBox="0 0 16 16">
+							  <path class="bi-bookmark text-muted ${empty board.bmBoard ? '' : 'd-none'}" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+							  <path class="bi-bookmark-fill text-pink ${not empty board.bmBoard ? '' : 'd-none'}" d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
 							</svg>
-							<svg xmlns="http://www.w3.org/2000/svg" width="0.98rem" height="0.98rem" fill="currentColor" class="bi bi-share text-muted cursor-pointer" viewBox="0 0 16 16">
+							<svg xmlns="http://www.w3.org/2000/svg" id="share" width="0.98rem" height="0.98rem" fill="currentColor" class="bi bi-share text-muted cursor-pointer" viewBox="0 0 16 16">
 							  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
 							</svg>
 							<!-- 수정 삭제 버튼 -->
@@ -136,12 +141,15 @@
 					</c:forEach>
 				</div>
 				<!-- 글버튼 -->
-				<div class="row mb-2 content-bottom text-muted">
-					<span class="fa fa-heart-o mr-1 cursor-pointer" style="line-height: 1.5;"></span>
-					<span class="mr-2" id="like_cnt" class="like_cnt">${board.like_cnt}</span>  
-					<span class="fa fa-comment-o ml-2 mr-1 cursor-pointer" style="line-height: 1.4;"></span>
+				<div class="row mb-2 content-bottom">
+					<span class="fa ${not empty board.likeBoard ? 'fa-heart' : 'fa-heart-o'}
+						  mr-1 cursor-pointer" id="like" 
+						  style="line-height: 1.5;
+						  ${not empty board.likeBoard ? 'color:var(--danger)' : 'color:var(--gray)'}"></span>
+					<span class="mr-2 like_cnt" id="like_cnt">${board.like_cnt}</span>  
+					<span class="fa fa-comment-o ml-2 mr-1" id="cmt" style="line-height: 1.4;"></span>
 					<span id="cmt_cnt" class="cmt_cnt">${board.cmt_cnt}</span> 
-					<a href="" class="text-muted ml-auto font-size-090">신고</a>
+					<a href="" class="ml-auto text-muted font-size-090">신고</a>
 				</div>
 			</div>
 			<!-- 상세보기 댓글 -->
@@ -158,6 +166,54 @@
 	</div>
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
+	<!-- like,bookmark,link --> 
+	<script>
+	$('#like').on('click', function() {
+		var url = "${localPath}/like?board_no=${board.board_no}";
+		$.get(url, function(rData) {
+			console.log(rData);
+// 			let spanLike = document.querySelector('#like')
+			if (rData == "like") {
+// 				spanLike.classList.replace('fa-heart-o', 'fa-heart');
+				$('#like').css('color', 'var(--danger)');
+				$('#like').switchClass('fa-heart-o', 'fa-heart');
+				$(".like_cnt").text(Number($("#like_cnt").text()) + 1);
+			} else {
+				$('#like').css('color', 'var(--gray)');
+				$('#like').switchClass('fa-heart', 'fa-heart-o');
+				$(".like_cnt").text(Number($("#like_cnt").text()) - 1);
+			}
+		});
+	})
+	
+	$('#bookmark').on('click', function() {
+		var url = "${localPath}/bookmark?board_no=${board.board_no}";
+		$.get(url, function(rData) {
+			console.log(rData);
+			console.log($('#bookmark').find('path'));
+			$('#bookmark > .bi-bookmark').toggleClass('d-none');
+			$('#bookmark > .bi-bookmark-fill').toggleClass('d-none');
+		});
+	})
+	
+	$("#share").on('click', function() {
+		console.log(window.document.location.href);
+		var url = null;
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		Swal.fire({
+			title: 'url이 복사 되었습니다', 
+			icon: 'success', 
+			confirmButtonText: "확인",
+		}).then(function(){close()});
+	})
+	</script>
+	
 	<!-- kakaoMap -->
 	<script>
 	<c:if test="${not empty board.sort_place}">
@@ -333,7 +389,8 @@
 		$("#moreViewDiv").empty();
 		var url = "${contextPath}/comment/list?board_no=${board.board_no}";
 		$.get(url, function(rData) {
-			if (rData.length < 4) {
+			const perPage = 10;
+			if (rData.length < perPage + 1) {
 				$("#btnMoreComments").hide();
 			} else {
 				$("#btnMoreComments").show();
@@ -385,8 +442,7 @@
 				cloneDiv.find(".c_reg_date").text(reg_date);
 				cloneDiv.find(".replyCommentDiv").attr("id", "replyCommentDiv_" + this.c_no);
 				$("#commentContainer > .comment-row:eq(1)").css('border-top', 'none');
-				// 댓글 3개까지는 전체보기 줄여보기 x, 4개부터 보일때 3개까지만 보이고 전체보기 버튼 눌러야 전체보임
-				if(i > 2) {
+				if(i > perPage - 1) {
 					$("#moreViewDiv").append(cloneDiv);
 //	 				console.log(i + "," + "moreview" +  cloneDiv.html());
 					$("#moreViewDiv").insertAfter("#commentContainer > .comment-row:last"); 

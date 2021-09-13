@@ -1,7 +1,9 @@
 package com.yj.yeogiya.model.vo;
 
 public class BoardSearch {
-	private String user_id; //로그인한 아이디
+	private String login_id; //로그인한 아이디
+	
+	private int board_no;
 	
 	//카테고리
 	private String subLocal;
@@ -31,12 +33,6 @@ public class BoardSearch {
 	
 	private int perPage = 10; // 한페이지에 보여줄 게시글 개수 
 	private final int PAGE_BLOCK = 10; // 1 2 3 4 5 6 7.. 10 
-	public String getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
 	public String getSubLocal() {
 		return subLocal;
 	}
@@ -138,15 +134,25 @@ public class BoardSearch {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	public String getLogin_id() {
+		return login_id;
+	}
+	public void setLogin_id(String login_id) {
+		this.login_id = login_id;
+	}
+	public int getBoard_no() {
+		return board_no;
+	}
+	public void setBoard_no(int board_no) {
+		this.board_no = board_no;
+	}
 	@Override
 	public String toString() {
-		return "BoardSearch [user_id=" + user_id + ", subLocal=" + subLocal + ", sortBoard=" + sortBoard
-				+ ", sortPlace=" + sortPlace + ", order=" + order + ", searchType=" + searchType + ", keyword="
-				+ keyword + ", page=" + page + ", startRow=" + startRow + ", endRow=" + endRow + ", count=" + count
-				+ ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage + ", perPage="
-				+ perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
+		return "BoardSearch [login_id=" + login_id + ", board_no=" + board_no + ", subLocal=" + subLocal
+				+ ", sortBoard=" + sortBoard + ", sortPlace=" + sortPlace + ", order=" + order + ", searchType="
+				+ searchType + ", keyword=" + keyword + ", page=" + page + ", startRow=" + startRow + ", endRow="
+				+ endRow + ", count=" + count + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage="
+				+ totalPage + ", perPage=" + perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 	}
-	
-	
 	
 }

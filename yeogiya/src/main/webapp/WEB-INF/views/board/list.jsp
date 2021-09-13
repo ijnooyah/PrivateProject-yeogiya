@@ -53,9 +53,6 @@ div.subLocal_wrap a.active {
 	color:var(--pink);
 }
 </style>
-<%-- url설정 --%>
-<c:set var="sortBoard" value="sortBoard=${bs.sortBoard}"/>
-
 <div class="px-4 pt-4">
 	<div class="h3 logo mt-2" style="color:var(--pink);">
 	<c:forEach var="sb" items="${sortBoardArr}">

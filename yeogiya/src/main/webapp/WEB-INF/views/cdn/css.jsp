@@ -50,6 +50,17 @@
 <c:set var="localPath" value="${contextPath}/${sortLocalP.eng_name}" scope="application"/>
 <c:set var="listPath" value="${contextPath}/${sortLocalP.eng_name}/list" scope="application"/>
 <c:set var="noProfile" value="${contextPath}/resources/image/no-profile.png" scope="application"/>
+	
+	<c:if test="${not empty bs.sortBoard}">
+		<c:set var="sortBoard" value="sortBoard=${bs.sortBoard}" scope="application"/>
+	</c:if>
+	<c:if test="${not empty bs.subLocal}">
+		<c:set var="subLocal" value="&subLocal=${bs.subLocal}" scope="application" />
+	</c:if>
+	<c:if test="${not empty bs.sortPlace}">
+		<c:set var="sortPlace" value="&sortPlace=${bs.sortPlace}" scope="application"/>
+	</c:if>
+    
     <!-- font awsome-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
    

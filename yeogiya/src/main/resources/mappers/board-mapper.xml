@@ -130,14 +130,22 @@
 		    a.*, b.sort_name sortLocalName, c.sort_name subLocalName,
 		    d.sort_name sortBoardName, e.sort_name sortPlaceName,
 		    f.user_nick userNick, f.user_img userImg
+		    <if test = "login_id != null">
+			, bl.board_no likeBoard, bm.board_no bmBoard
+			</if>
 		FROM tbl_board a
 		JOIN tbl_sort_local b ON a.sort_local = b.sort_no
 		JOIN tbl_sort_local c ON a.sub_local = c.sort_no
 		JOIN tbl_sort_board d ON a.sort_board = d.sort_no
 		LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
+		<if test = "login_id != null">
+		LEFT OUTER JOIN tbl_like bl ON bl.user_id = #{login_id} AND bl.board_no = #{board_no}
+		LEFT OUTER JOIN tbl_bookmark bm ON bm.user_id = #{login_id} AND bm.board_no = #{board_no}
+		</if>
 		JOIN tbl_member f ON a.user_id = f.user_id
 		WHERE a.board_no = #{board_no} and a.is_del = 'N'
 	</select>
+	
 	<!-- 1-2. -->
 	<select id="selectBoardTag" resultType="BoardTag">
 		select A.board_no, B.*
@@ -226,6 +234,63 @@
 		SET cmt_cnt = cmt_cnt + #{count}
 		WHERE board_no = #{board_no} 
 	</update>
+	<!-- 댓글수 증가 -->
+	<update id="updateLikeCnt">
+		UPDATE tbl_board
+		SET like_cnt = like_cnt + #{count}
+		WHERE board_no = #{board_no} 
+	</update>
 <!-- ************DELETE************ -->
+	
+	
+	
+<!-- 좋아요, 북마크 -->
+<!-- 좋아요 -->
+	<!-- 좋아요 테이블 -->
+	<insert id="insertLike">
+		insert into tbl_like
+		SELECT A.* FROM (
+	        select #{user_id} USER_ID,
+	        	   #{board_no} BOARD_NO
+	        from dual
+	         WHERE NOT EXISTS
+			(
+			  SELECT
+			  *
+			  FROM
+			  tbl_like
+			  WHERE
+			  user_id = #{user_id} and board_no = #{board_no}
+			)
+	    ) A
+	</insert>
+	<delete id="deleteLike">
+		delete from tbl_like
+		where board_no = #{board_no} and user_id = #{user_id}
+	</delete>
+	
+	<!-- 북마크 -->
+	<insert id="insertBookmark">
+		insert into tbl_bookmark
+		SELECT A.* FROM (
+	        select #{user_id} USER_ID,
+	        	   #{board_no} BOARD_NO
+	        from dual
+	         WHERE NOT EXISTS
+			(
+			  SELECT
+			  *
+			  FROM
+			  tbl_bookmark
+			  WHERE
+			  user_id = #{user_id} and board_no = #{board_no}
+			)
+	    ) A
+	</insert>
+	
+	<delete id="deleteBookmark">
+		delete from tbl_bookmark
+		where board_no = ${board_no} and user_id = #{user_id}
+	</delete>
 	
 </mapper>

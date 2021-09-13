@@ -19,6 +19,7 @@ import com.yj.yeogiya.model.dao.BoardDao;
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardImg;
 import com.yj.yeogiya.model.vo.BoardPlace;
+import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
 import com.yj.yeogiya.model.vo.Sort;
 
@@ -66,7 +67,7 @@ public class BoardServiceImpl implements BoardService {
 			// 2. tag 
 			String tag = board.getTag(); // "콤마로 연결되어 있는 상태"
 			if(tag != null && tag.trim() != "") {
-				System.out.println("태그 있음");
+//				System.out.println("태그 있음");
 				String[] tags = tag.split(",");
 				List<BoardTag> tagList = new ArrayList<BoardTag>();
 				for (String splittedTag : tags) {
@@ -79,14 +80,14 @@ public class BoardServiceImpl implements BoardService {
 					result = board_no;
 				}
 			} else {
-				System.out.println("태그 없음");
+//				System.out.println("태그 없음");
 				result = board_no;
 			}
 			
 			// 3. place 
 			BoardPlace place = board.getPlace();
 			if (board.getSort_place() != null) {
-				System.out.println("장소 있음");
+//				System.out.println("장소 있음");
 				place.setBoard_no(board_no);
 				place.setSort_place(board.getSort_place());
 				place.setSort_local(board.getSort_local());
@@ -97,7 +98,7 @@ public class BoardServiceImpl implements BoardService {
 					result = board_no;
 				}
 			} else {
-				System.out.println("장소 없음");
+//				System.out.println("장소 없음");
 				result = board_no;
 			}
 			
@@ -123,13 +124,13 @@ public class BoardServiceImpl implements BoardService {
 			// 서버에는 안올라갔는데 태그인척하는 img있는거 대비 has_img까지 체크 
 			// -> has_img는 프론트에서 점검했던거
 			if (!imgList.isEmpty() && board.getHas_img().equals("Y")) {
-				System.out.println("이미지 있음");
+//				System.out.println("이미지 있음");
 				result = boardDao.insertBoardImg(imgList);
 				if (result == imgList.size()) {
 					result = board_no;
 				}
 			} else {
-				System.out.println("이미지 없음");
+//				System.out.println("이미지 없음");
 				result = board_no;
 			}
 			
@@ -140,15 +141,15 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Transactional
 	@Override
-	public Board selectBoardArticle(int board_no, boolean isUpdate) {
+	public Board selectBoardArticle(String login_id, int board_no, boolean isUpdate) {
 		logger.info("selectBoardArticle");
 		if (!isUpdate) {
 			boardDao.updateViewCnt(board_no);
 		}
-		Board board = boardDao.selectBoard(board_no);
+		Board board = boardDao.selectBoard(login_id, board_no);
 		BoardPlace place = boardDao.selectBoardPlace(board_no);
 		List<BoardTag> tagList = boardDao.selectBoardTag(board_no);
-		System.out.println("board:" + board);
+//		System.out.println("board:" + board);
 		board.setPlace(place);
 		board.setTagList(tagList);
 		Gson gson = new Gson();
@@ -170,22 +171,22 @@ public class BoardServiceImpl implements BoardService {
 			List<BoardTag> oldTagList = boardDao.selectBoardTag(board_no);
 			
 			if(!oldTagList.isEmpty()) { 
-				System.out.println("삭제할 태그 있음 = 기존 태그 존재");
+//				System.out.println("삭제할 태그 있음 = 기존 태그 존재");
 				result = boardDao.deleteBoardTag(oldTagList);
 				
 				if(result != oldTagList.size()) {
-					System.out.println("기존태그 삭제 제대로 안됨");
+//					System.out.println("기존태그 삭제 제대로 안됨");
 					result = 0;
 				}
-				System.out.println("기존태그 삭제 제대로 됨");
+//				System.out.println("기존태그 삭제 제대로 됨");
 			}
 			else {
-				System.out.println("삭제할 태그 없음 = 기존 태그 없음");
+//				System.out.println("삭제할 태그 없음 = 기존 태그 없음");
 			}
 			
 			String tag = board.getTag(); // "콤마로 연결되어 있는 상태"
 			if(tag != null && tag.trim() != "") {
-				System.out.println("새로운 태그 있음");
+//				System.out.println("새로운 태그 있음");
 				String[] tags = tag.split(",");
 				List<BoardTag> tagList = new ArrayList<BoardTag>();
 				for (String splittedTag : tags) {
@@ -196,12 +197,12 @@ public class BoardServiceImpl implements BoardService {
 				result = boardDao.insertBoardTag(tagList);
 				
 				if(result != tags.length) {
-					System.out.println("새로운 태그 insert 문제 생김");
+//					System.out.println("새로운 태그 insert 문제 생김");
 					result = 0;
 				}
 			} 
 			else {
-				System.out.println("새로운 태그 없음");
+//				System.out.println("새로운 태그 없음");
 			}
 			
 			// 3. place 
@@ -215,12 +216,12 @@ public class BoardServiceImpl implements BoardService {
 				boardDao.insertPlace(place);
 				result = boardDao.updateBoardPlace(place);
 				if (result != 1) {
-					System.out.println("장소 업데이트 실패");
+//					System.out.println("장소 업데이트 실패");
 					result = 0;
 				}
 			} 
 			else {
-				System.out.println("장소 없음");
+//				System.out.println("장소 없음");
 			}
 			
 			
@@ -228,18 +229,18 @@ public class BoardServiceImpl implements BoardService {
 			List<BoardImg> oldImgList = boardDao.selectBoardImg(board_no);
 			
 			if(!oldImgList.isEmpty()) { 
-				System.out.println("삭제할 이미지 있음 = 기존 이미지 존재");
+//				System.out.println("삭제할 이미지 있음 = 기존 이미지 존재");
 				result = boardDao.deleteBoardImg(board_no);
 				
 				if(result != oldImgList.size()) {
-					System.out.println("기존이미지 삭제 제대로 안됨");
+//					System.out.println("기존이미지 삭제 제대로 안됨");
 					result = 0;
 				} 
-				System.out.println("기존이미지 삭제 제대로 됨");
+//				System.out.println("기존이미지 삭제 제대로 됨");
 				
 			}
 			else {
-				System.out.println("삭제할 이미지 없음 = 기존 이미지 없음");
+//				System.out.println("삭제할 이미지 없음 = 기존 이미지 없음");
 			}
 			
 			List<BoardImg> imgList = new ArrayList<BoardImg>();
@@ -263,15 +264,15 @@ public class BoardServiceImpl implements BoardService {
 			// 서버에는 안올라갔는데 태그인척하는 img있는거 대비 has_img까지 체크 
 			// -> has_img는 프론트에서 점검했던거
 			if (!imgList.isEmpty() && board.getHas_img().equals("Y")) {
-				System.out.println("새로운 이미지 있음");
+//				System.out.println("새로운 이미지 있음");
 				result = boardDao.insertBoardImg(imgList);
 				if (result != imgList.size()) {
-					System.out.println("새로운 이미지 insert 문제 생김");
+//					System.out.println("새로운 이미지 insert 문제 생김");
 					result = 0;
 				}
 			} 
 			else {
-				System.out.println("새로운 이미지 없음");
+//				System.out.println("새로운 이미지 없음");
 			}
 		}
 		
@@ -281,6 +282,33 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardTag> searchTag(String keyword) {
 		return boardDao.searchTag(keyword);
+	}
+
+	@Override
+	public int likeBoard(String user_id, int board_no) {
+		int result = boardDao.insertLike(board_no, user_id); 
+		// result => 0 : 유저가 좋아요를 했었음, result => 1:유저가 좋아요를 안했음
+//		System.out.println("result" + result);
+		if (result == 0) {
+			boardDao.deleteLike(board_no, user_id);
+//			 System.out.println("좋아요삭제");
+			boardDao.updateLikeCnt(board_no, -1);
+		} else {
+//			System.out.println("좋아요추가");
+			boardDao.updateLikeCnt(board_no, 1);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int bookmarkBoard(String user_id, int board_no) {
+		int result = boardDao.insertBookmark(board_no, user_id); 
+		if (result == 0) {
+			boardDao.deleteBookmark(board_no, user_id);
+		} 
+		
+		return result;
 	}
 
 }

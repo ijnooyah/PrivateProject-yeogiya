@@ -5,13 +5,14 @@ import java.util.List;
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardImg;
 import com.yj.yeogiya.model.vo.BoardPlace;
+import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
 import com.yj.yeogiya.model.vo.Sort;
 
 
 public interface BoardDao {
-	
-//************CREATE************
+
+	//************CREATE************
 	// 1. 게시글
 	// 1-1.board
 	public int insertBoard(Board board);
@@ -28,13 +29,11 @@ public interface BoardDao {
 	
 	// 3. 이미지
 	
-	
-	
-	
-//************READ************
+
+	//************READ************
 	// 1. 게시글 상세보기
 	// 1-1.board
-	public Board selectBoard(int board_no);
+	public Board selectBoard(String login_id, int board_no);
 	// 1-2.tag
 	public List<BoardTag> selectBoardTag(int board_no);
 	// 1-3. place
@@ -52,7 +51,7 @@ public interface BoardDao {
 	public List<BoardTag> searchTag(String keyword);
 	
 	
-//************UPDATE************
+	//************UPDATE************
 	// 1. 게시글
 	// 1-1.board
 	public int updateBoard(Board board);
@@ -67,15 +66,25 @@ public interface BoardDao {
 	//2.게시글 댓글수,조회수,좋아요수 등 증감
 	public int updateCmtCnt(int board_no, int count);
 	public int updateViewCnt(int board_no);
+	public int updateLikeCnt(int board_no, int count);
 	
 	
 	
 	
-	
-//************DELETE************
+	//************DELETE************
 	// 1. 게시글
 	// 1-1.board
 	// 1-2.tag
 	// 1-3. place
 	// 1-4. img
+	
+	
+	//---- 좋아요,북마크-----
+	// 좋아요
+	public int insertLike(int board_no, String user_id);
+	public int deleteLike(int board_no, String user_id);
+	// 북마크
+	public int insertBookmark(int board_no, String user_id);
+	public int deleteBookmark(int board_no, String user_id);
+	
 }

@@ -21,10 +21,10 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void insertComment(Comment cmt) {
 		if (cmt.getParent_c_no() == 0) {
-			System.out.println("일반댓글");
+//			System.out.println("일반댓글");
 			commentDao.insertComment(cmt);
 		} else {
-			System.out.println("답댓글");
+//			System.out.println("답댓글");
 			commentDao.insertRecomment(cmt);
 		}
 		boardDao.updateCmtCnt(cmt.getB_no(), 1);

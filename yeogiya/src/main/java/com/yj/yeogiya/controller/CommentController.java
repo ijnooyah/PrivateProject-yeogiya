@@ -31,7 +31,7 @@ public class CommentController {
 	public List<Comment> list(@RequestParam int board_no) throws Exception {
 		logger.info("list");
 		List<Comment> list = commentService.selectCommentList(board_no);
-		System.out.println(list);
+//		System.out.println(list);
 		return list;
 	}
 	
@@ -47,7 +47,7 @@ public class CommentController {
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public String insertComment(@RequestBody Comment cmt) throws Exception {
 		logger.info("insert");
-		System.out.println(cmt);
+//		System.out.println(cmt);
 		commentService.insertComment(cmt);
 		return "success";
 	}
@@ -55,7 +55,7 @@ public class CommentController {
 	@RequestMapping(value="update", method=RequestMethod.POST)
 	public String update(@RequestBody Comment cmt) throws Exception {
 		logger.info("update");
-		System.out.println(cmt);
+//		System.out.println(cmt);
 		commentService.updateComment(cmt);
 		return "success";
 	}
@@ -63,7 +63,7 @@ public class CommentController {
 	@RequestMapping(value="delete", method=RequestMethod.POST)
 	public int delete(@RequestBody Comment cmt) throws Exception {
 		logger.info("delete");
-		System.out.println(cmt);
+//		System.out.println(cmt);
 		return commentService.deleteComment(cmt);
 	}
 }
