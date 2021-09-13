@@ -70,7 +70,6 @@ div.subLocal_wrap a.active {
 		</c:forEach>
 	</div>
 	<div class="d-flex mb-1">
-<!-- 		<span class="text-muted font-size-090 my-auto">울산 전체</span> -->
 		<div class="dropdown ml-auto">
 			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			  말머리
