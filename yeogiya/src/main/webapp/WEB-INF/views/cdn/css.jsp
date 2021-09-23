@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.yj.yeogiya.model.vo.Sort"%>
@@ -60,7 +61,25 @@
 	<c:if test="${not empty bs.sortPlace}">
 		<c:set var="sortPlace" value="&sortPlace=${bs.sortPlace}" scope="application"/>
 	</c:if>
-    
+    <c:if test="${not empty bs.page }">
+		<c:set var="page" value="&page=${bs.page}" scope="application"/>
+	</c:if>
+	<c:if test="${not empty bs.perPage }">
+		<c:set var="perPage" value="&perPage=${bs.perPage}" scope="application"/>
+	</c:if>
+	<c:if test="${not empty bs.order }">
+		<c:set var="order" value="&order=${bs.order}" scope="application" />
+	</c:if>
+	<c:if test="${not empty bs.searchType }">
+		<c:set var="searchType" value="&searchType=${bs.searchType}" scope="application"/>
+	</c:if>
+	<c:if test="${not empty bs.keyword }">
+		<c:set var="keyword" value="&keyword=${bs.keyword}" scope="application"/>
+	</c:if>
+	
+	<c:set var="query" value="${sortBoard}${subLocal}${sortPlace}${page}${perPage}${order}${searchType}${keyword}"  scope="application"/>
+	<c:set var="sortQuery" value="${sortBoard}${subLocal}${sortPlace}"  scope="application"/>
+	
     <!-- font awsome-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
    

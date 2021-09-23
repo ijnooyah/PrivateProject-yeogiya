@@ -5,6 +5,8 @@ public class BoardSearch {
 	
 	private int board_no;
 	
+	//지역명
+	private String sortLocalEngName;
 	//카테고리
 	private String subLocal;
 	private String sortBoard;
@@ -20,7 +22,7 @@ public class BoardSearch {
 	private int page = 1;
 	
 	private int startRow = 1;
-	private int endRow = 10;
+	private int endRow = 15;
 	// 게시물 총 갯수
 	private int count;
 	
@@ -31,7 +33,7 @@ public class BoardSearch {
 	// 총 페이지 수(마지막 페이지 출력용)
 	private int totalPage;
 	
-	private int perPage = 10; // 한페이지에 보여줄 게시글 개수 
+	private int perPage = 15; // 한페이지에 보여줄 게시글 개수 
 	private final int PAGE_BLOCK = 10; // 1 2 3 4 5 6 7.. 10 
 	public String getSubLocal() {
 		return subLocal;
@@ -146,13 +148,19 @@ public class BoardSearch {
 	public void setBoard_no(int board_no) {
 		this.board_no = board_no;
 	}
+	public String getSortLocalEngName() {
+		return sortLocalEngName;
+	}
+	public void setSortLocalEngName(String sortLocalEngName) {
+		this.sortLocalEngName = sortLocalEngName;
+	}
 	@Override
 	public String toString() {
-		return "BoardSearch [login_id=" + login_id + ", board_no=" + board_no + ", subLocal=" + subLocal
-				+ ", sortBoard=" + sortBoard + ", sortPlace=" + sortPlace + ", order=" + order + ", searchType="
-				+ searchType + ", keyword=" + keyword + ", page=" + page + ", startRow=" + startRow + ", endRow="
-				+ endRow + ", count=" + count + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage="
-				+ totalPage + ", perPage=" + perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
+		return "BoardSearch [login_id=" + login_id + ", board_no=" + board_no + ", sortLocalEngName=" + sortLocalEngName
+				+ ", subLocal=" + subLocal + ", sortBoard=" + sortBoard + ", sortPlace=" + sortPlace + ", order="
+				+ order + ", searchType=" + searchType + ", keyword=" + keyword + ", page=" + page + ", startRow="
+				+ startRow + ", endRow=" + endRow + ", count=" + count + ", startPage=" + startPage + ", endPage="
+				+ endPage + ", totalPage=" + totalPage + ", perPage=" + perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 	}
-	
+
 }

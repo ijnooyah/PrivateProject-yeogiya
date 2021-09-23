@@ -36,6 +36,7 @@
 				<jsp:include page="./list.jsp" flush="false"/>
 			</c:otherwise>
 		</c:choose>
+		<jsp:include page="./search.jsp" flush="false"/>
 		</div>
 	</div>
 	<jsp:include page="../common/footer.jsp" flush="false"/>

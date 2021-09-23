@@ -68,8 +68,12 @@
 		<div class="row card ml-auto content-top">
 			<div class="col-md-12 pt-4 px-5 pb-5" style="flex:none;">
 				<div class="row mb-2">
-					<a class="sort_board text-pink" href="${listPath}?${sortBoard}${subLocal}${sortPlace}"
+					<a class="sort_board text-pink" href="${listPath}?${sortBoard}"
 						  style="position:relative;">${board.sortBoardName}</a>
+						<a type="button" href="${listPath}?${query}"
+							class="btn-sm btn btn-plain ml-auto mr-2">
+					 	   목록
+						</a>
 				</div>
 				<!-- 글정보 -->
 				<div class="row mb-2 content-info">
@@ -162,6 +166,7 @@
 			<div class="mt-5">
 				<jsp:include page="./list.jsp" flush="false"/>
 			</div>
+			<jsp:include page="./search.jsp" flush="false"/>
 		</div>
 	</div>
 	<jsp:include page="../common/footer.jsp" flush="false"/>
@@ -317,7 +322,8 @@
 	}	
 	//답댓글 작성
 	function insertRecomment(el) {
-		var re_group = $(el).parent().parent().parent().parent().find(".re_group").val()
+		var re_group = $(el).parent().parent().parent().parent().parent().find('.re_group').val();
+		console.log(re_group);
 		var parent_c_no = $("#parent_c_no").val();
 //	 	var user_id = $("#re_user_id").val()
 		var c_content = $("#re_c_content").val();

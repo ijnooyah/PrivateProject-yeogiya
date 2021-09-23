@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.yj.yeogiya.model.service.BoardService;
 import com.yj.yeogiya.model.vo.Board;
+import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
 import com.yj.yeogiya.model.vo.Sort;
 
@@ -32,7 +33,14 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@ModelAttribute("sortLocalP")
-	public Sort sortLocalP(@PathVariable("sortLocalPEngName") String sortLocalPEngName) {
+	public Sort sortLocalP(
+			@PathVariable("sortLocalPEngName") String sortLocalPEngName
+			, BoardSearch bs, Model model) {
+		logger.info("");
+		bs.setSortLocalEngName(sortLocalPEngName);
+		System.out.println(bs);
+		List<Board> boardList = boardService.selectBoardList(bs);
+		model.addAttribute("boardList", boardList);
 		return boardService.selectSortLocalPByEngName(sortLocalPEngName);
 	}
 	

@@ -40,7 +40,9 @@ public interface BoardDao {
 	public BoardPlace selectBoardPlace(int board_no);
 	
 	
-	// 2. 글목록
+	// 2. 글목록 
+	public List<Board> selectBoardList(BoardSearch bs);
+	public int getBoardListCount(BoardSearch bs);
 	// 3. 카테고리
 	public List<Sort> selectSortLocal();
 	public List<Sort> selectSortPlace();

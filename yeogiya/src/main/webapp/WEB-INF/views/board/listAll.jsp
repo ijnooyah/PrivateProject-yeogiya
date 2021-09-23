@@ -7,7 +7,7 @@ td.td_title {
 min-width:300px;
 }
 td.td_title .short_title {
-width:230px;
+max-width:220px;
 }
 
 .board-container .dropdown-menu {
@@ -103,19 +103,19 @@ width:230px;
 						</td>
 						<!-- 제목 -->
 						<td class="td_title d-flex">
-							<span class="place_sort mr-1 text-muted font-weight-400">[맛집]</span>
+							<span class="place_sort mr-2 text-muted font-weight-400">[맛집]</span>
 							<a href="" class="short_title">
 								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
 							</a>
-							<span class="text-pink mx-1">[3]</span>
+							<span class="text-pink mx-2 font-weight-400">[3]</span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image mr-1" viewBox="0 0 16 16" style="margin-top:2px;">
 							  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 							  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
 							</svg>
 							<!-- 지도유무 -->
-							<svg width="0.95rem" height="0.95rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="var(--pink50)" xmlns="http://www.w3.org/2000/svg" style="margin-top:2px;"> 
-							  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-							</svg>
+<!-- 							<svg width="0.95rem" height="0.95rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="var(--pink50)" xmlns="http://www.w3.org/2000/svg" style="margin-top:2px;">  -->
+<!-- 							  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/> -->
+<!-- 							</svg> -->
 						</td>
 						<!-- 글쓴이 -->
 						<td class="td_writer">
@@ -140,63 +140,9 @@ width:230px;
 		</table>
 	</div>
 	<div class="d-flex mb-1">
-		<a type="button" class="btn-sm btn border ml-auto mr-2 font-size-075 rounded-0">
+		<a type="button" href="${localPath}/insert?${query}"
+			class="btn-sm btn ml-auto mr-2 btn-plain">
 			    글쓰기
 		</a>
-	</div>
-	<!-- pagination -->
-	<div class="page_wrap mt-5">
-		<nav class="pagination-sm">
-			<ul class="pagination justify-content-center">
-				<li class="page-item">
-					<a class="page-link" href="#">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-					  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-					</svg></a>
-				</li>
-				<li class="page-item active">
-					<a class="page-link" href="#">1</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">2</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">3</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">4</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">5</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-					  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-					</svg></a>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	<!-- pagination end -->
-	<!-- 검색 -->
-	<div class="search_wrap text-center mb-4">
-		<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<select class="form-control rounded-0">
-					<option value="titcont">제목+내용</option>
-					<option value="title">제목</option>
-					<option value="writer">작성자</option>
-				</select>
-				<div class="input-group-append">
-					<input type="text" class="form-control rounded-0"
-						placeholder="검색어를 입력하세요.">
-				</div>
-				<div class="input-group-append">
-					<button class="btn btn-pink btn-sm rounded-0" type="button">
-						<i class="fa fa-search font-size-090"></i>
-					</button>
-				</div>
-			</div>
-		</form>
 	</div>
 </div>	

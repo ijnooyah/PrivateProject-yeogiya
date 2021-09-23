@@ -29,7 +29,8 @@ public interface BoardService {
 	public Sort selectSortLocalPByEngName(String eng_name);
 	// 3. tag 비동기 자동완성 
 	public List<BoardTag> searchTag(String keyword);
-	
+	// 4. 글목록
+	public List<Board> selectBoardList(BoardSearch bs);
 	
 	
 //************UPDATE************

@@ -7,7 +7,7 @@ td.td_title {
 min-width:400px;
 }
 td.td_title .short_title {
-width:300px;
+max-width:300px;
 }
 
 .board-container .dropdown-menu {
@@ -64,32 +64,69 @@ div.subLocal_wrap a.active {
 	<div class="d-flex flex-wrap px-3 py-4 mx-1 mb-5 subLocal_wrap rounded-sm">
 		<c:forEach var="sbl" items="${subLocalArr}">
 			<div class="col-sm-2 my-1">
-			<a href="${listPath}?${sortBoard}&subLocal=${sbl.sort_no}" 
+			<a href="?${sortBoard}&subLocal=${sbl.sort_no}${not empty bs.sortPlace ? '&sortPlace=all' : ''}" 
 			   class="${bs.subLocal == sbl.sort_no ? 'active' : ''}">${sbl.sort_name}</a>
 			</div>
 		</c:forEach>
 	</div>
 	<div class="d-flex mb-1">
+		<c:if test="${not empty bs.sortPlace}">
+			<div class="dropdown">
+				<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  말머리
+				</button>
+				<div class="dropdown-menu" style="min-width:4rem;">
+					<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=all${page}${perPage}&order=${bs.order}${searchType}${keyword}">
+						전체</a>
+					<c:forEach var="sp" items="${sortPlaceArr}">
+						<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=${sp.sort_no}${page}${perPage}&order=${bs.order}${searchType}${keyword}">
+							${sp.sort_name}</a>
+					</c:forEach>
+				</div>
+			</div>
+		</c:if>
 		<div class="dropdown ml-auto">
 			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  말머리
+			  ${bs.perPage}개씩
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
-				<a class="dropdown-item" href="#">최신순</a>
-				<a class="dropdown-item" href="#">댓글순</a>
-				<a class="dropdown-item" href="#">좋아요순</a>
-				<a class="dropdown-item" href="#">조회수순</a>
+				<c:set var="step" value="5"/>
+				<c:forEach var="v" begin="1" end="7" varStatus="vs">
+					<c:if test="${vs.count < 4}">
+						<c:set var="step" value="${step + 5}"/>
+					</c:if>
+					<c:if test ="${vs.count >=4 }">
+						<c:set var="step" value="${step + 10}"/>
+					</c:if>
+					<a class="dropdown-item" href="?${sortQuery}${page}&perPage=${step}${order}${searchType}${keyword}">
+						${step}개씩</a>
+				</c:forEach>
 			</div>
 		</div>
 		<div class="dropdown">
+			<c:set var="orderTxt" value="정렬"/>
+			<c:choose>
+				<c:when test="${bs.order == 'like'}">
+					<c:set var="orderTxt" value="좋아요순"/>
+				</c:when>
+				<c:when test="${bs.order == 'date'}">
+					<c:set var="orderTxt" value="최신순"/>
+				</c:when>
+				<c:when test="${bs.order == 'cmt'}">
+					<c:set var="orderTxt" value="댓글순"/>
+				</c:when>
+				<c:when test="${bs.order == 'view'}">
+					<c:set var="orderTxt" value="조회수순"/>
+				</c:when>
+			</c:choose>
 			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  최신순
+			  ${orderTxt}
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
-				<a class="dropdown-item" href="#">최신순</a>
-				<a class="dropdown-item" href="#">댓글순</a>
-				<a class="dropdown-item" href="#">좋아요순</a>
-				<a class="dropdown-item" href="#">조회수순</a>
+				<a class="dropdown-item" href="?${sortQuery}${page}${perPage}&order=date${searchType}${keyword}">최신순</a>
+				<a class="dropdown-item" href="?${sortQuery}${page}${perPage}&order=cmt${searchType}${keyword}">댓글순</a>
+				<a class="dropdown-item" href="?${sortQuery}${page}${perPage}&order=like${searchType}${keyword}">좋아요순</a>
+				<a class="dropdown-item" href="?${sortQuery}${page}${perPage}&order=view${searchType}${keyword}">조회수순</a>
 			</div>
 		</div>
 	</div>
@@ -126,11 +163,11 @@ div.subLocal_wrap a.active {
 						</td>
 						<!-- 제목 -->
 						<td class="td_title d-flex">
-							<span class="place_sort mr-1 text-muted font-weight-400">[맛집]</span>
+							<span class="place_sort mr-2 text-muted font-weight-400">[맛집]</span>
 							<a href="" class="short_title">
 								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
 							</a>
-							<span class="text-pink mx-1">[3]</span>
+							<span class="text-pink mx-2 font-weight-400">[3]</span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image" viewBox="0 0 16 16" style="margin-top:2px;">
 							  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 							  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
@@ -147,43 +184,48 @@ div.subLocal_wrap a.active {
 						21.08.27
 						</td>
 						<!-- 좋아요 -->
-						<td  class="td_like">113</td>
+						<td  class="td_like ">113</td>
 						<!-- 조회 -->
 						<td  class="td_view">1003</td>
 					</tr>
 				</c:forEach>
-				<c:forEach var="v" begin="1" end="10">
-					<tr>
+				<c:forEach var="b" items="${boardList}">
+					<tr ${board.board_no == b.board_no ? 'style="background:#f3a6c630;"' : ''}>
 						<!-- 번호 -->
 						<td  class="td_no">
-							${v}
+							${b.board_no}
 						</td>
 						<!-- 지역 -->
 						<td class="td_subLocal">
 							<a href="" class="">	
-								강남구
+								${b.subLocalName}
 							</a>
 						</td>
 						<!-- 제목 -->
 						<td class="td_title d-flex">
-							<span class="place_sort mr-1 text-muted font-weight-400">[맛집]</span>
-							<a href="" class="short_title">
-								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
+							<c:if test="${not empty b.sort_place}">
+								<span class="place_sort mr-2 text-muted font-weight-400">
+									${b.sortPlaceName}</span>
+							</c:if>
+							<a href="${localPath}/content/${b.board_no}?${query}" class="short_title">
+								${b.board_title}
 							</a>
-							<span class="text-pink mx-1">[3]</span>
-							<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image mr-1" viewBox="0 0 16 16" style="margin-top:2px;">
-							  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-							  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-							</svg>
-							<!-- 지도유무 -->
-							<svg width="0.95rem" height="0.95rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="var(--pink50)" xmlns="http://www.w3.org/2000/svg" style="margin-top:2px;"> 
-							  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-							</svg>
+							<span class="text-pink mx-2 font-weight-400">[${b.cmt_cnt}]</span>
+							<c:if test="${b.has_img == 'Y'}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image mr-2" viewBox="0 0 16 16" style="margin-top:2px;">
+								  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+								</svg>
+							</c:if>
+<!-- 							지도유무 -->
+<!-- 							<svg width="0.95rem" height="0.95rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="var(--pink50)" xmlns="http://www.w3.org/2000/svg" style="margin-top:2px;">  -->
+<!-- 							  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/> -->
+<!-- 							</svg> -->
 						</td>
 						<!-- 글쓴이 -->
 						<td class="td_writer">
 							<a href="" class="">
-								닉네임
+								${b.userNick}
 							</a>
 						</td>
 						<!-- 작성일 -->
@@ -191,75 +233,29 @@ div.subLocal_wrap a.active {
 						<!-- now랑 글작성일이랑 같으면 HH:mm형식으로 보여주고 같지않으면 yy.MM.dd 형식으로 보여주기 -->
 						<jsp:useBean id="now" class="java.util.Date" />
 						<fmt:formatDate value="${now}" pattern="yy.MM.dd" var="today" />
-						<c:out value="${today}" />
+						<fmt:formatDate value="${b.reg_date}" pattern="yy.MM.dd" var="regDate"/>
+						<c:choose>
+							<c:when test="${regDate != today}">
+								${regDate}
+							</c:when>
+							<c:otherwise>
+								<fmt:formatDate value="${b.reg_date}" pattern="HH:mm"/>
+							</c:otherwise>
+						</c:choose>
 						</td>
 						<!-- 좋아요 -->
-						<td class="td_like ">113</td>
+						<td class="td_like ">${b.like_cnt}</td>
 						<!-- 조회 -->
-						<td  class="td_view ">1003</td>
+						<td  class="td_view ">${b.view_cnt}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 	<div class="d-flex mb-1">
-		<a type="button" class="btn-sm btn border ml-auto mr-2 font-size-075 rounded-0">
+		<a type="button" href="${localPath}/insert?${query}"
+			class="btn-sm btn ml-auto mr-2 btn-plain">
 			    글쓰기
 		</a>
-	</div>
-	<!-- pagination -->
-	<div class="page_wrap mt-5">
-		<nav class="pagination-sm">
-			<ul class="pagination justify-content-center">
-				<li class="page-item">
-					<a class="page-link" href="#">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-					  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-					</svg></a>
-				</li>
-				<li class="page-item active">
-					<a class="page-link" href="#">1</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">2</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">3</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">4</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">5</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-					  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-					</svg></a>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	<!-- pagination end -->
-	<!-- 검색 -->
-	<div class="search_wrap text-center mb-4">
-		<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<select class="form-control rounded-0">
-					<option value="titcont">제목+내용</option>
-					<option value="title">제목</option>
-					<option value="writer">작성자</option>
-				</select>
-				<div class="input-group-append">
-					<input type="text" class="form-control rounded-0"
-						placeholder="검색어를 입력하세요.">
-				</div>
-				<div class="input-group-append">
-					<button class="btn btn-pink btn-sm rounded-0" type="button">
-						<i class="fa fa-search font-size-090"></i>
-					</button>
-				</div>
-			</div>
-		</form>
 	</div>
 </div>	

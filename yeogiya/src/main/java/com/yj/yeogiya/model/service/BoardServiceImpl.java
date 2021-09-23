@@ -311,4 +311,11 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
+	@Override
+	public List<Board> selectBoardList(BoardSearch bs) {
+		int count = boardDao.getBoardListCount(bs);
+		bs.setCount(count); // 페이징관련된 필드 세팅 
+		return boardDao.selectBoardList(bs);
+	}
+
 }

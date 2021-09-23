@@ -180,8 +180,97 @@
  		select * from tbl_tag
         where tag_name like '%'||#{keyword}||'%'
  	</select>
+<!-- 3. 글목록 -->	
+<!-- 글전체 개수 -->
+ 	<select id="getBoardListCount" resultType="int">
+ 		SELECT count(*)
+		FROM tbl_board a
+		JOIN tbl_sort_local b ON a.sort_local = b.sort_no
+		JOIN tbl_sort_local c ON a.sub_local = c.sort_no
+		JOIN tbl_sort_board d ON a.sort_board = d.sort_no
+		LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
+		JOIN tbl_member f ON a.user_id = f.user_id
+		<include refid="search"></include>
+ 	</select>
  	
+ 	<select id="selectBoardList" resultType="Board">
+ 		SELECT * 
+		FROM (SELECT ROWNUM rnum, A.*
+				 FROM ( SELECT a.*, b.sort_name sortLocalName, c.sort_name subLocalName,
+					    d.sort_name sortBoardName, e.sort_name sortPlaceName,
+					    f.user_nick userNick
+					    <if test = "login_id != null">
+						, bl.board_no likeBoard, bm.board_no bmBoard
+						</if>
+						FROM tbl_board a
+						JOIN tbl_sort_local b ON a.sort_local = b.sort_no
+						JOIN tbl_sort_local c ON a.sub_local = c.sort_no
+						JOIN tbl_sort_board d ON a.sort_board = d.sort_no
+						LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
+						JOIN tbl_member f ON a.user_id = f.user_id
+						<if test = "login_id != null">
+						LEFT OUTER JOIN tbl_like bl ON bl.user_id = #{login_id} AND bl.board_no = #{board_no}
+						LEFT OUTER JOIN tbl_bookmark bm ON bm.user_id = #{login_id} AND bm.board_no = #{board_no}
+						</if>
+				 		<include refid="search"></include> ) A )
+		WHERE rnum BETWEEN #{startRow} AND #{endRow} 
+ 	</select>
  	
+ 	<sql id="search">
+ 		WHERE is_del = 'N' AND is_notice = 'N' AND b.eng_name = #{sortLocalEngName}
+ 		<!-- 검색 -->
+ 		<if test="searchType != null">
+			<choose>
+				<when test='searchType == "t"'>
+					AND a.board_title like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "c"'>
+					AND a.board_content like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "u"'>
+					AND f.user_nick like '%' || #{keyword} || '%'
+					or  a.user_id like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "tc"'>
+					AND a.board_title like '%' || #{keyword} || '%'
+					or  a.board_content like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
+		<!-- 게시판별 -->
+		<if test="sortBoard != null and sortBoard != 'all'">
+			AND a.sort_board = #{sortBoard}
+		</if>
+		<!-- 소지역별 -->
+		<if test="subLocal != null and subLocal != 'all'">
+			AND a.sub_local = #{subLocal}
+		</if>
+		<!-- 말머리별 -->
+		<if test="sortPlace != null and sortPlace != 'all'">
+			AND a.sort_place = #{sortPlace}
+		</if>
+		
+		<!-- 정렬 -->
+ 		<if test="order != null">
+ 			<choose> 
+				<when test="order == 'like'">
+					ORDER BY a.like_cnt DESC, a.board_no DESC
+				</when>
+				<when test="order == 'date'">
+					ORDER BY a.reg_date DESC
+				</when>
+				<when test="order =='view'">
+					ORDER BY a.view_cnt DESC, a.board_no DESC
+				</when>
+				<when test="order =='cmt'">
+					ORDER BY a.cmt_cnt DESC, a.board_no DESC
+				</when>
+			</choose>
+ 		</if>
+ 		<if test="order == null">
+ 			ORDER BY a.board_no DESC
+ 		</if>
+	</sql>
  	
 <!-- ************UPDATE************ -->
 	<!-- 1-1. board -->

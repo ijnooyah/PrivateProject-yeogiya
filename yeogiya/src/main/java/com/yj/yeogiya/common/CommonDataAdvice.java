@@ -5,11 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yj.yeogiya.controller.BoardController;
 import com.yj.yeogiya.model.service.BoardService;
+import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.Sort;
 
@@ -34,8 +37,7 @@ public class CommonDataAdvice {
 	}
 	
 	@ModelAttribute("bs")
-	public BoardSearch boardSearch(BoardSearch bs) {
-		System.out.println(bs);
+	public BoardSearch boardSearch(BoardSearch bs, Model model) {
 		return bs;
 	}
 

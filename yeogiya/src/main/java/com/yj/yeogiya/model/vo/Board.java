@@ -38,6 +38,8 @@ public class Board {
 	private String userNick;
 	private String userImg;
 	private String jsonTagList;
+	private int nextNo;
+	private int prevNo;
 	
 	private String tag;
 	
@@ -304,6 +306,22 @@ public class Board {
 		this.jsonTagList = jsonTagList;
 	}
 
+	public int getNextNo() {
+		return nextNo;
+	}
+
+	public void setNextNo(int nextNo) {
+		this.nextNo = nextNo;
+	}
+
+	public int getPrevNo() {
+		return prevNo;
+	}
+
+	public void setPrevNo(int prevNo) {
+		this.prevNo = prevNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", board_title=" + board_title
@@ -315,10 +333,8 @@ public class Board {
 				+ imgList + ", likeBoard=" + likeBoard + ", bmBoard=" + bmBoard + ", sortLocalName=" + sortLocalName
 				+ ", subLocalName=" + subLocalName + ", sortBoardName=" + sortBoardName + ", sortPlaceName="
 				+ sortPlaceName + ", userNick=" + userNick + ", userImg=" + userImg + ", jsonTagList=" + jsonTagList
-				+ ", tag=" + tag + "]";
+				+ ", nextNo=" + nextNo + ", prevNo=" + prevNo + ", tag=" + tag + "]";
 	}
-
-
 
 
 	

@@ -26,7 +26,7 @@ li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
 					<li class="sideMenu">
 						<div data-toggle="collapse" ${sb.sort_no == bs.sortBoard ? 'aria-expanded="true"' : 'aria-expanded="false"'}
 							  class="${sb.sort_no == bs.sortBoard ? 'active' : ''}">
-							<a href="${listPath}?${sbQuery}&subLocal=all">
+							<a href="${listPath}?${sbQuery}&subLocal=all${sb.has_sort_place == 'Y' ? '&sortPlace=all' : ''}">
 								${sb.sort_name}
 							</a>
 						</div>

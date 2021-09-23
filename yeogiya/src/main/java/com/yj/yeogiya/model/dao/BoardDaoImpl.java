@@ -175,6 +175,16 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.delete(NAMESPACE + "deleteBookmark", map);
 	}
 
+	@Override
+	public List<Board> selectBoardList(BoardSearch bs) {
+		return sqlSession.selectList(NAMESPACE + "selectBoardList", bs);
+	}
+
+	@Override
+	public int getBoardListCount(BoardSearch bs) {
+		return sqlSession.selectOne(NAMESPACE + "getBoardListCount", bs);
+	}
+
 	
 
 }
