@@ -64,7 +64,7 @@ div.subLocal_wrap a.active {
 	<div class="d-flex flex-wrap px-3 py-4 mx-1 mb-5 subLocal_wrap rounded-sm">
 		<c:forEach var="sbl" items="${subLocalArr}">
 			<div class="col-sm-2 my-1">
-			<a href="?${sortBoard}&subLocal=${sbl.sort_no}${not empty bs.sortPlace ? '&sortPlace=all' : ''}" 
+			<a href="?${sortBoard}&subLocal=${sbl.sort_no}${empty bs.sortPlace ? '' : sortPlace}${pageQ}&order=${bs.order}${searchQ}" 
 			   class="${bs.subLocal == sbl.sort_no ? 'active' : ''}">${sbl.sort_name}</a>
 			</div>
 		</c:forEach>
@@ -98,7 +98,7 @@ div.subLocal_wrap a.active {
 					<c:if test ="${vs.count >=4 }">
 						<c:set var="step" value="${step + 10}"/>
 					</c:if>
-					<a class="dropdown-item" href="?${sortQuery}${page}&perPage=${step}${order}${searchType}${keyword}">
+					<a class="dropdown-item" href="?${sortQ}${page}&perPage=${step}${order}${searchType}${keyword}">
 						${step}개씩</a>
 				</c:forEach>
 			</div>
@@ -123,10 +123,10 @@ div.subLocal_wrap a.active {
 			  ${orderTxt}
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
-				<a class="dropdown-item" href="?${sortQuery}${page}${perPage}&order=date${searchType}${keyword}">최신순</a>
-				<a class="dropdown-item" href="?${sortQuery}${page}${perPage}&order=cmt${searchType}${keyword}">댓글순</a>
-				<a class="dropdown-item" href="?${sortQuery}${page}${perPage}&order=like${searchType}${keyword}">좋아요순</a>
-				<a class="dropdown-item" href="?${sortQuery}${page}${perPage}&order=view${searchType}${keyword}">조회수순</a>
+				<a class="dropdown-item" href="?${sortQ}${page}${perPage}&order=date${searchType}${keyword}">최신순</a>
+				<a class="dropdown-item" href="?${sortQ}${page}${perPage}&order=cmt${searchType}${keyword}">댓글순</a>
+				<a class="dropdown-item" href="?${sortQ}${page}${perPage}&order=like${searchType}${keyword}">좋아요순</a>
+				<a class="dropdown-item" href="?${sortQ}${page}${perPage}&order=view${searchType}${keyword}">조회수순</a>
 			</div>
 		</div>
 	</div>
@@ -207,7 +207,7 @@ div.subLocal_wrap a.active {
 								<span class="place_sort mr-2 text-muted font-weight-400">
 									${b.sortPlaceName}</span>
 							</c:if>
-							<a href="${localPath}/content/${b.board_no}?${query}" class="short_title">
+							<a href="${localPath}/content/${b.board_no}?${allQ}" class="short_title">
 								${b.board_title}
 							</a>
 							<span class="text-pink mx-2 font-weight-400">[${b.cmt_cnt}]</span>
@@ -253,7 +253,7 @@ div.subLocal_wrap a.active {
 		</table>
 	</div>
 	<div class="d-flex mb-1">
-		<a type="button" href="${localPath}/insert?${query}"
+		<a type="button" href="${localPath}/insert?${allQ}"
 			class="btn-sm btn ml-auto mr-2 btn-plain">
 			    글쓰기
 		</a>
