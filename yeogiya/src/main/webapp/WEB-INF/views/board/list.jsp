@@ -219,7 +219,7 @@ div.subLocal_wrap a.active {
 								<span class="place_sort mr-2 text-muted font-weight-400">
 									${b.sortPlaceName}</span>
 							</c:if>
-							<a href="${localPath}/content/${b.board_no}?${sortQ}" class="short_title">
+							<a href="${localPath}/content/${b.board_no}?${allQ}" class="short_title">
 								${b.board_title}
 							</a>
 							<span class="text-pink mx-2 font-weight-400">[${b.cmt_cnt}]</span>

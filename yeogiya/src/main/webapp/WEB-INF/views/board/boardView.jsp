@@ -93,7 +93,7 @@
 								 data-setbg="${empty board.userImg ? noProfile : board.userImg}"
 								 style="width:30px; height:30px;"></div>
 							<div class="d-table-cell mr-2">
-								<a href="" class="align-middle text-black">${board.userNick}</a>
+								<a href="${contextPath}/member/${board.user_id}" class="align-middle text-black">${board.userNick}</a>
 							</div>
 							<div class="d-table-cell mr-2">
 								<span class="align-middle text-muted">
@@ -123,8 +123,8 @@
 								<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 							</svg>
 							<div class="dropdown-menu dropdown-menu-right" style="min-width:4rem; font-size:0.8rem;">
-								 <a class="dropdown-item" href="">수정</a> 
-								 <a class="dropdown-item" href="">삭제</a>
+								 <a class="dropdown-item" href="${localPath}/update/${board.board_no}?${allQ}">수정</a> 
+								 <a class="dropdown-item" href="javascript:doDelete();">삭제</a>
 							</div>
 						</div>
 					</div>
@@ -219,6 +219,29 @@
 			confirmButtonText: "확인",
 		}).then(function(){close()});
 	})
+	
+	
+	
+	
+	
+	//글삭제
+	function doDelete() {
+	Swal.fire({
+		title: '삭제하시겠습니까?', 
+		allowOutsideClick: false,
+		padding: '2em',
+// 		iconColor: "#1f5e43",
+// 		icon: 'question', 
+		confirmButtonText: "확인",
+// 		confirmButtonColor: "#1f5e43",
+		cancelButtonText: "취소",
+		showCancelButton: true,
+	}).then(function(result) {
+		if(result.isConfirmed) {
+			location.href = "${localPath}/delete/${board.board_no}?${allQ}";
+		} 
+	});
+	}
 	</script>
 	
 	<!-- kakaoMap -->

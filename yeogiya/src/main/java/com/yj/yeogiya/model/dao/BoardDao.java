@@ -75,11 +75,7 @@ public interface BoardDao {
 	
 	//************DELETE************
 	// 1. 게시글
-	// 1-1.board
-	// 1-2.tag
-	// 1-3. place
-	// 1-4. img
-	
+	public int deleteBoard(int board_no);
 	
 	//---- 좋아요,북마크-----
 	// 좋아요

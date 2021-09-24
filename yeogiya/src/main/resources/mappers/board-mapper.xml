@@ -335,8 +335,12 @@
 		WHERE board_no = #{board_no} 
 	</update>
 <!-- ************DELETE************ -->
-	
-	
+	<!-- 글삭제 -->
+	<update id="deleteBoard">
+		UPDATE tbl_board
+		SET is_del = 'Y'
+		WHERE board_no = #{board_no}
+	</update>
 	
 <!-- 좋아요, 북마크 -->
 <!-- 좋아요 -->

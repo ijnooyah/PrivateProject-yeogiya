@@ -3,6 +3,7 @@ package com.yj.yeogiya.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +37,9 @@ public class BoardController {
 	public Sort sortLocalP(
 			@PathVariable("sortLocalPEngName") String sortLocalPEngName
 			, BoardSearch bs, Model model) {
-		logger.info("");
+//		logger.info("");
 		bs.setSortLocalEngName(sortLocalPEngName);
-		System.out.println(bs);
+//		System.out.println(bs);
 		List<Board> boardList = boardService.selectBoardList(bs);
 		model.addAttribute("boardList", boardList);
 		return boardService.selectSortLocalPByEngName(sortLocalPEngName);
@@ -59,7 +60,7 @@ public class BoardController {
 	//글수정페이지
 	@RequestMapping(value = "update/{board_no}")
 	public String update(Model model, @PathVariable("board_no") int board_no) throws Exception {
-		logger.info("update");
+//		logger.info("update");
 		Board board = boardService.selectBoardArticle(null, board_no, true);
 		model.addAttribute("board", board);
 		return "board/boardUpdate";
@@ -68,7 +69,7 @@ public class BoardController {
 	//글상세보기페이지
 	@RequestMapping(value = "content/{board_no}")
 	public String content(Model model, @PathVariable("board_no") int board_no) throws Exception {
-		logger.info("content");
+//		logger.info("content");
 		String login_id = "mimi";
 		Board board = boardService.selectBoardArticle(login_id, board_no, false);
 		model.addAttribute("board", board);
@@ -78,14 +79,14 @@ public class BoardController {
 	//글목록페이지
 	@RequestMapping(value = "list")
 	public String list() throws Exception {
-		logger.info("list");
+//		logger.info("list");
 		return "board/boardList";
 	}
 	
 	//글작성작업
 	@RequestMapping(value = "insertRun", method = RequestMethod.POST)
 	public String insertRun(Board board) throws Exception {
-		logger.info("insertRun");
+//		logger.info("insertRun");
 //		System.out.println(board);
 		int board_no = boardService.insertBoardArticle(board);
 //		System.out.println("board_no: " + board_no);
@@ -103,7 +104,7 @@ public class BoardController {
 	//글수정작업
 	@RequestMapping(value = "updateRun", method = RequestMethod.POST)
 	public String updateRun(Board board) throws Exception {
-		logger.info("updateRun");
+//		logger.info("updateRun");
 //		System.out.println(board);
 		int result = boardService.updateBoardArticle(board);
 		int board_no = board.getBoard_no();
@@ -117,11 +118,22 @@ public class BoardController {
 		return url;
 	}
 	
+	//글삭제 작업
+	@RequestMapping(value = "delete/{board_no}")
+	public String delete(@PathVariable("board_no") int board_no, BoardSearch bs, HttpServletRequest request) throws Exception {
+//		logger.info("delete");
+		int result = boardService.deleteBoardArticle(board_no);
+		String query = request.getQueryString();
+//		System.out.println(query);
+//		String url = "redirect:list" + ;
+		return "redirect:/" + bs.getSortLocalEngName() + "/list?" + query;
+	}
+	
 	//태그
 	@RequestMapping(value = "searchTag", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String searchTag(String keyword) {    
-		logger.info("searchTag");
+//		logger.info("searchTag");
 //		System.out.println("keyword" + keyword);
 		List<BoardTag> tagList = boardService.searchTag(keyword);
 	    
@@ -133,7 +145,7 @@ public class BoardController {
 	@RequestMapping(value = "like", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String like(@RequestParam int board_no) {    
-		logger.info("like");
+//		logger.info("like");
 	    int result = boardService.likeBoard("mimi", board_no);
 	    
 	    if (result == 0) {
@@ -146,7 +158,7 @@ public class BoardController {
 	@RequestMapping(value = "bookmark", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String bookmark(@RequestParam int board_no) {    
-		logger.info("bookmark");
+//		logger.info("bookmark");
 	    int result = boardService.bookmarkBoard("mimi", board_no);
 	    
 	    if (result == 0) {

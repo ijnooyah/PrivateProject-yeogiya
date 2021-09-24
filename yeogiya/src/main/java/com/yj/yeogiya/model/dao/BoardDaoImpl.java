@@ -185,6 +185,11 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne(NAMESPACE + "getBoardListCount", bs);
 	}
 
+	@Override
+	public int deleteBoard(int board_no) {
+		return sqlSession.update(NAMESPACE + "deleteBoard", board_no);
+	}
+
 	
 
 }

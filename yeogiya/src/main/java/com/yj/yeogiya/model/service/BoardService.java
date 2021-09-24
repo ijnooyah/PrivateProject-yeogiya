@@ -44,6 +44,7 @@ public interface BoardService {
 	
 //************DELETE************
 	// 1. 게시글
+	public int deleteBoardArticle(int board_no);
 	// 2. 카테고리
 	
 	
