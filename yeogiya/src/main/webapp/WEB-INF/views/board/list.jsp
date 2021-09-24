@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style>
 td.td_title {
 min-width:400px;
@@ -56,7 +57,7 @@ div.subLocal_wrap a.active {
 <div class="px-4 pt-4">
 	<div class="h3 logo mt-2" style="color:var(--pink);">
 	<c:forEach var="sb" items="${sortBoardArr}">
-		<c:if test="${bs.sortBoard == sb.sort_no}">
+		<c:if test="${bs.sortBoard == sb.sort_no || board.sort_board == sb.sort_no}">
 			${sb.sort_name}
 		</c:if>
 	</c:forEach>
@@ -208,8 +209,8 @@ div.subLocal_wrap a.active {
 						</td>
 						<!-- 지역 -->
 						<td class="td_subLocal">
-							<a href="" class="">	
-								${b.subLocalName}
+							<a href="?sortBoard=${b.sort_board}&subLocal=${b.sub_local}${not empty b.sort_place ? '&sortPlace=all' : ''}" class="">	
+							${b.subLocalName}
 							</a>
 						</td>
 						<!-- 제목 -->
@@ -218,7 +219,7 @@ div.subLocal_wrap a.active {
 								<span class="place_sort mr-2 text-muted font-weight-400">
 									${b.sortPlaceName}</span>
 							</c:if>
-							<a href="${localPath}/content/${b.board_no}?${allQ}" class="short_title">
+							<a href="${localPath}/content/${b.board_no}?${sortQ}" class="short_title">
 								${b.board_title}
 							</a>
 							<span class="text-pink mx-2 font-weight-400">[${b.cmt_cnt}]</span>
@@ -235,7 +236,7 @@ div.subLocal_wrap a.active {
 						</td>
 						<!-- 글쓴이 -->
 						<td class="td_writer">
-							<a href="" class="">
+							<a href="${contextPath}/member/${b.user_id}" class="">
 								${b.userNick}
 							</a>
 						</td>
@@ -263,6 +264,12 @@ div.subLocal_wrap a.active {
 			</tbody>
 		</table>
 	</div>
+	<c:if test="${fn:length(boardList) == 0}">
+		<div class="text-center py-5 font-size-085 text-muted">
+				작성된 게시물이 없습니다.
+		</div>
+	</c:if>
+	
 	<div class="d-flex mb-1">
 		<a type="button" href="${localPath}/insert?${allQ}"
 			class="btn-sm btn ml-auto mr-2 btn-plain">

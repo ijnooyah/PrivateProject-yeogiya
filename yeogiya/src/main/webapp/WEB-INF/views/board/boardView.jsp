@@ -67,16 +67,16 @@
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto content-top">
 			<div class="col-md-12 pt-4 px-5 pb-5" style="flex:none;">
-				<div class="row mb-2">
-					<a class="sort_board text-pink" href="${listPath}?${sortQ}"
-						  style="position:relative;">${board.sortBoardName}</a>
+<!-- 				<div class="row mb-2"> -->
+<%-- 					<a class="sort_board text-pink" href="${listPath}?" --%>
+<%-- 						  style="position:relative;">${board.sortBoardName}</a> --%>
 <%-- 						<a type="button" href="${listPath}?${query}" --%>
 <!-- 							class="btn-sm btn btn-plain ml-auto mr-2"> -->
 <!-- 					 	   목록 -->
 <!-- 						</a> -->
-				</div>
+<!-- 				</div> -->
 				<!-- 글정보 -->
-				<div class="row mb-2 content-info">
+				<div class="row mb-2 content-info mt-2">
 					<div class="d-flex w-100 h5">
 						<div style="line-height: 1.4;">
 							<c:if test="${not empty board.sort_place}">

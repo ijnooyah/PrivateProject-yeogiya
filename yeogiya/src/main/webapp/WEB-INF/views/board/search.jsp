@@ -35,7 +35,7 @@
 	<!-- pagination end -->
 	<!-- 검색 -->
 	<div class="search_wrap text-center mb-4">
-		<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0">
+		<form id="searchFrm" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0">
 			<input type="hidden" name="sortBoard" value="${bs.sortBoard}">
 			<input type="hidden" name="subLocal" value="${bs.subLocal}">
 			<c:if test="${not empty bs.sortPlace}">
@@ -52,19 +52,43 @@
 <%-- 			</c:if> --%>
 			<div class="input-group">
 				<select class="form-control rounded-0" name="searchType">
+					<c:if test="${not empty bs.sortPlace}">
+						<option value="p" ${bs.searchType == 'p' ? 'selected' : ''}>장소</option>
+					</c:if>
 					<option value="tc" ${bs.searchType == 'tc' ? 'selected' : ''}>제목+내용</option>
 					<option value="t" ${bs.searchType == 't' ? 'selected' : ''}>제목</option>
 					<option value="w" ${bs.searchType == 'w' ? 'selected' : ''}>작성자</option>
 				</select>
 				<div class="input-group-append">
-					<input type="text" name="keyword" value="${bs.keyword}" class="form-control rounded-0"
+					<input type="text" id="inputSearch" name="keyword" value="${bs.keyword}" class="form-control rounded-0"
 						placeholder="검색어를 입력하세요.">
 				</div>
 				<div class="input-group-append">
-					<button class="btn btn-pink btn-sm rounded-0" type="submit">
+					<button class="btn btn-pink btn-sm rounded-0" onclick="doSubmit();" type="button">
 						<i class="fa fa-search font-size-090"></i>
 					</button>
 				</div>
 			</div>
 		</form>
 	</div>
+
+<script>
+ function doSubmit() {
+	 console.log('클릭');
+	 console.log('val', $('#inputSearch').val());
+	 if($('#inputSearch').val().trim() == '') {
+		 Swal.fire({
+	        	title: '검색어를 입력해 주세요!',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#inputSearch').focus();
+				}
+		});
+		return;
+	 } else {
+		 $('#searchFrm').submit();
+	 }
+ }
+</script>

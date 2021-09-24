@@ -40,6 +40,8 @@ public class Board {
 	private String jsonTagList;
 	private int nextNo;
 	private int prevNo;
+	private String placeName;
+	private String placeAddress;
 	
 	private String tag;
 	
@@ -322,6 +324,22 @@ public class Board {
 		this.prevNo = prevNo;
 	}
 
+	public String getPlaceName() {
+		return placeName;
+	}
+
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+
+	public String getPlaceAddress() {
+		return placeAddress;
+	}
+
+	public void setPlaceAddress(String placeAddress) {
+		this.placeAddress = placeAddress;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", board_title=" + board_title
@@ -333,8 +351,10 @@ public class Board {
 				+ imgList + ", likeBoard=" + likeBoard + ", bmBoard=" + bmBoard + ", sortLocalName=" + sortLocalName
 				+ ", subLocalName=" + subLocalName + ", sortBoardName=" + sortBoardName + ", sortPlaceName="
 				+ sortPlaceName + ", userNick=" + userNick + ", userImg=" + userImg + ", jsonTagList=" + jsonTagList
-				+ ", nextNo=" + nextNo + ", prevNo=" + prevNo + ", tag=" + tag + "]";
+				+ ", nextNo=" + nextNo + ", prevNo=" + prevNo + ", placeName=" + placeName + ", placeAddress="
+				+ placeAddress + ", tag=" + tag + "]";
 	}
+
 
 
 	

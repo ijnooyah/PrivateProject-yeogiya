@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style>
 td.td_title {
-min-width:300px;
+min-width:350px;
 }
 td.td_title .short_title {
-max-width:220px;
+max-width:350px;
 }
 
 .board-container .dropdown-menu {
@@ -40,29 +41,51 @@ max-width:220px;
 </style>
 <div class="px-4 pt-4">
 	<div class="h3 logo mt-2 mb-4" style="color:var(--pink);">
-	울산
+	${sortLocalP.sort_name}
 	</div>
 	<div class="d-flex mb-1">
 		<div class="dropdown ml-auto">
 			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  최신순
+			  ${bs.perPage}개씩
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
-				<a class="dropdown-item" href="#">최신순</a>
-				<a class="dropdown-item" href="#">댓글순</a>
-				<a class="dropdown-item" href="#">좋아요순</a>
-				<a class="dropdown-item" href="#">조회수순</a>
+				<c:set var="step" value="5"/>
+				<c:forEach var="v" begin="1" end="7" varStatus="vs">
+					<c:if test="${vs.count < 4}">
+						<c:set var="step" value="${step + 5}"/>
+					</c:if>
+					<c:if test ="${vs.count >=4 }">
+						<c:set var="step" value="${step + 10}"/>
+					</c:if>
+					<a class="dropdown-item" href="?${sortQ}${page}&perPage=${step}${order}${searchQ}">
+						${step}개씩</a>
+				</c:forEach>
 			</div>
 		</div>
 		<div class="dropdown">
+			<c:set var="orderTxt" value="정렬"/>
+			<c:choose>
+				<c:when test="${bs.order == 'like'}">
+					<c:set var="orderTxt" value="좋아요순"/>
+				</c:when>
+				<c:when test="${bs.order == 'date'}">
+					<c:set var="orderTxt" value="최신순"/>
+				</c:when>
+				<c:when test="${bs.order == 'cmt'}">
+					<c:set var="orderTxt" value="댓글순"/>
+				</c:when>
+				<c:when test="${bs.order == 'view'}">
+					<c:set var="orderTxt" value="조회수순"/>
+				</c:when>
+			</c:choose>
 			<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  15개씩
+			  ${orderTxt}
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
-				<a class="dropdown-item" href="#">최신순</a>
-				<a class="dropdown-item" href="#">댓글순</a>
-				<a class="dropdown-item" href="#">좋아요순</a>
-				<a class="dropdown-item" href="#">조회수순</a>
+				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=date${searchQ}">최신순</a>
+				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=cmt${searchQ}">댓글순</a>
+				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=like${searchQ}">좋아요순</a>
+				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=view${searchQ}">조회수순</a>
 			</div>
 		</div>
 	</div>
@@ -73,7 +96,7 @@ max-width:220px;
 				<tr>
 					<th>번호</th>
 					<th>게시판</th>
-					<th>지역</th>
+<!-- 					<th>지역</th> -->
 					<th>제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
@@ -83,35 +106,44 @@ max-width:220px;
 			</thead>
 			<tbody>
 				<!--조회된 게시글 목록 있을 때 -->
-				<c:forEach var="v" begin="1" end="15">
+				<c:forEach var="b" items="${boardList}">
 					<tr>
 						<!-- 번호 -->
 						<td  class="td_no">
-							${v}
+							${b.board_no}
 						</td>
 						<!-- 게시판 -->
 						<td class="td_sortBoard">
-							<a href="" class="">	
-								사담 게시판
-							</a>
+							<c:forEach var="sb" items="${sortBoardArr}">
+								<c:if test="${b.sort_board == sb.sort_no}">
+									<a href="?sortBoard=${b.sort_board}&subLocal=all&sortPlace=all" class="">	
+									${sb.sort_name}
+									</a>
+								</c:if>
+							</c:forEach>
 						</td>
 						<!-- 지역 -->
-						<td class="td_subLocal">
-							<a href="" class="">	
-								강남구
-							</a>
-						</td>
+<!-- 						<td class="td_subLocal"> -->
+<%-- 							<a href="?sortBoard=${b.sort_board}&subLocal=${b.sub_local}${not empty b.sort_place ? '&sortPlace=all' : ''}" class="">	 --%>
+<%-- 							${b.subLocalName} --%>
+<!-- 							</a> -->
+<!-- 						</td> -->
 						<!-- 제목 -->
 						<td class="td_title d-flex">
-							<span class="place_sort mr-2 text-muted font-weight-400">[맛집]</span>
-							<a href="" class="short_title">
-								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
+							<c:if test="${not empty b.sort_place}">
+<!-- 								<span class="place_sort mr-2 text-muted font-weight-400"> -->
+<%-- 									${b.sortPlaceName}</span> --%>
+							</c:if>
+							<a href="${localPath}/content/${b.board_no}?sortBoard=${b.sort_board}&subLocal=${b.sub_local}${not empty b.sort_place ? ('&sortPlace=' += b.sort_place) : ''}" class="short_title">
+								${b.board_title}
 							</a>
-							<span class="text-pink mx-2 font-weight-400">[3]</span>
-							<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image mr-1" viewBox="0 0 16 16" style="margin-top:2px;">
-							  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-							  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-							</svg>
+							<span class="text-pink mx-2 font-weight-400">[${b.cmt_cnt}]</span>
+							<c:if test="${b.has_img == 'Y'}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image mr-2" viewBox="0 0 16 16" style="margin-top:2px;">
+								  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+								</svg>
+							</c:if>
 							<!-- 지도유무 -->
 <!-- 							<svg width="0.95rem" height="0.95rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="var(--pink50)" xmlns="http://www.w3.org/2000/svg" style="margin-top:2px;">  -->
 <!-- 							  <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/> -->
@@ -119,8 +151,8 @@ max-width:220px;
 						</td>
 						<!-- 글쓴이 -->
 						<td class="td_writer">
-							<a href="" class="">
-								닉네임
+							<a href="${contextPath}/member/${b.user_id}" class="">
+								${b.userNick}
 							</a>
 						</td>
 						<!-- 작성일 -->
@@ -128,19 +160,33 @@ max-width:220px;
 						<!-- now랑 글작성일이랑 같으면 HH:mm형식으로 보여주고 같지않으면 yy.MM.dd 형식으로 보여주기 -->
 						<jsp:useBean id="now" class="java.util.Date" />
 						<fmt:formatDate value="${now}" pattern="yy.MM.dd" var="today" />
-						<c:out value="${today}" />
+						<fmt:formatDate value="${b.reg_date}" pattern="yy.MM.dd" var="regDate"/>
+						<c:choose>
+							<c:when test="${regDate != today}">
+								${regDate}
+							</c:when>
+							<c:otherwise>
+								<fmt:formatDate value="${b.reg_date}" pattern="HH:mm"/>
+							</c:otherwise>
+						</c:choose>
 						</td>
 						<!-- 좋아요 -->
-						<td class="td_like ">113</td>
+						<td class="td_like ">${b.like_cnt}</td>
 						<!-- 조회 -->
-						<td  class="td_view ">1003</td>
+						<td  class="td_view ">${b.view_cnt}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	<c:if test="${fn:length(boardList) == 0}">
+		<div class="text-center py-5 font-size-085 text-muted">
+				작성된 게시물이 없습니다.
+		</div>
+	</c:if>
+	
 	<div class="d-flex mb-1">
-		<a type="button" href="${localPath}/insert?${query}"
+		<a type="button" href="${localPath}/insert?${allQ}"
 			class="btn-sm btn ml-auto mr-2 btn-plain">
 			    글쓰기
 		</a>
