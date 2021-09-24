@@ -221,19 +221,16 @@
  		<!-- 검색 -->
  		<if test="searchType != null">
 			<choose>
+				<when test='searchType == "tc"'>
+					AND (a.board_title like '%' || #{keyword} || '%'
+					or  a.board_content like '%' || #{keyword} || '%')
+				</when>
 				<when test='searchType == "t"'>
 					AND a.board_title like '%' || #{keyword} || '%'
 				</when>
-				<when test='searchType == "c"'>
-					AND a.board_content like '%' || #{keyword} || '%'
-				</when>
-				<when test='searchType == "u"'>
-					AND f.user_nick like '%' || #{keyword} || '%'
-					or  a.user_id like '%' || #{keyword} || '%'
-				</when>
-				<when test='searchType == "tc"'>
-					AND a.board_title like '%' || #{keyword} || '%'
-					or  a.board_content like '%' || #{keyword} || '%'
+				<when test='searchType == "w"'>
+					AND (f.user_nick like '%' || #{keyword} || '%'
+					or  a.user_id like '%' || #{keyword} || '%')
 				</when>
 			</choose>
 		</if>

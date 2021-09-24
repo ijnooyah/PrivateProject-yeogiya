@@ -6,6 +6,7 @@
 <style>
 li.sideMenu > div.active > a {
 	color:var(--pink) !important;
+	text-decoration:underline;
 }
 
 li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
@@ -36,12 +37,13 @@ li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
 							  <c:if test="${not empty sbl.sort_no}">
 								<c:set var="sblQuery" value="&subLocal=${sbl.sort_no}" />
 							  </c:if>
+							  <c:if test="${sbl.sort_no != 'all'}">
 								<li class="sideSubMenu">
 									<div ${sb.sort_no == bs.sortBoard && sbl.sort_no == bs.subLocal ? 'class="active"' : ''}
 										<c:if test="${sb.has_sort_place == 'Y'}">
 											data-toggle="collapse"
 											<c:choose>
-												<c:when test="${sb.sort_no == bs.sortBoard && sbl.sort_no == bs.subLocal}">
+												<c:when test="${sb.sort_no == bs.sortBoard && sbl.sort_no == bs.subLocal && bs.sortPlace != 'all'}">
 												aria-expanded="true"
 												</c:when>
 												<c:otherwise>
@@ -55,7 +57,7 @@ li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
 										</a>
 									</div>
 									<c:if test="${sb.has_sort_place == 'Y'}">
-										<ul class="collapse ${sb.sort_no == bs.sortBoard && sbl.sort_no == bs.subLocal ? 'show' : ''} list-unstyled" id="">
+										<ul class="collapse ${sb.sort_no == bs.sortBoard && sbl.sort_no == bs.subLocal && bs.sortPlace != 'all' ? 'show' : ''} list-unstyled" id="">
 											<c:forEach var="sp" items="${sortPlaceArr}">
 											<!-- url설정 -->
 											  <c:if test="${not empty sp.sort_no}">
@@ -68,6 +70,7 @@ li.sideSubMenu > div.active > a, li.sideSubMenu li.active {
 										</ul>
 									</c:if>
 								</li>
+								</c:if>
 							</c:forEach>
 						</ul>
 					</li>

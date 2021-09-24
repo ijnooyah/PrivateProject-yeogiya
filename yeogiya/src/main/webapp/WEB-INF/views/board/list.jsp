@@ -64,7 +64,7 @@ div.subLocal_wrap a.active {
 	<div class="d-flex flex-wrap px-3 py-4 mx-1 mb-5 subLocal_wrap rounded-sm">
 		<c:forEach var="sbl" items="${subLocalArr}">
 			<div class="col-sm-2 my-1">
-			<a href="?${sortBoard}&subLocal=${sbl.sort_no}${sortPlace}${pageQ}${order}${searchQ}" 
+			<a href="?${sortBoard}&subLocal=${sbl.sort_no}${not empty bs.sortPlace ? '&sortPlace=all' : ''}${order}${searchQ}" 
 			   class="${bs.subLocal == sbl.sort_no ? 'active' : ''}">${sbl.sort_name}</a>
 			</div>
 		</c:forEach>

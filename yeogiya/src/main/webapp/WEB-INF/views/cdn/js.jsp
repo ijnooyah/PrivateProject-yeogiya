@@ -58,7 +58,7 @@
 	
 	//sidebar
 	$('[data-toggle=collapse]').on('click', function(e) {
-		e.stopPropagation(); // 이벤트 전파막기
+// 		e.stopPropagation(); // 이벤트 전파막기
 		console.log("클릭")
 		if($(this).attr('aria-expanded') == 'false') {
 			$(this).attr('aria-expanded', true);
@@ -66,6 +66,10 @@
 			$(this).attr('aria-expanded', false);
 		}
 		$(this).siblings('ul').collapse('toggle'); 
+	});
+	
+	$('[data-toggle=collapse] a').on('click', function(e) {
+		e.stopPropagation(); // 이벤트 전파막기
 	});
 	
 	//data-setbg

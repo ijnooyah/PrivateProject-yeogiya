@@ -52,9 +52,9 @@
 <%-- 			</c:if> --%>
 			<div class="input-group">
 				<select class="form-control rounded-0" name="searchType">
-					<option value="tc">제목+내용</option>
-					<option value="t">제목</option>
-					<option value="w">작성자</option>
+					<option value="tc" ${bs.searchType == 'tc' ? 'selected' : ''}>제목+내용</option>
+					<option value="t" ${bs.searchType == 't' ? 'selected' : ''}>제목</option>
+					<option value="w" ${bs.searchType == 'w' ? 'selected' : ''}>작성자</option>
 				</select>
 				<div class="input-group-append">
 					<input type="text" name="keyword" value="${bs.keyword}" class="form-control rounded-0"
