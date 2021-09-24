@@ -64,7 +64,7 @@ div.subLocal_wrap a.active {
 	<div class="d-flex flex-wrap px-3 py-4 mx-1 mb-5 subLocal_wrap rounded-sm">
 		<c:forEach var="sbl" items="${subLocalArr}">
 			<div class="col-sm-2 my-1">
-			<a href="?${sortBoard}&subLocal=${sbl.sort_no}${empty bs.sortPlace ? '' : sortPlace}${pageQ}&order=${bs.order}${searchQ}" 
+			<a href="?${sortBoard}&subLocal=${sbl.sort_no}${sortPlace}${pageQ}${order}${searchQ}" 
 			   class="${bs.subLocal == sbl.sort_no ? 'active' : ''}">${sbl.sort_name}</a>
 			</div>
 		</c:forEach>
@@ -73,13 +73,24 @@ div.subLocal_wrap a.active {
 		<c:if test="${not empty bs.sortPlace}">
 			<div class="dropdown">
 				<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  말머리
+				   <c:set var="flag" value="false" />
+				   <c:forEach var="sp" items="${sortPlaceArr}">
+			   			<c:if test="${bs.sortPlace == sp.sort_no}">
+							${sp.sort_name}
+			   			</c:if>
+			   			<c:if test="${not flag}">
+				   			<c:if test="${bs.sortPlace == 'all'}">
+				   				<c:set var="flag" value="true" />
+				   				말머리
+			   				</c:if>
+			   			</c:if>
+					</c:forEach>
 				</button>
 				<div class="dropdown-menu" style="min-width:4rem;">
-					<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=all${page}${perPage}&order=${bs.order}${searchType}${keyword}">
+					<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=all${pageQ}${order}${searchQ}">
 						전체</a>
 					<c:forEach var="sp" items="${sortPlaceArr}">
-						<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=${sp.sort_no}${page}${perPage}&order=${bs.order}${searchType}${keyword}">
+						<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=${sp.sort_no}${pageQ}${order}${searchQ}">
 							${sp.sort_name}</a>
 					</c:forEach>
 				</div>
@@ -98,7 +109,7 @@ div.subLocal_wrap a.active {
 					<c:if test ="${vs.count >=4 }">
 						<c:set var="step" value="${step + 10}"/>
 					</c:if>
-					<a class="dropdown-item" href="?${sortQ}${page}&perPage=${step}${order}${searchType}${keyword}">
+					<a class="dropdown-item" href="?${sortQ}${page}&perPage=${step}${order}${searchQ}">
 						${step}개씩</a>
 				</c:forEach>
 			</div>
@@ -123,10 +134,10 @@ div.subLocal_wrap a.active {
 			  ${orderTxt}
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
-				<a class="dropdown-item" href="?${sortQ}${page}${perPage}&order=date${searchType}${keyword}">최신순</a>
-				<a class="dropdown-item" href="?${sortQ}${page}${perPage}&order=cmt${searchType}${keyword}">댓글순</a>
-				<a class="dropdown-item" href="?${sortQ}${page}${perPage}&order=like${searchType}${keyword}">좋아요순</a>
-				<a class="dropdown-item" href="?${sortQ}${page}${perPage}&order=view${searchType}${keyword}">조회수순</a>
+				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=date${searchQ}">최신순</a>
+				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=cmt${searchQ}">댓글순</a>
+				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=like${searchQ}">좋아요순</a>
+				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=view${searchQ}">조회수순</a>
 			</div>
 		</div>
 	</div>

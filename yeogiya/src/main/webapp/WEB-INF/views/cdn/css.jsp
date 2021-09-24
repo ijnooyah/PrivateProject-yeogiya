@@ -48,38 +48,40 @@
 <c:set var="subLocalArr" value="<%=subLocalArr%>" scope="application"/>
 <c:set var="sortBoardArr" value="<%=sortBoardArr%>" scope="application"/>
 <c:set var="sortPlaceArr" value="<%=sortPlaceArr%>" scope="application"/>
+
 <c:set var="localPath" value="${contextPath}/${sortLocalP.eng_name}" scope="application"/>
 <c:set var="listPath" value="${contextPath}/${sortLocalP.eng_name}/list" scope="application"/>
 <c:set var="noProfile" value="${contextPath}/resources/image/no-profile.png" scope="application"/>
-	
-	<c:if test="${not empty bs.sortBoard}">
-		<c:set var="sortBoard" value="sortBoard=${bs.sortBoard}" scope="application"/>
-	</c:if>
-	<c:if test="${not empty bs.subLocal}">
-		<c:set var="subLocal" value="&subLocal=${bs.subLocal}" scope="application" />
-	</c:if>
-	<c:if test="${not empty bs.sortPlace}">
-		<c:set var="sortPlace" value="&sortPlace=${bs.sortPlace}" scope="application"/>
-	</c:if>
-		<c:if test="${not empty bs.page }">
-		<c:set var="page" value="&page=${bs.page}" scope="application"/>
-	</c:if>
-	<c:if test="${not empty bs.perPage }">
-		<c:set var="perPage" value="&perPage=${bs.perPage}"  scope="application"/>
-	</c:if>
-	<c:if test="${not empty bs.order }">
-		<c:set var="order" value="&order=${bs.order}"  scope="application"/>
-	</c:if>
-	<c:if test="${not empty bs.searchType }">
-		<c:set var="searchType" value="&searchType=${bs.searchType}" scope="application"/>
-	</c:if>
-	<c:if test="${not empty bs.keyword }">
-		<c:set var="keyword" value="&keyword=${bs.keyword}"  scope="application"/>
-	</c:if>
-	<c:set var="pageQ" value="${page}${perPage}" scope="application"/>
-	<c:set var="searchQ" value="${searchType}${keyword}" scope="application"/>
-	<c:set var="sortQ" value="${sortBoard}${subLocal}${sortPlace}"  scope="application"/>
-	<c:set var="allQ" value="${sortQ}${pageQ}${order}${searchQ}" scope="application"/>
+
+
+<c:if test="${not empty bs.sortBoard}">
+	<c:set var="sortBoard" value="sortBoard=${bs.sortBoard}" scope="request"/>
+</c:if>
+<c:if test="${not empty bs.subLocal}">
+	<c:set var="subLocal" value="&subLocal=${bs.subLocal}" scope="request"/>
+</c:if>
+<c:if test="${not empty bs.sortPlace}">
+	<c:set var="sortPlace" value="&sortPlace=${bs.sortPlace}" scope="request"/>
+</c:if>
+<c:if test="${not empty bs.page }">
+	<c:set var="page" value="&page=${bs.page}" scope="request"/>
+</c:if>
+<c:if test="${not empty bs.perPage }">
+	<c:set var="perPage" value="&perPage=${bs.perPage}" scope="request"/>
+</c:if>
+<c:if test="${not empty bs.order }">
+	<c:set var="order" value="&order=${bs.order}" scope="request"/>
+</c:if>
+<c:if test="${not empty bs.searchType }">
+	<c:set var="searchType" value="&searchType=${bs.searchType}" scope="request"/>
+</c:if>
+<c:if test="${not empty bs.keyword }">
+	<c:set var="keyword" value="&keyword=${bs.keyword}" scope="request"/>
+</c:if>
+<c:set var="pageQ" value="${page}${perPage}" scope="request"/>
+<c:set var="searchQ" value="${searchType}${keyword}" scope="request"/>
+<c:set var="sortQ" value="${sortBoard}${subLocal}${sortPlace}" scope="request"/>
+<c:set var="allQ" value="${sortQ}${pageQ}${order}${searchQ}" scope="request"/>
 	
     <!-- font awsome-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
