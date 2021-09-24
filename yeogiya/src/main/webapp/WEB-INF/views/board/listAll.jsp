@@ -151,7 +151,7 @@ max-width:350px;
 						</td>
 						<!-- 글쓴이 -->
 						<td class="td_writer">
-							<a href="${contextPath}/member/${b.user_id}" class="">
+							<a href="${contextPath}/profile/${b.user_id}" class="">
 								${b.userNick}
 							</a>
 						</td>

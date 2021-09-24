@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yj.yeogiya.controller.BoardController;
+import com.yj.yeogiya.controller.MemberController;
 import com.yj.yeogiya.model.service.BoardService;
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.Sort;
 
 
-@ControllerAdvice(assignableTypes = {BoardController.class})
+@ControllerAdvice(assignableTypes = {BoardController.class, MemberController.class})
 public class CommonDataAdvice {
 	
 	@Inject
