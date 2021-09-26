@@ -58,29 +58,6 @@
                 <input type="text" class="form-control" id="user_nick" name="user_nick" autocomplete="off" required>
                 <div class='invalid-feedback name-feedback'>이미 사용중인 닉네임 입니다.</div>
             </div>
-            <div class="row ml-2 mb-2">
-	        		<span class="pt-1 mr-1 text-pink font-size-080 cursor-pointer" onclick="chooseCurrPos(this);">
-						<svg width="16" height="16" viewBox="0 0 16 17" class="bi bi-compass" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							  <path fill-rule="evenodd" d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-							  <path d="M6.94 7.44l4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
-						</svg>		
-						현재 위치 자동선택 
-					</span>
-					<span class="currPos-feedback">
-					</span>
-			</div>
-            <!-- 지역 -->
-    		<div class="form-group">
-                <label for="" class="font-weight-500 col-form-label">지역</label>
-               	<div class="d-flex mb-2">
-               		<select class="form-control mr-1" id="district">
-						<option value="">울산</option>
-					</select>
-					<select class="form-control mr-1" id="city">
-						<option value="">동구</option>
-					</select>
-			    </div>
-            </div>
 	    	<!-- 휴대전화 -->
 			<div class="form-group">
 				<label for="user_phone" class="font-weight-500 col-form-label">휴대전화</label>
@@ -118,6 +95,18 @@
 					  <label class="custom-control-label" for="female">여자</label>
 				</div>
             </div>
+            <!-- 지역 -->
+    		<div class="form-group">
+                <label for="" class="font-weight-500 col-form-label">지역</label>
+               	<div class="d-flex mb-2">
+               		<select class="form-control mr-1" id="sortLocal">
+						<option value="0">상위 지역</option>
+					</select>
+					<select class="form-control" id="subLocal">
+						<option value="0">하위 지역</option>
+					</select>
+			    </div>
+            </div>
             <!-- 가입완료 버튼 -->
 			<button type="button" class="btn btn-pink btn-lg btn-block mt-4">가입하기</button>
 		</div>
@@ -131,51 +120,63 @@
 	</div>
 	<%@ include file="../cdn/js.jsp" %>
 	<script>
-	function chooseCurrPos(obj) {
-		console.log('cp');
-		var options = {
-		  enableHighAccuracy: true,
-		  maximumAge: 30000,
-		  timeout: 27000 // 정보 가져오는데 27초 이상 기다리지 않음 
-		};
-			 
-		if('geolocation' in navigator) {
-			navigator.geolocation.getCurrentPosition(success, error, options);
-		} else {
-		  	$('.currPos-feedback').text('이 브라우저에서는 Geolocation이 지원되지 않습니다.');
+	$(document).ready(function() {
+		//* 카테고리 부분
+		var jsonData = JSON.parse('${slJsonArr}');
+		var cate1Arr = new Array();
+		var cate1Obj = new Object();
+		// 1차 분류 셀렉트 박스에 삽입할 데이터 준비
+		for(var i = 0; i < jsonData.length; i++) {
+		 if(jsonData[i].sort_level == "1") {
+		  cate1Obj = new Object();  //초기화
+		  cate1Obj.sort_no = jsonData[i].sort_no;
+		  cate1Obj.sort_name = jsonData[i].sort_name;
+		  cate1Arr.push(cate1Obj);
+		 }
 		}
-	    
-	    function error(e) {
-	    	$('.currPos-feedback').text("Geolocation 오류 "+e.code +": " + e.message);
-	    }
-			    
-	    function success(pos) {
-	        
-	        console.log(pos); 
-	        
-	        var msg = "당신은 " +
-	            new Date(pos.timestamp).toLocaleString() + "에 " +
-	            " 위도 " + pos.coords.latitude + 
-	            " 경도 " + pos.coords.longitude + "에서 "+ 
-	            " 약 " + pos.coords.accuracy + " 미터 떨어진 곳에 있습니다.";
-	    
-			console.log(msg);
-			
-			var geocoder = new kakao.maps.services.Geocoder();
-
-			var callback = function(result, status) {
-			    if (status === kakao.maps.services.Status.OK) {
-					console.log(result[0])
-			        console.log('지역 명칭 : ' + result[0].address_name);
-			        console.log('행정구역 코드 : ' + result[0].code);
-			    }
-			};
-
-			geocoder.coord2RegionCode(pos.coords.longitude, pos.coords.latitude, callback);
-	    }    
+		// 1차 분류 셀렉트 박스에 데이터 삽입
+		var cate1Select = $("#sortLocal");
+		for(var i = 0; i < cate1Arr.length; i++) {
+			 cate1Select.append("<option value='" + cate1Arr[i].sort_no + "'>"
+		      + cate1Arr[i].sort_name + "</option>"); 
+		}
 		
-
-	}
+		$(document).on("change", "#sortLocal", function(){
+		
+			 var cate2Arr = new Array();
+			 var cate2Obj = new Object();
+			 
+			 // 2차 분류 셀렉트 박스에 삽입할 데이터 준비
+			 for(var i = 0; i < jsonData.length; i++) {
+			  if(jsonData[i].sort_level == "2") {
+			   cate2Obj = new Object();  //초기화
+			   cate2Obj.sort_no = jsonData[i].sort_no;
+			   cate2Obj.sort_name = jsonData[i].sort_name;
+			   cate2Obj.parent_sort = jsonData[i].parent_sort;
+			   cate2Arr.push(cate2Obj);
+			  }
+			 }
+			 
+			 var cate2Select = $("#subLocal");
+	
+			 cate2Select.children().remove();
+	
+			 $("option:selected", this).each(function(){
+			  
+			  var selectVal = $(this).val();  
+			  cate2Select.append("<option value='0'>하위지역</option>");
+			  
+			  for(var i = 0; i < cate2Arr.length; i++) {
+			   if(selectVal == cate2Arr[i].parent_sort) {
+			    cate2Select.append("<option value='" + cate2Arr[i].cate_no + "'>"
+			         + cate2Arr[i].sort_name + "</option>");
+			   }
+			  }
+			 });
+		});
+	});
+	</script>
+	<script>
 	</script>
 </body>
 </html>
