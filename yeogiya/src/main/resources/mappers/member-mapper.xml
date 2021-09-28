@@ -6,10 +6,36 @@
 <mapper namespace="com.yj.yeogiya.member">
 
 <!-- ************CREATE************ -->
-	
+
+
+	<!-- 회원가입 -->
+	<insert id="insertMember">
+		insert into tbl_member 
+		(user_id, user_pw, user_name, user_nick,
+		 user_phone, user_email, sort_local, sub_local, user_gender)
+		values 
+		(#{user_id}, #{user_pw}, #{user_name}, #{user_nick}, 
+		#{user_phone}, #{user_email}, #{sort_local, jdbcType=VARCHAR},
+		#{sub_local, jdbcType=VARCHAR}, #{user_gender, jdbcType=CHAR})
+	</insert>
 
 <!-- ************READ************ -->
+	<!-- 아이디 중복체크 -->
+ 	<select id="checkDupId" resultType="int">
+ 		select count(*) from tbl_member
+ 		where user_id = #{user_id}
+ 	</select>
+ 	<!-- 닉네임 중복체크 -->
+ 	<select id="checkDupNick" resultType="int">
+ 		select count(*) from tbl_member
+ 		where user_nick = #{user_nick} and is_quit = 'N'
+ 	</select>
  	
+ 	<!-- 로그인 -->
+ 	<select id="login" resultType="Member">
+ 		select * from tbl_member
+ 		where user_id = #{user_id} and user_pw = #{user_pw} and is_quit = 'N'
+ 	</select>
 <!-- ************UPDATE************ -->
 <!-- ************DELETE************ -->
 	

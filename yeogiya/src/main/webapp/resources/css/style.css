@@ -35,6 +35,10 @@
 /*입력폼 커스텀 */.form-control:focus{border:1px solid var(--pink);outline:unset;box-shadow:unset}
 /* 체크박스 */.custom-checkbox .custom-control-label::before {}.custom-checkbox .custom-control-input:checked~.custom-control-label::after,.custom-checkbox .custom-control-input:checked~.custom-control-label::before{border-radius:.25rem;background-color:var(--pink);border-color:var(--pink);}.custom-checkbox .custom-control-input:active~.custom-control-label::before{background-color:var(--pink)}.custom-checkbox .custom-control-input:focus~.custom-control-label::before{border:1px solid var(--pink);box-shadow:0 0 0 .2rem var(--pink30);}.custom-control-input:not(:disabled):active~.custom-control-label::before{color:var(--white);background-color:var(--pink30);border-color:var(--pink30)}
 /* 라디오버튼 */.custom-radio .custom-control-input:checked~.custom-control-label::after,.custom-radio .custom-control-input:checked~.custom-control-label::before{background-color:var(--pink);border-radius:50%}.custom-radio .custom-control-input:active~.custom-control-label::before{background-color:var(--pink);border-color:var(--pink);}.custom-radio .custom-control-input:focus~.custom-control-label::before{box-shadow:0 0 0 .2rem var(--pink30)}
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: var(--pink);
+    background-color: var(--pink);
+}
 /* 스위치 */
 .custom-switch .custom-control-input:disabled:checked~.custom-control-label::before {
 	background-color:var(--pink);

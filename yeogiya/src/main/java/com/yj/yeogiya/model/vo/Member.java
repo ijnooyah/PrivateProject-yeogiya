@@ -23,13 +23,13 @@ public class Member {
 	private int like_cnt;
 	private int rp_cnt;
 	private Timestamp sign_date;
-	private int is_quit;
+	private String is_quit;
 	private Timestamp quit_date;
 
 	private String sortLocalName;
 	private String subLocalName;
 	private String userGradeName;
-	
+	private String saveId;
 	
 	
 	
@@ -151,12 +151,6 @@ public class Member {
 	public void setSign_date(Timestamp sign_date) {
 		this.sign_date = sign_date;
 	}
-	public int getIs_quit() {
-		return is_quit;
-	}
-	public void setIs_quit(int is_quit) {
-		this.is_quit = is_quit;
-	}
 	public Timestamp getQuit_date() {
 		return quit_date;
 	}
@@ -181,6 +175,18 @@ public class Member {
 	public void setUserGradeName(String userGradeName) {
 		this.userGradeName = userGradeName;
 	}
+	public String getSaveId() {
+		return saveId;
+	}
+	public void setSaveId(String saveId) {
+		this.saveId = saveId;
+	}
+	public String getIs_quit() {
+		return is_quit;
+	}
+	public void setIs_quit(String is_quit) {
+		this.is_quit = is_quit;
+	}
 	@Override
 	public String toString() {
 		return "Member [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_nick="
@@ -190,9 +196,8 @@ public class Member {
 				+ ", post_cnt=" + post_cnt + ", cmt_cnt=" + cmt_cnt + ", msg_cnt=" + msg_cnt + ", like_cnt=" + like_cnt
 				+ ", rp_cnt=" + rp_cnt + ", sign_date=" + sign_date + ", is_quit=" + is_quit + ", quit_date="
 				+ quit_date + ", sortLocalName=" + sortLocalName + ", subLocalName=" + subLocalName + ", userGradeName="
-				+ userGradeName + "]";
+				+ userGradeName + ", saveId=" + saveId + "]";
 	}
-	
 	
 	
 }

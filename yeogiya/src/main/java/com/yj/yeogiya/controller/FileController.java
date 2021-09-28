@@ -37,8 +37,10 @@ public class FileController {
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	
 	private static final String UPLOAD_PATH = "board";
+	
 	@Value("#{property['file.rootPath']}") 
 	public String rootPath;
+	
 	@Inject
 	private BoardService boardService;
 	

@@ -132,7 +132,7 @@ public class BoardController {
 	//태그
 	@RequestMapping(value = "searchTag", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String searchTag(String keyword) {    
+	public String searchTag(String keyword) throws Exception {    
 //		logger.info("searchTag");
 //		System.out.println("keyword" + keyword);
 		List<BoardTag> tagList = boardService.searchTag(keyword);
@@ -144,7 +144,7 @@ public class BoardController {
 	//좋아요
 	@RequestMapping(value = "like", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String like(@RequestParam int board_no) {    
+	public String like(@RequestParam int board_no) throws Exception {    
 //		logger.info("like");
 	    int result = boardService.likeBoard("mimi", board_no);
 	    
@@ -157,7 +157,7 @@ public class BoardController {
 	//좋아요
 	@RequestMapping(value = "bookmark", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String bookmark(@RequestParam int board_no) {    
+	public String bookmark(@RequestParam int board_no) throws Exception {    
 //		logger.info("bookmark");
 	    int result = boardService.bookmarkBoard("mimi", board_no);
 	    
