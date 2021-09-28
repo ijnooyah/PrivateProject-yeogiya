@@ -40,4 +40,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.login(member);
 	}
 
+	@Override
+	public Member selectMember(String user_id, boolean all) {
+		Member member = memberDao.selectMember(user_id);
+		if (!all) {
+			return new Member(member.getUser_id(), member.getUser_email());
+		}
+		return member;
+	}
+
+	@Override
+	public Member findId(Member member) {
+		return memberDao.findId(member);
+	}
+
+
 }

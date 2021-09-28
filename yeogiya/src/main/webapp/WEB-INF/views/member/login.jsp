@@ -44,10 +44,10 @@
 		<div class="text-center mb-5">
 			<a href="" class="logo text-pink">여기야!</a>
 		</div>
-		<form method="post" action="loginRun" id="frmLogin">
+		<form method="post" action="loginRun" id="frmLogin" onsubmit="return validate();">
 			<div class="h4 text-center">로그인</div>
-			<input type="text" id="user_id" name="user_id" placeholder="아이디" class="form-control" value="${cookie.saveId.value}" required autofocus spellcheck="false">
-			<input type="password" id="user_pw" name="user_pw" class="form-control" placeholder="비밀번호" required>
+			<input type="text" id="user_id" name="user_id" placeholder="아이디" class="form-control" value="${cookie.saveId.value}"  autofocus spellcheck="false">
+			<input type="password" id="user_pw" name="user_pw" class="form-control" placeholder="비밀번호" >
 		    <div class="custom-control custom-checkbox mt-2">
 				  <input class="custom-control-input" type="checkbox" name="saveId" id="saveId">
 				  <label class="custom-control-label" for="saveId">
@@ -64,16 +64,16 @@
 			<div class='emptylogin red-feedback' style="display:none;"> 
 				<b>아이디</b>를 입력해 주세요.
 			</div>
-			<button class="btn btn-block btn-pink mt-3" type="button" onclick="validate();">로그인</button>
+			<button class="btn btn-block btn-pink mt-3" type="submit" >로그인</button>
 			<ul class="find_wrap" id="find_wrap">
 				<li><a 
-					href=""
+					href="${memberPath}/pwFind"
 					class="find_text">비밀번호 찾기</a></li>
 				<li><a 
-					href=""
+					href="${memberPath}/idFind"
 					class="find_text">아이디 찾기</a></li>
 				<li><a 
-					href=""
+					href="${memberPath}/join"
 					class="find_text">회원가입</a></li>
 			</ul>
 			<!-- sns간편로그인 -->
@@ -92,13 +92,16 @@
 			$('#user_id').focus();
 			$('.emptylogin').show();
 			$('.emptylogin').html('<b>아이디</b>를 입력해 주세요.');
+			return false;
 		} else if ($('#user_pw').val().trim() == "" || $('#user_pw').val() == null) {
 			$('#user_pw').focus();
 			$('.emptylogin').show();
 			$('.emptylogin').html('<b>비밀번호</b>를 입력해 주세요.');
+			return false;
 		} else {
 			$('.emptylogin').hide();
-			$('#frmLogin').submit();
+// 			$('#frmLogin').submit();
+			return true;
 		}
 	}
 	</script>

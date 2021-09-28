@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,9 +62,14 @@ public class MemberController {
 	
 	//회원가입 페이지
 	@RequestMapping(value = "join", method = RequestMethod.GET)
-	public String join(Model model) throws Exception {
-		
-		return "member/signUp";
+	public String join(@RequestParam(value = "serviceCheck", required = false) String serviceCheck, 
+			@RequestParam(value = "geoCheck", required = false) String geoCheck,
+			@RequestParam(value = "ageCheck", required = false) String ageCheck ) throws Exception {
+		if(serviceCheck != null && geoCheck != null && ageCheck != null) {
+			return "member/signUp";
+		} else {
+			return "member/term";
+		}
 	}
 	
 	//아이디 중복체크
@@ -94,8 +100,6 @@ public class MemberController {
 		Random random = new Random();
 		authNum = random.nextInt(8999) + 1000;
 		String content = "인증번호[" + authNum + "]를 입력해 주세요.";
-		
-		
 
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper messageHelper = new MimeMessageHelper(message, false, "UTF-8");
@@ -110,16 +114,15 @@ public class MemberController {
 
 		return authNum;
 	}
-	
 	@RequestMapping(value = "joinRun", method = RequestMethod.POST)
 	public String joinRun(Member member) throws Exception {
 		System.out.println(member);
 		int result = memberService.join(member);
-		return "member/signUpResult";
+		return "member/joinResult";
 	}
 	
-	@RequestMapping(value = "signUpResult", method = RequestMethod.GET)
-	public String signUpResult(Member member) throws Exception {
+	@RequestMapping(value = "joinResult", method = RequestMethod.GET)
+	public String joinResult(Member member) throws Exception {
 		System.out.println(member);
 		return "member/signUpResult";
 	}
@@ -156,8 +159,14 @@ public class MemberController {
 
 			// 생성된 쿠키 객체를 응답 객체에 담아서 내보냄
 			response.addCookie(cookie);
+			
+			String requestPath = (String) session.getAttribute("requestPath");
+			if (requestPath == null) {
+				url = "/";
+			} else {
+				url = requestPath;
+			}
 				
-			url = (String) session.getAttribute("requestPath");
 
 		} else { // 로그인 실패 시
 			ras.addFlashAttribute("msg", "fail");
@@ -175,10 +184,74 @@ public class MemberController {
 		return "member/idFind";
 	}
 	
-	@RequestMapping(value = "pwFind", method = RequestMethod.GET)
-	public String pwFind(Model model) throws Exception {
+	//비번찾기 가이드
+	@RequestMapping(value = "emailGuide")
+	@ResponseBody
+	public String emailGuide(@RequestBody Member member) throws Exception {
+		System.out.println(member);
+		Member existMember = memberService.selectMember(member.getUser_id(), true);
+		if(existMember == null) {
+			return "fail";
+		}
+		String to = member.getUser_email(); // 받는 사람 이메일
+		String title = "[여기야!] 비밀번호 찾기";
+		String content = "비밀번호: " + existMember.getUser_pw();
+
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper messageHelper = new MimeMessageHelper(message, false, "UTF-8");
+
+		messageHelper.setFrom(from); 
+		messageHelper.setTo(to); 
+		messageHelper.setSubject(title); 
+		messageHelper.setText(content); 
+
+		mailSender.send(message);
 		
-		return "member/pwFind";
+
+		return "success";
+	}
+
+	@RequestMapping(value = "pwFind")
+	public String pwFind(@RequestParam(value = "next", required = false) String next,
+			HttpSession session, Model model) throws Exception {
+		System.out.println("next" + next);
+		Member existMember =(Member) model.asMap().get("existMember");
+		System.out.println("pwFind : " + existMember);
+		if(next != null) {
+			if(next.equals("auth")) {
+				if(existMember != null) {
+					return "member/pwFind2";
+				} else {
+					return "redirect:pwFind";
+				}
+			}
+		}
+		return "member/pwFind1";
+	}
+	@RequestMapping(value = "pwFindRun", method = RequestMethod.POST)
+	public String pwFindRun(Model model, RedirectAttributes ras,
+			@RequestParam("user_id") String user_id, HttpSession session) throws Exception {
+		System.out.println("user_id : "+user_id);
+		Member existMember = memberService.selectMember(user_id, false);
+		System.out.println("pwFindRun : "+ existMember); 
+		
+		if (existMember != null) { // 해당유저존재시 
+			ras.addFlashAttribute("existMember", existMember);
+			ras.addAttribute("next", "auth");
+		} else {
+			ras.addFlashAttribute("msg", "fail");
+		}
+		return "redirect:pwFind";
+	}
+	@RequestMapping(value = "pwFind1")
+	public String pwFind1(Model model) throws Exception {
+		
+		return "member/pwFind1";
+	}
+	@RequestMapping(value = "pwFind2")
+	public String pwFind2(Model model) throws Exception {
+		
+		return "member/pwFind2";
 	}
 	@RequestMapping(value = "pwFindResult", method = RequestMethod.GET)
 	public String pwFindResult(Model model) throws Exception {

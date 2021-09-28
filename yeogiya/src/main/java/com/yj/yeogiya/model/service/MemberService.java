@@ -22,6 +22,8 @@ public interface MemberService {
 	public boolean checkDupNick(String user_nick);
 	//로그인
 	public Member loginRun(Member member);
+	public Member selectMember(String user_id, boolean all);
+	public Member findId(Member member);
 	
 //************UPDATE************
 	

@@ -27,6 +27,7 @@
 			<a href="" class="logo text-pink">여기야!</a>
 		</div>
 		<div class="form-group mx-auto">
+			<form id="frmTerm">
 		<!-- 서비스 이용약관 -->
 			<div class="h4 mb-3">여기야! 서비스 이용약관
 			</div>
@@ -250,7 +251,7 @@
 			  </div>
 			</div>
     		<div class="custom-control custom-checkbox my-2">
-			  <input class="custom-control-input" type="checkbox" value="" name="serviceCheck" id="serviceCheck">
+			  <input class="custom-control-input" type="checkbox" name="serviceCheck" id="serviceCheck">
 			  <label class="custom-control-label" for="serviceCheck">
 			    이용약관에 동의합니다. (필수)
 			  </label>
@@ -330,6 +331,7 @@
 					<button class="btn btn-pink-outline btn-lg mt-4 w-100" type="button" id="joinCancel" onclick="history.back();">취소</button>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
 	<%@ include file="../cdn/js.jsp" %>
@@ -347,10 +349,10 @@
 			let serviceCheck = document.getElementById("serviceCheck").checked;
 			let  geoCheck = document.getElementById("geoCheck").checked;
 			let  ageCheck = document.getElementById("ageCheck").checked;
-			if(!(serviceCheck && geoCheck)){
+			if(!(serviceCheck && geoCheck && ageCheck)){
 				alert("약관에 동의해주세요.");
 			} else {
-				location.href="${memberPath}/signUp";
+				$('#frmTerm').submit();
 			}
 		}
 	</script>

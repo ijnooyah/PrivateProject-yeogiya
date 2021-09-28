@@ -37,6 +37,15 @@ public class Member {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public Member(String user_id, String user_email) {
+		super();
+		this.user_id = user_id;
+		this.user_email = user_email;
+	}
+
+
 	public String getUser_id() {
 		return user_id;
 	}
