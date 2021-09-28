@@ -46,16 +46,11 @@
 	
 %>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
+<c:set var="noProfile" value="${contextPath}/resources/image/no-profile.png" scope="application"/>
+<c:set var="memberPath" value="${contextPath}/member" scope="application"/>
 <c:set var="sortLocalPArr" value="<%=sortLocalPArr%>" scope="application"/>
 <c:set var="sortLocalCArr" value="<%=sortLocalCArr%>" scope="application"/>
 <c:set var="slJsonArr" value="<%=slJsonArr%>" scope="application"/>
-<%-- <c:set var="subLocalArr" value="<%=subLocalArr%>" scope="application"/> --%>
-<%-- <c:set var="sortBoardArr" value="<%=sortBoardArr%>" scope="application"/> --%>
-<%-- <c:set var="sortPlaceArr" value="<%=sortPlaceArr%>" scope="application"/> --%>
-
-<%-- <c:set var="localPath" value="${contextPath}/${sortLocalP.eng_name}" scope="application"/> --%>
-<%-- <c:set var="listPath" value="${contextPath}/${sortLocalP.eng_name}/list" scope="application"/> --%>
-<c:set var="noProfile" value="${contextPath}/resources/image/no-profile.png" scope="application"/>
 
 
 <c:if test="${not empty bs.sortBoard}">

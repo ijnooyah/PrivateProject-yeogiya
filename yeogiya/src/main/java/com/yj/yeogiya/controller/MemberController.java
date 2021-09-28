@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,9 @@ import com.yj.yeogiya.model.vo.BoardTag;
 import com.yj.yeogiya.model.vo.Member;
 import com.yj.yeogiya.model.vo.Sort;
 
+
 @SessionAttributes({"loginMember"})
+@RequestMapping("/member")
 @Controller
 public class MemberController {
 	
@@ -129,13 +132,12 @@ public class MemberController {
 	
 	// 로그인 
 	@RequestMapping("loginRun")
-	public String loginRun(Member member, Model model,
+	public String loginRun(Member member, Model model, HttpSession session,
 			HttpServletResponse response, RedirectAttributes ras) throws Exception {
 
 		System.out.println("member : "+member);
 		Member loginMember = memberService.loginRun(member);
 		System.out.println("loginMember : "+ loginMember); 
-		
 		String url = "";
 		if (loginMember != null) { // 로그인 성공 시
 			model.addAttribute("loginMember", loginMember);
@@ -154,13 +156,13 @@ public class MemberController {
 
 			// 생성된 쿠키 객체를 응답 객체에 담아서 내보냄
 			response.addCookie(cookie);
-
-			url = "/"; // 성공 시 메인페이지
+				
+			url = (String) session.getAttribute("requestPath");
 
 		} else { // 로그인 실패 시
 			ras.addFlashAttribute("msg", "fail");
 
-			url = "login"; // 로그인 실패 시 로그인 전환 화면으로 재요청하는 주소를 작성.
+			url = "login"; 
 		}
 
 		return "redirect:" + url;

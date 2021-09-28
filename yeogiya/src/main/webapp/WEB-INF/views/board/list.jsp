@@ -272,7 +272,7 @@ div.subLocal_wrap a.active {
 	
 	<div class="d-flex mb-1">
 		<a type="button" href="${localPath}/insert?${allQ}"
-			class="btn-sm btn ml-auto mr-2 btn-plain">
+			class="loginNeed btn-sm btn ml-auto mr-2 btn-plain">
 			    글쓰기
 		</a>
 	</div>

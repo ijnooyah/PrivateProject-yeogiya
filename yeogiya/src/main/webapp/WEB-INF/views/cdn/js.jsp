@@ -77,4 +77,57 @@
         var bg = $(this).data('setbg');
         $(this).css('background-image', 'url(' + bg + ')');
     });
+	
+	//로그인 필수버튼들
+	var login_id = "${loginMember.user_id}"; // 로그인한사람 id
+	if(login_id == '') {
+		$(".container").on("click", ".loginNeed", function(e) {
+			e.preventDefault();
+			Swal.fire({
+				title: '로그인 필수',
+				text: '로그인 하시겠습니까?', 
+				allowOutsideClick: false,
+// 				iconColor: "#1f5e43",
+				icon: 'error', 
+				confirmButtonText: "확인",
+// 				confirmButtonColor: "#1f5e43",
+				cancelButtonText: "취소",
+				showCancelButton: true,
+			}).then(function(result) {
+				if(result.isConfirmed) {
+					location.href = "${memberPath}/login";
+				} 
+			});
+			return false;
+		});
+	} else {
+		$('#like').on('click', function() {
+			var url = "${localPath}/like?board_no=${board.board_no}";
+			$.get(url, function(rData) {
+				console.log(rData);
+//	 			let spanLike = document.querySelector('#like')
+				if (rData == "like") {
+//	 				spanLike.classList.replace('fa-heart-o', 'fa-heart');
+					$('#like').css('color', 'var(--danger)');
+					$('#like').switchClass('fa-heart-o', 'fa-heart');
+					$(".like_cnt").text(Number($("#like_cnt").text()) + 1);
+				} else {
+					$('#like').css('color', 'var(--gray)');
+					$('#like').switchClass('fa-heart', 'fa-heart-o');
+					$(".like_cnt").text(Number($("#like_cnt").text()) - 1);
+				}
+			});
+		})
+		
+		$('#bookmark').on('click', function() {
+			var url = "${localPath}/bookmark?board_no=${board.board_no}";
+			$.get(url, function(rData) {
+				console.log(rData);
+				console.log($('#bookmark').find('path'));
+				$('#bookmark > .bi-bookmark').toggleClass('d-none');
+				$('#bookmark > .bi-bookmark-fill').toggleClass('d-none');
+			});
+		})
+	}
 	</script>
+	

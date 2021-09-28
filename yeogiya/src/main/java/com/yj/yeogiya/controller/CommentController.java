@@ -54,7 +54,7 @@ public class CommentController {
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
 	public String update(@RequestBody Comment cmt) throws Exception {
-		logger.info("update");
+//		logger.info("update");
 //		System.out.println(cmt);
 		commentService.updateComment(cmt);
 		return "success";
@@ -62,7 +62,7 @@ public class CommentController {
 		
 	@RequestMapping(value="delete", method=RequestMethod.POST)
 	public int delete(@RequestBody Comment cmt) throws Exception {
-		logger.info("delete");
+//		logger.info("delete");
 //		System.out.println(cmt);
 		return commentService.deleteComment(cmt);
 	}

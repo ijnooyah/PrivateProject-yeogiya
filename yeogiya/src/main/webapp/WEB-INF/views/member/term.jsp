@@ -350,7 +350,7 @@
 			if(!(serviceCheck && geoCheck)){
 				alert("약관에 동의해주세요.");
 			} else {
-				location.href="${contextPath}/signUp";
+				location.href="${memberPath}/signUp";
 			}
 		}
 	</script>

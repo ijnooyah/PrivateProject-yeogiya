@@ -3,6 +3,7 @@ package com.yj.yeogiya.common;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import com.yj.yeogiya.controller.MemberController;
 import com.yj.yeogiya.model.service.BoardService;
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardSearch;
+import com.yj.yeogiya.model.vo.Member;
 import com.yj.yeogiya.model.vo.Sort;
 
 

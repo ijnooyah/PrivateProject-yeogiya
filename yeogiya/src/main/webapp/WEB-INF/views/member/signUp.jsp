@@ -123,7 +123,7 @@
 		<span class="font-weight-400">
 		    이미 아이디가 있으신가요?
 		</span>
-		<a href="${contextPath}/login" class="font-weight-700 text-pink">로그인</a>
+		<a href="${memberPath}/login" class="font-weight-700 text-pink">로그인</a>
 	</div>
 	</div>
 	<%@ include file="../cdn/js.jsp" %>
@@ -197,7 +197,7 @@
 	 	 	                data: {
 	 	 	                	'user_id': value 
 	 	 	                },
-	 	 	                url: "${contextPath}/checkDupId",
+	 	 	                url: "${memberPath}/checkDupId",
 	 	 	                success: function (data) {
 	 	 	                	if(data=="true"){	// 중복일경우
 	 	 	                		console.log('중복');
@@ -268,7 +268,7 @@
 	 	 	                data: {
 	 	 	                	'user_nick': value 
 	 	 	                },
-	 	 	                url: "${contextPath}/checkDupNick",
+	 	 	                url: "${memberPath}/checkDupNick",
 	 	 	                success: function (data) {
 	 	 	                	if(data=="true"){	// 중복일경우
 	 	 	                		console.log('중복');
@@ -349,7 +349,7 @@
  	                data: {
  	                	'user_email': value 
  	                },
- 	                url: "${contextPath}/emailAuth",
+ 	                url: "${memberPath}/emailAuth",
  	               success : function(data) {
  	            	console.log('authNum', data)
  	            	authNum = data; 

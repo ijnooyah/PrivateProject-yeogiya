@@ -118,14 +118,16 @@
 							<svg xmlns="http://www.w3.org/2000/svg" id="share" width="0.98rem" height="0.98rem" fill="currentColor" class="bi bi-share text-muted cursor-pointer" viewBox="0 0 16 16">
 							  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
 							</svg>
-							<!-- 수정 삭제 버튼 -->
+							<%-- 수정 삭제 버튼  --%>
+							<c:if test="${loginMember.user_id == board.user_id}">
 							<svg class="bi bi-three-dots-vertical cursor-pointer ml-2" style="opacity:.7;" data-toggle="dropdown" width="1.2rem" height="1.2rem" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 								<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 							</svg>
-							<div class="dropdown-menu dropdown-menu-right" style="min-width:4rem; font-size:0.8rem;">
-								 <a class="dropdown-item" href="${localPath}/update/${board.board_no}?${allQ}">수정</a> 
-								 <a class="dropdown-item" href="javascript:doDelete();">삭제</a>
-							</div>
+								<div class="dropdown-menu dropdown-menu-right" style="min-width:4rem; font-size:0.8rem;">
+									 <a class="dropdown-item" href="${localPath}/update/${board.board_no}?${allQ}">수정</a> 
+									 <a class="dropdown-item" href="javascript:doDelete();">삭제</a>
+								</div>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -148,14 +150,18 @@
 				</div>
 				<!-- 글버튼 -->
 				<div class="row mb-2 content-bottom">
-					<span class="fa ${not empty board.likeBoard ? 'fa-heart' : 'fa-heart-o'}
+					<span class="loginNeed fa ${not empty board.likeBoard ? 'fa-heart' : 'fa-heart-o'}
 						  mr-1 cursor-pointer" id="like" 
 						  style="line-height: 1.5;
 						  ${not empty board.likeBoard ? 'color:var(--danger)' : 'color:var(--gray)'}"></span>
 					<span class="mr-2 like_cnt" id="like_cnt">${board.like_cnt}</span>  
-					<span class="fa fa-comment-o ml-2 mr-1" id="cmt" style="line-height: 1.4;"></span>
+					<span class="loginNeed fa fa-comment-o ml-2 mr-1" id="cmt" style="line-height: 1.4;"></span>
 					<span id="cmt_cnt" class="cmt_cnt">${board.cmt_cnt}</span> 
-					<a href="" class="ml-auto text-muted font-size-090">신고</a>
+					<c:if test="${loginMember.user_id != board.user_id}">
+					<c:if test="${not empty loginMember}">
+						<a href="" class="ml-auto text-muted font-size-090">신고</a>
+					</c:if>
+					</c:if>
 				</div>
 			</div>
 			<!-- 상세보기 댓글 -->
@@ -175,33 +181,59 @@
 	<%@ include file="../cdn/js.jsp" %>
 	<!-- like,bookmark,link --> 
 	<script>
-	$('#like').on('click', function() {
-		var url = "${localPath}/like?board_no=${board.board_no}";
-		$.get(url, function(rData) {
-			console.log(rData);
-// 			let spanLike = document.querySelector('#like')
-			if (rData == "like") {
-// 				spanLike.classList.replace('fa-heart-o', 'fa-heart');
-				$('#like').css('color', 'var(--danger)');
-				$('#like').switchClass('fa-heart-o', 'fa-heart');
-				$(".like_cnt").text(Number($("#like_cnt").text()) + 1);
-			} else {
-				$('#like').css('color', 'var(--gray)');
-				$('#like').switchClass('fa-heart', 'fa-heart-o');
-				$(".like_cnt").text(Number($("#like_cnt").text()) - 1);
-			}
-		});
-	})
+// 	var login_id = "${loginMember.user_id}"; // 로그인한사람 id
+// 	if(login_id == '') {
+// 		$(".board-container").on("click", ".loginNeed", function(e) {
+// 			e.preventDefault();
+// 			Swal.fire({
+// 				title: '로그인 필수',
+// 				text: '로그인 하시겠습니까?', 
+// 				allowOutsideClick: false,
+// // 				iconColor: "#1f5e43",
+// 				icon: 'error', 
+// 				confirmButtonText: "확인",
+// // 				confirmButtonColor: "#1f5e43",
+// 				cancelButtonText: "취소",
+// 				showCancelButton: true,
+// 			}).then(function(result) {
+// 				if(result.isConfirmed) {
+// 					location.href = "${contextPath}/login";
+// 				} 
+// 			});
+// 			return false;
+// 		});
+// 	} else {
+// 		$('#like').on('click', function() {
+// 			var url = "${localPath}/like?board_no=${board.board_no}";
+// 			$.get(url, function(rData) {
+// 				console.log(rData);
+// //	 			let spanLike = document.querySelector('#like')
+// 				if (rData == "like") {
+// //	 				spanLike.classList.replace('fa-heart-o', 'fa-heart');
+// 					$('#like').css('color', 'var(--danger)');
+// 					$('#like').switchClass('fa-heart-o', 'fa-heart');
+// 					$(".like_cnt").text(Number($("#like_cnt").text()) + 1);
+// 				} else {
+// 					$('#like').css('color', 'var(--gray)');
+// 					$('#like').switchClass('fa-heart', 'fa-heart-o');
+// 					$(".like_cnt").text(Number($("#like_cnt").text()) - 1);
+// 				}
+// 			});
+// 		})
+		
+// 		$('#bookmark').on('click', function() {
+// 			var url = "${localPath}/bookmark?board_no=${board.board_no}";
+// 			$.get(url, function(rData) {
+// 				console.log(rData);
+// 				console.log($('#bookmark').find('path'));
+// 				$('#bookmark > .bi-bookmark').toggleClass('d-none');
+// 				$('#bookmark > .bi-bookmark-fill').toggleClass('d-none');
+// 			});
+// 		})
+// 	}
 	
-	$('#bookmark').on('click', function() {
-		var url = "${localPath}/bookmark?board_no=${board.board_no}";
-		$.get(url, function(rData) {
-			console.log(rData);
-			console.log($('#bookmark').find('path'));
-			$('#bookmark > .bi-bookmark').toggleClass('d-none');
-			$('#bookmark > .bi-bookmark-fill').toggleClass('d-none');
-		});
-	})
+	
+	
 	
 	$("#share").on('click', function() {
 		console.log(window.document.location.href);
@@ -326,7 +358,7 @@
 		var sendData = {
 				"c_content" : c_content,
 				"b_no" 	    : b_no,
-	 			"user_id"	: "mimi"
+	 			"user_id"	: login_id
 		}
 		$.ajax({
 			"url" : url,
@@ -366,7 +398,7 @@
 		var sendData = {
 				"c_content" : c_content,
 				"b_no" 	    : b_no,
-	 			"user_id"	: "mimi",
+	 			"user_id"	: login_id,
 				"parent_c_no" : parent_c_no,
 				"re_group" : re_group,
 		}
@@ -410,9 +442,6 @@
 
 	var board_writer = "${board.user_id}"; // 글작성자 id
 
-// 	if (loginVo != null) {
-// 		var login_id = "${loginVo.user_id}"; // 로그인한사람 id
-// 	}
 	// 댓글 리스트 조회
 	function selectCommentList() {
 		
@@ -442,9 +471,11 @@
 				cloneDiv.show();
 				
 				//자기 댓글이 아닐경우 수정삭제 안보이게하기, 신고버튼은 보이게 하기(신고 기능 없음)
-				if(this.user_id != "mimi") {
-					cloneDiv.find(".dropdown").hide();
-//	 				cloneDiv.find(".report").show();
+				if(this.user_id != login_id) {
+					cloneDiv.find(".private").remove();
+					if('${loginMember}' != "") {
+	 				cloneDiv.find(".report").show();
+					}
 				}
 				
 				//

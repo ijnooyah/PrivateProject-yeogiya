@@ -54,7 +54,7 @@
 					<div class="d-table-cell mr-2 set-bg rounded-circle border user_img" 
 						 style="width:34px; height:34px;"></div>
 					<div class="d-table-cell">
-						<a href="" class="c_user_nick">윤지</a>
+						<a href="" class="c_user_nick"></a>
 					</div>
 					<a class="cancel ml-auto text-muted font-size-080" href="javascript:cancelUpdate();">취소</a>
 				</div>
@@ -76,16 +76,16 @@
 					<div class="comment_right w-100 pl-2">
 						<div class="comment_right_top d-flex">
 							<div class="d-table-cell mr-1">
-								<a href="" class="c_user_nick">윤지</a>
+								<a href="" class="c_user_nick"></a>
 							</div>
 							<div class="d-table-cell">
 								<span class="is_board_writer badge badge-pill badge-pink font-size-060 align-top" style="display:none;">글주인</span>
 							</div>
 							<!-- 댓글, 수정 삭제 -->
-							<svg class="bi bi-three-dots-vertical cursor-pointer ml-auto" data-toggle="dropdown" width="16" height="16" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+							<svg class="bi bi-three-dots-vertical cursor-pointer ml-auto private" data-toggle="dropdown" width="16" height="16" fill="var(--gray)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 								<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 							</svg>
-							<div class="dropdown-menu dropdown-menu-right" style="min-width:4rem;font-size:0.8rem;">
+							<div class="dropdown-menu dropdown-menu-right private" style="min-width:4rem;font-size:0.8rem;">
 								 <a class="dropdown-item doUpdateComment" 
 								 	href="javascript:void(0);" >수정</a> 
 								 <a class="dropdown-item deleteComment" 
@@ -100,9 +100,9 @@
 						<div class="comment_right_bottom">
 							<span class="c_reg_date">21.09.02 20:05</span>
 							<span>|</span>
-							<span class="loginNeed doRecomment cursor-pointer" onclick="doRecomment(1)">답글</span>
-							<span>|</span>
-							<span class="cursor-pointer" onclick="신고()">신고</span>
+							<span class="doRecomment cursor-pointer" onclick="doRecomment(1)">답글</span>
+							<span class="report" style="display:none;">|</span>
+							<a class="cursor-pointer report" onclick="신고()" style="display:none;">신고</a>
 						</div>
 					</div>
 			</div>
@@ -119,7 +119,7 @@
 	<div class="commentWrite-container my-4">
 		<div class="input-group px-5">
 			<textarea id="c_content" name="c_content" spellcheck="false" autocomplete="off"
-				class="form-control rounded-0 font-size-085" placeholder="댓글을 남겨주세요."
+				class="loginNeed form-control rounded-0 font-size-085" placeholder="${not empty loginMember ? '댓글을 남겨주세요.' : '댓글을 작성하려면 로그인 해주세요.' }"
 				 style="height:100px; resize:none;"></textarea>
 			<div class="input-group-append">
 				<button class="loginNeed btn btn-pink rounded-0 font-size-090" type="button" style="width:100px;" 
@@ -132,8 +132,8 @@
 		<div id="reply_div" style="display:none;">
 			<div class="input-group px-5">
 				<input type="hidden" id="parent_c_no" value=""/>
-				<textarea id="re_c_content" class="form-control rounded-0 font-size-085" spellcheck="false" autocomplete="off"
-					 style="height:100px; resize:none;" placeholder="답댓글을 남겨보세요."></textarea>
+				<textarea id="re_c_content" class="loginNeed form-control rounded-0 font-size-085" spellcheck="false" autocomplete="off"
+					 style="height:100px; resize:none;" placeholder="${not empty loginMember ? '댓글을 남겨주세요.' : '댓글을 작성하려면 로그인 해주세요.' }"></textarea>
 				<div class="input-group-append">
 					<button class="loginNeed btn btn-pink rounded-0 font-size-090 insertRecomment" type="button" style="width:100px;" 
 						onclick="insertRecomment(this)">등록</button>

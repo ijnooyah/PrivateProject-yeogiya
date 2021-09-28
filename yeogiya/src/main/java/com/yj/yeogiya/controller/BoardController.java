@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,16 +16,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.yj.yeogiya.model.service.BoardService;
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
+import com.yj.yeogiya.model.vo.Member;
 import com.yj.yeogiya.model.vo.Sort;
 
 
 @Controller
+@SessionAttributes("{loginMember}")
 @RequestMapping("/{sortLocalPEngName}")
 public class BoardController {
 	
@@ -32,6 +36,13 @@ public class BoardController {
 	
 	@Inject
 	private BoardService boardService;
+	
+	@ModelAttribute("loginMember")
+	public Member loginMember(HttpSession session) {
+		Member loginMember = (Member)session.getAttribute("loginMember");
+//		System.out.println("session" + loginMember);
+		return loginMember;
+	}
 	
 	@ModelAttribute("sortLocalP")
 	public Sort sortLocalP(
@@ -68,9 +79,14 @@ public class BoardController {
 	
 	//글상세보기페이지
 	@RequestMapping(value = "content/{board_no}")
-	public String content(Model model, @PathVariable("board_no") int board_no) throws Exception {
-//		logger.info("content");
-		String login_id = "mimi";
+	public String content(Model model, @PathVariable("board_no") int board_no,
+			@ModelAttribute("loginMember") Member loginMember) throws Exception {
+		logger.info("content");
+		System.out.println(loginMember);
+		String login_id = null;
+		if(loginMember != null) {
+			login_id = loginMember.getUser_id();
+		}
 		Board board = boardService.selectBoardArticle(login_id, board_no, false);
 		model.addAttribute("board", board);
 		return "board/boardView";
@@ -144,9 +160,14 @@ public class BoardController {
 	//좋아요
 	@RequestMapping(value = "like", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String like(@RequestParam int board_no) throws Exception {    
-//		logger.info("like");
-	    int result = boardService.likeBoard("mimi", board_no);
+	public String like(@RequestParam int board_no, @ModelAttribute("loginMember") Member loginMember) throws Exception {    
+		logger.info("like");
+		System.out.println(loginMember);
+		String login_id = null;
+		if(loginMember != null) {
+			login_id = loginMember.getUser_id();
+		}
+	    int result = boardService.likeBoard(login_id, board_no);
 	    
 	    if (result == 0) {
 	    	return "cancel";
@@ -157,9 +178,13 @@ public class BoardController {
 	//좋아요
 	@RequestMapping(value = "bookmark", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String bookmark(@RequestParam int board_no) throws Exception {    
-//		logger.info("bookmark");
-	    int result = boardService.bookmarkBoard("mimi", board_no);
+	public String bookmark(@RequestParam int board_no, @ModelAttribute("loginMember") Member loginMember) throws Exception {    
+		logger.info("bookmark");
+		String login_id = null;
+		if(loginMember != null) {
+			login_id = loginMember.getUser_id();
+		}
+	    int result = boardService.bookmarkBoard(login_id, board_no);
 	    
 	    if (result == 0) {
 	    	return "cancel";

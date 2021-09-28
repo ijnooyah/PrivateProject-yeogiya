@@ -58,7 +58,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public int insertBoardArticle(Board board) {
-		logger.info("insertBoardArticle");
+//		logger.info("insertBoardArticle");
 		int result = 0; 
 		// 1. board
 		int board_no = boardDao.insertBoard(board);
@@ -142,7 +142,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public Board selectBoardArticle(String login_id, int board_no, boolean isUpdate) {
-		logger.info("selectBoardArticle");
+//		logger.info("selectBoardArticle");
 		if (!isUpdate) {
 			boardDao.updateViewCnt(board_no);
 		}
@@ -160,7 +160,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public int updateBoardArticle(Board board) {
-		logger.info("updateBoardArticle");
+//		logger.info("updateBoardArticle");
 		int board_no = board.getBoard_no();
 		
 		// 1. board

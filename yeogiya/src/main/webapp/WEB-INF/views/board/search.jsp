@@ -37,7 +37,9 @@
 	<div class="search_wrap text-center mb-4">
 		<form id="searchFrm" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0">
 			<input type="hidden" name="sortBoard" value="${bs.sortBoard}">
-			<input type="hidden" name="subLocal" value="${bs.subLocal}">
+			<c:if test="${bs.sortBoard != 'all'}">
+				<input type="hidden" name="subLocal" value="${bs.subLocal}">
+			</c:if>
 			<c:if test="${not empty bs.sortPlace}">
 				<input type="hidden" name="sortPlace" value="${bs.sortPlace}">
 			</c:if>

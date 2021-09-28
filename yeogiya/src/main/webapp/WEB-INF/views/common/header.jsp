@@ -31,6 +31,10 @@
           	<li class="nav-item"><a href="#" class="nav-link">고객센터</a></li>
         </ul>
          <ul class="nav navbar-nav ml-auto">
+        	<c:if test="${empty loginMember}">
+				<li class="nav-item"><a class="nav-link" href="${memberPath}/login">로그인</a></li>
+			</c:if>
+         	<c:if test="${not empty loginMember}">
 			<li class="nav-item dropdown">
 				<div class="dropdown dropdown-svg">
 					<a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -69,9 +73,9 @@
 			<li class="nav-item dropdown ml-md-auto">
 				<div class="dropdown">
 					<a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-						<span class="pr-2 d-table-cell align-middle nickname">윤지</span>
+						<span class="pr-2 d-table-cell align-middle nickname">${loginMember.user_nick}</span>
 						<div class="d-table-cell mr-2 set-bg rounded-circle border" 
-							 data-setbg="${contextPath}/resources/image/profile2.jpg"
+							 data-setbg="${empty loginMember.user_img ? noProfile : loginMember.user_img}"
 							 style="width:36px; height:36px;"></div>
 					</a>
 				    <div class="dropdown-menu dropdown-menu-right">
@@ -82,8 +86,7 @@
 				    </div>
 			    </div>
 			</li>
-			<!-- 로그인 안했을 때 -->
-<!-- 		<li class="nav-item"><a class="nav-link" href="#">로그인</a></li> -->
+			</c:if>
 		</ul>
       </div>
   </div>

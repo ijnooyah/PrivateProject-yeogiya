@@ -241,7 +241,7 @@ span.modalMapToggle::after {
 						<button class="btn btn-pink-outline">취소</button>
 					</div>
 				</div>
-				<input type="hidden" name="user_id" value="mimi"/>
+				<input type="hidden" name="user_id" value="${loginMember.user_id}"/>
 				<input type="hidden" name="sort_local" value="${sortLocalP.sort_no}"/>
 				<input type="hidden" name="has_img" value=""/>
 				<input type="hidden" id="place_name" name="place.place_name" value="">

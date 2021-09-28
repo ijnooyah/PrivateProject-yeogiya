@@ -35,4 +35,21 @@
 		<beans:property name="maxUploadSize" value="10485760"/>	
 	</beans:bean>
 	
+	
+	<!-- interceptor -->
+	<beans:bean class="com.yj.yeogiya.common.LoginInterceptor"
+		id="loginInterceptor"></beans:bean>
+		
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/resources/**"/>
+			<exclude-mapping path="/display"/>
+<!-- 			<exclude-mapping path="/**/main"/> -->
+			<exclude-mapping path="/comment/list"/>
+<!-- 			<exclude-mapping path="/**/content/*"/> -->
+			<exclude-mapping path="/member/**"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

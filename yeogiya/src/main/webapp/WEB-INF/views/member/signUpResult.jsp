@@ -31,7 +31,7 @@
 			<p class="pb-3">여기야! 에서 지역별 인기장소를 공유하고 즐겨보세요!<br>
 			 </p>
             <!-- 가입완료 버튼 -->
-			<a type="button" href="${contextPath}/login" class="btn btn-pink btn-lg btn-block mt-5">시작하기</a>
+			<a type="button" href="${memberPath}/login" class="btn btn-pink btn-lg btn-block mt-5">시작하기</a>
 		</div>
 	</form>
 	</div>
