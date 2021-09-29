@@ -50,8 +50,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member findId(Member member) {
-		return memberDao.findId(member);
+	public String findId(Member member) {
+		Member m = memberDao.findId(member);
+		String id = null;
+		if (m != null) {
+			String user_id = m.getUser_id();
+			id = user_id.substring(0, user_id.length() - 2) + "**";
+		}
+		return id;
+	}
+
+	@Override
+	public boolean checkDupEmail(String user_email) {
+		int result = memberDao.checkDupEmail(user_email);
+		if (result != 0) { // 중복
+			return true;
+		}
+		return false;
 	}
 
 

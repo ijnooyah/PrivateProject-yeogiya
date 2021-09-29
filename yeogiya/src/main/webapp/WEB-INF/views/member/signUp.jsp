@@ -334,15 +334,9 @@
  				$('.email-feedback').text("유효하지 않은 이메일 형식 입니다.");
  				$('#user_email').removeClass("is-valid");
  				$('#user_email').addClass("is-invalid");
- 			} else{
- 				console.log(value);
- 				$('#user_email').siblings('.valid-feedback').text("인증번호가 전송 되었습니다.");
-	 			$('#user_email').removeClass("is-invalid");
-	 			$('#user_email').addClass("is-valid");
-	 			$('#confirmEmail').attr('disabled', false);
- 				if($('#confirmEmail').hasClass('is-invalid')) {
- 					$('#confirmEmail').removeClass('is-invalid')
- 				}
+ 			} else {
+ 				
+ 				
  				$.ajax({
  	                type: "post",
  	                dataType: "text",
@@ -352,8 +346,22 @@
  	                url: "${memberPath}/emailAuth",
  	               success : function(data) {
  	            	console.log('authNum', data)
- 	            	authNum = data; 
- 	 		        validateCheck.email = true;
+	 	            	if(data == 'dup') {
+	 	            		validateCheck.email = false;
+	 	            		$('.email-feedback').text("이미 등록된 이메일 주소 입니다.");
+	 	    				$('#user_email').removeClass("is-valid");
+	 	    				$('#user_email').addClass("is-invalid");
+	 	            	} else {
+		 	            	$('#user_email').siblings('.valid-feedback').text("인증번호가 전송 되었습니다.");
+		 		 			$('#user_email').removeClass("is-invalid");
+		 		 			$('#user_email').addClass("is-valid");
+		 		 			$('#confirmEmail').attr('disabled', false);
+		 	 				if($('#confirmEmail').hasClass('is-invalid')) {
+		 	 					$('#confirmEmail').removeClass('is-invalid')
+		 	 				}
+		 	            	authNum = data; 
+		 	 		        validateCheck.email = true;
+	 	            	}
  	                },
  	                error : function() {
  	             	   validateCheck.email = false;

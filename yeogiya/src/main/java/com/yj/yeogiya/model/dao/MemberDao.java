@@ -22,6 +22,7 @@ public interface MemberDao {
 	public int checkDupId(String user_id);
 	//닉네임 중복체크
 	public int checkDupNick(String user_nick);
+	public int checkDupEmail(String user_email);
 	public Member login(Member member);
 	public Member selectMember(String user_id);
 	public Member findId(Member member);

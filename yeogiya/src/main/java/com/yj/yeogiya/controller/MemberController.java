@@ -93,7 +93,11 @@ public class MemberController {
 	//이메일 인증번호
 	@RequestMapping(value = "emailAuth")
 	@ResponseBody
-	public int emailAuth(@RequestParam("user_email") String user_email) throws Exception {
+	public String emailAuth(@RequestParam("user_email") String user_email) throws Exception {
+		boolean result = memberService.checkDupEmail(user_email);
+		if (result) {
+			return "dup";
+		}
 		String to = user_email; // 받는 사람 이메일
 		String title = "[여기야!] 회원가입 인증번호";
 		int authNum = 0;
@@ -112,7 +116,7 @@ public class MemberController {
 		mailSender.send(message);
 		
 
-		return authNum;
+		return String.valueOf(authNum);
 	}
 	@RequestMapping(value = "joinRun", method = RequestMethod.POST)
 	public String joinRun(Member member) throws Exception {
@@ -177,13 +181,6 @@ public class MemberController {
 		return "redirect:" + url;
 	}
 	
-	
-	@RequestMapping(value = "idFind", method = RequestMethod.GET)
-	public String idFind(Model model) throws Exception {
-		
-		return "member/idFind";
-	}
-	
 	//비번찾기 가이드
 	@RequestMapping(value = "emailGuide")
 	@ResponseBody
@@ -243,21 +240,51 @@ public class MemberController {
 		}
 		return "redirect:pwFind";
 	}
-	@RequestMapping(value = "pwFind1")
-	public String pwFind1(Model model) throws Exception {
-		
-		return "member/pwFind1";
+//	@RequestMapping(value = "pwFind1")
+//	public String pwFind1(Model model) throws Exception {
+//		
+//		return "member/pwFind1";
+//	}
+//	@RequestMapping(value = "pwFind2")
+//	public String pwFind2(Model model) throws Exception {
+//		
+//		return "member/pwFind2";
+//	}
+//	@RequestMapping(value = "pwFindResult", method = RequestMethod.GET)
+//	public String pwFindResult(Model model) throws Exception {
+//		
+//		return "member/pwFindResult";
+//	}
+
+	@RequestMapping(value = "idFind")
+	public String idFind(Member member, RedirectAttributes ras, Model model) throws Exception {
+		System.out.println(member);
+		String id = null;
+		if(member.getUser_name() != null && member.getUser_email() != null) {
+			id = memberService.findId(member);
+			System.out.println("id" + id);
+			if (id != null) {
+				model.addAttribute("id", id);
+				return "member/idFindResult";
+			} else {
+				ras.addFlashAttribute("msg", "fail");
+				return "redirect:idFind";
+			}
+			
+		} 
+		System.out.println("id" + id);
+		return "member/idFind";
 	}
-	@RequestMapping(value = "pwFind2")
-	public String pwFind2(Model model) throws Exception {
-		
-		return "member/pwFind2";
-	}
-	@RequestMapping(value = "pwFindResult", method = RequestMethod.GET)
-	public String pwFindResult(Model model) throws Exception {
-		
-		return "member/pwFindResult";
-	}
+	
+//	@RequestMapping(value = "idFindRun")
+//	public String idFindRun(Member member, RedirectAttributes ras) throws Exception {
+//		System.out.println(member);
+//		String id = memberService.findId(member);
+//		if (id != null) {
+//			ras.addFlashAttribute(")
+//		}
+//		return "member/idFind";
+//	}
 	
 	@RequestMapping(value = "idFindResult", method = RequestMethod.GET)
 	public String idFindResult(Model model) throws Exception {

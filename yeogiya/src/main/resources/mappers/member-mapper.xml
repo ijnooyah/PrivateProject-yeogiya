@@ -30,6 +30,11 @@
  		select count(*) from tbl_member
  		where user_nick = #{user_nick} and is_quit = 'N'
  	</select>
+ 	<!-- 이메일 중복체크 -->
+ 	<select id="checkDupEmail" resultType="int">
+ 		select count(*) from tbl_member
+ 		where user_email = #{user_email} and is_quit = 'N'
+ 	</select>
  	
  	<!-- 로그인 -->
  	<select id="login" resultType="Member">

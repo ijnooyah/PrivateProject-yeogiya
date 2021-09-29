@@ -44,4 +44,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE + "findId", member);
 	}
 
+	@Override
+	public int checkDupEmail(String user_email) {
+		return sqlSession.selectOne(NAMESPACE + "checkDupEmail", user_email);
+	}
+
 }

@@ -20,10 +20,12 @@ public interface MemberService {
 	public boolean checkDupId(String user_id);
 	//아이디 중복체크
 	public boolean checkDupNick(String user_nick);
+	public boolean checkDupEmail(String user_email);
 	//로그인
 	public Member loginRun(Member member);
 	public Member selectMember(String user_id, boolean all);
-	public Member findId(Member member);
+	//아이디 뒤에 두글자 자르고 ** 추가해서 리턴
+	public String findId(Member member);
 	
 //************UPDATE************
 	

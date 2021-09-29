@@ -19,7 +19,7 @@
 			<a href="" class="logo text-pink">여기야!</a>
 		</div>
 		<div class="text-center h4">아이디 조회 결과</div>
-		<div class="text-center">회원님의 아이디는 <span class="pink-color font-weight-600"> yoonji </span>입니다.</div>
+		<div class="text-center">회원님의 아이디는 <span class="text-pink font-weight-600"> ${id} </span>입니다.</div>
 		<div class="form-row w-75 m-auto">
 			<div class="col">
 				<button class="btn btn-pink mt-4 w-100" type="button">메인</button>
