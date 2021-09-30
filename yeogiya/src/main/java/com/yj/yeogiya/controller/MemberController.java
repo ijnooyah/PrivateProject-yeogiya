@@ -90,14 +90,20 @@ public class MemberController {
 		return String.valueOf(result);
 	}
 	
+	
+	//이메일 중복체크
+	@RequestMapping(value = "checkDupEmail")
+	@ResponseBody
+	public boolean checkDupEmail(@RequestParam("user_email") String user_email) throws Exception {
+		System.out.println(user_email);
+		boolean result = memberService.checkDupEmail(user_email);
+		return result;
+	}
+	
 	//이메일 인증번호
 	@RequestMapping(value = "emailAuth")
 	@ResponseBody
 	public String emailAuth(@RequestParam("user_email") String user_email) throws Exception {
-		boolean result = memberService.checkDupEmail(user_email);
-		if (result) {
-			return "dup";
-		}
 		String to = user_email; // 받는 사람 이메일
 		String title = "[여기야!] 회원가입 인증번호";
 		int authNum = 0;
@@ -118,14 +124,8 @@ public class MemberController {
 
 		return String.valueOf(authNum);
 	}
-	@RequestMapping(value = "joinRun", method = RequestMethod.POST)
-	public String joinRun(Member member) throws Exception {
-		System.out.println(member);
-		int result = memberService.join(member);
-		return "member/joinResult";
-	}
 	
-	@RequestMapping(value = "joinResult", method = RequestMethod.GET)
+	@RequestMapping(value = "joinRun", method = RequestMethod.GET)
 	public String joinResult(Member member) throws Exception {
 		System.out.println(member);
 		return "member/signUpResult";

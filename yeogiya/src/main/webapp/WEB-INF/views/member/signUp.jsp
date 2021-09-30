@@ -13,11 +13,6 @@
 	div.form-group{
 		width: 500px;
 	}
-	@media screen and (max-width: 750px){
-		div.form-group{
-			width: 90%;
-		}
-	}
 	</style>
 </head>
 <body>
@@ -326,6 +321,9 @@
 	 	});
 	 	
 	 	function sendAuthNum () {
+	 		authNum = null;
+	 		$('#confirmEmail').removeClass('is-invalid')
+	 		$('#confirmEmail').removeClass('is-valid')
 	 		validateCheck.email2 = false;
 	 		var emailReg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			var value = $('#user_email').val();
@@ -335,51 +333,74 @@
  				$('#user_email').removeClass("is-valid");
  				$('#user_email').addClass("is-invalid");
  			} else {
+ 				let sendData =  {'user_email': value };
+ 				var promise = new Promise(function(resolve, reject) {
+				$.ajax({
+						type : "post",
+						dataType : "text",
+						data : sendData,
+						url : "${memberPath}/checkDupEmail",
+						success : function(data) {
+							resolve(data);
+							if (data == "true") { // 중복일경우
+								console.log('중복');
+								validateCheck.email = false;
+								$('.email-feedback').text('이미 등록된 이메일 입니다');
+								$("#user_email").removeClass("is-valid");
+								$("#user_email").addClass("is-invalid");
+							} else { // 중복아닐경우
+								console.log('중복노')
+								validateCheck.email = true;
+								// 	                		$("#user_email").removeClass("is-invalid");
+								// 	      					$("#user_email").addClass("is-valid");
+							}
+						}
+					});
+				});
+			
  				
- 				
- 				$.ajax({
- 	                type: "post",
- 	                dataType: "text",
- 	                data: {
- 	                	'user_email': value 
- 	                },
- 	                url: "${memberPath}/emailAuth",
- 	               success : function(data) {
- 	            	console.log('authNum', data)
-	 	            	if(data == 'dup') {
-	 	            		validateCheck.email = false;
-	 	            		$('.email-feedback').text("이미 등록된 이메일 주소 입니다.");
-	 	    				$('#user_email').removeClass("is-valid");
-	 	    				$('#user_email').addClass("is-invalid");
-	 	            	} else {
-		 	            	$('#user_email').siblings('.valid-feedback').text("인증번호가 전송 되었습니다.");
-		 		 			$('#user_email').removeClass("is-invalid");
-		 		 			$('#user_email').addClass("is-valid");
-		 		 			$('#confirmEmail').attr('disabled', false);
-		 	 				if($('#confirmEmail').hasClass('is-invalid')) {
-		 	 					$('#confirmEmail').removeClass('is-invalid')
-		 	 				}
-		 	            	authNum = data; 
-		 	 		        validateCheck.email = true;
-	 	            	}
- 	                },
- 	                error : function() {
- 	             	   validateCheck.email = false;
- 	             	   alert('통신오류');
- 	                }
- 				});
- 			}
-			console.log('emailval',  validateCheck.email);
-	 	}
-	 	
-	 	function checkPw(){
-			if($("#user_pw").val()==$("#cfrmPw").val()){
+ 				promise.then(function(value) {
+					if (value == "false") {
+						$('#user_email').siblings('.valid-feedback').text("인증번호가 전송 되었습니다.");
+	 		 			$('#user_email').removeClass("is-invalid");
+	 		 			$('#user_email').addClass("is-valid");
+	 		 			$('#confirmEmail').attr('disabled', false);
+						$.ajax({
+		 	                type: "post",
+		 	                dataType: "text",
+		 	                data: sendData,
+		 	                url: "${memberPath}/emailAuth",
+		 	               success : function(data) {
+		 	            	console.log('authNum', data)
+			 	 				if($('#confirmEmail').hasClass('is-invalid')) {
+			 	 					$('#confirmEmail').removeClass('is-invalid')
+			 	 				}
+			 	            	authNum = data; 
+			 	 		        validateCheck.email2 = true;
+		 	                },
+		 	                error : function() {
+		 	             	   validateCheck.email2 = false;
+		 	             	   alert('통신오류');
+		 	                }
+		 				});
+					}
+				});
+
+				
+			}
+
+			console.log('emailval', validateCheck.email);
+			console.log('emailval2', validateCheck.email2);
+		}
+
+		function checkPw() {
+			if ($("#user_pw").val() == $("#cfrmPw").val()) {
 				console.log('일치');
 				validateCheck.pw2 = true;
 				console.log('비번확인', validateCheck.pw2);
 				$("#cfrmPw").removeClass("is-invalid");
 				$("#cfrmPw").addClass("is-valid");
-			}else{
+			} else {
 				console.log('불일치')
 				validateCheck.pw2 = false;
 				console.log('비번확인', validateCheck.pw2);
@@ -387,57 +408,61 @@
 				$("#cfrmPw").addClass("is-invalid");
 			}
 		}
-	 	
-	 	
-	 	$("#sendForm").click(function(){
-	 		$('.required').each(function() {
-	 			let value = $(this).val();
-		 		console.log($(this).attr('id'));
-	 			var id = $(this).attr('id');
-		 		if(value.trim() == "" || value == null) {
-		 			console.log('없음')
-		 			if(id == 'confirmEmail') {
-		 				$(".email-feedback").text("인증이 필요합니다.");
-		 			} else {
-		 				$(this).siblings(".invalid-feedback").text("필수 정보입니다.");
-		 			}
+
+		$("#sendForm").click(function() {
+			$('.required').each(function() {
+				let value = $(this).val();
+// 				console.log($(this).attr('id'));
+				var id = $(this).attr('id');
+				if (value.trim() == "" || value == null) {
+					console.log('없음')
+					if (id == 'confirmEmail') {
+						$(".email-feedback").text("인증이 필요합니다.");
+					} else {
+						$(this).siblings(".invalid-feedback").text("필수 정보입니다.");
+					}
 					$(this).removeClass("is-valid");
 					$(this).addClass("is-invalid");
-					switch(id) {
-					case 'user_id' :
+					switch (id) {
+					case 'user_id':
 						validateCheck.userId = false;
 						break;
-					case 'user_pw' :
+					case 'user_pw':
 						validateCheck.pw1 = false;
 						break;
-					case 'cfrmPw' :
+					case 'cfrmPw':
 						validateCheck.pw2 = false;
 						break;
-					case 'user_name' :
+					case 'user_name':
 						validateCheck.name = false;
 						break;
-					case 'user_nick' :
+					case 'user_nick':
 						validateCheck.nick = false;
 						break;
-					case 'user_phone' :
+					case 'user_phone':
 						validateCheck.phone = false;
 						break;
-					case 'user_email' :
+					case 'user_email':
 						validateCheck.email = false;
 						break;
-					case 'confirmEmail' :
+					case 'confirmEmail':
 						validateCheck.email2 = false;
 						break;
 					}
-	 			}
-	 		});
-	 		var valArr = Object.values(validateCheck);
-	 		for(var i = 0; i < valArr.length; i++) {
-	 			if(!valArr[i]) {
-	 				return;
-	 			}
-	 		}
-	 		$('#joinRun').submit();
+				}
+			});
+			if(validateCheck.email2 == false) {
+				$(".email-feedback").text("인증이 필요합니다.");
+				$("#confirmEmail").removeClass("is-valid");
+				$("#confirmEmail").addClass("is-invalid");
+			}
+			var valArr = Object.values(validateCheck);
+			for (var i = 0; i < valArr.length; i++) {
+				if (!valArr[i]) {
+					return;
+				}
+			}
+			$('#joinRun').submit();
 		});
 	</script>
 	<script>
