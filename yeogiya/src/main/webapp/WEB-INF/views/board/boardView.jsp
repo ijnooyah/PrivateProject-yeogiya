@@ -93,7 +93,7 @@
 								 data-setbg="${empty board.userImg ? noProfile : board.userImg}"
 								 style="width:30px; height:30px;"></div>
 							<div class="d-table-cell mr-2">
-								<a href="${contextPath}/profile/${board.user_id}" class="align-middle text-black">${board.userNick}</a>
+								<a href="${profilePath}/${board.user_id}" class="align-middle text-black">${board.userNick}</a>
 							</div>
 							<div class="d-table-cell mr-2">
 								<span class="align-middle text-muted">
@@ -488,7 +488,7 @@
 					cloneDiv.find(".user_img").css("background-image", "url(${noProfile})");
 				}
 				cloneDiv.find(".c_user_nick").text(this.user_nick);
-				cloneDiv.find(".c_user_nick").attr('href', '${contextPath}/profile/' + this.user_id)
+				cloneDiv.find(".c_user_nick").attr('href', '${profilePath}/' + this.user_id)
 				if (this.user_id == board_writer) {
 					cloneDiv.find(".is_board_writer").show();
 				}

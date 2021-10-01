@@ -22,7 +22,12 @@
 		 }
 	}
 	
+	// 게시판 카테고리 
+	List<Sort> sortBoardArr = (List<Sort>) request.getAttribute("sortBoardList");
+	
+	//지역배열 json
 	JSONArray slJsonArr = JSONArray.fromObject(sortLocalList);
+	
 // 	// 현재 상위지역 객체 얻기
 // 	Sort sortLocalP = (Sort) request.getAttribute("sortLocalP"); 
 // 	// 게시판 카테고리 
@@ -48,8 +53,10 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 <c:set var="noProfile" value="${contextPath}/resources/image/no-profile.png" scope="application"/>
 <c:set var="memberPath" value="${contextPath}/member" scope="application"/>
+<c:set var="profilePath" value="${contextPath}/member/profile" scope="application"/>
 <c:set var="sortLocalPArr" value="<%=sortLocalPArr%>" scope="application"/>
 <c:set var="sortLocalCArr" value="<%=sortLocalCArr%>" scope="application"/>
+<c:set var="sortBoardArr" value="<%=sortBoardArr%>" scope="application"/>
 <c:set var="slJsonArr" value="<%=slJsonArr%>" scope="application"/>
 
 

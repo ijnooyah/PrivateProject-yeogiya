@@ -198,7 +198,7 @@
  	<select id="selectBoardList" resultType="Board">
  		SELECT * 
 		FROM (SELECT ROWNUM rnum, A.*
-				 FROM ( SELECT a.*, b.sort_name sortLocalName, c.sort_name subLocalName,
+				 FROM ( SELECT a.*, b.sort_name sortLocalName, b.eng_name sortLocalEngName, c.sort_name subLocalName,
 					    d.sort_name sortBoardName, e.sort_name sortPlaceName,
 					    f.user_nick userNick, g.place_name placeName, g.place_address placeAddress
 					    <if test = "login_id != null">

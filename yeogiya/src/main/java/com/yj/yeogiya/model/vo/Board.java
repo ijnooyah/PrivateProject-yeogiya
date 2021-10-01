@@ -32,6 +32,7 @@ public class Board {
 	private String likeBoard; // 좋아요: 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
 	private String bmBoard; // 북마크 : 로그인한 사용자가 좋아요 했으면 값있고(값=글고유번호) 없으면 null (jstl에서는 empty)
 	private String sortLocalName;
+	private String sortLocalEngName;
 	private String subLocalName;
 	private String sortBoardName;
 	private String sortPlaceName;
@@ -340,6 +341,14 @@ public class Board {
 		this.placeAddress = placeAddress;
 	}
 
+	public String getSortLocalEngName() {
+		return sortLocalEngName;
+	}
+
+	public void setSortLocalEngName(String sortLocalEngName) {
+		this.sortLocalEngName = sortLocalEngName;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", board_title=" + board_title
@@ -349,12 +358,11 @@ public class Board {
 				+ rp_cnt + ", is_notice=" + is_notice + ", reg_date=" + reg_date + ", is_del=" + is_del + ", del_date="
 				+ del_date + ", mod_date=" + mod_date + ", place=" + place + ", tagList=" + tagList + ", imgList="
 				+ imgList + ", likeBoard=" + likeBoard + ", bmBoard=" + bmBoard + ", sortLocalName=" + sortLocalName
-				+ ", subLocalName=" + subLocalName + ", sortBoardName=" + sortBoardName + ", sortPlaceName="
-				+ sortPlaceName + ", userNick=" + userNick + ", userImg=" + userImg + ", jsonTagList=" + jsonTagList
-				+ ", nextNo=" + nextNo + ", prevNo=" + prevNo + ", placeName=" + placeName + ", placeAddress="
-				+ placeAddress + ", tag=" + tag + "]";
+				+ ", sortLocalEngName=" + sortLocalEngName + ", subLocalName=" + subLocalName + ", sortBoardName="
+				+ sortBoardName + ", sortPlaceName=" + sortPlaceName + ", userNick=" + userNick + ", userImg=" + userImg
+				+ ", jsonTagList=" + jsonTagList + ", nextNo=" + nextNo + ", prevNo=" + prevNo + ", placeName="
+				+ placeName + ", placeAddress=" + placeAddress + ", tag=" + tag + "]";
 	}
-
 
 
 	

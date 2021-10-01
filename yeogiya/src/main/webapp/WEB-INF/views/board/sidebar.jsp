@@ -8,8 +8,7 @@
 
 	//현재 상위지역 객체 얻기
 	Sort sortLocalP = (Sort) request.getAttribute("sortLocalP"); 
-	// 게시판 카테고리 
-	List<Sort> sortBoardArr = (List<Sort>) request.getAttribute("sortBoardList");
+
 	// 장소 카테고리
 	List<Sort> sortPlaceArr = (List<Sort>) request.getAttribute("sortPlaceList");
 	// 현재 상위 지역에 따른 하위지역담을 리스트 초기화
@@ -29,7 +28,6 @@
 %>
 
 <c:set var="subLocalArr" value="<%=subLocalArr%>" scope="application"/>
-<c:set var="sortBoardArr" value="<%=sortBoardArr%>" scope="application"/>
 <c:set var="sortPlaceArr" value="<%=sortPlaceArr%>" scope="application"/>
 
 <c:set var="localPath" value="${contextPath}/${sortLocalP.eng_name}" scope="application"/>

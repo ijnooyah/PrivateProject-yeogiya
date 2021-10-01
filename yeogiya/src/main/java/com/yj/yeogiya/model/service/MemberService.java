@@ -23,15 +23,14 @@ public interface MemberService {
 	public boolean checkDupEmail(String user_email);
 	//로그인
 	public Member loginRun(Member member);
-	public Member selectMember(String user_id, boolean all);
+	public Member selectMember(String user_id, BoardSearch bs, boolean getAll);
 	//아이디 뒤에 두글자 자르고 ** 추가해서 리턴
 	public String findId(Member member);
 	
 //************UPDATE************
 	
 	
-	
 //************DELETE************
-	
+	public int deleteBoardList(List<Board> boardList);
 	
 }

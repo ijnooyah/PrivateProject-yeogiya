@@ -30,8 +30,9 @@ public class Member {
 	private String subLocalName;
 	private String userGradeName;
 	private String saveId;
+	private String sortLocalEngName;
 	
-	
+	private List<Board> boardList;
 	
 	public Member() {
 		super();
@@ -196,6 +197,28 @@ public class Member {
 	public void setIs_quit(String is_quit) {
 		this.is_quit = is_quit;
 	}
+
+
+	public List<Board> getBoardList() {
+		return boardList;
+	}
+
+
+	public void setBoardList(List<Board> boardList) {
+		this.boardList = boardList;
+	}
+
+
+	public String getSortLocalEngName() {
+		return sortLocalEngName;
+	}
+
+
+	public void setSortLocalEngName(String sortLocalEngName) {
+		this.sortLocalEngName = sortLocalEngName;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Member [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_nick="
@@ -205,8 +228,10 @@ public class Member {
 				+ ", post_cnt=" + post_cnt + ", cmt_cnt=" + cmt_cnt + ", msg_cnt=" + msg_cnt + ", like_cnt=" + like_cnt
 				+ ", rp_cnt=" + rp_cnt + ", sign_date=" + sign_date + ", is_quit=" + is_quit + ", quit_date="
 				+ quit_date + ", sortLocalName=" + sortLocalName + ", subLocalName=" + subLocalName + ", userGradeName="
-				+ userGradeName + ", saveId=" + saveId + "]";
+				+ userGradeName + ", saveId=" + saveId + ", sortLocalEngName=" + sortLocalEngName + ", boardList="
+				+ boardList + "]";
 	}
-	
+
+
 	
 }

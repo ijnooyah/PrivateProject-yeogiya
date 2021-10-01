@@ -1,10 +1,14 @@
 package com.yj.yeogiya.model.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.yj.yeogiya.model.vo.Board;
+import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.Member;
 
 @Repository
@@ -47,6 +51,21 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int checkDupEmail(String user_email) {
 		return sqlSession.selectOne(NAMESPACE + "checkDupEmail", user_email);
+	}
+
+	@Override
+	public List<Board> selectBoardList(BoardSearch bs) {
+		return sqlSession.selectList(NAMESPACE + "selectBoardList", bs);
+	}
+
+	@Override
+	public int getBoardListCount(BoardSearch bs) {
+		return sqlSession.selectOne(NAMESPACE + "getBoardListCount", bs);
+	}
+
+	@Override
+	public int deleteBoardList(List<Board> boardList) {
+		return sqlSession.update(NAMESPACE + "deleteBoardList", boardList);
 	}
 
 }

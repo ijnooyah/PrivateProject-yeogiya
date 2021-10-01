@@ -43,5 +43,5 @@ public class CommonDataAdvice {
 	public BoardSearch boardSearch(BoardSearch bs, Model model) {
 		return bs;
 	}
-
+	
 }

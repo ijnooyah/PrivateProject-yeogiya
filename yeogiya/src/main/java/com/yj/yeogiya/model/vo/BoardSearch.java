@@ -2,6 +2,10 @@ package com.yj.yeogiya.model.vo;
 
 public class BoardSearch {
 	private String login_id; //로그인한 아이디
+	private String user_id; //just 아이디
+	
+	
+	private String tab;
 	
 	private int board_no;
 	
@@ -154,13 +158,27 @@ public class BoardSearch {
 	public void setSortLocalEngName(String sortLocalEngName) {
 		this.sortLocalEngName = sortLocalEngName;
 	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getTab() {
+		return tab;
+	}
+	public void setTab(String tab) {
+		this.tab = tab;
+	}
 	@Override
 	public String toString() {
-		return "BoardSearch [login_id=" + login_id + ", board_no=" + board_no + ", sortLocalEngName=" + sortLocalEngName
-				+ ", subLocal=" + subLocal + ", sortBoard=" + sortBoard + ", sortPlace=" + sortPlace + ", order="
-				+ order + ", searchType=" + searchType + ", keyword=" + keyword + ", page=" + page + ", startRow="
-				+ startRow + ", endRow=" + endRow + ", count=" + count + ", startPage=" + startPage + ", endPage="
-				+ endPage + ", totalPage=" + totalPage + ", perPage=" + perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
+		return "BoardSearch [login_id=" + login_id + ", user_id=" + user_id + ", tab=" + tab + ", board_no=" + board_no
+				+ ", sortLocalEngName=" + sortLocalEngName + ", subLocal=" + subLocal + ", sortBoard=" + sortBoard
+				+ ", sortPlace=" + sortPlace + ", order=" + order + ", searchType=" + searchType + ", keyword="
+				+ keyword + ", page=" + page + ", startRow=" + startRow + ", endRow=" + endRow + ", count=" + count
+				+ ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage + ", perPage="
+				+ perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 	}
 
+	
 }

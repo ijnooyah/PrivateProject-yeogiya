@@ -44,8 +44,13 @@
  	
  	<!-- 아이디로 멤버 얻기 -->
  	<select id="selectMember" resultType="Member">
- 		select * from tbl_member
- 		where user_id = #{user_id} and is_quit = 'N'
+ 		select a.*, b.sort_name sortLocalName, b.eng_name sortLocalEngName,
+ 		 c.sort_name subLocalName, d.sort_name userGradeName
+ 		from tbl_member a
+ 		LEFT OUTER JOIN tbl_sort_local b ON a.sort_local = b.sort_no
+		LEFT OUTER JOIN tbl_sort_local c ON a.sub_local = c.sort_no
+		JOIN tbl_member_grade d ON a.user_grade = d.sort_no
+ 		where user_id = #{user_id}
  	</select>
  	<!-- 아이디찾기 -->
  	<select id="findId" resultType="Member">
@@ -53,7 +58,83 @@
  		where user_name = #{user_name} and user_email = #{user_email} and is_quit = 'N' 
  	</select>
  	
+ 	
+ 	
+ 	<!-- *****profile 글보기*** -->	
+	<!-- 글전체 개수 -->
+ 	<select id="getBoardListCount" resultType="int">
+ 		SELECT count(*)
+		FROM tbl_board a
+		JOIN tbl_sort_local b ON a.sort_local = b.sort_no
+		JOIN tbl_sort_local c ON a.sub_local = c.sort_no
+		JOIN tbl_sort_board d ON a.sort_board = d.sort_no
+		LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
+		JOIN tbl_member f ON a.user_id = f.user_id
+		LEFT OUTER JOIN (select a.*, b.board_no  from tbl_place a, tbl_board_place b
+                        where a.place_no = b.place_no) g ON a.board_no = g.board_no 
+		<include refid="search"></include>
+ 	</select>
+ 	
+ 	<select id="selectBoardList" resultType="Board">
+ 		SELECT * 
+		FROM (SELECT ROWNUM rnum, A.*
+				 FROM ( SELECT a.*, b.sort_name sortLocalName, b.eng_name sortLocalEngName, c.sort_name subLocalName,
+					    d.sort_name sortBoardName, e.sort_name sortPlaceName,
+					    f.user_nick userNick, g.place_name placeName, g.place_address placeAddress
+					    <if test = "login_id != null">
+						, bl.board_no likeBoard, bm.board_no bmBoard
+						</if>
+						FROM tbl_board a
+						JOIN tbl_sort_local b ON a.sort_local = b.sort_no
+						JOIN tbl_sort_local c ON a.sub_local = c.sort_no
+						JOIN tbl_sort_board d ON a.sort_board = d.sort_no
+						LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
+						JOIN tbl_member f ON a.user_id = f.user_id
+						LEFT OUTER JOIN (select a.*, b.board_no  from tbl_place a, tbl_board_place b
+                        where a.place_no = b.place_no) g ON a.board_no = g.board_no 
+						<if test = "login_id != null">
+						LEFT OUTER JOIN tbl_like bl ON bl.user_id = #{login_id} AND bl.board_no = #{board_no}
+						LEFT OUTER JOIN tbl_bookmark bm ON bm.user_id = #{login_id} AND bm.board_no = #{board_no}
+						</if>
+				 		<include refid="search"></include> ) A )
+		WHERE rnum BETWEEN #{startRow} AND #{endRow} 
+ 	</select>
+ 	
+ 	<sql id="search">
+ 		WHERE is_del = 'N' AND a.user_id = #{user_id}
+ 		<!-- 검색 -->
+ 		<if test="searchType != null">
+			<choose>
+				<when test='searchType == "tc"'>
+					AND (a.board_title like '%' || #{keyword} || '%'
+					or  a.board_content like '%' || #{keyword} || '%')
+				</when>
+				<when test='searchType == "t"'>
+					AND a.board_title like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "w"'>
+					AND (f.user_nick like '%' || #{keyword} || '%'
+					or  a.user_id like '%' || #{keyword} || '%')
+				</when>
+				<when test='searchType == "p"'>
+					AND (g.place_name like '%' || #{keyword} || '%'
+					or  g.place_address like '%' || #{keyword} || '%')
+				</when>
+			</choose>
+		</if>
+		ORDER BY a.board_no desc
+	</sql>
+ 	
 <!-- ************UPDATE************ -->
+
 <!-- ************DELETE************ -->
+	<update id="deleteBoardList"  parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+      	 	UPDATE tbl_board
+      	   	SET is_del = 'Y',
+      	   	    del_date = sysdate
+      	   	WHERE board_no = #{item.board_no} AND user_id = #{item.user_id}
+    	</foreach>
+	</update>
 	
 </mapper>

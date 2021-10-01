@@ -1,5 +1,6 @@
 package com.yj.yeogiya.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -76,7 +77,7 @@ public class MemberController {
 	@RequestMapping(value = "checkDupId", method = RequestMethod.POST)
 	@ResponseBody
 	public String checkDupId(@RequestParam("user_id") String user_id) throws Exception {
-		System.out.println(user_id);
+//		System.out.println(user_id);
 		boolean result = memberService.checkDupId(user_id);
 		return String.valueOf(result);
 	}
@@ -95,7 +96,7 @@ public class MemberController {
 	@RequestMapping(value = "checkDupEmail")
 	@ResponseBody
 	public boolean checkDupEmail(@RequestParam("user_email") String user_email) throws Exception {
-		System.out.println(user_email);
+//		System.out.println(user_email);
 		boolean result = memberService.checkDupEmail(user_email);
 		return result;
 	}
@@ -127,7 +128,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "joinRun", method = RequestMethod.GET)
 	public String joinResult(Member member) throws Exception {
-		System.out.println(member);
+//		System.out.println(member);
 		return "member/signUpResult";
 	}
 	
@@ -142,13 +143,12 @@ public class MemberController {
 	public String loginRun(Member member, Model model, HttpSession session,
 			HttpServletResponse response, RedirectAttributes ras) throws Exception {
 
-		System.out.println("member : "+member);
+//		System.out.println("member : "+member);
 		Member loginMember = memberService.loginRun(member);
-		System.out.println("loginMember : "+ loginMember); 
+//		System.out.println("loginMember : "+ loginMember); 
 		String url = "";
 		if (loginMember != null) { // 로그인 성공 시
 			model.addAttribute("loginMember", loginMember);
-
 			Cookie cookie = new Cookie("saveId", loginMember.getUser_id());
 
 			if (member.getSaveId() != null) { 
@@ -185,11 +185,12 @@ public class MemberController {
 	@RequestMapping(value = "emailGuide")
 	@ResponseBody
 	public String emailGuide(@RequestBody Member member) throws Exception {
-		System.out.println(member);
-		Member existMember = memberService.selectMember(member.getUser_id(), true);
+//		System.out.println(member);
+		Member existMember = memberService.selectMember(member.getUser_id(), null, true);
 		if(existMember == null) {
 			return "fail";
 		}
+//		System.out.println(existMember);
 		String to = member.getUser_email(); // 받는 사람 이메일
 		String title = "[여기야!] 비밀번호 찾기";
 		String content = "비밀번호: " + existMember.getUser_pw();
@@ -211,9 +212,9 @@ public class MemberController {
 	@RequestMapping(value = "pwFind")
 	public String pwFind(@RequestParam(value = "next", required = false) String next,
 			HttpSession session, Model model) throws Exception {
-		System.out.println("next" + next);
+//		System.out.println("next" + next);
 		Member existMember =(Member) model.asMap().get("existMember");
-		System.out.println("pwFind : " + existMember);
+//		System.out.println("pwFind : " + existMember);
 		if(next != null) {
 			if(next.equals("auth")) {
 				if(existMember != null) {
@@ -228,9 +229,9 @@ public class MemberController {
 	@RequestMapping(value = "pwFindRun", method = RequestMethod.POST)
 	public String pwFindRun(Model model, RedirectAttributes ras,
 			@RequestParam("user_id") String user_id, HttpSession session) throws Exception {
-		System.out.println("user_id : "+user_id);
-		Member existMember = memberService.selectMember(user_id, false);
-		System.out.println("pwFindRun : "+ existMember); 
+//		System.out.println("user_id : "+user_id);
+		Member existMember = memberService.selectMember(user_id, null, false);
+//		System.out.println("pwFindRun : "+ existMember); 
 		
 		if (existMember != null) { // 해당유저존재시 
 			ras.addFlashAttribute("existMember", existMember);
@@ -258,7 +259,7 @@ public class MemberController {
 
 	@RequestMapping(value = "idFind")
 	public String idFind(Member member, RedirectAttributes ras, Model model) throws Exception {
-		System.out.println(member);
+//		System.out.println(member);
 		String id = null;
 		if(member.getUser_name() != null && member.getUser_email() != null) {
 			id = memberService.findId(member);
@@ -286,16 +287,46 @@ public class MemberController {
 //		return "member/idFind";
 //	}
 	
-	@RequestMapping(value = "idFindResult", method = RequestMethod.GET)
-	public String idFindResult(Model model) throws Exception {
-		
-		return "member/idFindResult";
+//	@RequestMapping(value = "idFindResult", method = RequestMethod.GET)
+//	public String idFindResult(Model model) throws Exception {
+//		
+//		return "member/idFindResult";
+//	}
+	
+	@RequestMapping(value = "profile/{user_id}", method = RequestMethod.GET)
+	public String profile(@PathVariable("user_id") String user_id,
+			@ModelAttribute("bs") BoardSearch bs, Model model) throws Exception {
+		Member member = memberService.selectMember(user_id, bs, true);
+//		System.out.println(bs);
+//		System.out.println(member);
+		model.addAttribute("member", member);
+		return "mypage/mypage";
 	}
 	
-	@RequestMapping(value = "mypage", method = RequestMethod.GET)
-	public String mypage(Model model) throws Exception {
+	@ResponseBody
+	@RequestMapping(value = "profile/delete", method = RequestMethod.POST)
+	public int profileDelete(HttpSession session, 
+			@RequestParam(value = "tab") String tab,
+			@RequestParam(value = "chbox[]") List<String> chArr) throws Exception {
+		System.out.println(chArr);
+		System.out.println(tab);
+		int result = 0;
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		
-		return "mypage/mypage";
+		 if(loginMember != null) {
+		 String user_id = loginMember.getUser_id();
+		 List<Board> boardList = new ArrayList<>();
+		  for(String i : chArr) {   
+		   Board board = new Board();
+		   board.setBoard_no(Integer.parseInt(i));
+		   board.setUser_id(user_id);
+		   boardList.add(board);
+		  }   
+		  System.out.println(boardList);
+		  result = memberService.deleteBoardList(boardList);
+		 }  
+		 System.out.println(result);
+		return result;
 	}
 	
 	@RequestMapping(value = "mypageChange", method = RequestMethod.GET)

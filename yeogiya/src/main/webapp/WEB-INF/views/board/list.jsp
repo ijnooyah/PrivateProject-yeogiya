@@ -236,7 +236,7 @@ div.subLocal_wrap a.active {
 						</td>
 						<!-- 글쓴이 -->
 						<td class="td_writer">
-							<a href="${contextPath}/profile/${b.user_id}" class="">
+							<a href="${profilePath}/${b.user_id}" class="">
 								${b.userNick}
 							</a>
 						</td>

@@ -27,10 +27,13 @@ public interface MemberDao {
 	public Member selectMember(String user_id);
 	public Member findId(Member member);
 	
+	//프로필 글목록
+	public List<Board> selectBoardList(BoardSearch bs);
+	public int getBoardListCount(BoardSearch bs);
 	//************UPDATE************
 	
 	
 	
 	//************DELETE************
-	
+	public int deleteBoardList(List<Board> boardList);
 }

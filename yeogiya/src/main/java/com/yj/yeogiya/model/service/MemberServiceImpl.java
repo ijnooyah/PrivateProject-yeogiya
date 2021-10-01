@@ -1,10 +1,14 @@
 package com.yj.yeogiya.model.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.yj.yeogiya.model.dao.MemberDao;
+import com.yj.yeogiya.model.vo.Board;
+import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.Member;
 
 @Service
@@ -41,10 +45,24 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member selectMember(String user_id, boolean all) {
+	public Member selectMember(String user_id, BoardSearch bs, boolean getAll) {
 		Member member = memberDao.selectMember(user_id);
-		if (!all) {
-			return new Member(member.getUser_id(), member.getUser_email());
+		
+		if (member != null) {
+			
+			if (bs == null) { //탈퇴회원 조회 x
+				if(member.getIs_quit().equals("Y")) {
+					return null;
+				} else if(!getAll) {
+					return new Member(member.getUser_id(), member.getUser_email());
+				}
+			} else {
+				int count = memberDao.getBoardListCount(bs);
+				bs.setCount(count); // 페이징관련된 필드 세팅 
+				List<Board> boardList = memberDao.selectBoardList(bs);
+				member.setBoardList(boardList);
+			}
+			
 		}
 		return member;
 	}
@@ -67,6 +85,11 @@ public class MemberServiceImpl implements MemberService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int deleteBoardList(List<Board> boardList) {
+		return memberDao.deleteBoardList(boardList);
 	}
 
 
