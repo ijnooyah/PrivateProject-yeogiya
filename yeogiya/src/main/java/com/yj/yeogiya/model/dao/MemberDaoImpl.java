@@ -101,4 +101,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.delete(NAMESPACE + "deleteBookmarkList", bookmarkList);
 	}
 
+	@Override
+	public int updateProfile(Member member) {
+		return sqlSession.update(NAMESPACE + "updateProfile", member);
+	}
+
 }

@@ -57,7 +57,7 @@
 		<div class="mypage_top row mb-5 mx-4">
 				<div class="mypage_top_left">
 					<div class="d-table-cell mr-2 set-bg rounded-circle border" 
-						 data-setbg="${empty member.user_img ? noProfile : member.user_img}"
+						 data-setbg="${empty member.user_img ? noProfile : (contextPath += '/display?img=' += member.user_img)}"
 						 style="width:80px; height:80px;"></div>
 				</div>
 				<div class="mypage_top_right ml-4">
@@ -65,10 +65,12 @@
 						<span class="font-weight-500">${member.user_nick}</span>
 						<span class="text-muted">|</span>
 						<span class="text-muted font-size-100 mr-1">${member.is_quit == 'Y' ? '탈퇴 회원' : member.userGradeName }</span>
-						<a href="" class="fa fa-cog text-muted" style="text-decoration:none;"></a>						
+						<c:if test="${loginMember.user_id == member.user_id}">
+							<a href="${profilePath}/update" class="fa fa-cog  text-muted" style="text-decoration:none;"></a>						
+						</c:if>
 					</div>
 					<div class="font-size-090 mb-1">
-						<span class="text-muted">지역 </span><span class="text-pink mr-3">${member.sortLocalName}</span>
+						<span class="text-muted">지역 </span><span class="text-pink mr-3">${member.open_local == 'N' ? '비공개' : member.sortLocalName}</span>
 						<span class="mr-3 text-muted">총 게시물 <span class="text-pink">${member.boardCnt}</span>개</span>
 						<span class="text-muted">총 댓글 <span class="text-pink">${member.cmtCnt}</span>개</span>
 					</div>
@@ -130,7 +132,14 @@
 								<jsp:include page="./commentTable.jsp" flush="false"/>
 							</c:when>
 							<c:when test="${bs.tab == 'bookmark'}">
-								<jsp:include page="./boardTable.jsp" flush="false"/>
+								<c:if test="${member.open_bmk == 'N'}">
+									<div class="text-center py-5">
+										북마크  비공개
+									</div>
+								</c:if>
+								<c:if test="${member.open_bmk != 'N'}">
+									<jsp:include page="./boardTable.jsp" flush="false"/>
+								</c:if>
 							</c:when>
 						</c:choose>
 						<jsp:include page="./search.jsp" flush="false"/>

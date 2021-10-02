@@ -48,7 +48,7 @@
 <!-- 			<exclude-mapping path="/**/main"/> -->
 			<exclude-mapping path="/comment/**"/>
 <!-- 			<exclude-mapping path="/**/content/*"/> -->
-			<exclude-mapping path="/member/**"/>
+			<exclude-mapping path="/member/*"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>

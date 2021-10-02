@@ -90,7 +90,7 @@
 					<div class="d-flex w-100 font-size-085 mt-1">
 						<div class="d-flex">
 							<div class="d-table-cell mr-2 set-bg rounded-circle border" 
-								 data-setbg="${empty board.userImg ? noProfile : board.userImg}"
+								 data-setbg="${empty board.userImg ? noProfile : (contextPath += '/display?img=' += board.userImg)}"
 								 style="width:30px; height:30px;"></div>
 							<div class="d-table-cell mr-2">
 								<a href="${profilePath}/${board.user_id}" class="align-middle text-black">${board.userNick}</a>

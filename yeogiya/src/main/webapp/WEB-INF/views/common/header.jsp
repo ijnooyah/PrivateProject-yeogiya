@@ -75,7 +75,7 @@
 					<a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 						<span class="pr-2 d-table-cell align-middle nickname">${loginMember.user_nick}</span>
 						<div class="d-table-cell mr-2 set-bg rounded-circle border" 
-							 data-setbg="${empty loginMember.user_img ? noProfile : loginMember.user_img}"
+							 data-setbg="${empty loginMember.user_img ? noProfile : (contextPath += '/display?img=' += loginMember.user_img)}"
 							 style="width:36px; height:36px;"></div>
 					</a>
 				    <div class="dropdown-menu dropdown-menu-right">

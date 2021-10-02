@@ -28,8 +28,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public boolean checkDupNick(String user_nick) {
+	public boolean checkDupNick(String user_nick, String orgUserNick) {
 		int result = memberDao.checkDupNick(user_nick);
+		
+		System.out.println("orgUserNick:" + orgUserNick); 
+		System.out.println("user_nick:" + user_nick); 
+		if(orgUserNick != null) { //not signUp
+			if(orgUserNick.equals(user_nick)) {
+				return false;
+			} 
+		} 
 		if (result != 0) { // 중복
 			return true;
 		}
@@ -137,6 +145,11 @@ public class MemberServiceImpl implements MemberService {
 			  return memberDao.deleteBookmarkList(boardList);
 		}
 		
+	}
+
+	@Override
+	public int updateProfile(Member member) {
+		return memberDao.updateProfile(member);
 	}
 
 

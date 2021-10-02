@@ -19,7 +19,7 @@ public interface MemberService {
 	//아이디 중복체크
 	public boolean checkDupId(String user_id);
 	//아이디 중복체크
-	public boolean checkDupNick(String user_nick);
+	public boolean checkDupNick(String user_nick, String orgUserNick);
 	public boolean checkDupEmail(String user_email);
 	//로그인
 	public Member loginRun(Member member);
@@ -28,7 +28,7 @@ public interface MemberService {
 	public String findId(Member member);
 	
 //************UPDATE************
-	
+	public int updateProfile(Member member);
 	
 //************DELETE************
 	public int deleteList(String tab, List<String> chArr, String user_id);

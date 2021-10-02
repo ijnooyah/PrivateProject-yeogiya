@@ -85,9 +85,18 @@ public class MemberController {
 	//닉네임 중복체크
 	@RequestMapping(value = "checkDupNick")
 	@ResponseBody
-	public String checkDupNick(@RequestParam("user_nick") String user_nick) throws Exception {
+	public String checkDupNick(@RequestParam("user_nick") String user_nick,
+			HttpSession session) throws Exception {
+		logger.info("checkDupNick");
 		System.out.println(user_nick);
-		boolean result = memberService.checkDupNick(user_nick);
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		System.out.println(loginMember);
+		boolean result = false;
+		if (loginMember != null) { // not signUp
+			result  = memberService.checkDupNick(user_nick, loginMember.getUser_nick());
+		} else {
+			result  = memberService.checkDupNick(user_nick, null);
+		}
 		return String.valueOf(result);
 	}
 	
@@ -325,6 +334,23 @@ public class MemberController {
 		 }  
 		 System.out.println(result); // 성공하면 -1만 나오네..
 		return result;
+	}
+	
+	@RequestMapping(value = "profile/update")
+	public String profileEdit(Model model, @ModelAttribute("loginMember") Member loginMember) throws Exception {
+		Member member = memberService.selectMember(loginMember.getUser_id(), null, true);
+		model.addAttribute("member", member);
+		return "mypage/mypageChange";
+	}
+	
+	@RequestMapping(value = "profile/updateRun")
+	public String profileEditRun(@ModelAttribute("loginMember") Member loginMember,
+			Member member) throws Exception {
+		logger.info("profileEditRun");
+		System.out.println(member);
+		member.setUser_id(loginMember.getUser_id());
+		int result = memberService.updateProfile(member);
+		return "redirect:" + loginMember.getUser_id();
 	}
 	
 	@RequestMapping(value = "mypageChange", method = RequestMethod.GET)

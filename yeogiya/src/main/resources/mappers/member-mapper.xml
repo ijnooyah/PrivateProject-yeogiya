@@ -30,6 +30,7 @@
  		select count(*) from tbl_member
  		where user_nick = #{user_nick} and is_quit = 'N'
  	</select>
+ 	
  	<!-- 이메일 중복체크 -->
  	<select id="checkDupEmail" resultType="int">
  		select count(*) from tbl_member
@@ -170,7 +171,19 @@
 		WHERE rnum BETWEEN #{startRow} AND #{endRow} 
  	</select>
 <!-- ************UPDATE************ -->
-
+	<update id="updateProfile">
+		UPDATE tbl_member
+   	   	SET user_img = #{user_img, jdbcType=VARCHAR},
+			user_nick = #{user_nick},
+			user_intro = #{user_intro, jdbcType=VARCHAR},
+			open_local = #{open_local},
+			open_bmk = #{open_bmk},
+			cmt_alert = #{cmt_alert, jdbcType=VARCHAR},
+			like_alert = #{like_alert, jdbcType=VARCHAR},
+			msg_alert = #{msg_alert, jdbcType=VARCHAR},
+			bmk_alert = #{bmk_alert, jdbcType=VARCHAR}
+   	   	WHERE user_id = #{user_id}
+	</update>
 <!-- ************DELETE************ -->
 	<update id="deleteBoardList"  parameterType="java.util.List">
 		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">

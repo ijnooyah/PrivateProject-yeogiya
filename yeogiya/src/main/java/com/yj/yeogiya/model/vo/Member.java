@@ -22,6 +22,12 @@ public class Member {
 	private int msg_cnt;
 	private int like_cnt;
 	private int rp_cnt;
+	private String like_alert;
+	private String cmt_alert;
+	private String msg_alert;
+	private String bmk_alert;
+	private String open_local;
+	private String open_bmk;
 	private Timestamp sign_date;
 	private String is_quit;
 	private Timestamp quit_date;
@@ -252,6 +258,66 @@ public class Member {
 	}
 
 
+	public String getLike_alert() {
+		return like_alert;
+	}
+
+
+	public void setLike_alert(String like_alert) {
+		this.like_alert = like_alert;
+	}
+
+
+	public String getCmt_alert() {
+		return cmt_alert;
+	}
+
+
+	public void setCmt_alert(String cmt_alert) {
+		this.cmt_alert = cmt_alert;
+	}
+
+
+	public String getMsg_alert() {
+		return msg_alert;
+	}
+
+
+	public void setMsg_alert(String msg_alert) {
+		this.msg_alert = msg_alert;
+	}
+
+
+	public String getBmk_alert() {
+		return bmk_alert;
+	}
+
+
+	public void setBmk_alert(String bmk_alert) {
+		this.bmk_alert = bmk_alert;
+	}
+
+
+	public String getOpen_local() {
+		return open_local;
+	}
+
+
+	public void setOpen_local(String open_local) {
+		this.open_local = open_local;
+	}
+
+
+	public String getOpen_bmk() {
+		return open_bmk;
+	}
+
+
+	public void setOpen_bmk(String open_bmk) {
+		this.open_bmk = open_bmk;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Member [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_nick="
@@ -259,11 +325,16 @@ public class Member {
 				+ ", sub_local=" + sub_local + ", user_gender=" + user_gender + ", user_img=" + user_img
 				+ ", user_intro=" + user_intro + ", user_grade=" + user_grade + ", user_warn=" + user_warn
 				+ ", post_cnt=" + post_cnt + ", cmt_cnt=" + cmt_cnt + ", msg_cnt=" + msg_cnt + ", like_cnt=" + like_cnt
-				+ ", rp_cnt=" + rp_cnt + ", sign_date=" + sign_date + ", is_quit=" + is_quit + ", quit_date="
-				+ quit_date + ", sortLocalName=" + sortLocalName + ", subLocalName=" + subLocalName + ", userGradeName="
-				+ userGradeName + ", saveId=" + saveId + ", sortLocalEngName=" + sortLocalEngName + ", boardList="
-				+ boardList + ", commentList=" + commentList + "]";
+				+ ", rp_cnt=" + rp_cnt + ", like_alert=" + like_alert + ", cmt_alert=" + cmt_alert + ", msg_alert="
+				+ msg_alert + ", bmk_alert=" + bmk_alert + ", open_local=" + open_local + ", open_bmk=" + open_bmk
+				+ ", sign_date=" + sign_date + ", is_quit=" + is_quit + ", quit_date=" + quit_date + ", sortLocalName="
+				+ sortLocalName + ", subLocalName=" + subLocalName + ", userGradeName=" + userGradeName + ", saveId="
+				+ saveId + ", sortLocalEngName=" + sortLocalEngName + ", boardCnt=" + boardCnt + ", cmtCnt=" + cmtCnt
+				+ ", boardList=" + boardList + ", commentList=" + commentList + "]";
 	}
+
+
+
 
 
 

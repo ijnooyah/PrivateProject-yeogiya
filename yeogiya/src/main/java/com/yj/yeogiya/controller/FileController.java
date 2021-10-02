@@ -75,5 +75,11 @@ public class FileController {
 		return jsonArr.toString();
 	}
 	
+	@RequestMapping(value="/uploadUserImg", method=RequestMethod.POST, produces="application/text;charset=utf-8")
+	public String uploadImg(MultipartFile file) throws Exception {
+		System.out.println("file:" + file);
+		String filePath = FileUploadUtil.uploadImage(file, rootPath, "profile");
 
+		return filePath;
+	}
 }
