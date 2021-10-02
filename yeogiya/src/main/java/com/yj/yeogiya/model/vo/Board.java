@@ -23,7 +23,7 @@ public class Board {
 	private String is_del;
 	private Timestamp del_date;
 	private Timestamp mod_date;
-	
+	private String query;
 	// has a
 	private BoardPlace place;
 	private List<BoardTag> tagList;
@@ -347,6 +347,14 @@ public class Board {
 
 	public void setSortLocalEngName(String sortLocalEngName) {
 		this.sortLocalEngName = sortLocalEngName;
+	}
+
+	public String getQuery() {
+		return query;
+	}
+
+	public void setQuery(String query) {
+		this.query = query;
 	}
 
 	@Override

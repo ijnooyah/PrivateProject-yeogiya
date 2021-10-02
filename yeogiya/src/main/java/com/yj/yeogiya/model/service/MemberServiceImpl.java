@@ -1,5 +1,6 @@
 package com.yj.yeogiya.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.yj.yeogiya.model.dao.MemberDao;
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardSearch;
+import com.yj.yeogiya.model.vo.Comment;
 import com.yj.yeogiya.model.vo.Member;
 
 @Service
@@ -48,6 +50,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectMember(String user_id, BoardSearch bs, boolean getAll) {
 		Member member = memberDao.selectMember(user_id);
 		
+		
 		if (member != null) {
 			
 			if (bs == null) { //탈퇴회원 조회 x
@@ -57,10 +60,24 @@ public class MemberServiceImpl implements MemberService {
 					return new Member(member.getUser_id(), member.getUser_email());
 				}
 			} else {
-				int count = memberDao.getBoardListCount(bs);
-				bs.setCount(count); // 페이징관련된 필드 세팅 
-				List<Board> boardList = memberDao.selectBoardList(bs);
-				member.setBoardList(boardList);
+				int boardCnt = memberDao.getBoardListCount(bs);
+				int cmtCnt = memberDao.getCommentListCount(bs);
+				member.setBoardCnt(boardCnt);
+				member.setCmtCnt(cmtCnt);
+				if(bs.getTab().equals("board")) {
+					bs.setCount(boardCnt); // 페이징관련된 필드 세팅 
+					List<Board> boardList = memberDao.selectBoardList(bs);
+					member.setBoardList(boardList);
+				} else if(bs.getTab().equals("comment")) {
+					bs.setCount(cmtCnt); // 페이징관련된 필드 세팅 
+					List<Comment> commentList = memberDao.selectCommentList(bs);
+					member.setCommentList(commentList);
+				} else {
+					int count = memberDao.getBookmarkListCount(bs);
+					bs.setCount(count); // 페이징관련된 필드 세팅 
+					List<Board> bookmarkList = memberDao.selectBookmarkList(bs);
+					member.setBoardList(bookmarkList);
+				}
 			}
 			
 		}
@@ -88,9 +105,40 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteBoardList(List<Board> boardList) {
-		return memberDao.deleteBoardList(boardList);
+	public int deleteList(String tab, List<String> chArr, String user_id) {
+		List<Board> boardList = new ArrayList<>();
+		List<Comment> commentList = new ArrayList<Comment>();
+		if(tab.equals("board")) {
+			  for(String i : chArr) {   
+			   Board board = new Board();
+			   board.setBoard_no(Integer.parseInt(i));
+			   board.setUser_id(user_id);
+			   boardList.add(board);
+			  }   
+			  System.out.println(boardList);
+			  return memberDao.deleteBoardList(boardList);
+		} else if(tab.equals("comment")) {
+			for(String i : chArr) {   
+			   Comment comment = new Comment();
+			   comment.setC_no(Integer.parseInt(i));
+			   comment.setUser_id(user_id);
+			   commentList.add(comment);
+			  }   
+			  System.out.println(commentList);
+			  return memberDao.deleteCommentList(commentList);
+		} else {
+			for(String i : chArr) {   
+			   Board bookmark = new Board();
+			   bookmark.setBoard_no(Integer.parseInt(i));
+			   bookmark.setUser_id(user_id);
+			   boardList.add(bookmark);
+			  }   
+			  System.out.println(boardList);
+			  return memberDao.deleteBookmarkList(boardList);
+		}
+		
 	}
+
 
 
 }

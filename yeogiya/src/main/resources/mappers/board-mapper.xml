@@ -14,11 +14,11 @@
  		</selectKey>
 		insert into tbl_board 
 			 (board_no, user_id, board_title, board_content,
-			 sort_local, sub_local, sort_board, sort_place, has_img)
+			 sort_local, sub_local, sort_board, sort_place, has_img, query)
 		values 
 			(#{board_no}, #{user_id}, #{board_title}, #{board_content},
 			#{sort_local}, #{sub_local}, #{sort_board}, 
-			#{sort_place, jdbcType=VARCHAR}, #{has_img})
+			#{sort_place, jdbcType=VARCHAR}, #{has_img}, #{query})
 	</insert>
 	
 	<!-- 1-2. tag -->
@@ -286,7 +286,9 @@
  			sort_local = #{sort_local},
  			sub_local = #{sub_local},
  			sort_board = #{sort_board},
+ 			sort_place = #{sort_place, jdbcType=VARCHAR},
  			has_img = #{has_img},
+ 			query = #{query},
  			mod_date = sysdate
  		WHERE board_no = #{board_no}
 	</update>

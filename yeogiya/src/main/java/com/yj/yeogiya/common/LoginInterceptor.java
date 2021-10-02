@@ -21,19 +21,37 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		uri = uri.substring(contextPath.length());
 		String queryString = request.getQueryString();
 		String requestPath = null;
-		String regex = "(.*)\\/(insert|update|delete|comment)";
+		String regex = "(.*)\\/(insert|update|delete)(.*)";
 		if(queryString == null) {
 			requestPath = uri;
 		} else {
 			requestPath = uri + "?" + queryString; 
 		}
-		if (requestPath.matches(regex)) {
-			System.out.println("정규식 맞음");
-			response.sendRedirect(contextPath + "/member/login");
-		} else {
-			session.setAttribute("requestPath", requestPath);
-		}
-				
+		
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		System.out.println(loginMember);
+		System.out.println(requestPath);
+		if(loginMember == null) {
+			if (requestPath.matches(regex)) {
+				System.out.println("정규식 맞음");
+				session.setAttribute("requestPath", requestPath);
+				response.sendRedirect(contextPath + "/member/login");
+				return false;
+			} 
+		} 
+		
+		
 		return true; // 요청 처리를 계속함
 	}	
+	
+	
+	private boolean isAjaxRequest(HttpServletRequest request) {
+		
+		String header = request.getHeader("x-requested-with");
+		if ("XMLHttpRequest".contentEquals(header))	{
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

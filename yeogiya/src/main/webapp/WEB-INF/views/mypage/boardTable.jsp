@@ -2,29 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<div class="pl-4">
-	<!-- 상단 -->
-	<div class="d-flex mb-1 dropdown">
-		<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		  ${bs.perPage}개씩
-		</button>
-		<div class="dropdown-menu" style="min-width:4rem;">
-			<c:set var="step" value="5"/>
-			<c:forEach var="v" begin="1" end="7" varStatus="vs">
-				<c:if test="${vs.count < 4}">
-					<c:set var="step" value="${step + 5}"/>
-				</c:if>
-				<c:if test ="${vs.count >=4 }">
-					<c:set var="step" value="${step + 10}"/>
-				</c:if>
-				<a class="dropdown-item" href="?${tab}${page}&perPage=${step}${searchQ}">
-					${step}개씩</a>
-			</c:forEach>
-		</div>
-		<svg xmlns="http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem" fill="currentColor" class="bi bi-trash-fill trash text-muted cursor-pointer mt-2 ml-auto mr-2" viewBox="0 0 16 16" style="opacity:.6;">
-		  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-		</svg>
-	</div>
 	 <!-- 목록 -->
 	<div class="table_wrap">
 		<table class="table">
@@ -32,8 +9,10 @@
 				<tr>
 					<th>
 					<div class="custom-control custom-checkbox">
+						<c:if test="${loginMember.user_id == member.user_id}">
 						 <input class="custom-control-input" type="checkbox" id="allCheck">
 						 <label class="custom-control-label" for="allCheck"></label>
+						</c:if>
 					</div>
 					</th>
 					<th>번호</th>
@@ -53,8 +32,10 @@
 						<td>
 							<!-- 자기 글일때만 체크 버튼 보이기 -->
 							<div class="custom-control custom-checkbox">
-								 <input class="custom-control-input rowCheck ${v>0 ?  'custom-control-input' : 'd-none'}" type="checkbox" name="rowCheck" id="${b.board_no}">
-								 <label class="custom-control-label ${v>0 ?  'custom-control-label' : ''}" for="${b.board_no}"></label>
+								<c:if test="${loginMember.user_id == member.user_id}">
+								 <input class="custom-control-input rowCheck" type="checkbox" name="rowCheck" id="${b.board_no}">
+								 <label class="custom-control-label" for="${b.board_no}"></label>
+								</c:if>
 							</div>
 						</td>
 						<!-- 번호 -->
@@ -63,19 +44,19 @@
 						</td>
 						<!-- 지역 -->
 						<td class="td_sortLocal">
-							<a href="" class=" ">
+							<a href="${contextPath}/${b.sortLocalEngName}/list?sortBoard=all" class=" ">
 								${b.sortLocalName}
 							</a>
 						</td>
 						<!-- 게시판 -->
 						<td class="td_sortBoard">
-							<a href="" class="">	
+							<a href="${contextPath}/${b.sortLocalEngName}/list?sortBoard=${b.sort_board}&subLocal=all${not empty b.sort_place ? '&sortPlace=all' : ''}" class="">	
 								${b.sortBoardName}
 							</a>
 						</td>
 						<!-- 제목 -->
 						<td class="td_title d-flex" style="min-width:340px;">
-							<a href="${contextPath}/${sortLocalEngName}/content/${b.board_no}?sortBoard=${b.sort_board}&subLocal=${b.sub_local}${not empty b.sort_place ? ('&sortPlace=' += b.sort_place) : ''}" class="short_title">
+							<a href="${contextPath}/${b.sortLocalEngName}/content/${b.board_no}?sortBoard=${b.sort_board}&subLocal=${b.sub_local}${not empty b.sort_place ? ('&sortPlace=' += b.sort_place) : ''}" class="short_title">
 								${b.board_title}
 							</a>
 							<span class="text-pink mx-2 font-weight-400">[${b.cmt_cnt}]</span>
@@ -88,8 +69,8 @@
 						</td>
 						<!-- 글쓴이 -->
 						<td class="td_writer">
-							<a href="" class="">
-								${member.user_nick}
+							<a href="${profilePath}/${b.user_id}" class="">
+								${b.userNick}
 							</a>
 						</td>
 						<!-- 작성일 -->
@@ -116,4 +97,3 @@
 			</tbody>
 		</table>
 	</div>
-</div>	

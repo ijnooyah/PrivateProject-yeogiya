@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardSearch;
+import com.yj.yeogiya.model.vo.Comment;
 import com.yj.yeogiya.model.vo.Member;
 
 @Repository
@@ -65,7 +66,39 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int deleteBoardList(List<Board> boardList) {
-		return sqlSession.update(NAMESPACE + "deleteBoardList", boardList);
+		int result = sqlSession.update(NAMESPACE + "deleteBoardList", boardList);
+		System.out.println(result);
+		return result;
+	}
+
+	@Override
+	public List<Comment> selectCommentList(BoardSearch bs) {
+		return sqlSession.selectList(NAMESPACE + "selectCommentList", bs);
+	}
+
+	@Override
+	public int getCommentListCount(BoardSearch bs) {
+		return sqlSession.selectOne(NAMESPACE + "getCommentListCount", bs);
+	}
+
+	@Override
+	public int deleteCommentList(List<Comment> commentList) {
+		return sqlSession.update(NAMESPACE + "deleteCommentList", commentList);
+	}
+
+	@Override
+	public List<Board> selectBookmarkList(BoardSearch bs) {
+		return sqlSession.selectList(NAMESPACE + "selectBookmarkList", bs);
+	}
+
+	@Override
+	public int getBookmarkListCount(BoardSearch bs) {
+		return sqlSession.selectOne(NAMESPACE + "getBookmarkListCount", bs);
+	}
+
+	@Override
+	public int deleteBookmarkList(List<Board> bookmarkList) {
+		return sqlSession.delete(NAMESPACE + "deleteBookmarkList", bookmarkList);
 	}
 
 }

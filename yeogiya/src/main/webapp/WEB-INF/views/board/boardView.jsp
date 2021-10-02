@@ -368,8 +368,10 @@
 			"method" : "post",
 			"dataType" : "text",
 			"data" : JSON.stringify(sendData),
-			"success" : function(rData) {
-				if(rData == "success") {
+			"success" : function(data) {
+				console.log(data)
+				if(data == "success") {
+					
 					selectCommentList();
 					$("#c_content").val("");
 				}
@@ -468,14 +470,16 @@
 					cloneDiv.addClass("recomment-row");
 					cloneDiv.find(".c_parent_user_nick").show();
 				}
-				cloneDiv.show();
 				
+				cloneDiv.show();
 				//자기 댓글이 아닐경우 수정삭제 안보이게하기, 신고버튼은 보이게 하기(신고 기능 없음)
 				if(this.user_id != login_id) {
 					cloneDiv.find(".private").remove();
 					if('${loginMember}' != "") {
 	 				cloneDiv.find(".report").show();
 					}
+				} else {
+					cloneDiv.css("background", "#f3a6c61a")
 				}
 				
 				//

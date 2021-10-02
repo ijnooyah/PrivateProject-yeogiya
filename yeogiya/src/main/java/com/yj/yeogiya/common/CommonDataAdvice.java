@@ -41,6 +41,7 @@ public class CommonDataAdvice {
 	
 	@ModelAttribute("bs")
 	public BoardSearch boardSearch(BoardSearch bs, Model model) {
+		System.out.println(bs);
 		return bs;
 	}
 	

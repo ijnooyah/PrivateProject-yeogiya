@@ -70,32 +70,21 @@
 		JOIN tbl_sort_board d ON a.sort_board = d.sort_no
 		LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
 		JOIN tbl_member f ON a.user_id = f.user_id
-		LEFT OUTER JOIN (select a.*, b.board_no  from tbl_place a, tbl_board_place b
-                        where a.place_no = b.place_no) g ON a.board_no = g.board_no 
 		<include refid="search"></include>
  	</select>
  	
  	<select id="selectBoardList" resultType="Board">
  		SELECT * 
 		FROM (SELECT ROWNUM rnum, A.*
-				 FROM ( SELECT a.*, b.sort_name sortLocalName, b.eng_name sortLocalEngName, c.sort_name subLocalName,
-					    d.sort_name sortBoardName, e.sort_name sortPlaceName,
-					    f.user_nick userNick, g.place_name placeName, g.place_address placeAddress
-					    <if test = "login_id != null">
-						, bl.board_no likeBoard, bm.board_no bmBoard
-						</if>
+				 FROM ( SELECT a.*, b.sort_name sortLocalName, b.eng_name sortLocalEngName,
+				 		c.sort_name subLocalName, d.sort_name sortBoardName,
+				 		e.sort_name sortPlaceName, f.user_nick userNick
 						FROM tbl_board a
 						JOIN tbl_sort_local b ON a.sort_local = b.sort_no
 						JOIN tbl_sort_local c ON a.sub_local = c.sort_no
 						JOIN tbl_sort_board d ON a.sort_board = d.sort_no
 						LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
 						JOIN tbl_member f ON a.user_id = f.user_id
-						LEFT OUTER JOIN (select a.*, b.board_no  from tbl_place a, tbl_board_place b
-                        where a.place_no = b.place_no) g ON a.board_no = g.board_no 
-						<if test = "login_id != null">
-						LEFT OUTER JOIN tbl_like bl ON bl.user_id = #{login_id} AND bl.board_no = #{board_no}
-						LEFT OUTER JOIN tbl_bookmark bm ON bm.user_id = #{login_id} AND bm.board_no = #{board_no}
-						</if>
 				 		<include refid="search"></include> ) A )
 		WHERE rnum BETWEEN #{startRow} AND #{endRow} 
  	</select>
@@ -103,28 +92,83 @@
  	<sql id="search">
  		WHERE is_del = 'N' AND a.user_id = #{user_id}
  		<!-- 검색 -->
- 		<if test="searchType != null">
-			<choose>
-				<when test='searchType == "tc"'>
-					AND (a.board_title like '%' || #{keyword} || '%'
-					or  a.board_content like '%' || #{keyword} || '%')
-				</when>
-				<when test='searchType == "t"'>
-					AND a.board_title like '%' || #{keyword} || '%'
-				</when>
-				<when test='searchType == "w"'>
-					AND (f.user_nick like '%' || #{keyword} || '%'
-					or  a.user_id like '%' || #{keyword} || '%')
-				</when>
-				<when test='searchType == "p"'>
-					AND (g.place_name like '%' || #{keyword} || '%'
-					or  g.place_address like '%' || #{keyword} || '%')
-				</when>
-			</choose>
-		</if>
+<!--  		<if test="searchType != null"> -->
+<!-- 			<choose> -->
+<!-- 				<when test='searchType == "tc"'> -->
+<!-- 					AND (a.board_title like '%' || #{keyword} || '%' -->
+<!-- 					or  a.board_content like '%' || #{keyword} || '%') -->
+<!-- 				</when> -->
+<!-- 				<when test='searchType == "t"'> -->
+<!-- 					AND a.board_title like '%' || #{keyword} || '%' -->
+<!-- 				</when> -->
+<!-- 				<when test='searchType == "w"'> -->
+<!-- 					AND (f.user_nick like '%' || #{keyword} || '%' -->
+<!-- 					or  a.user_id like '%' || #{keyword} || '%') -->
+<!-- 				</when> -->
+<!-- 				<when test='searchType == "p"'> -->
+<!-- 					AND (g.place_name like '%' || #{keyword} || '%' -->
+<!-- 					or  g.place_address like '%' || #{keyword} || '%') -->
+<!-- 				</when> -->
+<!-- 			</choose> -->
+<!-- 		</if> -->
 		ORDER BY a.board_no desc
 	</sql>
+	
+	<!-- 댓글전체 개수 -->
+ 	<select id="getCommentListCount" resultType="int">
+ 		SELECT count(*)
+	    FROM tbl_comment a
+	    JOIN tbl_board b ON a.b_no = b.board_no
+	    JOIN tbl_sort_local c ON b.sort_local = c.sort_no
+	    JOIN tbl_member d ON a.user_id = d.user_id
+	    WHERE a.is_del = 'N' AND a.user_id = #{user_id}
+	    ORDER BY a.c_no desc
+ 	</select>
  	
+ 	<select id="selectCommentList" resultType="Comment">
+ 		SELECT * 
+		FROM (SELECT ROWNUM rnum, A.*
+				 FROM ( SELECT a.*, b.board_title boardTitle, b.query boardQuery, 
+					    c.eng_name sortLocalEngName, d.user_nick user_nick
+					    FROM tbl_comment a
+					    JOIN tbl_board b ON a.b_no = b.board_no
+					    JOIN tbl_sort_local c ON b.sort_local = c.sort_no
+					    JOIN tbl_member d ON a.user_id = d.user_id
+					    WHERE a.is_del = 'N' AND a.user_id = #{user_id}
+					    ORDER BY a.c_no desc) A )
+		WHERE rnum BETWEEN #{startRow} AND #{endRow} 
+ 	</select>
+ 	
+ 	
+ 	<!-- 북마크전체 개수 -->
+ 	<select id="getBookmarkListCount" resultType="int">
+ 		SELECT count(*)
+		FROM tbl_bookmark a
+		JOIN tbl_board b ON a.board_no = b.board_no
+		JOIN tbl_sort_local c ON b.sort_local = c.sort_no
+		JOIN tbl_sort_local d ON b.sub_local = d.sort_no
+		JOIN tbl_sort_board e ON b.sort_board = e.sort_no
+		LEFT OUTER JOIN tbl_sort_place f ON b.sort_place = f.sort_no 
+		JOIN tbl_member g ON b.user_id = g.user_id
+ 		<include refid="search"></include>
+ 	</select>
+ 	
+ 	<select id="selectBookmarkList" resultType="Board">
+ 		SELECT * 
+		FROM (SELECT ROWNUM rnum, A.*
+				 FROM ( SELECT b.*, c.sort_name sortLocalName, c.eng_name sortLocalEngName, 
+				 		d.sort_name subLocalName, e.sort_name sortBoardName, 
+				 		f.sort_name sortPlaceName, g.user_nick userNick
+						FROM tbl_bookmark a
+						JOIN tbl_board b ON a.board_no = b.board_no
+						JOIN tbl_sort_local c ON b.sort_local = c.sort_no
+						JOIN tbl_sort_local d ON b.sub_local = d.sort_no
+						JOIN tbl_sort_board e ON b.sort_board = e.sort_no
+						LEFT OUTER JOIN tbl_sort_place f ON b.sort_place = f.sort_no 
+						JOIN tbl_member g ON b.user_id = g.user_id
+				 		<include refid="search"></include> ) A )
+		WHERE rnum BETWEEN #{startRow} AND #{endRow} 
+ 	</select>
 <!-- ************UPDATE************ -->
 
 <!-- ************DELETE************ -->
@@ -136,5 +180,21 @@
       	   	WHERE board_no = #{item.board_no} AND user_id = #{item.user_id}
     	</foreach>
 	</update>
+	<update id="deleteCommentList"  parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+      	 	UPDATE tbl_comment
+      	   	SET is_del = 'Y',
+      	   	    del_date = sysdate
+      	   	WHERE c_no = #{item.c_no} AND user_id = #{item.user_id}
+    	</foreach>
+	</update>
+	<delete id="deleteBookmarkList"  parameterType="java.util.List">
+		DELETE FROM tbl_bookmark
+		<where>
+			<foreach collection="list" item="item" open="" close="" separator="OR">
+				(board_no = #{item.board_no} and user_id = #{item.user_id})
+			</foreach>
+		</where>
+	</delete>
 	
 </mapper>

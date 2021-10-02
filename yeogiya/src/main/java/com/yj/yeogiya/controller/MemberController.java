@@ -294,11 +294,17 @@ public class MemberController {
 //	}
 	
 	@RequestMapping(value = "profile/{user_id}", method = RequestMethod.GET)
-	public String profile(@PathVariable("user_id") String user_id,
-			@ModelAttribute("bs") BoardSearch bs, Model model) throws Exception {
-		Member member = memberService.selectMember(user_id, bs, true);
+	public String profile(@ModelAttribute("bs") BoardSearch bs, Model model, RedirectAttributes ras) throws Exception {
 //		System.out.println(bs);
+		if(bs.getTab() == null) {
+			ras.addAttribute("tab", "board");
+			return "redirect:";
+		}
+		Member member = memberService.selectMember(bs.getUser_id(), bs, true);
 //		System.out.println(member);
+		if (member == null) {
+			return "common/404";
+		}
 		model.addAttribute("member", member);
 		return "mypage/mypage";
 	}
@@ -315,17 +321,9 @@ public class MemberController {
 		
 		 if(loginMember != null) {
 		 String user_id = loginMember.getUser_id();
-		 List<Board> boardList = new ArrayList<>();
-		  for(String i : chArr) {   
-		   Board board = new Board();
-		   board.setBoard_no(Integer.parseInt(i));
-		   board.setUser_id(user_id);
-		   boardList.add(board);
-		  }   
-		  System.out.println(boardList);
-		  result = memberService.deleteBoardList(boardList);
+		 result = memberService.deleteList(tab, chArr, user_id);
 		 }  
-		 System.out.println(result);
+		 System.out.println(result); // 성공하면 -1만 나오네..
 		return result;
 	}
 	

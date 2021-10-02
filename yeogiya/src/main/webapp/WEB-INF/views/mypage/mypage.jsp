@@ -69,8 +69,8 @@
 					</div>
 					<div class="font-size-090 mb-1">
 						<span class="text-muted">지역 </span><span class="text-pink mr-3">${member.sortLocalName}</span>
-						<span class="mr-3 text-muted">총 게시물 <span class="text-pink">${member.post_cnt}</span>개</span>
-						<span class="text-muted">총 댓글 <span class="text-pink">${member.cmt_cnt}</span>개</span>
+						<span class="mr-3 text-muted">총 게시물 <span class="text-pink">${member.boardCnt}</span>개</span>
+						<span class="text-muted">총 댓글 <span class="text-pink">${member.cmtCnt}</span>개</span>
 					</div>
 					<div class="font-size-090">
 						<span class="mr-2 text-muted">자기소개</span>
@@ -97,6 +97,31 @@
 				<div class="tab-content px-4">
 					<div class="px-3">
 						<br>
+						<div class="pl-4">
+						<!-- 상단 -->
+						<div class="d-flex mb-1 dropdown">
+							<button type="button" class="btn-sm btn border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  ${bs.perPage}개씩
+							</button>
+							<div class="dropdown-menu" style="min-width:4rem;">
+								<c:set var="step" value="5"/>
+								<c:forEach var="v" begin="1" end="7" varStatus="vs">
+									<c:if test="${vs.count < 4}">
+										<c:set var="step" value="${step + 5}"/>
+									</c:if>
+									<c:if test ="${vs.count >=4 }">
+										<c:set var="step" value="${step + 10}"/>
+									</c:if>
+									<a class="dropdown-item" href="?${tab}${page}&perPage=${step}${searchQ}">
+										${step}개씩</a>
+								</c:forEach>
+							</div>
+							<c:if test="${loginMember.user_id == member.user_id}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem" fill="currentColor" class="bi bi-trash-fill trash text-muted cursor-pointer mt-2 ml-auto mr-2" viewBox="0 0 16 16" style="opacity:.6;">
+								  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+								</svg>
+							</c:if>
+						</div>
 						<c:choose>
 							<c:when test="${bs.tab == 'board'}">
 								<jsp:include page="./boardTable.jsp" flush="false"/>
@@ -109,6 +134,7 @@
 							</c:when>
 						</c:choose>
 						<jsp:include page="./search.jsp" flush="false"/>
+						</div>
 					</div>
 				</div>
 		</div>

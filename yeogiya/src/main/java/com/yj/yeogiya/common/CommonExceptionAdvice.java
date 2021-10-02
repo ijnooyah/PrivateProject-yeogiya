@@ -17,4 +17,11 @@ public class CommonExceptionAdvice {
 		
 		return "common/404";
 	}
+	
+	@ExceptionHandler(NullPointerException.class)
+    public String nullPointerHandle(Exception e) {
+         return "common/404";
+    }
+
+
 }

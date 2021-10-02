@@ -32,8 +32,11 @@ public class Member {
 	private String saveId;
 	private String sortLocalEngName;
 	
-	private List<Board> boardList;
+	private int boardCnt;
+	private int cmtCnt;
 	
+	private List<Board> boardList;
+	private List<Comment> commentList;
 	public Member() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -219,6 +222,36 @@ public class Member {
 	}
 
 
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+
+
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
+
+
+	public int getBoardCnt() {
+		return boardCnt;
+	}
+
+
+	public void setBoardCnt(int boardCnt) {
+		this.boardCnt = boardCnt;
+	}
+
+
+	public int getCmtCnt() {
+		return cmtCnt;
+	}
+
+
+	public void setCmtCnt(int cmtCnt) {
+		this.cmtCnt = cmtCnt;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Member [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_nick="
@@ -229,8 +262,10 @@ public class Member {
 				+ ", rp_cnt=" + rp_cnt + ", sign_date=" + sign_date + ", is_quit=" + is_quit + ", quit_date="
 				+ quit_date + ", sortLocalName=" + sortLocalName + ", subLocalName=" + subLocalName + ", userGradeName="
 				+ userGradeName + ", saveId=" + saveId + ", sortLocalEngName=" + sortLocalEngName + ", boardList="
-				+ boardList + "]";
+				+ boardList + ", commentList=" + commentList + "]";
 	}
+
+
 
 
 	

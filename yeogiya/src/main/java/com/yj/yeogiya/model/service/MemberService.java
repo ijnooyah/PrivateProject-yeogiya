@@ -31,6 +31,6 @@ public interface MemberService {
 	
 	
 //************DELETE************
-	public int deleteBoardList(List<Board> boardList);
+	public int deleteList(String tab, List<String> chArr, String user_id);
 	
 }

@@ -47,7 +47,7 @@ public class CommentController {
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public String insertComment(@RequestBody Comment cmt) throws Exception {
 		logger.info("insert");
-//		System.out.println(cmt);
+		System.out.println(cmt);
 		commentService.insertComment(cmt);
 		return "success";
 	}

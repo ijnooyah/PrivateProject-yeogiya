@@ -1,5 +1,7 @@
 package com.yj.yeogiya.model.vo;
 
+import java.sql.Timestamp;
+
 public class Comment {
 	private int c_no;
 	private String user_id;
@@ -9,9 +11,9 @@ public class Comment {
 	private String c_content;
 	private int c_depth;
 	private String is_del;
-	private String reg_date;
-	private String mod_date;
-	private String del_date;
+	private Timestamp reg_date;
+	private Timestamp mod_date;
+	private Timestamp del_date;
 	private int rp_cnt;
 	private String is_blind;
 	
@@ -21,7 +23,10 @@ public class Comment {
 	private String parent_user_id;
 	private String parent_user_nick;
 	
-	
+	private String boardTitle;
+	private String boardQuery;
+	private String sortLocalEngName;
+	private Board board;
 	
 	public Comment() {
 		super();
@@ -126,39 +131,6 @@ public class Comment {
 
 
 
-	public String getReg_date() {
-		return reg_date;
-	}
-
-
-
-	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date;
-	}
-
-
-
-	public String getMod_date() {
-		return mod_date;
-	}
-
-
-
-	public void setMod_date(String mod_date) {
-		this.mod_date = mod_date;
-	}
-
-
-
-	public String getDel_date() {
-		return del_date;
-	}
-
-
-
-	public void setDel_date(String del_date) {
-		this.del_date = del_date;
-	}
 
 
 
@@ -234,14 +206,107 @@ public class Comment {
 
 
 
+
+	public Board getBoard() {
+		return board;
+	}
+
+
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}
+
+
+
+	public String getBoardQuery() {
+		return boardQuery;
+	}
+
+
+
+	public void setBoardQuery(String boardQuery) {
+		this.boardQuery = boardQuery;
+	}
+
+
+
+	public String getSortLocalEngName() {
+		return sortLocalEngName;
+	}
+
+
+
+	public void setSortLocalEngName(String sortLocalEngName) {
+		this.sortLocalEngName = sortLocalEngName;
+	}
+
+
+
+	public Timestamp getReg_date() {
+		return reg_date;
+	}
+
+
+
+	public void setReg_date(Timestamp reg_date) {
+		this.reg_date = reg_date;
+	}
+
+
+
+	public Timestamp getMod_date() {
+		return mod_date;
+	}
+
+
+
+	public void setMod_date(Timestamp mod_date) {
+		this.mod_date = mod_date;
+	}
+
+
+
+	public Timestamp getDel_date() {
+		return del_date;
+	}
+
+
+
+	public void setDel_date(Timestamp del_date) {
+		this.del_date = del_date;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Comment [c_no=" + c_no + ", user_id=" + user_id + ", b_no=" + b_no + ", re_group=" + re_group
 				+ ", parent_c_no=" + parent_c_no + ", c_content=" + c_content + ", c_depth=" + c_depth + ", is_del="
 				+ is_del + ", reg_date=" + reg_date + ", mod_date=" + mod_date + ", del_date=" + del_date + ", rp_cnt="
 				+ rp_cnt + ", is_blind=" + is_blind + ", user_nick=" + user_nick + ", user_img=" + user_img
-				+ ", parent_user_id=" + parent_user_id + ", parent_user_nick=" + parent_user_nick + "]";
+				+ ", parent_user_id=" + parent_user_id + ", parent_user_nick=" + parent_user_nick + ", boardTitle="
+				+ boardTitle + ", boardQuery=" + boardQuery + ", sortLocalEngName=" + sortLocalEngName + ", board="
+				+ board + "]";
 	}
+
+
+
+
+
+
 	
 	
 }

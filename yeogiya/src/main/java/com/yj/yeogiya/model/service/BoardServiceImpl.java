@@ -61,6 +61,13 @@ public class BoardServiceImpl implements BoardService {
 //		logger.info("insertBoardArticle");
 		int result = 0; 
 		// 1. board
+		String query = "sortBoard=" + board.getSort_board()
+		+ "&subLocal=" +board.getSub_local();
+		if(board.getSort_place() != null) {
+			query += "&sortPlace=" + board.getSort_place();
+		}
+		board.setQuery(query);
+		
 		int board_no = boardDao.insertBoard(board);
 		
 		if (board_no > 0) {
@@ -164,6 +171,12 @@ public class BoardServiceImpl implements BoardService {
 		int board_no = board.getBoard_no();
 		
 		// 1. board
+		String query = "sortBoard=" + board.getSort_board()
+		+ "&subLocal=" +board.getSub_local();
+		if(board.getSort_place() != null) {
+			query += "&sortPlace=" + board.getSort_place();
+		}
+		board.setQuery(query);
 		int result = boardDao.updateBoard(board);
 		
 		if (result > 0) {
