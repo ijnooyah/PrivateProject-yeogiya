@@ -55,13 +55,6 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	
 	//회원가입 페이지
-	@RequestMapping(value = "term", method = RequestMethod.GET)
-	public String term(Model model) throws Exception {
-		
-		return "member/term";
-	}
-	
-	//회원가입 페이지
 	@RequestMapping(value = "join", method = RequestMethod.GET)
 	public String join(@RequestParam(value = "serviceCheck", required = false) String serviceCheck, 
 			@RequestParam(value = "geoCheck", required = false) String geoCheck,
@@ -250,21 +243,6 @@ public class MemberController {
 		}
 		return "redirect:pwFind";
 	}
-//	@RequestMapping(value = "pwFind1")
-//	public String pwFind1(Model model) throws Exception {
-//		
-//		return "member/pwFind1";
-//	}
-//	@RequestMapping(value = "pwFind2")
-//	public String pwFind2(Model model) throws Exception {
-//		
-//		return "member/pwFind2";
-//	}
-//	@RequestMapping(value = "pwFindResult", method = RequestMethod.GET)
-//	public String pwFindResult(Model model) throws Exception {
-//		
-//		return "member/pwFindResult";
-//	}
 
 	@RequestMapping(value = "idFind")
 	public String idFind(Member member, RedirectAttributes ras, Model model) throws Exception {
@@ -284,123 +262,6 @@ public class MemberController {
 		} 
 		System.out.println("id" + id);
 		return "member/idFind";
-	}
-	
-//	@RequestMapping(value = "idFindRun")
-//	public String idFindRun(Member member, RedirectAttributes ras) throws Exception {
-//		System.out.println(member);
-//		String id = memberService.findId(member);
-//		if (id != null) {
-//			ras.addFlashAttribute(")
-//		}
-//		return "member/idFind";
-//	}
-	
-//	@RequestMapping(value = "idFindResult", method = RequestMethod.GET)
-//	public String idFindResult(Model model) throws Exception {
-//		
-//		return "member/idFindResult";
-//	}
-	
-	@RequestMapping(value = "profile/{user_id}", method = RequestMethod.GET)
-	public String profile(@ModelAttribute("bs") BoardSearch bs, Model model, RedirectAttributes ras) throws Exception {
-//		System.out.println(bs);
-		if(bs.getTab() == null) {
-			ras.addAttribute("tab", "board");
-			return "redirect:";
-		}
-		Member member = memberService.selectMember(bs.getUser_id(), bs, true);
-//		System.out.println(member);
-		if (member == null) {
-			return "common/404";
-		}
-		model.addAttribute("member", member);
-		return "mypage/mypage";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "profile/delete", method = RequestMethod.POST)
-	public int profileDelete(HttpSession session, 
-			@RequestParam(value = "tab") String tab,
-			@RequestParam(value = "chbox[]") List<String> chArr) throws Exception {
-		System.out.println(chArr);
-		System.out.println(tab);
-		int result = 0;
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		
-		 if(loginMember != null) {
-		 String user_id = loginMember.getUser_id();
-		 result = memberService.deleteList(tab, chArr, user_id);
-		 }  
-		 System.out.println(result); // 성공하면 -1만 나오네..
-		return result;
-	}
-	
-	@RequestMapping(value = "profile/update")
-	public String profileEdit(Model model, @ModelAttribute("loginMember") Member loginMember) throws Exception {
-		Member member = memberService.selectMember(loginMember.getUser_id(), null, true);
-		model.addAttribute("member", member);
-		return "mypage/mypageChange";
-	}
-	
-	@RequestMapping(value = "profile/updateRun")
-	public String profileEditRun(@ModelAttribute("loginMember") Member loginMember,
-			Member member) throws Exception {
-		logger.info("profileEditRun");
-		System.out.println(member);
-		member.setUser_id(loginMember.getUser_id());
-		int result = memberService.updateProfile(member);
-		return "redirect:" + loginMember.getUser_id();
-	}
-	
-	@RequestMapping(value = "mypageChange", method = RequestMethod.GET)
-	public String mypageChange(Model model) throws Exception {
-		
-		return "mypage/mypageChange";
-	}
-	
-	@RequestMapping(value = "myInfoView", method = RequestMethod.GET)
-	public String myInfoView(Model model) throws Exception {
-		
-		return "myInfo/myInfoView";
-	}
-	
-	@RequestMapping(value = "myInfoChange", method = RequestMethod.GET)
-	public String myInfoChange(Model model) throws Exception {
-		
-		return "myInfo/myInfoChange";
-	}
-	
-	@RequestMapping(value = "myInfoChangePw", method = RequestMethod.GET)
-	public String myInfoChangePw(Model model) throws Exception {
-		
-		return "myInfo/myInfoChangePw";
-	}
-	
-	@RequestMapping(value = "emailChangePw", method = RequestMethod.GET)
-	public String emailChangePw(Model model) throws Exception {
-		
-		return "myInfo/emailChangePw";
-	}
-	@RequestMapping(value = "emailChange", method = RequestMethod.GET)
-	public String emailChange(Model model) throws Exception {
-		
-		return "myInfo/emailChange";
-	}
-	@RequestMapping(value = "deleteAccountResult", method = RequestMethod.GET)
-	public String deleteAccountResult(Model model) throws Exception {
-		
-		return "myInfo/deleteAccountResult";
-	}
-	@RequestMapping(value = "deleteAccountPw", method = RequestMethod.GET)
-	public String deleteAccountPw(Model model) throws Exception {
-		
-		return "myInfo/deleteAccountPw";
-	}
-	@RequestMapping(value = "pwChange", method = RequestMethod.GET)
-	public String pwChange(Model model) throws Exception {
-		
-		return "myInfo/pwChange";
 	}
 	
 }

@@ -37,6 +37,18 @@ public class BoardController {
 	@Inject
 	private BoardService boardService;
 	
+	@ModelAttribute("loginMember")
+	public Member loginMember(HttpSession session, BoardSearch bs) {
+		Member loginMember = (Member)session.getAttribute("loginMember");
+//		System.out.println("session" + loginMember);
+		if(loginMember != null) {
+			bs.setLogin_id(loginMember.getUser_id());
+		}
+		System.out.println("loginMember: " + loginMember);
+		System.out.println("bs: " + bs);
+		return loginMember;
+	}
+	
 	@ModelAttribute("sortLocalP")
 	public Sort sortLocalP(
 			@PathVariable("sortLocalPEngName") String sortLocalPEngName

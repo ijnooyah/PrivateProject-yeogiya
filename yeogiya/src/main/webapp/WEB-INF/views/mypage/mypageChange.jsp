@@ -255,10 +255,11 @@
 		var value = $('#user_nick').val();
 		var nickReg = /^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$/;
 			if (value.trim() == "" || value == null) {
+				nickCheck = false;
 				$('.nick-feedback').text("필수 정보입니다.");
 				$('.nick-feedback').show();
 			} else if(!value.match(nickReg) ){
-// 				validateCheck.nick = false;
+				nickCheck = false;
 				$('.nick-feedback').text("2~10자의 한글, 영문 대소문자, 숫자만 사용 가능합니다.");
 				$('.nick-feedback').show();
 			} else{
@@ -289,14 +290,10 @@
 	 
 	
 	function validate() {
-		if($('#user_nick').val().trim() == "" || $('#user_nick').val() == null) {
+		if(!nickCheck) {
 			$('#user_nick').focus();
-			$('.nick-feedback').text("필수 정보입니다.");
-			$('.nick-feedback').show();
 			return false;
-		} else if (!nickCheck) {
-			return false;
-		}
+		} 
 	}
 	</script>
 </body>

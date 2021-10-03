@@ -514,7 +514,7 @@
 			  
 			  for(var i = 0; i < cate2Arr.length; i++) {
 			   if(selectVal == cate2Arr[i].parent_sort) {
-			    cate2Select.append("<option value='" + cate2Arr[i].cate_no + "'>"
+			    cate2Select.append("<option value='" + cate2Arr[i].sort_no + "'>"
 			         + cate2Arr[i].sort_name + "</option>");
 			   }
 			  }

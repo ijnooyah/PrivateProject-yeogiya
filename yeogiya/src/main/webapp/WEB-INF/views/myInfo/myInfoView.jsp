@@ -75,17 +75,17 @@
 						<!-- 아이디 -->
 						<tr>
 							<th>아이디</th>
-							<td class="td_body">ijnooyah</td>
+							<td class="td_body">${member.user_id}</td>
 						</tr>
 						<!-- 이름 -->
 						<tr>
 							<th>이름</th>
-							<td class="td_body">하윤지</td>
+							<td class="td_body">${member.user_name}</td>
 						</tr>
 						<!-- 지역 -->
 						<tr>
 							<th>지역</th>
-							<td class="td_body">울산 동구</td>
+							<td class="td_body">${not empty member.sortLocalName ? member.sortLocalName : 'x'}</td>
 						</tr>
 						<!-- 휴대전화 -->
 						<tr>
@@ -100,12 +100,26 @@
 						<!-- 성별 -->
 						<tr>
 							<th>성별</th>
-							<td class="td_body">여</td>
+							<td class="td_body">
+							<c:choose>
+								<c:when test="${member.user_gender == 'F'}">
+									여
+								</c:when>
+								<c:when test="${member.user_gender == 'M'}">
+									남
+								</c:when>
+								<c:when test="${empty member.user_gender}">
+									x
+								</c:when>
+							</c:choose>
+							</td>
 						</tr>
 						<!-- 가입일 -->
 						<tr>
 							<th>가입일</th>
-							<td class="td_body">2021-09-04</td>
+							<td class="td_body">
+							<fmt:formatDate value="${member.sign_date}" pattern="yyyy-MM-dd"/>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -114,10 +128,10 @@
 		      <h3>회원 정보</h3>
 		      <hr class="hr">
 		      <ul class="list-menu">
-		        <li><a href="">회원정보 변경</a></li>
-		        <li><a href="">이메일 주소 변경</a></li>
-		        <li><a href="">비밀번호 변경</a></li>
-		        <li><a href="">탈퇴</a></li>
+		        <li><a href="${mePath}/update?act=info">회원정보 변경</a></li>
+		        <li><a href="${mePath}/update?act=email">이메일 주소 변경</a></li>
+		        <li><a href="${mePath}/update?act=pw">비밀번호 변경</a></li>
+		        <li><a href="${mePath}/delete">탈퇴</a></li>
 		      </ul>
 		    </div>  
    		</div>

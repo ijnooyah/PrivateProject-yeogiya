@@ -7,6 +7,8 @@ public class BoardSearch {
 	
 	private String tab;
 	
+	private String act;
+	
 	private int board_no;
 	
 	//지역명
@@ -170,14 +172,20 @@ public class BoardSearch {
 	public void setTab(String tab) {
 		this.tab = tab;
 	}
+	public String getAct() {
+		return act;
+	}
+	public void setAct(String act) {
+		this.act = act;
+	}
 	@Override
 	public String toString() {
-		return "BoardSearch [login_id=" + login_id + ", user_id=" + user_id + ", tab=" + tab + ", board_no=" + board_no
-				+ ", sortLocalEngName=" + sortLocalEngName + ", subLocal=" + subLocal + ", sortBoard=" + sortBoard
-				+ ", sortPlace=" + sortPlace + ", order=" + order + ", searchType=" + searchType + ", keyword="
-				+ keyword + ", page=" + page + ", startRow=" + startRow + ", endRow=" + endRow + ", count=" + count
-				+ ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage + ", perPage="
-				+ perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
+		return "BoardSearch [login_id=" + login_id + ", user_id=" + user_id + ", tab=" + tab + ", act=" + act
+				+ ", board_no=" + board_no + ", sortLocalEngName=" + sortLocalEngName + ", subLocal=" + subLocal
+				+ ", sortBoard=" + sortBoard + ", sortPlace=" + sortPlace + ", order=" + order + ", searchType="
+				+ searchType + ", keyword=" + keyword + ", page=" + page + ", startRow=" + startRow + ", endRow="
+				+ endRow + ", count=" + count + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage="
+				+ totalPage + ", perPage=" + perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 	}
 
 	

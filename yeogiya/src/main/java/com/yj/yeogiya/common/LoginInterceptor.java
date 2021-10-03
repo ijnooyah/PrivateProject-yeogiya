@@ -21,7 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		uri = uri.substring(contextPath.length());
 		String queryString = request.getQueryString();
 		String requestPath = null;
-		String regex = "(.*)\\/(insert|update|delete)(.*)";
+		String regex = "(.*)\\/(insert|update|delete|me)(.*)";
 		if(queryString == null) {
 			requestPath = uri;
 		} else {

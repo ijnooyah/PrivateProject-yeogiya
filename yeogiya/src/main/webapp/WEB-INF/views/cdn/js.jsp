@@ -79,7 +79,7 @@
     });
 	
 	//로그인 필수버튼들
-	var login_id = "${loginMember.user_id}"; // 로그인한사람 id
+	var login_id = "${sessionScope.loginMember.user_id}"; // 로그인한사람 id
 	if(login_id == '') {
 		$(".container").on("click", ".loginNeed", function(e) {
 			e.preventDefault();

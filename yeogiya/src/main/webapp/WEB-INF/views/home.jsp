@@ -10,9 +10,8 @@
 <h1>
 	Hello world!  
 </h1>
-
+${loginMember }
 <P>  The rootPath is ${rootPath} </P>
-${testVo.content}
 <br>
 <br>
 <br>
