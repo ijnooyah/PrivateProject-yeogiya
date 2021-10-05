@@ -29,8 +29,11 @@ public interface MemberService {
 	
 //************UPDATE************
 	public int updateProfile(Member member);
+	public int updateInfo(Member member);
+	public int updateEmail(Member member);
 	
 //************DELETE************
 	public int deleteList(String tab, List<String> chArr, String user_id);
+	public int deleteMember(Member member);
 	
 }

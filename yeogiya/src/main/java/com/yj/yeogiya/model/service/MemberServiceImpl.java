@@ -152,6 +152,21 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updateProfile(member);
 	}
 
+	@Override
+	public int updateInfo(Member member) {
+		return memberDao.updateInfo(member);
+	}
+
+	@Override
+	public int updateEmail(Member member) {
+		return memberDao.updateEmail(member);
+	}
+
+	@Override
+	public int deleteMember(Member member) {
+		return memberDao.deleteMember(member);
+	}
+
 
 
 }

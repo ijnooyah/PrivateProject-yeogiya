@@ -106,4 +106,19 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.update(NAMESPACE + "updateProfile", member);
 	}
 
+	@Override
+	public int updateInfo(Member member) {
+		return sqlSession.update(NAMESPACE + "updateInfo", member);
+	}
+
+	@Override
+	public int updateEmail(Member member) {
+		return sqlSession.update(NAMESPACE + "updateEmail", member);
+	}
+
+	@Override
+	public int deleteMember(Member member) {
+		return sqlSession.update(NAMESPACE + "deleteMember", member);
+	}
+
 }

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -49,7 +50,7 @@ public class MeController {
 	private MemberService memberService;
 	
 	@RequestMapping(value = "")
-	public String me(@ModelAttribute("loginMember") Member loginMember, Model model, RedirectAttributes ras) throws Exception {
+	public String me(@ModelAttribute("loginMember") Member loginMember, Model model) throws Exception {
 		logger.info("me");
 		
 		String user_id = null;
@@ -68,15 +69,24 @@ public class MeController {
 	public String update(@ModelAttribute("bs") BoardSearch bs,
 			@ModelAttribute("loginMember") Member loginMember,
 			@RequestParam(value = "chkPw", required = false) String chkPw,
-			RedirectAttributes ras) throws Exception {
+			RedirectAttributes ras, Model model) throws Exception {
 		logger.info("update");
 		
 		System.out.println("chkPw:" + chkPw);
 		System.out.println("loginMember:" + loginMember);
 		String act = bs.getAct();
 		
+		String user_id = null;
+		if(loginMember != null) {
+			user_id = loginMember.getUser_id();
+		}
+		Member member = memberService.selectMember(user_id, null, true);
+		System.out.println("member:" + member);
+		
+		model.addAttribute("member", member);
+		
 		if(act.equals("pw")) {
-			return "myInfo/myInfoChange";
+			return "myInfo/pwChange";
 		}
 		
 		if (loginMember != null) {
@@ -90,42 +100,70 @@ public class MeController {
 						return "myInfo/emailChange";
 					}
 				} else {
-					ras.addFlashAttribute("msg", "fail");
 					System.out.println("다름");
+					ras.addFlashAttribute("msg", "fail");
+					switch (act) {
+					case "info":
+						ras.addAttribute("act", "info");
+						break;
+					case "email":
+						ras.addAttribute("act", "email");
+						break;
+					}
+					return "redirect:update";
 				}
 			}
 		}
 		return "myInfo/pwCheck";
 	}
-	@RequestMapping(value = "updateEmail")
-	public String updateEmail(@ModelAttribute("loginMember") Member loginMember,
-			Model model) throws Exception {
-		logger.info("updateEmail");
-		
-		return "myInfo/myInfoChange";
-	}
-	@RequestMapping(value = "myInfoChange", method = RequestMethod.GET)
-	public String myInfoChange(Model model) throws Exception {
-		
-		return "myInfo/myInfoChange";
+	
+	@RequestMapping(value = "updateRun", method = RequestMethod.POST)
+	public String updateRun(Member member, @RequestParam(value = "act", required = false) String act) throws Exception {
+		logger.info("updateRun");
+		System.out.println("member:" + member);
+		System.out.println("act" + act);
+		int result = 0;
+		switch (act) {
+		case "info":
+			result = memberService.updateInfo(member);
+		case "email":
+			result = memberService.updateEmail(member);
+			break;
+		}
+		return "redirect:/me";
 	}
 	
-	@RequestMapping(value = "myInfoChangePw", method = RequestMethod.GET)
-	public String myInfoChangePw(Model model) throws Exception {
-		
-		return "myInfo/myInfoChangePw";
+	@RequestMapping(value = "delete")
+	public String delete() throws Exception {
+		return "myInfo/deleteAccountPw";
 	}
 	
-	@RequestMapping(value = "emailChangePw", method = RequestMethod.GET)
-	public String emailChangePw(Model model) throws Exception {
+	@RequestMapping(value = "deleteRun")
+	public String deleteRun(@ModelAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "chkPw") String chkPw,
+			SessionStatus status, RedirectAttributes ras) throws Exception {
+		logger.info("deleteRun");
 		
-		return "myInfo/emailChangePw";
-	}
-	@RequestMapping(value = "emailChange", method = RequestMethod.GET)
-	public String emailChange(Model model) throws Exception {
+		System.out.println("chkPw:" + chkPw);
+		System.out.println("loginMember:" + loginMember);
 		
-		return "myInfo/emailChange";
+		int result = 0;
+		if (loginMember != null) {
+			if(chkPw != null) {
+				if(chkPw.equals(loginMember.getUser_pw())) {
+					System.out.println("같음");
+					result = memberService.deleteMember(loginMember);
+					status.setComplete();
+					return "myInfo/deleteAccountResult";
+				} else {
+					System.out.println("다름");
+					ras.addFlashAttribute("msg", "fail");
+				}
+			}
+		}
+		return "redirect:delete";
 	}
+	
 	@RequestMapping(value = "deleteAccountResult", method = RequestMethod.GET)
 	public String deleteAccountResult(Model model) throws Exception {
 		

@@ -90,12 +90,12 @@
 						<!-- 휴대전화 -->
 						<tr>
 							<th>휴대전화</th>
-							<td class="td_body">010-8261-6277</td>
+							<td class="td_body">${member.user_phone}</td>
 						</tr>
 						<!-- 이메일 -->
 						<tr>
 							<th>이메일</th>
-							<td class="td_body">ijnooyah@gmail.com</td>
+							<td class="td_body">${member.user_email}</td>
 						</tr>
 						<!-- 성별 -->
 						<tr>

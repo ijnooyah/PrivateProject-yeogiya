@@ -82,7 +82,7 @@
 				      <a class="dropdown-item" href="#">마이페이지</a>
 				      <a class="dropdown-item" href="#">회원정보</a>
 					    <hr class="dropdown-divider">
-					    <a class="dropdown-item" href="#">로그아웃</a>
+					    <a class="dropdown-item" href="${memberPath}/logout">로그아웃</a>
 				    </div>
 			    </div>
 			</li>

@@ -39,9 +39,12 @@ public interface MemberDao {
 	public int getBookmarkListCount(BoardSearch bs);
 	//************UPDATE************
 	public int updateProfile(Member member);
+	public int updateInfo(Member member);
+	public int updateEmail(Member member);
 	
 	//************DELETE************
 	public int deleteBoardList(List<Board> boardList);
 	public int deleteCommentList(List<Comment> commentList);
 	public int deleteBookmarkList(List<Board> bookmarkList);
+	public int deleteMember(Member member);
 }
