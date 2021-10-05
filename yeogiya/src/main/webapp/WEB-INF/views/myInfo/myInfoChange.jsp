@@ -35,18 +35,18 @@
 				<!-- 아이디  -->
 				<div class="form-group">
 	                <label for="user_id" class="font-weight-500 col-form-label">아이디</label>
-	                <input type="text" class="form-control" name="user_id" value="${member.user_id}" readonly>
+	                <input type="text" class="form-control" name="user_id" value="${loginMember.user_id}" readonly>
 	            </div>
 	            <!-- 이름 -->
 	    		<div class="form-group">
 	                <label for="user_name" class="font-weight-500 col-form-label">이름</label>
-	                <input type="text" class="form-control" name="user_name" value="${member.user_name}" readonly>
+	                <input type="text" class="form-control" name="user_name" value="${loginMember.user_name}" readonly>
 	            </div>
 		    	<!-- 휴대전화 -->
 				<div class="form-group">
 					<label for="user_phone" class="font-weight-500 col-form-label">휴대전화</label>
 	                <input type="text" class="form-control required" id="user_phone" name="user_phone" 
-                	placeholder="01012345678" spellcheck="false" value="${member.user_phone}" required>
+                	placeholder="01012345678" spellcheck="false" value="${loginMember.user_phone}" required>
 	                <div class='invalid-feedback phone-feedback'>유효하지 않은 번호 입니다.</div>
 		    	</div>
 		    		<p class="h4 pt-5 mb-3">선택정보</p>
@@ -55,11 +55,11 @@
               <label for="user_gender" class="font-weight-500 col-form-label">성별</label>
 			  <br>
                <div class="custom-control custom-radio custom-control-inline">
-					  <input class="custom-control-input" type="radio" name="user_gender" id="male" value="M" ${member.user_gender == 'M' ? 'checked' : ''}>
+					  <input class="custom-control-input" type="radio" name="user_gender" id="male" value="M" ${loginMember.user_gender == 'M' ? 'checked' : ''}>
 					  <label class="custom-control-label" for="male">남자</label>
 					</div>
 					<div class="custom-control custom-radio custom-control-inline">
-					  <input class="custom-control-input" type="radio" name="user_gender" id="female" value="F"  ${member.user_gender == 'F' ? 'checked' : ''}>
+					  <input class="custom-control-input" type="radio" name="user_gender" id="female" value="F"  ${loginMember.user_gender == 'F' ? 'checked' : ''}>
 					  <label class="custom-control-label" for="female">여자</label>
 				</div>
             </div>
@@ -83,7 +83,7 @@
             </div>
 	            <div class="text-center pt-5">
 					<button type="submit" class="btn btn-pink">수정</button>
-					<button class="btn btn-pink-outline">취소</button>
+					<a class="btn btn-pink-outline" href="${contextPath}/me">취소</a>
 				</div>
 			</div>
 			<input type="hidden" name="act" value="${bs.act}"/>
@@ -140,7 +140,7 @@
 		
 		// 1차 분류 셀렉트 박스에 데이터 삽입
 		var cate1Select = $("#sortLocal");
-		var selectedCate1 = "${member.sort_local}"
+		var selectedCate1 = "${loginMember.sort_local}"
 		console.log(selectedCate1);
 		for(var i = 0; i < cate1Arr.length; i++) {
 			if(cate1Arr[i].sort_no == selectedCate1) {
@@ -169,7 +169,7 @@
 		 
 		
 		 //수정용 임시로 보여줄 2차분류
-		 var selectedCate2 = "${member.sub_local}"
+		 var selectedCate2 = "${loginMember.sub_local}"
 		 var cate2Select = $("#subLocal");
 		  for(var i = 0; i < cate2Arr.length; i++) {
 		   if(selectedCate1 == cate2Arr[i].parent_sort) {

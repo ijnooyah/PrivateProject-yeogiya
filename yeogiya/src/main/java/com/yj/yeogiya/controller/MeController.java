@@ -65,6 +65,23 @@ public class MeController {
 		return "myInfo/myInfoView";
 	}
 	
+	//닉네임 중복체크
+	@RequestMapping(value = "checkPw")
+	@ResponseBody
+	public String checkPw(@RequestParam("currPw") String currPw,
+		@ModelAttribute("loginMember") Member loginMember) throws Exception {
+		logger.info("checkPw");
+		System.out.println(currPw);
+		System.out.println(loginMember);
+		boolean result = false;
+		if (loginMember != null) { 
+			if(currPw.equals(loginMember.getUser_pw())) {
+				result = true;
+			}
+		} 
+		return String.valueOf(result);
+	}
+	
 	@RequestMapping(value = "update")
 	public String update(@ModelAttribute("bs") BoardSearch bs,
 			@ModelAttribute("loginMember") Member loginMember,
@@ -76,14 +93,14 @@ public class MeController {
 		System.out.println("loginMember:" + loginMember);
 		String act = bs.getAct();
 		
-		String user_id = null;
-		if(loginMember != null) {
-			user_id = loginMember.getUser_id();
-		}
-		Member member = memberService.selectMember(user_id, null, true);
-		System.out.println("member:" + member);
+//		String user_id = null;
+//		if(loginMember != null) {
+//			user_id = loginMember.getUser_id();
+//		}
+//		Member member = memberService.selectMember(user_id, null, true);
+//		System.out.println("member:" + member);
 		
-		model.addAttribute("member", member);
+//		model.addAttribute("member", member);
 		
 		if(act.equals("pw")) {
 			return "myInfo/pwChange";
@@ -118,16 +135,24 @@ public class MeController {
 	}
 	
 	@RequestMapping(value = "updateRun", method = RequestMethod.POST)
-	public String updateRun(Member member, @RequestParam(value = "act", required = false) String act) throws Exception {
+	public String updateRun(@ModelAttribute("loginMember") Member loginMember,
+			Member member, @RequestParam(value = "act", required = false) String act) throws Exception {
 		logger.info("updateRun");
 		System.out.println("member:" + member);
 		System.out.println("act" + act);
 		int result = 0;
+		
+		if(loginMember != null) {
+			member.setUser_id(loginMember.getUser_id());
+		}
 		switch (act) {
 		case "info":
 			result = memberService.updateInfo(member);
 		case "email":
 			result = memberService.updateEmail(member);
+			break;
+		case "pw":
+			result = memberService.updatePw(member);
 			break;
 		}
 		return "redirect:/me";
@@ -164,11 +189,6 @@ public class MeController {
 		return "redirect:delete";
 	}
 	
-	@RequestMapping(value = "deleteAccountResult", method = RequestMethod.GET)
-	public String deleteAccountResult(Model model) throws Exception {
-		
-		return "myInfo/deleteAccountResult";
-	}
 	@RequestMapping(value = "deleteAccountPw", method = RequestMethod.GET)
 	public String deleteAccountPw(Model model) throws Exception {
 		

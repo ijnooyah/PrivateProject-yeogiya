@@ -75,40 +75,40 @@
 						<!-- 아이디 -->
 						<tr>
 							<th>아이디</th>
-							<td class="td_body">${member.user_id}</td>
+							<td class="td_body">${loginMember.user_id}</td>
 						</tr>
 						<!-- 이름 -->
 						<tr>
 							<th>이름</th>
-							<td class="td_body">${member.user_name}</td>
+							<td class="td_body">${loginMember.user_name}</td>
 						</tr>
 						<!-- 지역 -->
 						<tr>
 							<th>지역</th>
-							<td class="td_body">${not empty member.sortLocalName ? member.sortLocalName : 'x'}</td>
+							<td class="td_body">${not empty loginMember.sortLocalName ? loginMember.sortLocalName : 'x'}</td>
 						</tr>
 						<!-- 휴대전화 -->
 						<tr>
 							<th>휴대전화</th>
-							<td class="td_body">${member.user_phone}</td>
+							<td class="td_body">${loginMember.user_phone}</td>
 						</tr>
 						<!-- 이메일 -->
 						<tr>
 							<th>이메일</th>
-							<td class="td_body">${member.user_email}</td>
+							<td class="td_body">${loginMember.user_email}</td>
 						</tr>
 						<!-- 성별 -->
 						<tr>
 							<th>성별</th>
 							<td class="td_body">
 							<c:choose>
-								<c:when test="${member.user_gender == 'F'}">
+								<c:when test="${loginMember.user_gender == 'F'}">
 									여
 								</c:when>
-								<c:when test="${member.user_gender == 'M'}">
+								<c:when test="${loginMember.user_gender == 'M'}">
 									남
 								</c:when>
-								<c:when test="${empty member.user_gender}">
+								<c:when test="${empty loginMember.user_gender}">
 									x
 								</c:when>
 							</c:choose>
@@ -118,7 +118,7 @@
 						<tr>
 							<th>가입일</th>
 							<td class="td_body">
-							<fmt:formatDate value="${member.sign_date}" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${loginMember.sign_date}" pattern="yyyy-MM-dd"/>
 							</td>
 						</tr>
 					</tbody>

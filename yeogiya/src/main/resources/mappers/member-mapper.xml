@@ -204,6 +204,12 @@
 		SET	user_email = #{user_email}
    	   	WHERE user_id = #{user_id}
 	</update>
+	
+	<update id="updatePw">
+		UPDATE tbl_member
+		SET	user_pw = #{user_pw}
+   	   	WHERE user_id = #{user_id}
+	</update>
 <!-- ************DELETE************ -->
 	<update id="deleteBoardList"  parameterType="java.util.List">
 		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">

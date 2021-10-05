@@ -46,11 +46,10 @@
 		    		<div class="col-sm-3"></div>
 				</div>
 	    	</div>
-			<input type="hidden" name="user_id" value="${loginMember.user_id}"/>
 			<input type="hidden" name="act" value="${bs.act}"/>
 			 <div class="text-center pt-5">
 				<button type="submit" class="btn btn-pink">수정</button>
-				<button class="btn btn-pink-outline">취소</button>
+				<a class="btn btn-pink-outline" href="${contextPath}/me">취소</a>
 			</div>
 		</form>
 	</div>

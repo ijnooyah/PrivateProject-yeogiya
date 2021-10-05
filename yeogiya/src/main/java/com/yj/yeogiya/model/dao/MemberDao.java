@@ -41,6 +41,7 @@ public interface MemberDao {
 	public int updateProfile(Member member);
 	public int updateInfo(Member member);
 	public int updateEmail(Member member);
+	public int updatePw(Member member);
 	
 	//************DELETE************
 	public int deleteBoardList(List<Board> boardList);

@@ -121,4 +121,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.update(NAMESPACE + "deleteMember", member);
 	}
 
+	@Override
+	public int updatePw(Member member) {
+		return sqlSession.update(NAMESPACE + "updatePw", member);
+	}
+
 }
