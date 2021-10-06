@@ -242,6 +242,15 @@
 				</when>
 			</choose>
 		</if>
+<!-- 		<if test="searchType == null and keyword != null"> -->
+<!-- 			AND (a.board_title like '%' || #{keyword} || '%' -->
+<!-- 				or  a.board_content like '%' || #{keyword} || '%' -->
+<!-- 				or a.board_title like '%' || #{keyword} || '%' -->
+<!-- 				or f.user_nick like '%' || #{keyword} || '%' -->
+<!-- 				or  a.user_id like '%' || #{keyword} || '%' -->
+<!-- 				or g.place_name like '%' || #{keyword} || '%' -->
+<!-- 				or  g.place_address like '%' || #{keyword} || '%') -->
+<!-- 		</if> -->
 		<!-- 게시판별 -->
 		<if test="sortBoard != null and sortBoard != 'all'">
 			AND a.sort_board = #{sortBoard}
@@ -276,6 +285,67 @@
  			ORDER BY a.board_no DESC
  		</if>
 	</sql>
+ 	
+ 	
+ 	<select id="selectNoticeList" resultType="Board">
+ 		SELECT a.*, b.sort_name sortLocalName, b.eng_name sortLocalEngName, c.sort_name subLocalName,
+	    d.sort_name sortBoardName, e.sort_name sortPlaceName,
+	    f.user_nick userNick, g.place_name placeName, g.place_address placeAddress
+	    <if test = "login_id != null">
+		, bl.board_no likeBoard, bm.board_no bmBoard
+		</if>
+		FROM tbl_board a
+		JOIN tbl_sort_local b ON a.sort_local = b.sort_no
+		JOIN tbl_sort_local c ON a.sub_local = c.sort_no
+		JOIN tbl_sort_board d ON a.sort_board = d.sort_no
+		LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
+		JOIN tbl_member f ON a.user_id = f.user_id
+		LEFT OUTER JOIN (select a.*, b.board_no  from tbl_place a, tbl_board_place b
+                    where a.place_no = b.place_no) g ON a.board_no = g.board_no 
+		<if test = "login_id != null">
+		LEFT OUTER JOIN tbl_like bl ON bl.user_id = #{login_id} AND bl.board_no = #{board_no}
+		LEFT OUTER JOIN tbl_bookmark bm ON bm.user_id = #{login_id} AND bm.board_no = #{board_no}
+		</if>
+ 		WHERE is_del = 'N' AND is_notice = 'Y' AND b.eng_name = #{sortLocalEngName}
+ 		<if test="sortBoard != null and sortBoard != 'all'">
+			AND a.sort_board = #{sortBoard}
+		</if>
+		<!-- 소지역별 -->
+		<if test="subLocal != null and subLocal != 'all'">
+			AND a.sub_local = #{subLocal}
+		</if>
+		<!-- 말머리별 -->
+		<if test="sortPlace != null and sortPlace != 'all'">
+			AND a.sort_place = #{sortPlace}
+		</if>
+ 		ORDER BY a.board_no DESC
+ 	</select>
+ 	
+ 	<select id="selectMain" resultType="Board">
+ 		SELECT * 
+		FROM (SELECT ROWNUM rnum, A.*
+				 FROM ( SELECT a.*, b.sort_name sortLocalName, b.eng_name sortLocalEngName, c.sort_name subLocalName,
+					    d.sort_name sortBoardName, e.sort_name sortPlaceName,
+					    f.user_nick userNick, f.user_img userImg, g.place_name placeName, g.place_address placeAddress
+					    <if test = "login_id != null">
+						, bl.board_no likeBoard, bm.board_no bmBoard
+						</if>
+						FROM tbl_board a
+						JOIN tbl_sort_local b ON a.sort_local = b.sort_no
+						JOIN tbl_sort_local c ON a.sub_local = c.sort_no
+						JOIN tbl_sort_board d ON a.sort_board = d.sort_no
+						LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
+						JOIN tbl_member f ON a.user_id = f.user_id
+						LEFT OUTER JOIN (select a.*, b.board_no  from tbl_place a, tbl_board_place b
+                        where a.place_no = b.place_no) g ON a.board_no = g.board_no 
+						<if test = "login_id != null">
+						LEFT OUTER JOIN tbl_like bl ON bl.user_id = #{login_id} AND bl.board_no = a.board_no
+						LEFT OUTER JOIN tbl_bookmark bm ON bm.user_id = #{login_id} AND bm.board_no = a.board_no
+						</if>
+				 		WHERE is_del = 'N' AND is_notice = 'N' AND b.sort_no = #{sortLocal} AND a.sort_place is not null
+						ORDER BY a.view_cnt DESC, a.like_cnt DESC, a.board_no DESC  ) A )
+		WHERE rnum BETWEEN 1 AND 10
+ 	</select>
  	
 <!-- ************UPDATE************ -->
 	<!-- 1-1. board -->

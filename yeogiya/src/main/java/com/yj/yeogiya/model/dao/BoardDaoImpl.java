@@ -190,6 +190,16 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.update(NAMESPACE + "deleteBoard", board_no);
 	}
 
+	@Override
+	public List<Board> selectMain(BoardSearch bs) {
+		return sqlSession.selectList(NAMESPACE + "selectMain", bs);
+	}
+
+	@Override
+	public List<Board> selectNoticeList(BoardSearch bs) {
+		return sqlSession.selectList(NAMESPACE + "selectNoticeList", bs);
+	}
+
 	
 
 }

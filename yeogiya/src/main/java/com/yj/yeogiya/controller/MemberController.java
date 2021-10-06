@@ -168,11 +168,8 @@ public class MemberController {
 			response.addCookie(cookie);
 			
 			String requestPath = (String) session.getAttribute("requestPath");
-			if (requestPath == null) {
-				url = "/";
-			} else {
-				url = requestPath;
-			}
+			System.out.println("로그인 :" + requestPath);
+			url = "/";
 				
 
 		} else { // 로그인 실패 시

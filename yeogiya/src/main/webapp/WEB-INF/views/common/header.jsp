@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-    <a href="${contextPath}/${sortLocalP.eng_name}" class="logo text-pink ml-3 mr-4" style="font-size:1rem;">여기야!</a>
+    <a href="${contextPath}/" class="logo text-pink ml-3 mr-4" style="font-size:1rem;">여기야!</a>
     <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,7 +28,7 @@
 	            </c:forEach>
 	          </ul>
 	        </li>
-          	<li class="nav-item"><a href="#" class="nav-link">고객센터</a></li>
+<!--           	<li class="nav-item"><a href="#" class="nav-link">고객센터</a></li> -->
         </ul>
          <ul class="nav navbar-nav ml-auto">
         	<c:if test="${empty loginMember}">
@@ -79,8 +79,8 @@
 							 style="width:36px; height:36px;"></div>
 					</a>
 				    <div class="dropdown-menu dropdown-menu-right">
-				      <a class="dropdown-item" href="#">마이페이지</a>
-				      <a class="dropdown-item" href="#">회원정보</a>
+				      <a class="dropdown-item" href="${profilePath}/${loginMember.user_id}">마이페이지</a>
+				      <a class="dropdown-item" href="${contextPath}/me">회원정보</a>
 					    <hr class="dropdown-divider">
 					    <a class="dropdown-item" href="${memberPath}/logout">로그아웃</a>
 				    </div>

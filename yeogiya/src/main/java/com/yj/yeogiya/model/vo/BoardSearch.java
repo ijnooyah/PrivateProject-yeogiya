@@ -12,6 +12,7 @@ public class BoardSearch {
 	private int board_no;
 	
 	//지역명
+	private String sortLocal;
 	private String sortLocalEngName;
 	//카테고리
 	private String subLocal;
@@ -178,14 +179,20 @@ public class BoardSearch {
 	public void setAct(String act) {
 		this.act = act;
 	}
+	public String getSortLocal() {
+		return sortLocal;
+	}
+	public void setSortLocal(String sortLocal) {
+		this.sortLocal = sortLocal;
+	}
 	@Override
 	public String toString() {
 		return "BoardSearch [login_id=" + login_id + ", user_id=" + user_id + ", tab=" + tab + ", act=" + act
-				+ ", board_no=" + board_no + ", sortLocalEngName=" + sortLocalEngName + ", subLocal=" + subLocal
-				+ ", sortBoard=" + sortBoard + ", sortPlace=" + sortPlace + ", order=" + order + ", searchType="
-				+ searchType + ", keyword=" + keyword + ", page=" + page + ", startRow=" + startRow + ", endRow="
-				+ endRow + ", count=" + count + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage="
-				+ totalPage + ", perPage=" + perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
+				+ ", board_no=" + board_no + ", sortLocal=" + sortLocal + ", sortLocalEngName=" + sortLocalEngName
+				+ ", subLocal=" + subLocal + ", sortBoard=" + sortBoard + ", sortPlace=" + sortPlace + ", order="
+				+ order + ", searchType=" + searchType + ", keyword=" + keyword + ", page=" + page + ", startRow="
+				+ startRow + ", endRow=" + endRow + ", count=" + count + ", startPage=" + startPage + ", endPage="
+				+ endPage + ", totalPage=" + totalPage + ", perPage=" + perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 	}
 
 	

@@ -32,6 +32,9 @@ public interface BoardService {
 	// 4. 글목록
 	public List<Board> selectBoardList(BoardSearch bs);
 	
+	public List<Board> selectMain(BoardSearch bs);
+	
+	public List<Board> selectNoticeList(BoardSearch bs);
 	
 //************UPDATE************
 	// 1. 게시글

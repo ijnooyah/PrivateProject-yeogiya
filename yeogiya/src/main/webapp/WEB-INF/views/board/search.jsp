@@ -66,7 +66,7 @@
 						placeholder="검색어를 입력하세요.">
 				</div>
 				<div class="input-group-append">
-					<button class="btn btn-pink btn-sm rounded-0" onclick="doSubmit();" type="button">
+					<button class="btn btn-pink btn-sm rounded-0 loginNeed" onclick="doSubmit();" type="button">
 						<i class="fa fa-search font-size-090"></i>
 					</button>
 				</div>
@@ -78,7 +78,10 @@
  function doSubmit() {
 	 console.log('클릭');
 	 console.log('val', $('#inputSearch').val());
-	 if($('#inputSearch').val().trim() == '') {
+	 var login_id = "${sessionScope.loginMember.user_id}"
+	 if(login_id == '') {
+		 return;
+	 } else if($('#inputSearch').val().trim() == '') {
 		 Swal.fire({
 	        	title: '검색어를 입력해 주세요!',
 				allowOutsideClick: false,

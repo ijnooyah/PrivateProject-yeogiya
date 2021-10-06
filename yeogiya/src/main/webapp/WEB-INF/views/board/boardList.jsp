@@ -29,6 +29,14 @@
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 		<c:choose>
+			<c:when test="${login == 'need'}">
+				<div style="height:200px;" class="d-flex">
+				<div class="m-auto text-center">
+					<div class="mb-3">비회원이 사용할 수 없는 기능입니다.</div>
+					<a class="text-pink font-weight-600" href="${memberPath}/login">로그인</a> 
+				</div> 
+				</div>
+			</c:when>
 			<c:when test="${bs.sortBoard == 'all'}">
 				<jsp:include page="./listAll.jsp" flush="false"/>
 			</c:when>

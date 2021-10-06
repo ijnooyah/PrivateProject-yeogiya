@@ -101,8 +101,8 @@
 							<span class="c_reg_date">21.09.02 20:05</span>
 							<span>|</span>
 							<span class="doRecomment cursor-pointer" onclick="doRecomment(1)">답글</span>
-							<span class="report" style="display:none;">|</span>
-							<a class="cursor-pointer report" onclick="신고()" style="display:none;">신고</a>
+<!-- 							<span class="report" style="display:none;">|</span> -->
+<!-- 							<a class="cursor-pointer report" onclick="신고()" style="display:none;">신고</a> -->
 						</div>
 					</div>
 			</div>

@@ -52,7 +52,7 @@ public class MeController {
 	@RequestMapping(value = "")
 	public String me(@ModelAttribute("loginMember") Member loginMember, Model model) throws Exception {
 		logger.info("me");
-		
+		System.out.println("loginMember:" + loginMember);
 		String user_id = null;
 		if(loginMember != null) {
 			user_id = loginMember.getUser_id();
@@ -138,6 +138,7 @@ public class MeController {
 	public String updateRun(@ModelAttribute("loginMember") Member loginMember,
 			Member member, @RequestParam(value = "act", required = false) String act) throws Exception {
 		logger.info("updateRun");
+		System.out.println("loginMember:" + loginMember);
 		System.out.println("member:" + member);
 		System.out.println("act" + act);
 		int result = 0;
@@ -148,6 +149,7 @@ public class MeController {
 		switch (act) {
 		case "info":
 			result = memberService.updateInfo(member);
+			break;
 		case "email":
 			result = memberService.updateEmail(member);
 			break;

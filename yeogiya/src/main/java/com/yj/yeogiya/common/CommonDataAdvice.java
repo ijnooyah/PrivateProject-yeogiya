@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.yj.yeogiya.HomeController;
 import com.yj.yeogiya.controller.BoardController;
 import com.yj.yeogiya.controller.MeController;
 import com.yj.yeogiya.controller.MemberController;
@@ -19,7 +20,7 @@ import com.yj.yeogiya.model.vo.Sort;
 
 
 @ControllerAdvice(assignableTypes = {BoardController.class, MemberController.class,
-									ProfileController.class, MeController.class})
+									ProfileController.class, MeController.class, HomeController.class})
 public class CommonDataAdvice {
 	private static final Logger logger = LoggerFactory.getLogger(CommonDataAdvice.class);
 	

@@ -15,6 +15,7 @@ public interface MemberService {
 	
 //************CREATE************
 	public int join(Member member); 
+	
 	//************READ************
 	//아이디 중복체크
 	public boolean checkDupId(String user_id);

@@ -85,7 +85,7 @@
 						<!-- 지역 -->
 						<tr>
 							<th>지역</th>
-							<td class="td_body">${not empty loginMember.sortLocalName ? loginMember.sortLocalName : 'x'}</td>
+							<td class="td_body">${not empty member.sortLocalName ? member.sortLocalName : 'x'}</td>
 						</tr>
 						<!-- 휴대전화 -->
 						<tr>

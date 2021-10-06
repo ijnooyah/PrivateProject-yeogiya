@@ -157,50 +157,67 @@ div.subLocal_wrap a.active {
 				</tr>
 			</thead>
 			<tbody>
-				<!--조회된 게시글 목록 있을 때 -->
-					<!-- 공지목록 -->
-				<c:forEach var="v" begin="1" end="3">
-					<tr class="tr_notice">
-						<!-- 번호 -->
-						<td class="td_no td_notice">
-							<div class='badge badge-pink p-1'>
-							공지
-							</div>
-						</td>
-						<!-- 지역 -->
-						<td class="td_subLocal">
-							<a href="" class="">	
-								강남구
-							</a>
-						</td>
-						<!-- 제목 -->
-						<td class="td_title d-flex">
-							<span class="place_sort mr-2 text-muted font-weight-400">[맛집]</span>
-							<a href="" class="short_title">
-								제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
-							</a>
-							<span class="text-pink mx-2 font-weight-400">[3]</span>
-							<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image" viewBox="0 0 16 16" style="margin-top:2px;">
-							  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-							  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-							</svg>
-						</td>
-						<!-- 글쓴이 -->
-						<td class="td_writer">
-							<a href=""  class="">
-								관리자
-							</a>
-						</td>
-						<!-- 날짜 -->
-						<td  class="td_date">
-						21.08.27
-						</td>
-						<!-- 좋아요 -->
-						<td  class="td_like ">113</td>
-						<!-- 조회 -->
-						<td  class="td_view">1003</td>
-					</tr>
-				</c:forEach>
+				<!-- 공지목록 -->
+				<c:if test="${not empty noticeList}">
+					<c:forEach var="n" items="${noticeList}">
+						<tr class="tr_notice" ${board.board_no == n.board_no ? 'style="background:#f3a6c630;"' : ''}>
+							<!-- 번호 -->
+							<td class="td_no td_notice">
+								<div class='badge badge-pink p-1'>
+								공지
+								</div>
+							</td>
+							<!-- 지역 -->
+							<td class="td_subLocal">
+								<a href="?sortBoard=${n.sort_board}&subLocal=${n.sub_local}${not empty n.sort_place ? '&sortPlace=all' : ''}" class="">	
+								${n.subLocalName}
+								</a>
+							</td>
+							<!-- 제목 -->
+							<td class="td_title d-flex">
+								<c:if test="${not empty n.sort_place}">
+									<span class="place_sort mr-2 text-muted font-weight-400">
+										${n.sortPlaceName}</span>
+								</c:if>
+								<a href="${localPath}/content/${n.board_no}?${allQ}" class="short_title">
+									${n.board_title}
+								</a>
+								<span class="text-pink mx-2 font-weight-400">[${n.cmt_cnt}]</span>
+								<c:if test="${n.has_img == 'Y'}">
+									<svg xmlns="http://www.w3.org/2000/svg" width="0.95rem" height="0.95rem" fill="var(--pink50)" class="bi bi-image mr-2" viewBox="0 0 16 16" style="margin-top:2px;">
+									  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+									  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+									</svg>
+								</c:if>
+							</td>
+							<!-- 글쓴이 -->
+							<td class="td_writer">
+								<a href="${profilePath}/${n.user_id}" class="">
+									${n.userNick}
+								</a>
+							</td>
+							<!-- 작성일 -->
+							<td class="td_date ">
+							<!-- now랑 글작성일이랑 같으면 HH:mm형식으로 보여주고 같지않으면 yy.MM.dd 형식으로 보여주기 -->
+							<jsp:useBean id="now" class="java.util.Date" />
+							<fmt:formatDate value="${now}" pattern="yy.MM.dd" var="today" />
+							<fmt:formatDate value="${n.reg_date}" pattern="yy.MM.dd" var="regDate"/>
+							<c:choose>
+								<c:when test="${regDate != today}">
+									${regDate}
+								</c:when>
+								<c:otherwise>
+									<fmt:formatDate value="${n.reg_date}" pattern="HH:mm"/>
+								</c:otherwise>
+							</c:choose>
+							</td>
+							<!-- 좋아요 -->
+							<td class="td_like ">${n.like_cnt}</td>
+							<!-- 조회 -->
+							<td  class="td_view ">${n.view_cnt}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
 				<c:forEach var="b" items="${boardList}">
 					<tr ${board.board_no == b.board_no ? 'style="background:#f3a6c630;"' : ''}>
 						<!-- 번호 -->
@@ -243,7 +260,7 @@ div.subLocal_wrap a.active {
 						<!-- 작성일 -->
 						<td class="td_date ">
 						<!-- now랑 글작성일이랑 같으면 HH:mm형식으로 보여주고 같지않으면 yy.MM.dd 형식으로 보여주기 -->
-						<jsp:useBean id="now" class="java.util.Date" />
+<%-- 						<jsp:useBean id="now" class="java.util.Date" /> --%>
 						<fmt:formatDate value="${now}" pattern="yy.MM.dd" var="today" />
 						<fmt:formatDate value="${b.reg_date}" pattern="yy.MM.dd" var="regDate"/>
 						<c:choose>

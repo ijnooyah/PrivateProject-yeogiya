@@ -31,6 +31,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		System.out.println(loginMember);
 		System.out.println(requestPath);
+		System.out.println(queryString);
 		if(loginMember == null) {
 			if (requestPath.matches(regex)) {
 				System.out.println("정규식 맞음");
@@ -41,7 +42,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		} 
 		
 		
-		return true; // 요청 처리를 계속함
+		return true;
 	}	
 	
 	

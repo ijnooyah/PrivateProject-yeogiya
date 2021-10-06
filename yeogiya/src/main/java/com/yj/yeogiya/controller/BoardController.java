@@ -57,7 +57,9 @@ public class BoardController {
 		bs.setSortLocalEngName(sortLocalPEngName);
 //		System.out.println(bs);
 		List<Board> boardList = boardService.selectBoardList(bs);
+		List<Board> noticeList = boardService.selectNoticeList(bs);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("noticeList", noticeList);
 		return boardService.selectSortLocalPByEngName(sortLocalPEngName);
 	}
 	
@@ -99,8 +101,15 @@ public class BoardController {
 	
 	//글목록페이지
 	@RequestMapping(value = "list")
-	public String list() throws Exception {
-//		logger.info("list");
+	public String list(BoardSearch bs, HttpSession session, Model model) throws Exception {
+		logger.info("list");
+		System.out.println("bs:" + bs);
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			if(bs.getOrder() != null || bs.getKeyword() != null || bs.getSearchType() != null) {
+				model.addAttribute("login", "need");
+			}
+		}
 		return "board/boardList";
 	}
 	
@@ -125,8 +134,8 @@ public class BoardController {
 	//글수정작업
 	@RequestMapping(value = "updateRun", method = RequestMethod.POST)
 	public String updateRun(Board board) throws Exception {
-//		logger.info("updateRun");
-//		System.out.println(board);
+		logger.info("updateRun");
+		System.out.println(board);
 		int result = boardService.updateBoardArticle(board);
 		int board_no = board.getBoard_no();
 		String sortBoard = "sortBoard=" + board.getSort_board();

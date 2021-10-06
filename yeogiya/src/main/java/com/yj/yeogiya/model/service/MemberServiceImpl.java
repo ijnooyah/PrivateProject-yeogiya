@@ -2,6 +2,7 @@ package com.yj.yeogiya.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -154,6 +155,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int updateInfo(Member member) {
+		System.out.println("service");
+		System.out.println(member);
 		return memberDao.updateInfo(member);
 	}
 

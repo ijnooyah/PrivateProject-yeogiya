@@ -113,7 +113,7 @@
 						<div class="ml-auto mr-2">
 							<svg xmlns="http://www.w3.org/2000/svg" width="0.98rem" height="0.98rem" fill="currentColor" id="bookmark" class="bi bi-bookmark mr-2 cursor-pointer" viewBox="0 0 16 16">
 							  <path class="bi-bookmark text-muted ${empty board.bmBoard ? '' : 'd-none'}" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-							  <path class="bi-bookmark-fill text-pink ${not empty board.bmBoard ? '' : 'd-none'}" d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
+							  <path class="bi-bookmark-fill text-warning ${not empty board.bmBoard ? '' : 'd-none'}" d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
 							</svg>
 							<svg xmlns="http://www.w3.org/2000/svg" id="share" width="0.98rem" height="0.98rem" fill="currentColor" class="bi bi-share text-muted cursor-pointer" viewBox="0 0 16 16">
 							  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
@@ -159,7 +159,7 @@
 					<span id="cmt_cnt" class="cmt_cnt">${board.cmt_cnt}</span> 
 					<c:if test="${loginMember.user_id != board.user_id}">
 					<c:if test="${not empty loginMember}">
-						<a href="" class="ml-auto text-muted font-size-090">신고</a>
+<!-- 						<a href="" class="ml-auto text-muted font-size-090">신고</a> -->
 					</c:if>
 					</c:if>
 				</div>
@@ -476,7 +476,7 @@
 				if(this.user_id != login_id) {
 					cloneDiv.find(".private").remove();
 					if('${loginMember}' != "") {
-	 				cloneDiv.find(".report").show();
+// 	 				cloneDiv.find(".report").show();
 					}
 				} else {
 					cloneDiv.css("background", "#f3a6c61a")

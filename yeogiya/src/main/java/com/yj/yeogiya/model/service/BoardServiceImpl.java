@@ -336,4 +336,14 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteBoard(board_no);
 	}
 
+	@Override
+	public List<Board> selectMain(BoardSearch bs) {
+		return boardDao.selectMain(bs);
+	}
+
+	@Override
+	public List<Board> selectNoticeList(BoardSearch bs) {
+		return boardDao.selectNoticeList(bs);
+	}
+
 }

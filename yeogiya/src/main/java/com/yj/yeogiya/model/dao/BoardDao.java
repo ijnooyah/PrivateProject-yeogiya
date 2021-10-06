@@ -53,6 +53,12 @@ public interface BoardDao {
 	public List<BoardTag> searchTag(String keyword);
 	
 	
+	//메인
+	public List<Board> selectMain(BoardSearch bs);
+	
+	//공지
+	public List<Board> selectNoticeList(BoardSearch bs);
+	
 	//************UPDATE************
 	// 1. 게시글
 	// 1-1.board

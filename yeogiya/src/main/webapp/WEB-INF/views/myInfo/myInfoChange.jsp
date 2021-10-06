@@ -74,10 +74,10 @@
                	</div>
                	<div class="d-flex mb-2">
                		<select class="form-control mr-1" id="sortLocal" name="sort_local">
-						<option value="0">상위 지역</option>
+						<option value="">상위 지역</option>
 					</select>
 					<select class="form-control" id="subLocal" name="sub_local">
-						<option value="0">하위 지역</option>
+						<option value="">하위 지역</option>
 					</select>
 			    </div>
             </div>
@@ -190,7 +190,7 @@
 			 $("option:selected", this).each(function(){
 			  
 			  var selectVal = $(this).val();  
-			  cate2Select.append("<option value='0'>하위지역</option>");
+			  cate2Select.append("<option value=''>하위지역</option>");
 			  
 			  for(var i = 0; i < cate2Arr.length; i++) {
 			   if(selectVal == cate2Arr[i].parent_sort) {
