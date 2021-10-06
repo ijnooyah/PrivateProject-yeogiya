@@ -7,7 +7,7 @@
     </li>
     <li><a href="#구현-기능">구현 기능</a>
       <ul>
-         <li><a href="#1.-Member">Member</a>
+         <li><a href="#1-member">Member</a>
            <ul>
             <li><a href="#join">회원가입</a></li>
             <li><a href="#login">로그인</a></li>
