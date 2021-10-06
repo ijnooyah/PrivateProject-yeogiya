@@ -7,6 +7,42 @@
     </li>
     <li><a href="#구현-기능">구현 기능</a>
       <ul>
+         <li><a href="#Member">Member</a>
+           <ul>
+            <li><a href="#join">회원가입</a></li>
+            <li><a href="#login">로그인</a></li>
+            <li><a href="#idFind">아이디 찾기</a></li>
+            <li><a href="#pwFind">비밀번호 찾기</a></li>
+          </ul>
+         </li>
+         <li><a href="#Profile">Profile</a>
+           <ul>
+            <li><a href="#">프로필 조회</a></li>
+            <li><a href="#">글, 댓글, 북마크삭제</a></li>
+            <li><a href="#">프로필 변경</a></li>
+          </ul>
+         </li>
+         <li><a href="#Me">Me</a>
+           <ul>
+            <li><a href="#">회원정보 조회</a></li>
+            <li><a href="#">회원정보 변경</a></li>
+            <li><a href="#">이메일 변경</a></li>
+            <li><a href="#">비밀번호 변경</a></li>
+            <li><a href="#">회원 탈퇴</a></li>
+          </ul>
+         </li>
+        <li><a href="#Board">Board</a>
+           <ul>
+            <li><a href="#">메인</a></li>
+            <li><a href="#">글목록 조회</a></li>
+            <li><a href="#">상세조회</a></li>
+            <li><a href="#">글작성</a></li>
+            <li><a href="#">글수정</a></li>
+            <li><a href="#">글삭제</a></li>
+            <li><a href="#">댓글</a></li>
+            <li><a href="#">북마크, 좋아요</a></li>
+          </ul>
+         </li>
       </ul>
     </li>
   </ol>
@@ -37,3 +73,17 @@
 
 * DB 설계<br>
 ![Yeogiya](https://user-images.githubusercontent.com/85017704/136155526-69773015-6bf4-4219-953c-d6fe54b9c012.png)
+
+------------
+
+# 📝구현 기능
+
+## 1. Member
+
+<h2 id="join"> 회원가입</h2>
+
+* 구현 기능 설명
+  
+
+<br><br>
+
