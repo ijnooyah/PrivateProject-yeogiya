@@ -105,7 +105,7 @@
 				
 				promise.then(function(value) {
 				if (value == "false") {
-					$('.valid-feedback').text("인증번호가 전송 되었습니다.");
+					$('.valid-feedback').text("");
  		 			$('#user_email').removeClass("is-invalid");
  		 			$('#user_email').addClass("is-valid");
  		 			$('.invalid-feedback').hide();
@@ -117,6 +117,7 @@
 	 	                data: sendData,
 	 	                url: "${memberPath}/emailAuth",
 	 	               success : function(data) {
+	 	            	 $('.valid-feedback').text("인증번호가 전송 되었습니다.");
 	 	            	console.log('authNum', data)
 		 	 				if($('#confirmEmail').hasClass('is-invalid')) {
 		 	 					$('#confirmEmail').removeClass('is-invalid')

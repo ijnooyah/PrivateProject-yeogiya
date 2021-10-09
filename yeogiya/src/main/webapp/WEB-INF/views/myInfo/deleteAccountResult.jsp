@@ -10,25 +10,26 @@
 	<%@ include file="../cdn/css.jsp" %>
 	<title>deleteAccount</title>
 	<style>
-	.myInfo-container {
-		width: 330px;
+	.container {
+		width: 400px;
 		padding: 5rem 0;
 	}
 	
 	</style>
 </head>
 <body>
-<jsp:include page="../common/header.jsp" flush="false"/>
 	<div class="container myInfo-container my-5">
+		<div class="text-center mb-5">
+			<a href="${contextPath}" class="logo text-pink">여기야!</a>
+		</div>
 		<form action="" method="post" class="my-2">
 			<div class="h4 text-center">회원탈퇴 완료</div>
 			<div class="small text-center my-3">다음에 또 만나요!</div>
 			<div class="mt-4 row">
-				<a type="button" class="btn btn-pink btn-block">메인으로</a>
+				<a href="${contextPath}" class="btn btn-pink btn-block">메인으로</a>
 			</div>
 		</form>
 	</div>
-	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
 	<script>
 

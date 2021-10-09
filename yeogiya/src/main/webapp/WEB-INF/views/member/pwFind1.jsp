@@ -49,6 +49,7 @@
 	<script>
 	function validate () {
 		if($('#user_id').val().trim() == "" || $('#user_id').val() == null){
+			$('#user_id').focus();
 			$('#user_id').addClass('is-invalid');
 			return false;
 		} else {

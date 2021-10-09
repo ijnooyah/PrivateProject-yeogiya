@@ -25,7 +25,7 @@
 				<input type="text" class="form-control required" name="user_email" id="user_email" 
 			           placeholder="yeogiya@naver.com" spellcheck="false">
 				<div class="invalid-feedback">등록되지 않은 메일주소입니다. 다시 확인해 주세요.</div>
-				<div class="valid-feedback">안내 메일이 발송 되었습니다. 메일함을 확인해 주세요.</div>
+				<div class="valid-feedback"></div>
 	    	</div>
 			<div class="mt-4 row">
 				<button type="submit" class="btn btn-pink btn-block">안내메일 발송</button>
@@ -53,7 +53,7 @@
 			$('#user_email').addClass("is-invalid");
 			return false;
 		} else {
-// 			$('#user_email').siblings('.valid-feedback').text("안내 메일이 발송 되었습니다.");
+			$('#user_email').siblings('.valid-feedback').text("");
 			$('#user_email').removeClass("is-invalid");
 			$('#user_email').addClass("is-valid");
 			$.ajax({
@@ -69,6 +69,9 @@
 	                url: "${memberPath}/emailGuide",
 	               success : function(data) {
 	            	console.log('data', data)
+	            	if(data == 'success') {
+	    				$('#user_email').siblings('.valid-feedback').text("안내 메일이 발송 되었습니다. 메일함을 확인해 주세요.");
+	            	}
 	                },
 	                error : function() {
 	             	   alert('통신오류');

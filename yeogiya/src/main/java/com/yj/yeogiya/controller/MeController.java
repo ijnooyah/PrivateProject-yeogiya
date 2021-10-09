@@ -196,6 +196,7 @@ public class MeController {
 		
 		return "myInfo/deleteAccountPw";
 	}
+	
 	@RequestMapping(value = "pwChange", method = RequestMethod.GET)
 	public String pwChange(Model model) throws Exception {
 		
