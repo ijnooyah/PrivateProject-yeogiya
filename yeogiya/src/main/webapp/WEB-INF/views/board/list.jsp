@@ -88,10 +88,10 @@ div.subLocal_wrap a.active {
 					</c:forEach>
 				</button>
 				<div class="dropdown-menu" style="min-width:4rem;">
-					<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=all${pageQ}${order}${searchQ}">
+					<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=all">
 						전체</a>
 					<c:forEach var="sp" items="${sortPlaceArr}">
-						<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=${sp.sort_no}${pageQ}${order}${searchQ}">
+						<a class="dropdown-item" href="?${sortBoard}${subLocal}&sortPlace=${sp.sort_no}">
 							${sp.sort_name}</a>
 					</c:forEach>
 				</div>
