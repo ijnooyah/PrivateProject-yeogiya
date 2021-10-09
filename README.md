@@ -25,9 +25,9 @@
          </details>
         <details><summary><a href="#3-profile">Profile</a></summary>
           <ul>
-            <li><a href="#">프로필 조회</a></li>
-            <li><a href="#">글, 댓글, 북마크삭제</a></li>
-            <li><a href="#">프로필 변경</a></li>
+            <li><a href="#profileView">프로필 조회</a></li>
+            <li><a href="#profileDelete">글, 댓글, 북마크삭제</a></li>
+            <li><a href="#profileChange">프로필 변경</a></li>
           </ul>
          </details>
         <details><summary><a href="#4-board">Board</a></summary>
@@ -254,5 +254,53 @@
 ------------
 <br>
 
+## 3. Profile
+
+<h3 id="profileView"> a. 프로필 조회</h2>
+
+* **구현 기능 설명** 
+
+  - 아이디, 이름, 지역, 휴대전화, 이메일, 성별, 가입일을 보여준다.
+  - 지역 또는 성별은 입력되지 않은 경우 x 표시로 보여준다.
+  - 로그인 되지 않은 상태에서 회원정보 주소로 들어오게 되면 로그인 페이지로 넘어간다.
+
+<br><br>
+- 회원정보 보기 <br>![회원정보 조회](https://user-images.githubusercontent.com/85017704/136651669-2ec3dee5-98ff-4b54-b836-7a6bbbc9d878.png)  <br><br><br><br>
+- 비로그인 접속 <br>![회원정보보기비로그인](https://user-images.githubusercontent.com/85017704/136651686-9be92941-66e8-43d4-8c5d-a14af73e7851.gif)  <br><br><br><br>
+ 
+------------
+<br>
+
+<h3 id="profileDelete"> b. 글, 댓글, 북마크삭제</h2>
+
+* **구현 기능 설명** 
+
+  - 정보수정 전 비밀번호를 입력받는다.
+  - 아이디와 이름은 변경이 불가능하다.
+  - 휴대전화 정보는 미기입하거나 올바르지 않은 형식으로 수정 할 수 없다.
+  - 지역정보와 성별정보를 수정할 수 있다.
+
+<br><br>
+- 비밀번호 입력
+  - 유효성 검사 및 서버에서 비밀번호 확인 <br> ![정보변경비번확인](https://user-images.githubusercontent.com/85017704/136652016-e8924ea2-b2d1-4fda-9bae-10a63da76725.gif) <br><br><br><br>
+- 올바른 비밀번호 입력 후 정보수정 <br> ![정보변경비밀번호입력올바르게](https://user-images.githubusercontent.com/85017704/136652182-7c40e36d-567c-46c1-9e83-95558ce2034c.gif)<br><br><br><br>
+- 휴대전화 미기입 및 올바르지 않은 형식 <br> ![휴대전화수정](https://user-images.githubusercontent.com/85017704/136652221-d54f25a4-3a9e-46d8-92bc-ae88fb625be1.gif)<br><br><br><br>
+- 지역 및 성별 정보 수정 <br> ![지역성별정보수정](https://user-images.githubusercontent.com/85017704/136652409-a7ec000a-8739-4abc-af44-a50551e73863.gif) <br><br><br><br>
+
+------------
+<br>
 
 
+<h3 id="profileChange"> c. 프로필 변경</h2>
+
+* **구현 기능 설명** 
+
+  - 이메일 수정 전 비밀번호를 입력받는다.
+  - 입력된 이메일 주소가 형식에 맞지 않으면 유효성 메세지가 출력된다.
+  - `Promise`를 사용해 이메일 중복확인 결과에 따라 변경할 이메일 주소로 인증번호를 전송한다.
+
+<br><br>
+- 비밀번호 입력, 유효성 검사 캡쳐 생략 (회원가입, 회원정보 변경과 같음) 
+- 이메일 인증
+  - `Promise`를 이용해 ajax 흐름제어
+  - 중복되지 않은 이메일이라면 해당 이메일 주소로 4자리의 숫자를 랜덤으로 생성해 전송한다.<br>![이메일변경promise](https://user-images.githubusercontent.com/85017704/136659535-85485219-cac5-4bfa-abe2-460d5f67d9ff.gif) <br><br><br><br>
