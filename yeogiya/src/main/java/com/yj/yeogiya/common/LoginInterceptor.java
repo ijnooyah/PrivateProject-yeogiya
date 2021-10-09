@@ -14,7 +14,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		System.out.println("인터셉터");
+		System.out.println("----------인터셉터----------");
 		String contextPath = request.getContextPath();
 		
 		String uri = request.getRequestURI();
@@ -29,9 +29,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		System.out.println(loginMember);
-		System.out.println(requestPath);
-		System.out.println(queryString);
+		System.out.println("loginMember:" + loginMember);
+		System.out.println("requestPath:" + requestPath);
+		System.out.println("queryString:" + queryString);
 		if(loginMember == null) {
 			if (requestPath.matches(regex)) {
 				System.out.println("정규식 맞음");

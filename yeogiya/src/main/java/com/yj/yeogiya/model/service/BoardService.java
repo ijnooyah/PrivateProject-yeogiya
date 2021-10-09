@@ -8,6 +8,7 @@ import com.yj.yeogiya.model.vo.Board;
 import com.yj.yeogiya.model.vo.BoardImg;
 import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
+import com.yj.yeogiya.model.vo.Member;
 import com.yj.yeogiya.model.vo.Sort;
 
 public interface BoardService {
@@ -32,7 +33,7 @@ public interface BoardService {
 	// 4. 글목록
 	public List<Board> selectBoardList(BoardSearch bs);
 	
-	public List<Board> selectMain(BoardSearch bs);
+	public List<Board> selectMain(Member member);
 	
 	public List<Board> selectNoticeList(BoardSearch bs);
 	

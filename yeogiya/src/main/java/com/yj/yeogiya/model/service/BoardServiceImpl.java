@@ -21,6 +21,7 @@ import com.yj.yeogiya.model.vo.BoardImg;
 import com.yj.yeogiya.model.vo.BoardPlace;
 import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
+import com.yj.yeogiya.model.vo.Member;
 import com.yj.yeogiya.model.vo.Sort;
 
 
@@ -337,8 +338,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> selectMain(BoardSearch bs) {
-		return boardDao.selectMain(bs);
+	public List<Board> selectMain(Member member) {
+		return boardDao.selectMain(member);
 	}
 
 	@Override

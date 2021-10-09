@@ -103,10 +103,10 @@
                	</div>
                	<div class="d-flex mb-2">
                		<select class="form-control mr-1" id="sortLocal" name="sort_local">
-						<option value="0">상위 지역</option>
+						<option value="">상위 지역</option>
 					</select>
 					<select class="form-control" id="subLocal" name="sub_local">
-						<option value="0">하위 지역</option>
+						<option value="">하위 지역</option>
 					</select>
 			    </div>
             </div>
@@ -361,7 +361,7 @@
  				
  				promise.then(function(value) {
 					if (value == "false") {
-						$('#user_email').siblings('.valid-feedback').text("인증번호가 전송 되었습니다.");
+						$('#user_email').siblings('.valid-feedback').text("");
 	 		 			$('#user_email').removeClass("is-invalid");
 	 		 			$('#user_email').addClass("is-valid");
 	 		 			$('#confirmEmail').attr('disabled', false);
@@ -371,6 +371,7 @@
 		 	                data: sendData,
 		 	                url: "${memberPath}/emailAuth",
 		 	               success : function(data) {
+		 	            	$('#user_email').siblings('.valid-feedback').text("인증번호가 전송 되었습니다.");
 		 	            	console.log('authNum', data)
 			 	 				if($('#confirmEmail').hasClass('is-invalid')) {
 			 	 					$('#confirmEmail').removeClass('is-invalid')
@@ -510,7 +511,7 @@
 			 $("option:selected", this).each(function(){
 			  
 			  var selectVal = $(this).val();  
-			  cate2Select.append("<option value='0'>하위지역</option>");
+			  cate2Select.append("<option value=''>하위지역</option>");
 			  
 			  for(var i = 0; i < cate2Arr.length; i++) {
 			   if(selectVal == cate2Arr[i].parent_sort) {

@@ -104,11 +104,13 @@
 <!-- 				</div> -->
 <!-- 			</div> -->
 <!-- 		</div> -->
+			<jsp:useBean id="now" class="java.util.Date" />
+			<fmt:formatDate value="${now}" pattern="MM" var="month" />
 			<div class="mx-auto col-sm-10 mb-3 pt-5">
-				<a class="text-black" href="${contextPath}/${memberLocalEngName}/list?sortBoard=all">핫플레이스
-				<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-		 			<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-				</svg></a>
+				<span>${month}월의 핫플레이스
+				</span>
+				<span class="text-muted font-size-070">*조회수, 좋아요, 댓글 기준
+				</span>
 			</div>
 			<div class="d-flex flex-wrap justify-content-center">
 				<c:if test="${empty loginMember}">

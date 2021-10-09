@@ -30,17 +30,18 @@ public class HomeController {
 	@Inject
 	private BoardService boardService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home(Model model, BoardSearch bs, HttpSession session) {
+		logger.info("home");
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		System.out.println(loginMember);
+		System.out.println("loginMember:" + loginMember);
 		List<Board> boardList = null;
 		if(loginMember != null) {
-			bs.setLogin_id(loginMember.getUser_id());
-			bs.setSortLocal(loginMember.getSort_local());
-			boardList = boardService.selectMain(bs);
+			if(loginMember.getSort_local() != null) {
+				boardList = boardService.selectMain(loginMember);
+			}
 		}
-		System.out.println(boardList );
+		System.out.println(boardList);
 		
 		model.addAttribute("boardList", boardList);
 		

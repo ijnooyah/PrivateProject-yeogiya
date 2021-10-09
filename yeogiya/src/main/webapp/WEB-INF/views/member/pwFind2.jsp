@@ -16,7 +16,7 @@
 <body>
 	<div class="container">
 		<div class="text-center mb-5">
-			<a href="" class="logo text-pink">여기야!</a>
+			<a href="${contextPath}" class="logo text-pink">여기야!</a>
 		</div>
 		<form action="pwFindRun" method="post" onsubmit="return validate();">
 			<div class="h4 text-center">비밀번호 찾기</div>

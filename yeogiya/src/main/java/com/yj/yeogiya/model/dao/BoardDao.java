@@ -7,6 +7,7 @@ import com.yj.yeogiya.model.vo.BoardImg;
 import com.yj.yeogiya.model.vo.BoardPlace;
 import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
+import com.yj.yeogiya.model.vo.Member;
 import com.yj.yeogiya.model.vo.Sort;
 
 
@@ -54,7 +55,7 @@ public interface BoardDao {
 	
 	
 	//메인
-	public List<Board> selectMain(BoardSearch bs);
+	public List<Board> selectMain(Member member);
 	
 	//공지
 	public List<Board> selectNoticeList(BoardSearch bs);

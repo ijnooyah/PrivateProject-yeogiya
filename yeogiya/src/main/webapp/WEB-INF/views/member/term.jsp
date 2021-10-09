@@ -24,7 +24,7 @@
 <body>
 	<div class="container my-5">
 		<div class="text-center mb-5">
-			<a href="" class="logo text-pink">여기야!</a>
+			<a href="${contextPath}" class="logo text-pink">여기야!</a>
 		</div>
 		<div class="form-group mx-auto">
 			<form id="frmTerm">

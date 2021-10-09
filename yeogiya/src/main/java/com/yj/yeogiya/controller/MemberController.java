@@ -99,7 +99,8 @@ public class MemberController {
 	@RequestMapping(value = "checkDupEmail")
 	@ResponseBody
 	public boolean checkDupEmail(@RequestParam("user_email") String user_email) throws Exception {
-//		System.out.println(user_email);
+		logger.info("checkDupEmail");
+		System.out.println(user_email);
 		boolean result = memberService.checkDupEmail(user_email);
 		return result;
 	}
@@ -129,9 +130,13 @@ public class MemberController {
 		return String.valueOf(authNum);
 	}
 	
-	@RequestMapping(value = "joinRun", method = RequestMethod.GET)
-	public String joinResult(Member member) throws Exception {
+	@RequestMapping(value = "joinRun")
+	public String joinResult(Member member, Model model) throws Exception {
 //		System.out.println(member);
+		int result = memberService.join(member);
+		if(result == 1) {
+			model.addAttribute("loginMember", member);
+		}
 		return "member/signUpResult";
 	}
 	
@@ -145,10 +150,10 @@ public class MemberController {
 	@RequestMapping("loginRun")
 	public String loginRun(Member member, Model model, HttpSession session,
 			HttpServletResponse response, RedirectAttributes ras) throws Exception {
-
-//		System.out.println("member : "+member);
+		logger.info("loginRun");
+		System.out.println("member : "+member);
 		Member loginMember = memberService.loginRun(member);
-//		System.out.println("loginMember : "+ loginMember); 
+		System.out.println("loginMember : "+ loginMember); 
 		String url = "";
 		if (loginMember != null) { // 로그인 성공 시
 			model.addAttribute("loginMember", loginMember);
@@ -168,7 +173,7 @@ public class MemberController {
 			response.addCookie(cookie);
 			
 			String requestPath = (String) session.getAttribute("requestPath");
-			System.out.println("로그인 :" + requestPath);
+			System.out.println("requestPath :" + requestPath);
 			url = "/";
 				
 

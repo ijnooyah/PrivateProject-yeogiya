@@ -14,6 +14,7 @@ import com.yj.yeogiya.model.vo.BoardImg;
 import com.yj.yeogiya.model.vo.BoardPlace;
 import com.yj.yeogiya.model.vo.BoardSearch;
 import com.yj.yeogiya.model.vo.BoardTag;
+import com.yj.yeogiya.model.vo.Member;
 import com.yj.yeogiya.model.vo.Sort;
 
 
@@ -191,8 +192,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<Board> selectMain(BoardSearch bs) {
-		return sqlSession.selectList(NAMESPACE + "selectMain", bs);
+	public List<Board> selectMain(Member member) {
+		return sqlSession.selectList(NAMESPACE + "selectMain", member);
 	}
 
 	@Override

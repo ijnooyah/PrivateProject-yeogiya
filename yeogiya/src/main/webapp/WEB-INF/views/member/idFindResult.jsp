@@ -16,7 +16,7 @@
 <body>
 	<div class="container">
 		<div class="text-center mb-5">
-			<a href="" class="logo text-pink">여기야!</a>
+			<a href="${contextPath}" class="logo text-pink">여기야!</a>
 		</div>
 		<div class="text-center h4">아이디 조회 결과</div>
 		<div class="text-center">회원님의 아이디는 <span class="text-pink font-weight-600"> ${id} </span>입니다.</div>
