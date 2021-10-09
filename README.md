@@ -179,7 +179,7 @@
 
 <br><br>
 - 회원정보 보기 <br>![회원정보 조회](https://user-images.githubusercontent.com/85017704/136651669-2ec3dee5-98ff-4b54-b836-7a6bbbc9d878.png)  <br><br><br><br>
-- 비로그인 접속 <![회원정보보기비로그인](https://user-images.githubusercontent.com/85017704/136651686-9be92941-66e8-43d4-8c5d-a14af73e7851.gif)  <br><br><br><br>
+- 비로그인 접속 <br>![회원정보보기비로그인](https://user-images.githubusercontent.com/85017704/136651686-9be92941-66e8-43d4-8c5d-a14af73e7851.gif)  <br><br><br><br>
  
 ------------
 <br>
