@@ -23,14 +23,14 @@
             <li><a href="#quit">회원 탈퇴</a></li>
           </ul>
          </details>
-        <details><summary><a href="#1-member">Profile</a></summary>
+        <details><summary><a href="#3-profile">Profile</a></summary>
           <ul>
             <li><a href="#">프로필 조회</a></li>
             <li><a href="#">글, 댓글, 북마크삭제</a></li>
             <li><a href="#">프로필 변경</a></li>
           </ul>
          </details>
-        <details><summary><a href="#Board">Board</a></summary>
+        <details><summary><a href="#4-board">Board</a></summary>
           <ul>
             <li><a href="#">메인</a></li>
             <li><a href="#">글목록 조회</a></li>
@@ -118,6 +118,7 @@
  <br><br><br><br>
 - 아이디 저장
   - 약 한달동안 유지하는 쿠키 <br>![아이디저장배속](https://user-images.githubusercontent.com/85017704/136641542-dc31502f-f673-4ca3-8e7e-537a1491a0d1.gif) <br><br><br><br>
+  - 아이디 저장 해제 <br> ![아이디저장체크해제](https://user-images.githubusercontent.com/85017704/136660714-4f4c87a3-c108-40ca-a29d-2e8c35250cab.gif) <br><br><br><br>
 
 ------------
 <br>
@@ -208,15 +209,15 @@
 * **구현 기능 설명** 
 
   - 이메일 수정 전 비밀번호를 입력받는다.
-  - 입력된 값이 형식에 맞지 않으면 유효성 메세지가 출력된다.
+  - 입력된 이메일 주소가 형식에 맞지 않으면 유효성 메세지가 출력된다.
   - `Promise`를 사용해 이메일 중복확인 결과에 따라 변경할 이메일 주소로 인증번호를 전송한다.
 
 <br><br>
-- 유효성 검사 <br> ![아이디찾기 유효성](https://user-images.githubusercontent.com/85017704/136646369-f8b0f573-3219-4433-b81f-76249247c73e.gif) <br><br><br><br>
-- 회원정보와 일치하지 않은 이름 또는 이메일 입력
-  - 서버에서 회원정보를 비교해 결과를 전송받은 후 메세지 출력<br> ![아이디찾기틀림](https://user-images.githubusercontent.com/85017704/136646512-a91a7df3-374b-4864-8cbd-7aa347c9dfae.gif) <br><br><br><br>
-- 아이디 찾기 <br>![아이디찾기](https://user-images.githubusercontent.com/85017704/136646555-d92c92e0-5756-471f-ac84-ed26fad85f22.gif)
- <br><br><br><br>
+- 비밀번호 입력, 유효성 검사 캡쳐 생략 (회원가입, 회원정보 변경과 같음) 
+- 이메일 인증
+  - `Promise`를 이용해 ajax 흐름제어
+  - 중복되지 않은 이메일이라면 해당 이메일 주소로 4자리의 숫자를 랜덤으로 생성해 전송한다.<br>![이메일변경promise](https://user-images.githubusercontent.com/85017704/136659535-85485219-cac5-4bfa-abe2-460d5f67d9ff.gif) <br><br><br><br>
+
 
 ------------
 <br>
@@ -226,22 +227,15 @@
 
 * **구현 기능 설명** 
 
-  - 아이디를 입력하지 않고 버튼을 누르면 입력 요구 메세지가 출력된다.
-  - 서버에서 회원정보를 비교해 가입되지 않거나 탈퇴한 정보일 경우 유효성메세지가 출력된다.
-  - 올바른 아이디가 입력될 경우 이메일 주소 입력창을 보여준다.
-  - 이메일을 입력하지 않거나 이메일의 형식이 올바르지 않을 경우 유효성 메세지가 출력된다.
-  - 서버에서 회원정보를 비교해 회원정보에 등록된 이메일과 다른 이메일 주소가 입력될 경우 유효성 메세지가 출력된다.
-  - 회원정보에 등록된 이메일이 입력될 경우 비동기 방식으로 해당 이메일로 비밀번호를 전송한다. 
+  - 현재 비밀번호를 비동기로 확인한다.
+  - 현재 비밀번호가 입력되지 않거나 다르면 서버로 정보가 전송되지 않는다.
+  - 새비밀번호의 형식이 바르지 않거나 재확인과 일치하지 않으면 서버로 정보가 전송되지 않는다.
+  
 
 <br><br>
-- 아이디 입력 
-  - 미입력시 유효성 메세지 출력 <br> ![비밀번호찾기아이디미입력](https://user-images.githubusercontent.com/85017704/136647275-25b6e1e8-8860-423b-897d-5a9223c2d9e9.gif) <br><br><br><br>
-  - 서버에서 회원정보를 비교해 가입되지 않거나 탈퇴한 회원일 경우 유효성 메세지 출력 <br> ![비밀번호찾기아이디잘못입력](https://user-images.githubusercontent.com/85017704/136647310-7252819e-f6dd-4a20-aaba-b07f55be075f.gif) <br><br><br><br>
-  - 올바른 아이디 입력 <br> ![비밀번호찾기올바른아이디](https://user-images.githubusercontent.com/85017704/136647424-65b4bf0e-e96f-4bb0-a145-f972b6e035ca.gif) <br><br><br><br>
-- 이메일 입력
-  - 유효성 검사 <br> ![비밀번호찾기이메일유효성](https://user-images.githubusercontent.com/85017704/136647691-c84932d2-0b2f-4a46-b060-3df53d2a3311.gif) 
-  - 서버에서 회원정보를 비교해 등록된 이메일과 다른 이메일 주소 입력될 경우 유효성 메세지 출력<br>![비밀번호찾기틀린이메일](https://user-images.githubusercontent.com/85017704/136649995-ef918fc0-81e0-40b8-93f8-ba26ace1fbfd.gif) <br><br><br><br>
-- ajax를 통해 비밀번호 정보 이메일 보내기 <br> ![비밀번호이메일정보배속](https://user-images.githubusercontent.com/85017704/136650419-e0f6c219-2529-47b4-bb78-a0c396e8d34e.gif) <br><br><br><br>
+- 서버로 전송 되지 않는 경우들 <br> ![비밀번호변경전송x](https://user-images.githubusercontent.com/85017704/136659889-aaa07e3c-625f-4e05-bbbb-276dc09370c1.gif) <br><br><br><br>
+- 서버로 전송 <br> ![비밀번호변경ok](https://user-images.githubusercontent.com/85017704/136659994-c625f682-50ef-4404-9fb7-c03e02572793.gif) <br><br><br><br>
+
 ------------
 <br>
 
@@ -249,22 +243,14 @@
 
 * **구현 기능 설명** 
 
-  - 아이디를 입력하지 않고 버튼을 누르면 입력 요구 메세지가 출력된다.
-  - 서버에서 회원정보를 비교해 가입되지 않거나 탈퇴한 정보일 경우 유효성메세지가 출력된다.
-  - 올바른 아이디가 입력될 경우 이메일 주소 입력창을 보여준다.
-  - 이메일을 입력하지 않거나 이메일의 형식이 올바르지 않을 경우 유효성 메세지가 출력된다.
-  - 서버에서 회원정보를 비교해 회원정보에 등록된 이메일과 다른 이메일 주소가 입력될 경우 유효성 메세지가 출력된다.
-  - 회원정보에 등록된 이메일이 입력될 경우 비동기 방식으로 해당 이메일로 비밀번호를 전송한다. 
+  - 회원 탈퇴 전 비밀번호를 입력받는다.
+  - 탈퇴된 아이디로 로그인, 아이디 찾기, 비밀번호 찾기를 할 수 없다.
 
 <br><br>
-- 아이디 입력 
-  - 미입력시 유효성 메세지 출력 <br> ![비밀번호찾기아이디미입력](https://user-images.githubusercontent.com/85017704/136647275-25b6e1e8-8860-423b-897d-5a9223c2d9e9.gif) <br><br><br><br>
-  - 서버에서 회원정보를 비교해 가입되지 않거나 탈퇴한 회원일 경우 유효성 메세지 출력 <br> ![비밀번호찾기아이디잘못입력](https://user-images.githubusercontent.com/85017704/136647310-7252819e-f6dd-4a20-aaba-b07f55be075f.gif) <br><br><br><br>
-  - 올바른 아이디 입력 <br> ![비밀번호찾기올바른아이디](https://user-images.githubusercontent.com/85017704/136647424-65b4bf0e-e96f-4bb0-a145-f972b6e035ca.gif) <br><br><br><br>
-- 이메일 입력
-  - 유효성 검사 <br> ![비밀번호찾기이메일유효성](https://user-images.githubusercontent.com/85017704/136647691-c84932d2-0b2f-4a46-b060-3df53d2a3311.gif) 
-  - 서버에서 회원정보를 비교해 등록된 이메일과 다른 이메일 주소 입력될 경우 유효성 메세지 출력<br>![비밀번호찾기틀린이메일](https://user-images.githubusercontent.com/85017704/136649995-ef918fc0-81e0-40b8-93f8-ba26ace1fbfd.gif) <br><br><br><br>
-- ajax를 통해 비밀번호 정보 이메일 보내기 <br> ![비밀번호이메일정보배속](https://user-images.githubusercontent.com/85017704/136650419-e0f6c219-2529-47b4-bb78-a0c396e8d34e.gif) <br><br><br><br>
+- 유효성 검사 생략
+- 회원 탈퇴 <br> ![회원탈퇴](https://user-images.githubusercontent.com/85017704/136660551-cce9b4b1-87bf-4ff7-8189-cb9cb1043481.gif) <br><br><br><br>
+  
+  
 ------------
 <br>
 
