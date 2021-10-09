@@ -49,7 +49,7 @@
 			<input type="text" id="user_id" name="user_id" placeholder="아이디" class="form-control" value="${cookie.saveId.value}"  autofocus spellcheck="false">
 			<input type="password" id="user_pw" name="user_pw" class="form-control" placeholder="비밀번호" >
 		    <div class="custom-control custom-checkbox mt-2">
-				  <input class="custom-control-input" type="checkbox" name="saveId" id="saveId">
+				  <input class="custom-control-input" type="checkbox" name="saveId" id="saveId" ${not empty cookie.saveId.value ? 'checked' : ''}>
 				  <label class="custom-control-label" for="saveId">
 				 	아이디 저장
 				  </label>
