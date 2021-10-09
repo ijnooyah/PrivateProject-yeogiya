@@ -22,10 +22,10 @@
 		<div class="text-center">회원님의 아이디는 <span class="text-pink font-weight-600"> ${id} </span>입니다.</div>
 		<div class="form-row w-75 m-auto">
 			<div class="col">
-				<button class="btn btn-pink mt-4 w-100" type="button">메인</button>
+				<a class="btn btn-pink mt-4 w-100" href="${contextPath}">메인</a>
 			</div>
 			<div class="col">
-				<button class="btn btn-pink-outline mt-4 w-100" type="button">로그인</button>
+				<a class="btn btn-pink-outline mt-4 w-100" href="${memberPath}/login">로그인</a>
 			</div>
 		</div>
 	</div>

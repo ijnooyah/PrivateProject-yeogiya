@@ -24,13 +24,13 @@
 			
 			<div class="form-group d-flex flex-wrap">
 				<label for="user_name" class="font-weight-500 col-form-label pr-3">이름</label>
-				<input type="text" id="user_name" name="user_name" class="form-control col-sm-9 ml-auto mb-3">
+				<input type="text" id="user_name" name="user_name" class="form-control col-sm-9 ml-auto mb-3" spellcheck="false">
 				<label for="user_name" class="font-weight-500 col-form-label">이메일</label>
-				<input type="text" id="user_email" name="user_email" class="form-control col-sm-9 ml-auto mb-3">
+				<input type="text" id="user_email" name="user_email" class="form-control col-sm-9 ml-auto mb-3" spellcheck="false">
 				<div class='invalid-feedback' ${msg == 'fail' ? 'style="display:block;"' : '' }>
 					<c:if test="${msg == 'fail'}">
-						아이디 또는 비밀번호가 잘못 입력 되었습니다.<br>
-						<b>아이디</b>와 <b>비밀번호</b>를 정확히 입력해 주세요.
+						이름 또는 이메일이 잘못 입력 되었습니다.<br>
+						<b>이름</b>과 <b>이메일</b>을 정확히 입력해 주세요.
 					</c:if>
 				</div>
 			</div>
@@ -46,20 +46,23 @@
 		if($('#user_name').val().trim() == "" || $('#user_name').val() == null) {
 			$('#user_name').focus();
 			$('.invalid-feedback').html('<b>이름</b>을 입력해 주세요.');
-			$('#user_name').removeClass('is-valid');
-			$('#user_name').addClass('is-invalid');
+			$('.invalid-feedback').show();
+// 			$('#user_name').removeClass('is-valid');
+// 			$('#user_name').addClass('is-invalid');
 			return false;
 		} else if ($('#user_email').val().trim() == "" || $('#user_email').val() == null) {
 			$('#user_email').focus();
 			$('.invalid-feedback').html('<b>이메일</b>을 입력해 주세요.');
-			$('#user_email').removeClass('is-valid');
-			$('#user_email').addClass('is-invalid');
+			$('.invalid-feedback').show();
+// 			$('#user_email').removeClass('is-valid');
+// 			$('#user_email').addClass('is-invalid');
 			return false;
 		} else if(!$('#user_email').val().match(emailReg)) {
 			$('#user_email').focus();
 			$('.invalid-feedback').text("유효하지 않은 이메일 형식 입니다.");
-			$('#user_email').removeClass("is-valid");
-			$('#user_email').addClass("is-invalid");
+			$('.invalid-feedback').show();
+// 			$('#user_email').removeClass("is-valid");
+// 			$('#user_email').addClass("is-invalid");
 			return false;
 		} else {
 			
