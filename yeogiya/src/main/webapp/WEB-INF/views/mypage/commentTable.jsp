@@ -60,7 +60,7 @@
 							</a>
 						</td>
 						<td class="td_title" style="width:305px;">
-						 	<a href="${contextPath}/${b.sortLocalEngName}/content/${c.b_no}?${c.boardQuery}" class="short_title">
+						 	<a href="${contextPath}/${c.sortLocalEngName}/content/${c.b_no}?${c.boardQuery}" class="short_title">
 								${c.boardTitle}
 							</a>
 						</td>

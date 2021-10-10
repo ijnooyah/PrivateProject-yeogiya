@@ -236,7 +236,7 @@
 		var cnt = $(this).val();
 		$("#nickCnt").text(cnt.length);
 		$("#nickCnt").css("color", "#212529");
-		if(cnt.length == 10){
+		if(cnt.length >= 10){
 			$("#nickCnt").css("color", "var(--danger)");
 		}
 	});
@@ -245,7 +245,7 @@
 		var cnt = $(this).val();
 		$("#introCnt").text(cnt.length);
 		$("#introCnt").css("color", "#212529");
-		if(cnt.length == 200){
+		if(cnt.length >= 200){
 			$("#introCnt").css("color", "var(--danger)");
 		}
 	});

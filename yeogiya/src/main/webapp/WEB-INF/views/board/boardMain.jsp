@@ -127,7 +127,7 @@
 								<div class="card">
 									<div class="card-body">
 										<div class="card-title">
-											<p class="h5" style="max-width:530px"><span class="text-pink mr-1">[${b.sortPlaceName}]</span><a class="text-black" href="${contextPath}/${b.sortLocalEngName}/content/${b.board_no}?${b.query}">${b.board_title}</a></p>
+											<p class="h5 d-flex" style="max-width:530px"><span class="text-pink mr-1">[${b.sortPlaceName}]</span><a class="text-black short_title" style="width:300px;" href="${contextPath}/${b.sortLocalEngName}/content/${b.board_no}?${b.query}">${b.board_title}</a></p>
 											<div class="d-flex">
 												<div class="d-table-cell mr-2 set-bg rounded-circle border" 
 													 data-setbg="${empty b.userImg ? noProfile : (contextPath += '/display?img=' += b.userImg)}"

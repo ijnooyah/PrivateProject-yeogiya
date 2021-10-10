@@ -175,7 +175,22 @@
 					$("input[name=rowCheck]:checked").each(function() {
 						checkArr.push($(this).attr("id"));
 					});
-					 
+					
+					if(checkArr.length == 0) {
+						 Swal.fire({
+								title: '삭제할 대상을 선택해 주세요.', 
+								allowOutsideClick: false,
+								padding: '2em',
+//						 		iconColor: "#1f5e43",
+						 		icon: 'error', 
+								confirmButtonText: "확인",
+//						 		confirmButtonColor: "#1f5e43",
+// 								cancelButtonText: "취소",
+// 								showCancelButton: true,
+							})
+						return;
+					}
+					
 					$.ajax({
 						url : "${profilePath}/delete",
 						type : "post",
