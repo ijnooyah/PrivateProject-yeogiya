@@ -57,7 +57,7 @@ max-width:350px;
 					<c:if test ="${vs.count >=4 }">
 						<c:set var="step" value="${step + 10}"/>
 					</c:if>
-					<a class="dropdown-item" href="?${sortQ}${page}&perPage=${step}${order}${searchQ}">
+					<a class="dropdown-item" href="?${sortQ}&page=1&perPage=${step}${order}${searchQ}">
 						${step}개씩</a>
 				</c:forEach>
 			</div>

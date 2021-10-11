@@ -117,7 +117,7 @@
 									<c:if test ="${vs.count >=4 }">
 										<c:set var="step" value="${step + 10}"/>
 									</c:if>
-									<a class="dropdown-item" href="?${tab}${page}&perPage=${step}${searchQ}">
+									<a class="dropdown-item" href="?${tab}&page=1&perPage=${step}">
 										${step}개씩</a>
 								</c:forEach>
 							</div>
