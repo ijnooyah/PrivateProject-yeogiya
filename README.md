@@ -32,14 +32,13 @@
          </details>
         <details><summary><a href="#4-board">Board</a></summary>
           <ul>
-            <li><a href="#">메인</a></li>
-            <li><a href="#">글목록 조회</a></li>
-            <li><a href="#">상세조회</a></li>
-            <li><a href="#">글작성</a></li>
-            <li><a href="#">글수정</a></li>
-            <li><a href="#">글삭제</a></li>
-            <li><a href="#">댓글</a></li>
-            <li><a href="#">북마크, 좋아요</a></li>
+            <li><a href="#main">메인</a></li>
+            <li><a href="#boardList">글목록 조회</a></li>
+            <li><a href="#boardInsert">글작성</a></li>
+             <li><a href="#boardView">글 상세조회</a></li>
+            <li><a href="#boardUpdate">글수정</a></li>
+            <li><a href="#boardDelete">글삭제</a></li>
+            <li><a href="#comment">댓글</a></li>
           </ul>
          </details>
     </li>
@@ -469,4 +468,212 @@
 
    </div>
 </details>
+
+<br><br>
+
+## 4. Board
+
+<h3 id="main"> 4-1. 메인</h2>
+
+<details open="open">
+  <summary><b>구현 기능 설명</b></summary>
+  <div markdown="1">
+  
+  - 이달의 인기글은 장소가 있는 게시판에서 조회수, 좋아요수, 댓글수 순으로 10개를 보여준다. 
+  - 비로그인, 지역을 설정하지 않은 회원은 인기글이 보이지 않는다.
+  - 회원이 지역을 설정했다면 로고 위에 지역이 뜬다.
+  - 목록에서 좋아요, 북마크, 링크공유를 할 수 있다.
+  - 상단 메뉴를 통해 지역 사이트와 게시판을 들어갈 수 있다.
+  
+    </div>
+</details>
+
+<details>
+  <summary><b>구현 기능 시현 및 상세설명</b></summary>
+  <div markdown="1">
+    
+    - 비로그인 사용자, 지역 미설정 사용자, 지역 설정 사용자 <br><br> ![메인비로그인지역배속](https://user-images.githubusercontent.com/85017704/136780252-226048af-bdfd-48b4-9f9d-eec4c61e960b.gif) <br><br><br><br>
+    - 좋아요, 북마크 반영
+      - 새로고침해도 좋아요, 북마크 변경사항 유지됨 <br><br> ![메인좋아요북마크](https://user-images.githubusercontent.com/85017704/136785046-3ce0b395-ad67-4d0b-bcae-8a61129dd0f9.gif) <br><br><br><br>
+    - 링크복사 <br><br>![녹화_2021_10_11_20_49_01_884](https://user-images.githubusercontent.com/85017704/136785287-e1ba7c2d-816e-4683-8b6a-7d73538ecd16.gif) <br><br><br><br>
+    - 메뉴
+      - 마우스오버시 지역이 펼쳐짐
+      - 지역에 마우스 오버시 각지역의 게시판이 펼쳐짐
+      - 지역을 클릭하면 지역 사이트로 이동
+      - 게시판을 클릭하면 지역의 게시판 글목록으로 이동 <br><br> ![메뉴배속](https://user-images.githubusercontent.com/85017704/136786054-a6d92475-94b6-4a7a-a006-44e7962e7694.gif) <br><br><br><br>
+
+
+    </div>
+</details>
+
+<br>
+
+<h3 id="boardList"> 4-2. 글목록 조회</h2>
+
+<details open="open">
+  <summary><b>구현 기능 설명</b></summary>
+  <div markdown="1">
+  
+  - 사이드바에서 게시판, 카테고리, 말머리를 볼 수 있다.
+  - 페이징, 정렬, 검색이 가능하다.
+  - 장소 말머리가 있는 게시판은 장소 검색이 가능하다.
+  - 현재 무엇을 선택 했는지 사이드바와 상단바로 알 수 있다.
+  - 사진이 있는 게시물일 경우 제목 옆에 사진 아이콘이 나타난다.
+  - 당일 올라온 게시물일 경우 시간만 표시되며 당일 게시물이 아닐 경우 날짜가 표시된다.
+  - 비로그인 사용자인 경우 검색, 정렬이 불가능하다. (페이징은 가능)
+
+    </div>
+</details>
+
+<details>
+  <summary><b>구현 기능 시현 및 상세설명</b></summary>
+  <div markdown="1">
+
+    - 사이드바
+      - 글자를 선택했을 경우 하이퍼링크로 이동, 글자 바깥 영역을 선택 했을경우 하위 카테고리를 펼침
+      - 말머리가 없는 게시판은 하위 지역 카테고리 아래의 카테고리가 없음 <br><br> ![사이드바](https://user-images.githubusercontent.com/85017704/136791842-7f28004c-b57c-45ba-bdc8-96042f9cf184.gif) <br><br><br><br>
+    - 정렬, 페이징, 검색
+      - 장소 말머리가 없는 게시판은 장소 검색 기능이 없음 <br><br> ![녹화_2021_10_11_22_22_59_123](https://user-images.githubusercontent.com/85017704/136797619-e0192522-45dc-4cfe-929e-403ffa832ff0.gif) <br><br><br><br>
+      - 작성자는 아이디 또는 닉네임으로 찾음 <br><br> ![녹화_2021_10_11_22_25_26_780](https://user-images.githubusercontent.com/85017704/136797997-c2837f4b-cc31-4aa5-b118-bd92bd6974e6.gif) <br><br><br><br>
+      - 필터링된 게시글이 없는 경우 '작성된 게시물이 없습니다.' <br><br> ![녹화_2021_10_11_22_27_30_10](https://user-images.githubusercontent.com/85017704/136798187-f6ba1cec-d835-4880-92cd-61674d43284f.gif) <br><br><br><br>
+      - 하위 지역, 말머리(장소 게시판), 정렬, 페이징, 검색으로 글 필터링 가능 <br><br> ![녹화_2021_10_11_22_40_55_113](https://user-images.githubusercontent.com/85017704/136800354-1f661552-1db4-4ee1-90b3-1486710228fd.gif) <br><br><br><br>
+      - 비로그인 사용자 <br><br> ![녹화_2021_10_11_22_45_34_429](https://user-images.githubusercontent.com/85017704/136800905-0954a0b8-71c4-4eb4-8533-14ec46df2290.gif) <br><br><br><br>
+
+
+    </div>
+</details>
+
+<br>
+
+
+<h3 id="boardInsert"> 4-3. 글작성</h2>
+
+<details open="open">
+  <summary><b>구현 기능 설명</b></summary>
+  <div markdown="1">
+
+
+  - 비로그인 사용자인 경우 글쓰기가 불가능하다.
+  - 장소 말머리가 있는 게시판인 경우에만 장소 선택 기능이 존재한다.
+  - 글쓰기 버튼을 누른 곳에따라 카테고리 선택창이 달라진다.
+  - 카테고리, 말머리, 제목, 내용, 장소(장소 게시판)은 필수사항이다.
+  - 해시태그는 tagit 라이브러리를 사용해 작성한다.
+
+
+    </div>
+</details>
+
+<details>
+  <summary><b>구현 기능 시현 및 상세설명</b></summary>
+   <div markdown="1">
+     
+     - 비로그인 사용자 <br><br> ![녹화_2021_10_11_22_50_39_755](https://user-images.githubusercontent.com/85017704/136801722-47e09516-b814-4f65-90ee-9fffc83ab4ca.gif) <br><br><br><br>
+     
+
+     
+ 
+
+   </div>
+</details>
+
+<br>
+
+<h3 id="boardView"> 4-4. 글 상세조회 </h2>
+
+<details open="open">
+  <summary><b>구현 기능 설명</b></summary>
+  <div markdown="1">
+      
+  - 본인의 계정일 경우 체크박스와 삭제 버튼이 존재하며 선택한 대상을 삭제할 수 있다.
+  - 전체선택 또는 개별선택으로 대상을 삭제할 수 있다.
+  - 선택된 대상이 없을 시 대상 선택 요구 메세지가 출력된다.
+
+
+    </div>
+</details>
+
+<details>
+  <summary><b>구현 기능 시현 및 상세설명</b></summary>
+   <div markdown="1">
+
+ 
+
+   </div>
+</details>
+
+<br>
+
+<h3 id="boardUpdate"> 4-5. 글수정</h2>
+
+<details open="open">
+  <summary><b>구현 기능 설명</b></summary>
+  <div markdown="1">
+      
+  - 본인의 계정일 경우 체크박스와 삭제 버튼이 존재하며 선택한 대상을 삭제할 수 있다.
+  - 전체선택 또는 개별선택으로 대상을 삭제할 수 있다.
+  - 선택된 대상이 없을 시 대상 선택 요구 메세지가 출력된다.
+
+
+    </div>
+</details>
+
+<details>
+  <summary><b>구현 기능 시현 및 상세설명</b></summary>
+   <div markdown="1">
+
+ 
+
+   </div>
+</details>
+
+<br>
+
+<h3 id="boardDelete"> 4-6. 글삭제</h2>
+
+<details open="open">
+  <summary><b>구현 기능 설명</b></summary>
+  <div markdown="1">
+      
+  - 본인의 계정일 경우 체크박스와 삭제 버튼이 존재하며 선택한 대상을 삭제할 수 있다.
+  - 전체선택 또는 개별선택으로 대상을 삭제할 수 있다.
+  - 선택된 대상이 없을 시 대상 선택 요구 메세지가 출력된다.
+
+
+    </div>
+</details>
+
+<details>
+  <summary><b>구현 기능 시현 및 상세설명</b></summary>
+   <div markdown="1">
+
+ 
+
+   </div>
+</details>
+
+<br>
+
+<h3 id="comment"> 4-7. 댓글</h2>
+
+<details open="open">
+  <summary><b>구현 기능 설명</b></summary>
+  <div markdown="1">
+      
+  - 본인의 계정일 경우 체크박스와 삭제 버튼이 존재하며 선택한 대상을 삭제할 수 있다.
+  - 전체선택 또는 개별선택으로 대상을 삭제할 수 있다.
+  - 선택된 대상이 없을 시 대상 선택 요구 메세지가 출력된다.
+
+
+    </div>
+</details>
+
+<details>
+  <summary><b>구현 기능 시현 및 상세설명</b></summary>
+   <div markdown="1">
+
+ 
+
+   </div>
+</details>
+
 
