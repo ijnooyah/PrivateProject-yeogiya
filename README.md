@@ -422,15 +422,15 @@
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
   <div markdown="1">
     
-   - 이미지 업로드
-    - 첨부된 파일이 이미지 형식이(JPG·PNG·GIF·JPEG) 아니거나 10MB를 초과한다면 업로드 불가 <br><br> ![녹화_2021_10_11_15_21_35_512](https://user-images.githubusercontent.com/85017704/136742282-e9c35bfa-61ca-4c32-b407-cdf378cc515d.gif) <br><br><br><br>
-    - 프로필 사진은 비동기 방식으로 전송되어 지정된 외부폴더에 저장됨
-    - 프로필 사진이 정상적으로 업로드 되면 `FileReader`을 이용해 미리보기 이미지를 출력하고 이미지 삭제 버튼을 보여줌 
-    - 삭제버튼을 누르면 이미지가 삭제됨 <br><br> ![이미지업로드배속](https://user-images.githubusercontent.com/85017704/136743293-65f90cea-65e8-479e-b96e-5862d1257e60.gif) <br><br><br><br>
-  - 닉네임 중복체크
-    - 현재 자신이 사용하고 있는 닉네임일 경우 중복메세지 뜨지 않음. <br><br>   ![녹화_2021_10_11_15_40_37_735](https://user-images.githubusercontent.com/85017704/136744205-b718b732-af0d-4f2e-b023-cfc676022918.gif) <br><br><br><br>
-   - 글자수 제한 <br><br>  ![글자수배속](https://user-images.githubusercontent.com/85017704/136745084-6731299d-bd8e-4632-9998-b2313f2a2174.gif) <br><br><br><br>
-  - 프로필 설정 <br><br> ![프로필수정](https://user-images.githubusercontent.com/85017704/136748985-dadd47c1-3717-4dab-a5c6-309116600262.gif) <br><br><br><br>
+- 이미지 업로드
+  - 첨부된 파일이 이미지 형식이(JPG·PNG·GIF·JPEG) 아니거나 10MB를 초과한다면 업로드 불가 <br><br> ![녹화_2021_10_11_15_21_35_512](https://user-images.githubusercontent.com/85017704/136742282-e9c35bfa-61ca-4c32-b407-cdf378cc515d.gif) <br><br><br><br>
+  - 프로필 사진은 비동기 방식으로 전송되어 지정된 외부폴더에 저장됨
+  - 프로필 사진이 정상적으로 업로드 되면 `FileReader`을 이용해 미리보기 이미지를 출력하고 이미지 삭제 버튼을 보여줌 
+  - 삭제버튼을 누르면 이미지가 삭제됨 <br><br> ![이미지업로드배속](https://user-images.githubusercontent.com/85017704/136743293-65f90cea-65e8-479e-b96e-5862d1257e60.gif) <br><br><br><br>
+- 닉네임 중복체크
+  - 현재 자신이 사용하고 있는 닉네임일 경우 중복메세지 뜨지 않음. <br><br> ![녹화_2021_10_11_15_40_37_735](https://user-images.githubusercontent.com/85017704/136744205-b718b732-af0d-4f2e-b023-cfc676022918.gif) <br><br><br><br>
+- 글자수 제한 <br><br>  ![글자수배속](https://user-images.githubusercontent.com/85017704/136745084-6731299d-bd8e-4632-9998-b2313f2a2174.gif) <br><br><br><br>
+- 프로필 설정 <br><br> ![프로필수정](https://user-images.githubusercontent.com/85017704/136748985-dadd47c1-3717-4dab-a5c6-309116600262.gif) <br><br><br><br>
 
 
     
@@ -457,13 +457,13 @@
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
    <div markdown="1">
 
-  - 전체선택 삭제 
-     - 글 <br><br> ![녹화_2021_10_11_16_23_49_199](https://user-images.githubusercontent.com/85017704/136749305-e98b2876-06cb-4909-b032-b7535d022c81.gif) <br><br><br><br>
-     - 댓글 <br><br> ![녹화_2021_10_11_16_26_35_153](https://user-images.githubusercontent.com/85017704/136749416-b0501fa5-dcb2-4e55-ac61-e41675e9b9c2.gif) <br><br><br><br>
-     - 북마크 <br><br>  ![녹화_2021_10_11_16_27_23_761](https://user-images.githubusercontent.com/85017704/136749491-ee1fa4f5-26fc-400d-acbc-d3d579df546a.gif) <br><br><br><br>
-   - 개별선택 삭제 
-     - 댓글, 북마크 사진 생략(글과 동일)  <br><br> ![녹화_2021_10_11_16_28_48_13](https://user-images.githubusercontent.com/85017704/136749879-668c5067-cc9b-4d47-9120-0efa10c11810.gif)  <br><br><br><br>
-  - 선택된 대상이 없을 시 대상 선택 요구 메세지 출력 <br><br> ![녹화_2021_10_11_16_31_12_991](https://user-images.githubusercontent.com/85017704/136750109-83e8405b-933c-454f-a285-cbdd9ee46964.gif)   <br><br><br><br>
+- 전체선택 삭제 
+  - 글 <br><br> ![녹화_2021_10_11_16_23_49_199](https://user-images.githubusercontent.com/85017704/136749305-e98b2876-06cb-4909-b032-b7535d022c81.gif) <br><br><br><br>
+  - 댓글 <br><br> ![녹화_2021_10_11_16_26_35_153](https://user-images.githubusercontent.com/85017704/136749416-b0501fa5-dcb2-4e55-ac61-e41675e9b9c2.gif) <br><br><br><br>
+  - 북마크 <br><br>  ![녹화_2021_10_11_16_27_23_761](https://user-images.githubusercontent.com/85017704/136749491-ee1fa4f5-26fc-400d-acbc-d3d579df546a.gif) <br><br><br><br>
+- 개별선택 삭제 
+  - 댓글, 북마크 사진 생략(글과 동일)  <br><br> ![녹화_2021_10_11_16_28_48_13](https://user-images.githubusercontent.com/85017704/136749879-668c5067-cc9b-4d47-9120-0efa10c11810.gif)  <br><br><br><br>
+- 선택된 대상이 없을 시 대상 선택 요구 메세지 출력 <br><br> ![녹화_2021_10_11_16_31_12_991](https://user-images.githubusercontent.com/85017704/136750109-83e8405b-933c-454f-a285-cbdd9ee46964.gif)   <br><br><br><br>
 
 
    </div>
@@ -492,17 +492,18 @@
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
   <div markdown="1">
     
-    - 비로그인 사용자, 지역 미설정 사용자, 지역 설정 사용자 <br><br> ![메인비로그인지역배속](https://user-images.githubusercontent.com/85017704/136780252-226048af-bdfd-48b4-9f9d-eec4c61e960b.gif) <br><br><br><br>
-    - 좋아요, 북마크 반영
-      - 새로고침해도 좋아요, 북마크 변경사항 유지됨 <br><br> ![메인좋아요북마크](https://user-images.githubusercontent.com/85017704/136785046-3ce0b395-ad67-4d0b-bcae-8a61129dd0f9.gif) <br><br><br><br>
-    - 링크복사 <br><br>![녹화_2021_10_11_20_49_01_884](https://user-images.githubusercontent.com/85017704/136785287-e1ba7c2d-816e-4683-8b6a-7d73538ecd16.gif) <br><br><br><br>
-    - 메뉴
-      - 마우스오버시 지역이 펼쳐짐
-      - 지역에 마우스 오버시 각지역의 게시판이 펼쳐짐
-      - 지역을 클릭하면 지역 사이트로 이동
-      - 게시판을 클릭하면 지역의 게시판 글목록으로 이동 <br><br> ![메뉴배속](https://user-images.githubusercontent.com/85017704/136786054-a6d92475-94b6-4a7a-a006-44e7962e7694.gif) <br><br><br><br>
+    
+  - 비로그인 사용자, 지역 미설정 사용자, 지역 설정 사용자 <br><br> ![메인비로그인지역배속](https://user-images.githubusercontent.com/85017704/136780252-226048af-bdfd-48b4-9f9d-eec4c61e960b.gif) <br><br><br><br>
+  - 좋아요, 북마크 반영
+    - 새로고침해도 좋아요, 북마크 변경사항 유지됨 <br><br> ![메인좋아요북마크](https://user-images.githubusercontent.com/85017704/136785046-3ce0b395-ad67-4d0b-bcae-8a61129dd0f9.gif)  <br><br><br><br>
+  - 링크복사 <br><br> ![녹화_2021_10_11_20_49_01_884](https://user-images.githubusercontent.com/85017704/136785287-e1ba7c2d-816e-4683-8b6a-7d73538ecd16.gif) <br><br><br><br>
+  - 메뉴
+    - 마우스오버시 지역이 펼쳐짐
+    - 지역에 마우스 오버시 각지역의 게시판이 펼쳐짐
+    - 지역을 클릭하면 지역 사이트로 이동
+    - 게시판을 클릭하면 지역의 게시판 글목록으로 이동 <br><br> ![메뉴배속](https://user-images.githubusercontent.com/85017704/136786054-a6d92475-94b6-4a7a-a006-44e7962e7694.gif) <br><br><br><br>
 
-
+    
     </div>
 </details>
 
@@ -529,15 +530,16 @@
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
   <div markdown="1">
 
-    - 사이드바
-      - 글자를 선택했을 경우 하이퍼링크로 이동, 글자 바깥 영역을 선택 했을경우 하위 카테고리를 펼침
-      - 말머리가 없는 게시판은 하위 지역 카테고리 아래의 카테고리가 없음 <br><br> ![사이드바](https://user-images.githubusercontent.com/85017704/136791842-7f28004c-b57c-45ba-bdc8-96042f9cf184.gif) <br><br><br><br>
-    - 정렬, 페이징, 검색
-      - 장소 말머리가 없는 게시판은 장소 검색 기능이 없음 <br><br> ![녹화_2021_10_11_22_22_59_123](https://user-images.githubusercontent.com/85017704/136797619-e0192522-45dc-4cfe-929e-403ffa832ff0.gif) <br><br><br><br>
-      - 작성자는 아이디 또는 닉네임으로 찾음 <br><br> ![녹화_2021_10_11_22_25_26_780](https://user-images.githubusercontent.com/85017704/136797997-c2837f4b-cc31-4aa5-b118-bd92bd6974e6.gif) <br><br><br><br>
-      - 필터링된 게시글이 없는 경우 '작성된 게시물이 없습니다.' <br><br> ![녹화_2021_10_11_22_27_30_10](https://user-images.githubusercontent.com/85017704/136798187-f6ba1cec-d835-4880-92cd-61674d43284f.gif) <br><br><br><br>
-      - 하위 지역, 말머리(장소 게시판), 정렬, 페이징, 검색으로 글 필터링 가능 <br><br> ![녹화_2021_10_11_22_40_55_113](https://user-images.githubusercontent.com/85017704/136800354-1f661552-1db4-4ee1-90b3-1486710228fd.gif) <br><br><br><br>
-      - 비로그인 사용자 <br><br> ![녹화_2021_10_11_22_45_34_429](https://user-images.githubusercontent.com/85017704/136800905-0954a0b8-71c4-4eb4-8533-14ec46df2290.gif) <br><br><br><br>
+    
+  - 사이드바
+    - 글자를 선택했을 경우 하이퍼링크로 이동, 글자 바깥 영역을 선택 했을경우 하위 카테고리를 펼침
+    - 말머리가 없는 게시판은 하위 지역 카테고리 아래의 카테고리가 없음 <br><br> ![사이드바](https://user-images.githubusercontent.com/85017704/136791842-7f28004c-b57c-45ba-bdc8-96042f9cf184.gif) <br><br><br><br>
+  - 정렬, 페이징, 검색
+    - 장소 말머리가 없는 게시판은 장소 검색 기능이 없음 <br><br> ![녹화_2021_10_11_22_22_59_123](https://user-images.githubusercontent.com/85017704/136797619-e0192522-45dc-4cfe-929e-403ffa832ff0.gif) <br><br><br><br>
+    - 작성자는 아이디 또는 닉네임으로 찾음 <br><br> ![녹화_2021_10_11_22_25_26_780](https://user-images.githubusercontent.com/85017704/136797997-c2837f4b-cc31-4aa5-b118-bd92bd6974e6.gif) <br><br><br><br>
+    - 필터링된 게시글이 없는 경우 '작성된 게시물이 없습니다.' <br><br> ![녹화_2021_10_11_22_27_30_10](https://user-images.githubusercontent.com/85017704/136798187-f6ba1cec-d835-4880-92cd-61674d43284f.gif) <br><br><br><br>
+    - 하위 지역, 말머리(장소 게시판), 정렬, 페이징, 검색으로 글 필터링 가능 <br><br> ![녹화_2021_10_11_22_40_55_113](https://user-images.githubusercontent.com/85017704/136800354-1f661552-1db4-4ee1-90b3-1486710228fd.gif) <br><br><br><br>
+    - 비로그인 사용자 <br><br> ![녹화_2021_10_11_22_45_34_429](https://user-images.githubusercontent.com/85017704/136800905-0954a0b8-71c4-4eb4-8533-14ec46df2290.gif) <br><br><br><br>
 
 
     </div>
@@ -570,23 +572,23 @@
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
    <div markdown="1">
      
-     - 비로그인 사용자 <br><br> ![녹화_2021_10_11_22_50_39_755](https://user-images.githubusercontent.com/85017704/136801722-47e09516-b814-4f65-90ee-9fffc83ab4ca.gif) <br><br><br><br>
-     - 게시판, 카테고리 선택창, 장소 선택 기능
-      - 위치에 따라 게시판과 카테고리 선택창이 달라짐
-      - 장소 말머리가 있는 게시판인 경우에만 장소 선택 기능이 존재 <br><br> ![녹화_2021_10_12_02_12_31_664](https://user-images.githubusercontent.com/85017704/136829628-97b4c413-6ee1-4fea-b61b-af17979b650a.gif) <br><br><br><br>
-    - 필수정보 미제출 및 유효성 검사 <br><br> ![글작성필수정보유효성](https://user-images.githubusercontent.com/85017704/136831382-6e98c8be-461f-4666-8dee-2e5fe8454030.gif)  <br><br><br><br>
-    - 장소 선택
-     - kakao map API 이용 
-     - 키워드를 검색하면 키워드에 해당하는 목록과 마커가 나타남
-     - 마커나 목록을 클릭하면 클릭한 장소가 선택된 장소에 표시됨
-     - 검색창에 지역 사이트에 따른 지역명이 추가 되어있음  <br><br> ![글작성지도](https://user-images.githubusercontent.com/85017704/136831954-119beabd-6741-4dd8-bc21-ae6146ff516c.gif) <br><br><br><br>
-   - WYSIWYG 에디터 (summernote)
-     - 사진 다중업로드 가능 <br><br> ![에디터](https://user-images.githubusercontent.com/85017704/136833525-ea2a06b4-932d-475c-a065-29d231e7ca92.gif) <br><br><br><br>
-   - 해시태그 작성
-     - 자동완성, 중복된 태그 입력 불가능 
-     - 해시태그 삭제 가능 <br><br> ![녹화_2021_10_12_02_54_53_816](https://user-images.githubusercontent.com/85017704/136833985-a0e6ead7-cb80-4ea7-9312-aeba1af7b397.gif) <br><br><br><br>
-   - 글작성 완료
-     - 작성한 글로 이동 <br><br> ![글작성완료](https://user-images.githubusercontent.com/85017704/136834407-497cf6e1-f7f5-4b8e-b0bd-68cf826b6cc9.gif) <br><br><br><br>
+- 비로그인 사용자 <br><br> ![녹화_2021_10_11_22_50_39_755](https://user-images.githubusercontent.com/85017704/136801722-47e09516-b814-4f65-90ee-9fffc83ab4ca.gif) <br><br><br><br>
+- 게시판, 카테고리 선택창, 장소 선택 기능
+    - 위치에 따라 게시판과 카테고리 선택창이 달라짐
+    - 장소 말머리가 있는 게시판인 경우에만 장소 선택 기능이 존재 <br><br> ![녹화_2021_10_12_02_12_31_664](https://user-images.githubusercontent.com/85017704/136829628-97b4c413-6ee1-4fea-b61b-af17979b650a.gif) <br><br><br><br>
+- 필수정보 미제출 및 유효성 검사 <br><br> ![글작성필수정보유효성](https://user-images.githubusercontent.com/85017704/136831382-6e98c8be-461f-4666-8dee-2e5fe8454030.gif)  <br><br><br><br>
+- 장소 선택
+   - kakao map API 이용 
+   - 키워드를 검색하면 키워드에 해당하는 목록과 마커가 나타남
+   - 마커나 목록을 클릭하면 클릭한 장소가 선택된 장소에 표시됨
+   - 검색창에 지역 사이트에 따른 지역명이 추가 되어있음  <br><br> ![글작성지도](https://user-images.githubusercontent.com/85017704/136831954-119beabd-6741-4dd8-bc21-ae6146ff516c.gif) <br><br><br><br>
+- WYSIWYG 에디터 (summernote)
+  - 사진 다중업로드 가능 <br><br> ![에디터](https://user-images.githubusercontent.com/85017704/136833525-ea2a06b4-932d-475c-a065-29d231e7ca92.gif) <br><br><br><br>
+- 해시태그 작성
+   - 자동완성, 중복된 태그 입력 불가능 
+   - 해시태그 삭제 가능 <br><br> ![녹화_2021_10_12_02_54_53_816](https://user-images.githubusercontent.com/85017704/136833985-a0e6ead7-cb80-4ea7-9312-aeba1af7b397.gif) <br><br><br><br>
+- 글작성 완료
+   - 작성한 글로 이동 <br><br> ![글작성완료](https://user-images.githubusercontent.com/85017704/136834407-497cf6e1-f7f5-4b8e-b0bd-68cf826b6cc9.gif) <br><br><br><br>
 
    </div>
 </details>
