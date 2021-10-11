@@ -554,10 +554,13 @@
 
 
   - 비로그인 사용자인 경우 글쓰기가 불가능하다.
-  - 장소 말머리가 있는 게시판인 경우에만 장소 선택 기능이 존재한다.
   - 글쓰기 버튼을 누른 곳에따라 카테고리 선택창이 달라진다.
+  - 장소 말머리가 있는 게시판인 경우에만 장소 선택 기능이 존재한다.
   - 카테고리, 말머리, 제목, 내용, 장소(장소 게시판)은 필수사항이다.
-  - 해시태그는 tagit 라이브러리를 사용해 작성한다.
+  - WYSIWYG 에디터 (summernote)를 글을 꾸밀 수 있다.
+  - 장소 선택은 kakao map API를 이용한다.
+  - 글 내에서 중복 해시태그를 작성 할 수 없다.
+  - 해시태그 작성시 자동완성이 나온다.
 
 
     </div>
@@ -568,10 +571,22 @@
    <div markdown="1">
      
      - 비로그인 사용자 <br><br> ![녹화_2021_10_11_22_50_39_755](https://user-images.githubusercontent.com/85017704/136801722-47e09516-b814-4f65-90ee-9fffc83ab4ca.gif) <br><br><br><br>
-     
-
-     
- 
+     - 게시판, 카테고리 선택창, 장소 선택 기능
+      - 위치에 따라 게시판과 카테고리 선택창이 달라짐
+      - 장소 말머리가 있는 게시판인 경우에만 장소 선택 기능이 존재 <br><br> ![녹화_2021_10_12_02_12_31_664](https://user-images.githubusercontent.com/85017704/136829628-97b4c413-6ee1-4fea-b61b-af17979b650a.gif) <br><br><br><br>
+    - 필수정보 미제출 및 유효성 검사 <br><br> ![글작성필수정보유효성](https://user-images.githubusercontent.com/85017704/136831382-6e98c8be-461f-4666-8dee-2e5fe8454030.gif)  <br><br><br><br>
+    - 장소 선택
+     - kakao map API 이용 
+     - 키워드를 검색하면 키워드에 해당하는 목록과 마커가 나타남
+     - 마커나 목록을 클릭하면 클릭한 장소가 선택된 장소에 표시됨
+     - 검색창에 지역 사이트에 따른 지역명이 추가 되어있음  <br><br> ![글작성지도](https://user-images.githubusercontent.com/85017704/136831954-119beabd-6741-4dd8-bc21-ae6146ff516c.gif) <br><br><br><br>
+   - WYSIWYG 에디터 (summernote)
+     - 사진 다중업로드 가능 <br><br> ![에디터](https://user-images.githubusercontent.com/85017704/136833525-ea2a06b4-932d-475c-a065-29d231e7ca92.gif) <br><br><br><br>
+   - 해시태그 작성
+     - 자동완성, 중복된 태그 입력 불가능 
+     - 해시태그 삭제 가능 <br><br> ![녹화_2021_10_12_02_54_53_816](https://user-images.githubusercontent.com/85017704/136833985-a0e6ead7-cb80-4ea7-9312-aeba1af7b397.gif) <br><br><br><br>
+   - 글작성 완료
+     - 작성한 글로 이동 <br><br> ![글작성완료](https://user-images.githubusercontent.com/85017704/136834407-497cf6e1-f7f5-4b8e-b0bd-68cf826b6cc9.gif) <br><br><br><br>
 
    </div>
 </details>
