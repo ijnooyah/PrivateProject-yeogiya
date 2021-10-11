@@ -523,6 +523,22 @@ span.modalMapToggle::after {
 	let summernote = document.querySelector('#summernote');
 	function validate() {
 		let msg = null;
+		
+		// 0. 게시판
+		if($('#sortBoard').val() == 0) {
+			Swal.fire({
+	        	title: '게시판을 선택해주세요.',
+				allowOutsideClick: false,
+				icon: 'error', 
+				confirmButtonText: "확인",
+				didClose: function() {
+					$('#sortBoard').focus();
+				}
+			});
+			return false;
+		}
+		
+		
 		// 1. 카테고리
 		if($('#subLocal').val() == 0) {
 			Swal.fire({
