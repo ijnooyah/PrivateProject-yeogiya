@@ -70,7 +70,10 @@
 						</c:if>
 					</div>
 					<div class="font-size-090 mb-1">
-						<span class="text-muted">지역 </span><span class="text-pink mr-3">${member.open_local == 'N' ? '비공개' : member.sortLocalName}</span>
+						<span class="text-muted">지역 </span><span class="text-pink mr-3">
+						<c:if test="${member.open_local == 'N'}">비공개</c:if>
+						<c:if test="${member.open_local != 'N'}">${empty member.sort_local ? '&times;' : member.sort_local}</c:if>
+						</span>
 						<span class="mr-3 text-muted">총 게시물 <span class="text-pink">${member.boardCnt}</span>개</span>
 						<span class="text-muted">총 댓글 <span class="text-pink">${member.cmtCnt}</span>개</span>
 					</div>
@@ -132,12 +135,12 @@
 								<jsp:include page="./commentTable.jsp" flush="false"/>
 							</c:when>
 							<c:when test="${bs.tab == 'bookmark'}">
-								<c:if test="${member.open_bmk == 'N'}">
+								<c:if test="${member.open_bmk == 'N' && member.user_id != loginMember.user_id}">
 									<div class="text-center py-5">
 										북마크  비공개
 									</div>
 								</c:if>
-								<c:if test="${member.open_bmk != 'N'}">
+								<c:if test="${member.open_bmk != 'N' || member.user_id == loginMember.user_id}">
 									<jsp:include page="./boardTable.jsp" flush="false"/>
 								</c:if>
 							</c:when>
