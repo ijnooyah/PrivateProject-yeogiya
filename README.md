@@ -43,6 +43,8 @@
           </ul>
          </details>
     </li>
+    <li><a href="#특별한-기능">특별한 기능</a></li>
+    <li><a href="#고민과-기능">고민과 해결</a></li>
   </ol>
 </details>
 
@@ -382,18 +384,19 @@
 <details>
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
   <div markdown="1">
-      
-- 상단에서 프로필 사진, 닉네임, 회원등급, 지역, 총 게시물 수 , 총 댓글 수, 자기소개를 보여준다.
-- 프로필 사진이 설정되어 있지 않은 경우 기본 사진으로 설정한다.
-- 탈퇴한 회원일 경우 회원등급에 '탈퇴 회원'으로 표시된다.
-- 자기소개가 설정되어 있지 않은 경우 '자기소개 없음'으로 표시된다.
-- 회원이 지역을 비공개 해놨을 경우 지역이 표시 되지 않는다.
-- 회원이 작성한 글, 작성한 댓글, 북마크한 게시글 목록을 볼 수 있다.
-- 회원이 북마크를 비공개 해놨을 경우 북마크한 게시글이 보이지 않는다.
-- 작성한 글, 작성한 댓글, 북마크한 게시글 목록에 대해 정렬 및 페이징을 할 수 있다.
-- 조회된 게시글 목록 각각의 링크를 통해 지역 사이트, 게시판, 게시글, 회원 프로필로 이동할 수 있다.
-- 프로필 수정 및 글 삭제 버튼은 본인의 계정일 경우에만 존재한다.
- 
+
+- 프로필 보기
+  - 프로필 사진이 설정되어 있지 않은 경우 기본 사진으로 설정함.
+  - 탈퇴한 회원일 경우 회원등급에 '탈퇴 회원'으로 표시됨.
+  - 자기소개가 설정되어 있지 않은 경우 '자기소개 없음'으로 표시됨.
+  - 회원이 지역을 비공개 해놨을 경우 지역이 표시 되지 않음.
+  - 프로필 수정 및 글 삭제 버튼은 본인의 계정일 경우에만 존재.  <br><br>  ![녹화_2021_10_11_14_26_21_743](https://user-images.githubusercontent.com/85017704/136737721-32608ed4-a805-416e-bcc3-5d423c3a2e8f.gif) <br><br><br><br>
+- 회원이 작성한 글, 작성한 댓글, 북마크한 게시글 목록 보기.
+  - 회원이 북마크를 비공개 해놨을 경우 북마크한 게시글이 보이지 않음. <br><br>  ![녹화_2021_10_11_14_29_16_294](https://user-images.githubusercontent.com/85017704/136737882-7053f53d-fb8b-44bc-8bb2-886d0b12290c.gif) <br><br><br><br>
+- 정렬 및 페이징
+  - 조회된 게시글 목록 각각의 링크를 통해 지역 사이트, 게시판, 게시글, 회원 프로필로 이동 가능. <br><br> ![녹화_2021_10_11_15_10_51_879](https://user-images.githubusercontent.com/85017704/136741472-03a3809a-572a-4e40-a32f-923c8224608a.gif) <br><br><br><br>
+- 프로필 수정 및 글 삭제 버튼은 본인의 계정일 경우에만 존재 <br><br> ![녹화_2021_10_11_15_14_44_50](https://user-images.githubusercontent.com/85017704/136741625-5abb5080-f058-47f4-b4ab-d7c99d228468.gif) <br><br><br><br>
+
 
     </div>
 </details>
@@ -419,9 +422,19 @@
 <details>
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
   <div markdown="1">
-   - 첨부된 파일이 이미지 형식이(JPG·PNG·GIF·JPEG) 아니거나 10MB를 초과한다면 업로드 할 수 없다.
- 
+    
+   - 이미지 업로드
+    - 첨부된 파일이 이미지 형식이(JPG·PNG·GIF·JPEG) 아니거나 10MB를 초과한다면 업로드 불가 <br><br> ![녹화_2021_10_11_15_21_35_512](https://user-images.githubusercontent.com/85017704/136742282-e9c35bfa-61ca-4c32-b407-cdf378cc515d.gif) <br><br><br><br>
+    - 프로필 사진은 비동기 방식으로 전송되어 지정된 외부폴더에 저장됨
+    - 프로필 사진이 정상적으로 업로드 되면 `FileReader`을 이용해 미리보기 이미지를 출력하고 이미지 삭제 버튼을 보여줌 
+    - 삭제버튼을 누르면 이미지가 삭제됨 <br><br> ![이미지업로드배속](https://user-images.githubusercontent.com/85017704/136743293-65f90cea-65e8-479e-b96e-5862d1257e60.gif) <br><br><br><br>
+  - 닉네임 중복체크
+    - 현재 자신이 사용하고 있는 닉네임일 경우 중복메세지 뜨지 않음. <br><br>   ![녹화_2021_10_11_15_40_37_735](https://user-images.githubusercontent.com/85017704/136744205-b718b732-af0d-4f2e-b023-cfc676022918.gif) <br><br><br><br>
+   - 글자수 제한 <br><br>  ![글자수배속](https://user-images.githubusercontent.com/85017704/136745084-6731299d-bd8e-4632-9998-b2313f2a2174.gif) <br><br><br><br>
+  - 프로필 설정 <br><br> ![프로필수정](https://user-images.githubusercontent.com/85017704/136748985-dadd47c1-3717-4dab-a5c6-309116600262.gif) <br><br><br><br>
 
+
+    
     </div>
 </details>
 
@@ -432,7 +445,7 @@
 <details open="open">
   <summary><b>구현 기능 설명</b></summary>
   <div markdown="1">
-      
+
   - 본인의 계정일 경우 체크박스와 삭제 버튼이 존재하며 선택한 대상을 삭제할 수 있다.
   - 전체선택 또는 개별선택으로 대상을 삭제할 수 있다.
   - 선택된 대상이 없을 시 대상 선택 요구 메세지가 출력된다.
@@ -445,7 +458,14 @@
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
    <div markdown="1">
 
- 
+  - 전체선택 삭제 
+     - 글 <br><br> ![녹화_2021_10_11_16_23_49_199](https://user-images.githubusercontent.com/85017704/136749305-e98b2876-06cb-4909-b032-b7535d022c81.gif) <br><br><br><br>
+     - 댓글 <br><br> ![녹화_2021_10_11_16_26_35_153](https://user-images.githubusercontent.com/85017704/136749416-b0501fa5-dcb2-4e55-ac61-e41675e9b9c2.gif) <br><br><br><br>
+     - 북마크 <br><br>  ![녹화_2021_10_11_16_27_23_761](https://user-images.githubusercontent.com/85017704/136749491-ee1fa4f5-26fc-400d-acbc-d3d579df546a.gif) <br><br><br><br>
+   - 개별선택 삭제 
+     - 댓글, 북마크 사진 생략(글과 동일)  <br><br> ![녹화_2021_10_11_16_28_48_13](https://user-images.githubusercontent.com/85017704/136749879-668c5067-cc9b-4d47-9120-0efa10c11810.gif)  <br><br><br><br>
+  - 선택된 대상이 없을 시 대상 선택 요구 메세지 출력 <br><br> ![녹화_2021_10_11_16_31_12_991](https://user-images.githubusercontent.com/85017704/136750109-83e8405b-933c-454f-a285-cbdd9ee46964.gif)   <br><br><br><br>
+
 
    </div>
 </details>
