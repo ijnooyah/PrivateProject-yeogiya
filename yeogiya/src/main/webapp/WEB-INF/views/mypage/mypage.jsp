@@ -72,7 +72,7 @@
 					<div class="font-size-090 mb-1">
 						<span class="text-muted">지역 </span><span class="text-pink mr-3">
 						<c:if test="${member.open_local == 'N'}">비공개</c:if>
-						<c:if test="${member.open_local != 'N'}">${empty member.sort_local ? '&times;' : member.sort_local}</c:if>
+						<c:if test="${member.open_local != 'N'}">${empty member.sort_local ? '&times;' : member.sortLocalName}</c:if>
 						</span>
 						<span class="mr-3 text-muted">총 게시물 <span class="text-pink">${member.boardCnt}</span>개</span>
 						<span class="text-muted">총 댓글 <span class="text-pink">${member.cmtCnt}</span>개</span>
