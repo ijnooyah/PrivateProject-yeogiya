@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -50,7 +51,20 @@ public class FileController {
 		String fullFilePath = rootPath + "/" + img;
 		FileInputStream fis = new FileInputStream(fullFilePath);
 		HttpHeaders header = new HttpHeaders();
-        header.setContentType(MediaType.IMAGE_JPEG);
+		String extension = img.substring(img.lastIndexOf(".") + 1).toUpperCase();
+
+		switch (extension) {
+		case "JPG" :
+		case "JPEG" :
+			header.setContentType(MediaType.IMAGE_JPEG);
+			break;
+		case "PNG" :
+			header.setContentType(MediaType.IMAGE_PNG);
+		case "GIF" :
+			header.setContentType(MediaType.IMAGE_GIF);
+			
+		}
+        header.add("content-disposition", "inline;filename=" + URLEncoder.encode(img.substring(img.lastIndexOf("/") + 1), "UTF-8"));
         ResponseEntity<byte[]> entity = new ResponseEntity<byte[]>(
         		 IOUtils.toByteArray(fis), 
         		 header,
