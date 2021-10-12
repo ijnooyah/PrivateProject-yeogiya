@@ -177,7 +177,7 @@
 - 회원정보와 일치하지 않은 이름 또는 이메일 입력
   - 서버에서 회원정보를 비교해 결과를 전송받은 후 메세지 출력 <br><br> ![아이디찾기틀림](https://user-images.githubusercontent.com/85017704/136646512-a91a7df3-374b-4864-8cbd-7aa347c9dfae.gif) <br><br><br><br>
 - 아이디 찾기
-  - 아이디는 서버에서 뒤에서 두자리를 잘라 전달한다. :pushpin:[코드 확인](https://github.com/ijnooyah/PrivateProject-yeogiya/blob/a6a04b5e9413221bc9c9cd05a75d2b0420749023/yeogiya/src/main/java/com/yj/yeogiya/model/service/MemberServiceImpl.java#L97-L105) <br><br>![아이디찾기](https://user-images.githubusercontent.com/85017704/136646555-d92c92e0-5756-471f-ac84-ed26fad85f22.gif)
+  - 아이디는 서버에서 뒤에서 두자리를 잘라 전달한다. <br><br>![아이디찾기](https://user-images.githubusercontent.com/85017704/136646555-d92c92e0-5756-471f-ac84-ed26fad85f22.gif)
  <br><br><br><br>
   
   </div>
@@ -423,7 +423,7 @@
   <div markdown="1">
     
 - 이미지 업로드
-  - 첨부된 파일이 이미지 형식이(JPG·PNG·GIF·JPEG) 아니거나 10MB를 초과한다면 업로드 불가 <br><br> ![녹화_2021_10_11_15_21_35_512](https://user-images.githubusercontent.com/85017704/136742282-e9c35bfa-61ca-4c32-b407-cdf378cc515d.gif) <br><br><br><br>
+  - 첨부된 파일이 이미지 형식이(JPG·JPEG·PNG·GIF) 아니거나 10MB를 초과한다면 업로드 불가 <br><br> ![녹화_2021_10_11_15_21_35_512](https://user-images.githubusercontent.com/85017704/136742282-e9c35bfa-61ca-4c32-b407-cdf378cc515d.gif) <br><br><br><br>
   - 프로필 사진은 비동기 방식으로 전송되어 지정된 외부폴더에 저장됨
   - 프로필 사진이 정상적으로 업로드 되면 `FileReader`을 이용해 미리보기 이미지를 출력하고 이미지 삭제 버튼을 보여줌 
   - 삭제버튼을 누르면 이미지가 삭제됨 <br><br> ![이미지업로드배속](https://user-images.githubusercontent.com/85017704/136743293-65f90cea-65e8-479e-b96e-5862d1257e60.gif) <br><br><br><br>
@@ -601,9 +601,12 @@
   <summary><b>구현 기능 설명</b></summary>
   <div markdown="1">
       
-  - 본인의 계정일 경우 체크박스와 삭제 버튼이 존재하며 선택한 대상을 삭제할 수 있다.
-  - 전체선택 또는 개별선택으로 대상을 삭제할 수 있다.
-  - 선택된 대상이 없을 시 대상 선택 요구 메세지가 출력된다.
+  - 장소 말머리가 있는 게시판일 경우 작성자가 입력한 장소가 지도로 보인다.
+  - 지도의 인포윈도우를 클릭하면 해당 장소의 kakao map으로 이동한다.
+  - 해시태그를 누르면 해당 해시태그를 작성한 글목록이 조회되며 정렬, 페이징, 검색을 할 수 있다.
+  - 하단에는 글이 포함되어 있는 게시판의 글목록이 보이며 현재 글에는 색이 입혀진다.
+  - 본인의 계정일 경우 수정 및 삭제버튼이 존재한다.
+  - 비로그인 사용자일 경우 북마크, 좋아요, <a href="#comment">댓글 기능</a>, 해시태그 조회를 사용할 수 없다.
 
 
     </div>
@@ -612,10 +615,22 @@
 <details>
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
    <div markdown="1">
+     
+     
+- 상세글 보기
+     - 비로그인 사용자인 경우 북마크, 좋아요, 댓글, 해시태그 조회 기능 사용 불가
+     - 하단 글목록 <br><br> ![비로그인상세보기](https://user-images.githubusercontent.com/85017704/136919530-d4d25858-eb3f-426e-9e07-b22430d6e891.gif) <br><br><br><br>
+- 본인글 상세 보기
+     - 본인의 계정일 경우 수정 및 삭제버튼 존재 <br><br> ![녹화_2021_10_12_17_22_12_710](https://user-images.githubusercontent.com/85017704/136919658-a1f66c36-f8b6-4fec-b686-fd912a8c5a88.gif) <br><br><br><br>
+- 장소 <br><br> ![녹화_2021_10_12_16_59_17_721](https://user-images.githubusercontent.com/85017704/136916384-8283758f-f400-4d71-a195-86fe874ccb72.gif) <br><br><br><br>
+- 이미지 새탭에서 보기와 저장하기 (JPG·JPEG·PNG·GIF)
+     - 이름과 형식이 그대로 저장이됨 <br><br> ![사진저장](https://user-images.githubusercontent.com/85017704/136908175-5c4f36a0-f9b5-4e1e-9bd5-935c2d32a7ce.gif) <br><br><br><br>
+- 해시태그
+     - 해당 해시태그를 사용한 게시물들 조회
+     - 목록 정렬, 페이징, 검색 가능 <br><br> ![녹화_2021_10_12_17_30_01_425](https://user-images.githubusercontent.com/85017704/136920971-679e7f56-a015-459a-9955-4f59b4244af4.gif)  <br><br><br><br>
 
- 
 
-   </div>
+    </div>
 </details>
 
 <br>
