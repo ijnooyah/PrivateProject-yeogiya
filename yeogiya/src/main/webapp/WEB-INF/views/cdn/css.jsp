@@ -85,6 +85,9 @@
 <c:if test="${not empty bs.keyword }">
 	<c:set var="keyword" value="&keyword=${bs.keyword}" scope="request"/>
 </c:if>
+<c:if test="${not empty bs.tag}">
+	<c:set var="tag" value="&tag=${bs.tag}" scope="request"/>
+</c:if>
 <c:set var="pageQ" value="${page}${perPage}" scope="request"/>
 <c:set var="searchQ" value="${searchType}${keyword}" scope="request"/>
 <c:set var="sortQ" value="${sortBoard}${subLocal}${sortPlace}" scope="request"/>

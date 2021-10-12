@@ -192,6 +192,8 @@
 		JOIN tbl_member f ON a.user_id = f.user_id
 		LEFT OUTER JOIN (select a.*, b.board_no  from tbl_place a, tbl_board_place b
                         where a.place_no = b.place_no) g ON a.board_no = g.board_no 
+        LEFT OUTER JOIN (select a.*, b.board_no  from tbl_tag a, tbl_board_tag b
+                        where a.tag_no = b.tag_no) h ON a.board_no = h.board_no
 		<include refid="search"></include>
  	</select>
  	
@@ -212,6 +214,8 @@
 						JOIN tbl_member f ON a.user_id = f.user_id
 						LEFT OUTER JOIN (select a.*, b.board_no  from tbl_place a, tbl_board_place b
                         where a.place_no = b.place_no) g ON a.board_no = g.board_no 
+                        LEFT OUTER JOIN (select a.*, b.board_no  from tbl_tag a, tbl_board_tag b
+                        where a.tag_no = b.tag_no) h ON a.board_no = h.board_no
 						<if test = "login_id != null">
 						LEFT OUTER JOIN tbl_like bl ON bl.user_id = #{login_id} AND bl.board_no = #{board_no}
 						LEFT OUTER JOIN tbl_bookmark bm ON bm.user_id = #{login_id} AND bm.board_no = #{board_no}
@@ -252,6 +256,9 @@
 <!-- 				or  g.place_address like '%' || #{keyword} || '%') -->
 <!-- 		</if> -->
 		<!-- 게시판별 -->
+		<if test="sortBoard == 'all' and tag != null">
+			AND h.tag_name = #{tag}
+		</if>
 		<if test="sortBoard != null and sortBoard != 'all'">
 			AND a.sort_board = #{sortBoard}
 		</if>

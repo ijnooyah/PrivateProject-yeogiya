@@ -145,7 +145,7 @@
 				<!-- 해시태그 -->
 				<div class="row mb-1">
 					<c:forEach var="tag" items="${board.tagList}">
-						<a href="" class="mr-2 text-pink">&num;${tag.tag_name}</a>
+						<a href="${listPath}?sortBoard=all&tag=${tag.tag_name}" class="loginNeed mr-2 text-pink">&num;${tag.tag_name}</a>
 					</c:forEach>
 				</div>
 				<!-- 글버튼 -->

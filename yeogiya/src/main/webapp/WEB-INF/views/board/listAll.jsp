@@ -40,8 +40,11 @@ max-width:350px;
 }
 </style>
 <div class="px-4 pt-4">
-	<div class="h3 logo mt-2 mb-4" style="color:var(--pink);">
-	${sortLocalP.sort_name}
+	<div class="mt-2 mb-4" style="color:var(--pink);">
+	<span class="h3 logo">${sortLocalP.sort_name}</span>
+	<c:if test="${not empty bs.tag}">
+		<span class="ml-2">&num;${bs.tag}</span>
+	</c:if>
 	</div>
 	<div class="d-flex mb-1">
 		<div class="dropdown ml-auto">
@@ -57,7 +60,7 @@ max-width:350px;
 					<c:if test ="${vs.count >=4 }">
 						<c:set var="step" value="${step + 10}"/>
 					</c:if>
-					<a class="dropdown-item" href="?${sortQ}&page=1&perPage=${step}${order}${searchQ}">
+					<a class="dropdown-item" href="?${sortQ}${tag}&page=1&perPage=${step}${order}${searchQ}">
 						${step}개씩</a>
 				</c:forEach>
 			</div>
@@ -82,10 +85,10 @@ max-width:350px;
 			  ${orderTxt}
 			</button>
 			<div class="dropdown-menu" style="min-width:4rem;">
-				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=date${searchQ}">최신순</a>
-				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=cmt${searchQ}">댓글순</a>
-				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=like${searchQ}">좋아요순</a>
-				<a class="dropdown-item" href="?${sortQ}${pageQ}&order=view${searchQ}">조회수순</a>
+				<a class="dropdown-item" href="?${sortQ}${tag}${pageQ}&order=date${searchQ}">최신순</a>
+				<a class="dropdown-item" href="?${sortQ}${tag}${pageQ}&order=cmt${searchQ}">댓글순</a>
+				<a class="dropdown-item" href="?${sortQ}${tag}${pageQ}&order=like${searchQ}">좋아요순</a>
+				<a class="dropdown-item" href="?${sortQ}${tag}${pageQ}&order=view${searchQ}">조회수순</a>
 			</div>
 		</div>
 	</div>

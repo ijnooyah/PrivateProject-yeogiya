@@ -106,7 +106,7 @@ public class BoardController {
 		System.out.println("bs:" + bs);
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember == null) {
-			if(bs.getOrder() != null || bs.getKeyword() != null || bs.getSearchType() != null) {
+			if(bs.getTag() != null || bs.getOrder() != null || bs.getKeyword() != null || bs.getSearchType() != null) {
 				model.addAttribute("login", "need");
 			}
 		}

@@ -25,6 +25,8 @@ public class BoardSearch {
 	private String searchType;
 	private String keyword;
 	
+	private String tag;
+	
 	// 현재페이지
 	private int page = 1;
 	
@@ -185,15 +187,23 @@ public class BoardSearch {
 	public void setSortLocal(String sortLocal) {
 		this.sortLocal = sortLocal;
 	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	@Override
 	public String toString() {
 		return "BoardSearch [login_id=" + login_id + ", user_id=" + user_id + ", tab=" + tab + ", act=" + act
 				+ ", board_no=" + board_no + ", sortLocal=" + sortLocal + ", sortLocalEngName=" + sortLocalEngName
 				+ ", subLocal=" + subLocal + ", sortBoard=" + sortBoard + ", sortPlace=" + sortPlace + ", order="
-				+ order + ", searchType=" + searchType + ", keyword=" + keyword + ", page=" + page + ", startRow="
-				+ startRow + ", endRow=" + endRow + ", count=" + count + ", startPage=" + startPage + ", endPage="
-				+ endPage + ", totalPage=" + totalPage + ", perPage=" + perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
+				+ order + ", searchType=" + searchType + ", keyword=" + keyword + ", tag=" + tag + ", page=" + page + ", startRow=" + startRow + ", endRow=" + endRow + ", count=" + count
+				+ ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage + ", perPage="
+				+ perPage + ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 	}
+	
+	
 
 	
 }
