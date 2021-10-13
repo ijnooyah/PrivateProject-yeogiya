@@ -417,7 +417,8 @@
 				console.log(rData);
 				if(rData == "success") {
 					var reply = '<div id="reply_div" style="display:none;">'+$('#reply_div').html()+'</div>';
-		            $('#comment').append(reply);
+// 		           	console.log($('#commentContainer'));
+					$('#commentContainer').append(reply);
 					selectCommentList();
 				}
 			}
@@ -466,6 +467,9 @@
 			$(".cmt_cnt").text(rData.length);
 			$.each(rData, function(i) {
 				var cloneDiv = $("#commentContainer > .comment-row:eq(0)").clone();
+				if(this.is_del == 'Y') {
+					cloneDiv.html('<div class="font-size-080 text-muted">삭제된 댓글입니다.</div>');
+				}
 				if (this.c_depth == 1) {
 					cloneDiv.addClass("recomment-row");
 					cloneDiv.find(".c_parent_user_nick").show();
@@ -501,7 +505,7 @@
 				// 댓글 수정 취소
 				cloneDiv.find(".cancel").attr("href", "javascript:cancelUpdate(" + this.c_no + ")");
 				cloneDiv.find(".updateBtn").attr("onclick", "updateComment(" + this.c_no + ")");
-				cloneDiv.find(".deleteComment").attr("onclick", "deleteComment(" + this.c_no + ")");
+				cloneDiv.find(".deleteComment").attr("onclick", "deleteComment(" + this.c_no + "," +  this.parent_c_no + ")");
 				cloneDiv.find(".doRecomment").attr("onclick", "doRecomment(" + this.c_no + ")");
 				cloneDiv.find(".c_parent_user_nick").text("@" + this.parent_user_nick);
 				cloneDiv.find(".c_content").html(this.c_content);
@@ -574,7 +578,7 @@
 		});
 	}
 	// 댓글 삭제  
-	function deleteComment(c_no) {
+	function deleteComment(c_no, parent_c_no) {
 		var url = "${contextPath}/comment/delete";
 		Swal.fire({
 			text: '삭제하시겠습니까?', 
@@ -587,7 +591,8 @@
 			if(result.isConfirmed) {
 				var sendData = {
 						"b_no" : "${board.board_no}",
-						"c_no"	: c_no
+						"c_no"	: c_no,
+						"parent_c_no" : parent_c_no
 				}
 				
 				$.ajax({
@@ -599,16 +604,7 @@
 					"dataType" : "text",
 					"data" : JSON.stringify(sendData),
 					"success" : function(rData) {
-						if(rData == 0) {
-							Swal.fire({
-							text: '답댓이 있는 댓글은 삭제할 수 없습니다.', 
-							allowOutsideClick: false,
-							icon: 'error', 
-							confirmButtonText: "확인",
-							}).then(function(){close()});
-						} else {
-							selectCommentList();
-						}
+						selectCommentList();
 					}
 				});
 			} 

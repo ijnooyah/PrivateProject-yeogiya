@@ -25,7 +25,10 @@ public class CommentServiceImpl implements CommentService {
 			commentDao.insertComment(cmt);
 		} else {
 //			System.out.println("답댓글");
-			commentDao.insertRecomment(cmt);
+			int result = commentDao.insertRecomment(cmt);
+			if (result == 1) {
+				commentDao.updateChildCnt(cmt.getParent_c_no(), 1);
+			}
 		}
 		boardDao.updateCmtCnt(cmt.getB_no(), 1);
 	}
@@ -33,8 +36,15 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<Comment> selectCommentList(int board_no) {
 		List<Comment> cmtList = commentDao.selectCommentList(board_no);
-		for(Comment cmt : cmtList) {
-			cmt.setC_content(cmt.getC_content().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
+		
+		for(int i = 0; i < cmtList.size(); i++) {
+			Comment cmt = cmtList.get(i);
+			if(cmt.getIs_del().equals("Y")) {
+				cmtList.remove(i);
+				cmtList.add(i, new Comment("Y"));
+			} else {
+				cmt.setC_content(cmt.getC_content().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
+			}
 		}
 		return cmtList;
 	}
@@ -46,8 +56,17 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public int deleteComment(Comment cmt) {
-		boardDao.updateCmtCnt(cmt.getB_no(), -1);
-		return commentDao.deleteComment(cmt);
+		System.out.println("cmt:" + cmt);
+		int result = commentDao.deleteComment(cmt);
+		if(result == 1) {
+			boardDao.updateCmtCnt(cmt.getB_no(), -1);
+			if (cmt.getParent_c_no() != 0) {
+				System.out.println("답댓글 -1");
+				commentDao.updateChildCnt(cmt.getParent_c_no(), -1);
+			} 
+		}
+		
+		return result;
 	}
 
 	@Override

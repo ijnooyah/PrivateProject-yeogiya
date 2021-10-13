@@ -11,6 +11,13 @@
 		values (seq_c_no.nextval, #{user_id}, #{b_no}, seq_c_no.nextval, #{c_content})
 	</insert>
 	
+	<!-- 답댓글 유무 업데이트 -->
+	<update id="updateChildCnt">
+		UPDATE tbl_comment
+		SET child_cnt = child_cnt + #{count}
+		WHERE c_no = #{c_no} 
+	</update>
+	
 	<!-- 답댓글 달기 -->
 	<insert id="insertRecomment" parameterType="Comment">
 		insert into tbl_comment (
@@ -38,7 +45,11 @@
 							from tbl_comment a 
 							left outer join tbl_member b 
 							on a.user_id = b.user_id ) c on a.parent_c_no = c.c_no
-		where a.b_no = #{b_no} and a.is_del = 'N'
+		where (
+			(a.is_del = 'N' and a.b_no = #{b_no}) 
+			or (a.is_del = 'Y' and a.b_no = #{b_no} 
+			and a.child_cnt != 0 and a.c_depth = 0)
+		)
 		order by a.re_group desc, a.c_no asc
 	</select>
 	
@@ -56,7 +67,5 @@
 		SET is_del = 'Y',
    		    del_date = sysdate
  		WHERE c_no = #{c_no} AND b_no = #{b_no}
- 		AND NOT EXISTS ( SELECT * FROM tbl_comment
-                 		  WHERE parent_c_no = #{c_no})
 	</update>
  </mapper>

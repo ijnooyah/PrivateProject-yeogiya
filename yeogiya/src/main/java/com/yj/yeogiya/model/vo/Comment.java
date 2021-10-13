@@ -16,6 +16,7 @@ public class Comment {
 	private Timestamp del_date;
 	private int rp_cnt;
 	private String is_blind;
+	private int child_cnt;
 	
 	//not db column
 	private String user_nick;
@@ -31,6 +32,13 @@ public class Comment {
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public Comment(String is_del) {
+		super();
+		this.is_del = is_del;
 	}
 
 
@@ -291,16 +299,30 @@ public class Comment {
 
 
 
+	public int getChild_cnt() {
+		return child_cnt;
+	}
+
+
+
+	public void setChild_cnt(int child_cnt) {
+		this.child_cnt = child_cnt;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Comment [c_no=" + c_no + ", user_id=" + user_id + ", b_no=" + b_no + ", re_group=" + re_group
 				+ ", parent_c_no=" + parent_c_no + ", c_content=" + c_content + ", c_depth=" + c_depth + ", is_del="
 				+ is_del + ", reg_date=" + reg_date + ", mod_date=" + mod_date + ", del_date=" + del_date + ", rp_cnt="
-				+ rp_cnt + ", is_blind=" + is_blind + ", user_nick=" + user_nick + ", user_img=" + user_img
-				+ ", parent_user_id=" + parent_user_id + ", parent_user_nick=" + parent_user_nick + ", boardTitle="
-				+ boardTitle + ", boardQuery=" + boardQuery + ", sortLocalEngName=" + sortLocalEngName + ", board="
-				+ board + "]";
+				+ rp_cnt + ", is_blind=" + is_blind + ", child_cnt=" + child_cnt + ", user_nick=" + user_nick
+				+ ", user_img=" + user_img + ", parent_user_id=" + parent_user_id + ", parent_user_nick="
+				+ parent_user_nick + ", boardTitle=" + boardTitle + ", boardQuery=" + boardQuery + ", sortLocalEngName="
+				+ sortLocalEngName + ", board=" + board + "]";
 	}
+
+
 
 
 

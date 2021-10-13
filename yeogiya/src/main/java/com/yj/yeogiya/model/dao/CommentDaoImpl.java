@@ -1,6 +1,8 @@
 package com.yj.yeogiya.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -19,14 +21,14 @@ public class CommentDaoImpl implements CommentDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public void insertComment(Comment cmt) {
-		sqlSession.insert(NAMESPACE + "insertComment", cmt);
+	public int insertComment(Comment cmt) {
+		return sqlSession.insert(NAMESPACE + "insertComment", cmt);
 
 	}
 
 	@Override
-	public void insertRecomment(Comment cmt) {
-		sqlSession.insert(NAMESPACE + "insertRecomment", cmt);
+	public int insertRecomment(Comment cmt) {
+		return sqlSession.insert(NAMESPACE + "insertRecomment", cmt);
 		
 	}
 
@@ -48,6 +50,14 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public Comment selectComment(int c_no) {
 		return sqlSession.selectOne(NAMESPACE + "selectComment", c_no);
+	}
+
+	@Override
+	public int updateChildCnt(int c_no, int count) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("c_no", c_no);
+		map.put("count", count);
+		return sqlSession.update(NAMESPACE + "updateChildCnt", map);
 	}
 
 }

@@ -7,10 +7,13 @@ import com.yj.yeogiya.model.vo.Comment;
 
 public interface CommentDao {
 	//댓글 삽입
-	public void insertComment(Comment cmt);
+	public int insertComment(Comment cmt);
 	
 	//대댓글 삽입
-	public void insertRecomment(Comment cmt);
+	public int insertRecomment(Comment cmt);
+	
+	//답댓글수 업데이트
+	public int updateChildCnt(int c_no, int count);
 	
 	//댓글 조회
 	public Comment selectComment(int c_no);

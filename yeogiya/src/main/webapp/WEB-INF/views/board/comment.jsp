@@ -3,13 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<c:if test="${param.type == 'A'}">A</c:if> --%>
 <style>
+
+#commentContainer {
+	border-bottom: 1px solid var(--grayE1);
+}
+
 .board-container .comment-row{
 	 padding: 1rem 2rem;
 	 border-top: 1px solid var(--grayE1);
 }
-/* .board-container .comment-row:nth-child(2) { */
-/* 	border-top:none; */
-/* } */
+
+
 
 .board-container .comment-row.recomment-row{
 	 padding-left: 4rem;;
@@ -94,7 +98,7 @@
 							<!-- //댓글, 수정 삭제 -->
 						</div>
 						<div class="comment_right_middle py-1 pr-2">
-							<span class="c_parent_user_nick font-weight-500" style="display:none;">@하윤지 </span> 
+							<span class="c_parent_user_nick font-weight-600 text-muted" style="display:none;">@하윤지 </span> 
 							<span class="c_content">댓글내용 댓글댓글내용 댓글댓글내용댓글내용 댓글댓글내용 댓글댓글내용댓글내용 댓글댓글내용 댓글댓글내용댓글내용 댓글댓글내용 댓글댓글내용댓글내용 댓글댓글내용 댓글댓글내용댓글내용 댓글댓글내용 댓글댓글내용 11</span>
 						</div>
 						<div class="comment_right_bottom">
@@ -110,7 +114,7 @@
 		</div>
 	</div>
 	<!-- 댓글 더보기 버튼-->
-	<div class="text-center py-5">
+	<div class="text-center mt-3 mb-5">
 		<button type="button" id="btnMoreComments"
 			onclick="moreViewToggle(this);"
 			class="btn btn-sm btn-pink-outline font-size-075 rounded-0">댓글 더보기</button>
