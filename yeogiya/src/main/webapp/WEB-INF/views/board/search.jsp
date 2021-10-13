@@ -10,7 +10,7 @@
            	<c:set var="next" value="${bs.endPage + 1}"/>
            	<c:if test="${prev > 0}">
            		<li class="page-item left">
-					<a class="page-link" href="?${sortQ}&page=${prev}${perPage}${order}${searchQ}">
+					<a class="page-link" href="?${sortQ}${tag}&page=${prev}${perPage}${order}${searchQ}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
 					  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
 					</svg></a>
@@ -18,12 +18,12 @@
             </c:if>
             	<c:forEach var="v" begin="${bs.startPage}" end="${bs.endPage}">
             		<li class="page-item ${v == bs.page ? 'active' : '' }">
-						<a class="page-link" href="?${sortQ}&page=${v}${perPage}${order}${searchQ}">${v}</a>
+						<a class="page-link" href="?${sortQ}${tag}&page=${v}${perPage}${order}${searchQ}">${v}</a>
 					</li>
 				</c:forEach>
 				<c:if test="${next <= bs.totalPage}">
                		 <li class="page-item right">
-						<a class="page-link" href="?${sortQ}&page=${next}${perPage}${order}${searchQ}">
+						<a class="page-link" href="?${sortQ}${tag}&page=${next}${perPage}${order}${searchQ}">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
 						  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
 						</svg></a>
@@ -36,6 +36,10 @@
 	<!-- 검색 -->
 	<div class="search_wrap text-center mb-4">
 		<form id="searchFrm" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0">
+			
+			<c:if test="${not empty bs.tag}">
+				<input type="hidden" name="tag" value="${bs.tag}">
+			</c:if>
 			<input type="hidden" name="sortBoard" value="${bs.sortBoard}">
 			<c:if test="${bs.sortBoard != 'all'}">
 				<input type="hidden" name="subLocal" value="${bs.subLocal}">

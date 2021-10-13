@@ -85,7 +85,24 @@
 						<!-- 지역 -->
 						<tr>
 							<th>지역</th>
-							<td class="td_body">${not empty member.sortLocalName ? member.sortLocalName : 'x'}</td>
+							<td class="td_body">
+							<c:if test="${empty loginMember.sort_local}">&times;</c:if>
+							<c:set var="sortLocal" value=""/>
+							<c:set var="subLocal" value=""/>
+							<c:if test="${not empty loginMember.sort_local}">
+							<c:forEach items="${sortLocalPArr}" var="p">
+								<c:if test="${p.sort_no == loginMember.sort_local}">
+									<c:set var="sortLocal" value="${p.sort_name}"/>
+								</c:if>
+							</c:forEach>
+							<c:forEach items="${sortLocalCArr}" var="c">
+								<c:if test="${c.sort_no == loginMember.sub_local}">
+									<c:set var="subLocal" value="${c.sort_name}"/>
+								</c:if>
+							</c:forEach>
+							${sortLocal} ${subLocal}
+							</c:if>
+							</td>
 						</tr>
 						<!-- 휴대전화 -->
 						<tr>
@@ -109,7 +126,7 @@
 									남
 								</c:when>
 								<c:when test="${empty loginMember.user_gender}">
-									x
+									&times;
 								</c:when>
 							</c:choose>
 							</td>

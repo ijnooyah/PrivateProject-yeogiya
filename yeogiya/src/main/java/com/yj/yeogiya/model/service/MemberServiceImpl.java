@@ -52,7 +52,22 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member loginRun(Member member) {
-		return memberDao.login(member);
+		
+		Member loginMember = memberDao.login(member);
+//		if (loginMember != null) {
+//			
+//			if (loginMember.getUser_gender() == null) {
+//				loginMember.setUser_gender("&times;");
+//			} else {
+//				if(loginMember.getUser_gender().equals("F")) {
+//					loginMember.setUser_gender("여");
+//				} else {
+//					loginMember.setUser_gender("남");
+//				}
+//			}
+//			
+//		}
+		return loginMember;
 	}
 
 	@Override
@@ -62,7 +77,11 @@ public class MemberServiceImpl implements MemberService {
 		
 		if (member != null) {
 			
-			if (bs == null) { //탈퇴회원 조회 x
+			if (member.getSort_local() == null) { // 지역 미설정 회원
+				member.setSortLocalName("&times;");
+			}
+			
+			if (bs == null) { //탈퇴회원 x, 남이 볼수 없는 경우 
 				if(member.getIs_quit().equals("Y")) {
 					return null;
 				} else if(!getAll) {
@@ -71,6 +90,19 @@ public class MemberServiceImpl implements MemberService {
 			} else {
 				int boardCnt = memberDao.getBoardListCount(bs);
 				int cmtCnt = memberDao.getCommentListCount(bs);
+				
+				if (member.getIs_quit().equals("Y")) { // 회원 등급 설정
+					member.setUserGradeName("탈퇴 회원");
+				}
+				
+				if (member.getOpen_local().equals("N")) { // 지역 비공개 회원
+					member.setSortLocalName("비공개");
+				}
+				
+				if (member.getUser_intro() == null) {
+					member.setUser_intro("자기소개 없음");
+				}
+				
 				member.setBoardCnt(boardCnt);
 				member.setCmtCnt(cmtCnt);
 				if(bs.getTab().equals("board")) {
