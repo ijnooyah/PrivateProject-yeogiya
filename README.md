@@ -615,14 +615,16 @@
 <details>
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
    <div markdown="1">
-     
+
      
 - 상세글 보기
      - 비로그인 사용자인 경우 북마크, 좋아요, 댓글, 해시태그 조회 기능 사용 불가
      - 하단 글목록 <br><br> ![비로그인상세보기](https://user-images.githubusercontent.com/85017704/136919530-d4d25858-eb3f-426e-9e07-b22430d6e891.gif) <br><br><br><br>
 - 본인글 상세 보기
      - 본인의 계정일 경우 수정 및 삭제버튼 존재 <br><br> ![녹화_2021_10_12_17_22_12_710](https://user-images.githubusercontent.com/85017704/136919658-a1f66c36-f8b6-4fec-b686-fd912a8c5a88.gif) <br><br><br><br>
-- 장소 <br><br> ![녹화_2021_10_12_16_59_17_721](https://user-images.githubusercontent.com/85017704/136916384-8283758f-f400-4d71-a195-86fe874ccb72.gif) <br><br><br><br>
+- 장소
+    - 글 내에서 지도 조작 가능
+    - 인포윈도우 클릭시 해당 장소의 카카오맵으로 이동 <br><br> ![장소](https://user-images.githubusercontent.com/85017704/137092086-0ad09b74-ce33-4f0d-8dfb-d10004e80cb1.gif) <br><br><br><br>
 - 이미지 새탭에서 보기와 저장하기 (JPG·JPEG·PNG·GIF)
      - 이름과 형식이 그대로 저장이됨 <br><br> ![사진저장](https://user-images.githubusercontent.com/85017704/136908175-5c4f36a0-f9b5-4e1e-9bd5-935c2d32a7ce.gif) <br><br><br><br>
 - 해시태그
@@ -641,10 +643,10 @@
   <summary><b>구현 기능 설명</b></summary>
   <div markdown="1">
       
-  - 본인의 계정일 경우 체크박스와 삭제 버튼이 존재하며 선택한 대상을 삭제할 수 있다.
-  - 전체선택 또는 개별선택으로 대상을 삭제할 수 있다.
-  - 선택된 대상이 없을 시 대상 선택 요구 메세지가 출력된다.
-
+  - 말머리(장소 게시판)와 장소(장소 게시판)를 수정할 수 있다.
+  - 사진을 삭제하거나 추가할 수 있다.
+  - 해시태그를 삭제하거나 추가할 수 있다.
+  - 글작성과 마찬가지로 필수정보에대한 유효성 검사를 한다.
 
     </div>
 </details>
@@ -652,6 +654,9 @@
 <details>
   <summary><b>구현 기능 시현 및 상세설명</b></summary>
    <div markdown="1">
+
+     
+- 장소 말머리가 있는 게시판 글 수정 <br><br> ![ezgif-3-b735c3036f73](https://user-images.githubusercontent.com/85017704/137090549-d4cbca92-fc7d-4e34-8a4f-947ec7aa980c.gif) <br><br><br><br>
 
  
 
