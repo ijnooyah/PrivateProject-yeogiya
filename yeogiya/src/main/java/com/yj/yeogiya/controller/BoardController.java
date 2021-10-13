@@ -150,12 +150,16 @@ public class BoardController {
 	
 	//글삭제 작업
 	@RequestMapping(value = "delete/{board_no}")
-	public String delete(@PathVariable("board_no") int board_no, BoardSearch bs, HttpServletRequest request) throws Exception {
-//		logger.info("delete");
-		int result = boardService.deleteBoardArticle(board_no);
-		String query = request.getQueryString();
-//		System.out.println(query);
-//		String url = "redirect:list" + ;
+	public String delete(BoardSearch bs, HttpServletRequest request) throws Exception {
+		logger.info("delete");
+		int result = boardService.deleteBoardArticle(bs.getBoard_no());
+		
+		String query = "sortBoard=" + bs.getSortBoard() + "&subLocal=all";
+		
+		if(bs.getSortPlace() != null) {
+			query += "&sortPlace=all";
+		}
+		
 		return "redirect:/" + bs.getSortLocalEngName() + "/list?" + query;
 	}
 	
