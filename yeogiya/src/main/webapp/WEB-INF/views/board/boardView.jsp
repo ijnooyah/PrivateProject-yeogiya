@@ -451,7 +451,7 @@
 		$("#moreViewDiv").empty();
 		var url = "${contextPath}/comment/list?board_no=${board.board_no}";
 		$.get(url, function(rData) {
-			const perPage = 10;
+			const perPage = 5;
 			if (rData.length < perPage + 1) {
 				$("#btnMoreComments").hide();
 			} else {

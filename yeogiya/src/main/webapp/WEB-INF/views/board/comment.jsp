@@ -110,10 +110,10 @@
 		</div>
 	</div>
 	<!-- 댓글 더보기 버튼-->
-	<div class="text-center mt-3">
+	<div class="text-center py-5">
 		<button type="button" id="btnMoreComments"
-			onclick="moreViewToggle(this);" style="color:white;"
-			class="btn btn-sm btn-pink font-size-085">댓글 더보기</button>
+			onclick="moreViewToggle(this);"
+			class="btn btn-sm btn-pink-outline font-size-075 rounded-0">댓글 더보기</button>
 	</div>
 	<!--댓글 작성 -->
 	<div class="commentWrite-container my-4">
