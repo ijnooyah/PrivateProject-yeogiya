@@ -1,8 +1,23 @@
-# 💘PrivateProject-yeogiya
+# 💗 여기야 | 지역별 장소 공유 커뮤니티
+
+## 어떤 곳을 가야할까? 여기야!
+
+> 어떤 곳을 갈까 고민될 때 찾아볼 수 있는 사이트 
+
+‘여기야’는 지역 장소의 데이터화 목적으로 제작했습니다.
+
+지역 인증이 필요 없기 때문에 여행객들 또한 사용이 가능합니다.
+
+다른 포털 사이트에서 검색할 필요 없이 이곳에서 가고 싶은 곳이나 궁금한 곳을 찾아 보세요! 🥳
 
 <br>
 
-<img src="https://user-images.githubusercontent.com/85017704/137257500-fec763cf-fea3-4cd0-99c2-b2594bab6b19.png"  height="200" title="메인"/> <img src="https://user-images.githubusercontent.com/85017704/137258307-4e677c08-c8e4-448a-a437-8b4d107e7b53.png"  height="200" title="글목록"/> <img src="https://user-images.githubusercontent.com/85017704/137258309-3ddca527-a496-499f-a655-1192c51b1b09.png"  height="200" title="글상세보기"/> <img src="https://user-images.githubusercontent.com/85017704/137258310-eb63a9ea-7768-4b36-99b2-818b5279d169.png"  height="200" title="글작성"/> <img src="https://user-images.githubusercontent.com/85017704/137258315-7a3b4796-00dd-48b3-bea3-fc8cff839a59.png"  height="200" title="프로필"/> 
+![메인](https://user-images.githubusercontent.com/85017704/137292044-6e58b788-384a-47fd-9e5c-0ebb79df583a.gif)
+
+
+<br>
+
+***
 
 <br>
 
@@ -51,6 +66,7 @@
     </li>
     <li><a href="#특별한-기능">특별한 기능</a></li>
     <li><a href="#고민과-기능">고민과 해결</a></li>
+    <li><a href="#추가중인-기능들">추가중인 기능들</a></li>
   </ol>
 </details>
 
@@ -79,13 +95,9 @@
   - 카카오 지도 API를 이용하여 사용자가 편리하게 이용할 수 있게 할 것.
 
 * DB 설계<br>
-![Yeogiya](https://user-images.githubusercontent.com/85017704/136155526-69773015-6bf4-4219-953c-d6fe54b9c012.png)
+![Yeogiya](https://user-images.githubusercontent.com/85017704/137287741-323265fe-4dfd-4f5f-bc55-8d35b5c1be6e.png)
 
-<br>
-
-***
-
-<br>
+<br><br>
 
 # 📝구현 기능
 
@@ -119,7 +131,7 @@
     - 마우스오버시 지역이 펼쳐짐
     - 지역에 마우스 오버시 각지역의 게시판이 펼쳐짐
     - 지역을 클릭하면 지역 사이트로 이동
-    - 게시판을 클릭하면 지역의 게시판 글목록으로 이동 <br><br> ![메뉴배속](https://user-images.githubusercontent.com/85017704/136786054-a6d92475-94b6-4a7a-a006-44e7962e7694.gif) <br><br><br><br>
+    - 게시판을 클릭하면 지역의 게시판 글목록으로 이동 <br><br> ![녹화_2021_10_14_18_05_09_179](https://user-images.githubusercontent.com/85017704/137286646-4b52aa21-a93e-4c23-b6af-c4f038df805b.gif) <br><br><br><br>
 
     
     </div>
@@ -738,6 +750,99 @@
 
 <br><br>
 
+# 🛠특별한 기능
+
+<details>
+  <summary><b>장소의 데이터화</b></summary>
+   <div markdown="1">
 
 
+
+   </div>
+</details>
+
+<details>
+  <summary><b>해시태그</b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<details>
+  <summary><b>카테고리</b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<details>
+  <summary><b>카카오 </b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<br><br>
+
+# ⁉고민과 해결
+
+<details>
+  <summary><b>장소의 데이터화</b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<details>
+  <summary><b>해시태그</b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<details>
+  <summary><b>카테고리</b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<details>
+  <summary><b></b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<br><br>
+
+# 💨추가중인 기능들
+
+* 관리자
+  - 게시판, 카테고리 CRUD
+  - 회원관리
+  - 신고관리
+  - 데이터 시각화
+
+* 회원등급 자동 변경
+
+* websocket을 이용한 실시간 알림
+
+* sns를 통한 로그인 기능
+
+* 실시간 해시태그
 
