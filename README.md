@@ -273,7 +273,6 @@
   <summary><b>구현 기능 설명</b></summary>
   <div markdown="1">
       
-  - 말머리(장소 게시판)와 장소(장소 게시판)를 수정할 수 있다.
   - 사진을 삭제하거나 추가할 수 있다.
   - 해시태그를 삭제하거나 추가할 수 있다.
   - 글작성과 마찬가지로 필수정보에대한 유효성 검사를 한다.
@@ -286,7 +285,7 @@
    <div markdown="1">
 
      
-- 장소 말머리가 있는 게시판 글 수정 <br><br> ![ezgif-3-b735c3036f73](https://user-images.githubusercontent.com/85017704/137090549-d4cbca92-fc7d-4e34-8a4f-947ec7aa980c.gif) <br><br><br><br>
+- 글 수정 <br><br> ![ezgif-1-17bb3531f23f](https://user-images.githubusercontent.com/85017704/137328691-72ef8fd8-6de7-463b-ae94-ef295de44fd1.gif) <br><br><br><br>
 
  
 
@@ -755,9 +754,17 @@
 <details>
   <summary><b>장소의 데이터화</b></summary>
    <div markdown="1">
+	   
+- 관리자가 해당 지역의 핫플레이스를 파악할 수 있게함
+- 장소 말머리가 있는 게시판인 경우 장소 선택이 필수 <a href="#boardInsert">참고</a>
+- 장소로 글을 검색할 수 있으며 정렬, 페이징이 가능함 ![녹화_2021_10_14_23_17_19_330](https://user-images.githubusercontent.com/85017704/137335933-d96973a1-153c-4bc1-aeff-b45fd0001899.gif)
+- 글이 등록될 때 장소를 판단 이미 등록된 장소면 언급수를 증가시킴 
+	- 처음 언급되는 장소 ![장소 새로 등록](https://user-images.githubusercontent.com/85017704/137333664-ca5d3dfe-22c2-4a5c-8b86-57ca3894b87b.gif)
+	- 이미 언급된 장소  ![장소 등록](https://user-images.githubusercontent.com/85017704/137334556-c1247bd7-980a-4cc9-bddb-512c0037b8b3.gif)
+- 글이 삭제될 경우 장소의 언급수를 감소시킴 ![장소 삭제](https://user-images.githubusercontent.com/85017704/137334855-107d1492-74e8-44fa-9fdf-3929194fe70c.gif) 
+- 신고수를 파악해 홍보를 판단(추가예정) 
 
-
-
+	   
    </div>
 </details>
 
@@ -765,7 +772,7 @@
   <summary><b>해시태그</b></summary>
    <div markdown="1">
 
-
+- 이미 언급된 해시태그일 경우
 
    </div>
 </details>
@@ -793,9 +800,16 @@
 # ⁉고민과 해결
 
 <details>
-  <summary><b>장소의 데이터화</b></summary>
+  <summary><b>장소 문제</b></summary>
    <div markdown="1">
 
+- 사이트 특성상 홍보가 많을 것 같아 홍보 관련 문제를 고려하는 생각을 많이했는데 
+	   처음에는 수정할때 장소말머리와 장소를 수정할 수 있게 했는데 이부분이 잘못 사용하면 악용이 될 것 같아 
+	   수정 불가능으로 바꾸었다.
+	   그리고 처음엔 글을 삭제해도 언급수는 그대로 두게 했는데 (언급수는 이 장소가 얼마나 많은 사람들이 언급한게 중요한거지 
+	   삭제를 한 글이라고 해도 언급했다는 사실은 변하지 않아 그대로 두려고 했는데 막바지에 다시 생각해보니
+	   글작성후 삭제를 반복하면 그만큼 언급수는 증가하는데 악용이될것같아 
+	   글을 삭제하면 해당 장소 언급수도 줄어들게 했다)
 
 
    </div>
