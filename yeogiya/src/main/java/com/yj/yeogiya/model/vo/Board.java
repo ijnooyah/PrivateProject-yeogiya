@@ -51,6 +51,11 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Board(String is_del) {
+		super();
+		this.is_del = is_del;
+	}
+
 	public int getBoard_no() {
 		return board_no;
 	}

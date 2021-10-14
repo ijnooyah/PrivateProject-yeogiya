@@ -26,6 +26,7 @@ public class Comment {
 	
 	private String boardTitle;
 	private String boardQuery;
+	private String boardDel;
 	private String sortLocalEngName;
 	private Board board;
 	
@@ -311,6 +312,18 @@ public class Comment {
 
 
 
+	public String getBoardDel() {
+		return boardDel;
+	}
+
+
+
+	public void setBoardDel(String boardDel) {
+		this.boardDel = boardDel;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Comment [c_no=" + c_no + ", user_id=" + user_id + ", b_no=" + b_no + ", re_group=" + re_group
@@ -318,9 +331,12 @@ public class Comment {
 				+ is_del + ", reg_date=" + reg_date + ", mod_date=" + mod_date + ", del_date=" + del_date + ", rp_cnt="
 				+ rp_cnt + ", is_blind=" + is_blind + ", child_cnt=" + child_cnt + ", user_nick=" + user_nick
 				+ ", user_img=" + user_img + ", parent_user_id=" + parent_user_id + ", parent_user_nick="
-				+ parent_user_nick + ", boardTitle=" + boardTitle + ", boardQuery=" + boardQuery + ", sortLocalEngName="
-				+ sortLocalEngName + ", board=" + board + "]";
+				+ parent_user_nick + ", boardTitle=" + boardTitle + ", boardQuery=" + boardQuery + ", boardDel="
+				+ boardDel + ", sortLocalEngName=" + sortLocalEngName + ", board=" + board + "]";
 	}
+
+
+
 
 
 

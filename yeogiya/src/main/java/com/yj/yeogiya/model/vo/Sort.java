@@ -8,6 +8,7 @@ public class Sort {
 	private String parent_sort;
 	private String eng_name;
 	private String has_sort_place;
+	private String is_del;
 	
 	
 	public Sort() {
@@ -59,10 +60,20 @@ public class Sort {
 	public void setHas_sort_place(String has_sort_place) {
 		this.has_sort_place = has_sort_place;
 	}
+
+	public String getIs_del() {
+		return is_del;
+	}
+
+	public void setIs_del(String is_del) {
+		this.is_del = is_del;
+	}
+
 	@Override
 	public String toString() {
 		return "Sort [sort_no=" + sort_no + ", sort_name=" + sort_name + ", sort_level=" + sort_level + ", parent_sort="
-				+ parent_sort + ", eng_name=" + eng_name + ", has_sort_place=" + has_sort_place + "]";
+				+ parent_sort + ", eng_name=" + eng_name + ", has_sort_place=" + has_sort_place + ", is_del=" + is_del
+				+ "]";
 	}
 
 	

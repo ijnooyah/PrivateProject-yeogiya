@@ -76,7 +76,9 @@
 		JOIN tbl_sort_board d ON a.sort_board = d.sort_no
 		LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
 		JOIN tbl_member f ON a.user_id = f.user_id
-		<include refid="search"></include>
+		WHERE b.is_del = 'N' AND c.is_del = 'N' AND d.is_del = 'N' AND e.is_del = 'N'
+ 		AND a.is_del = 'N' AND a.user_id = #{user_id}
+		ORDER BY a.board_no desc
  	</select>
  	
  	<select id="selectBoardList" resultType="Board">
@@ -91,57 +93,43 @@
 						JOIN tbl_sort_board d ON a.sort_board = d.sort_no
 						LEFT OUTER JOIN tbl_sort_place e ON a.sort_place = e.sort_no 
 						JOIN tbl_member f ON a.user_id = f.user_id
-				 		<include refid="search"></include> ) A )
+				 		WHERE b.is_del = 'N' AND c.is_del = 'N' AND d.is_del = 'N'  AND e.is_del = 'N'
+ 						AND a.is_del = 'N' AND a.user_id = #{user_id}
+				 		ORDER BY a.board_no desc ) A )
 		WHERE rnum BETWEEN #{startRow} AND #{endRow} 
  	</select>
  	
- 	<sql id="search">
- 		WHERE is_del = 'N' AND a.user_id = #{user_id}
- 		<!-- 검색 -->
-<!--  		<if test="searchType != null"> -->
-<!-- 			<choose> -->
-<!-- 				<when test='searchType == "tc"'> -->
-<!-- 					AND (a.board_title like '%' || #{keyword} || '%' -->
-<!-- 					or  a.board_content like '%' || #{keyword} || '%') -->
-<!-- 				</when> -->
-<!-- 				<when test='searchType == "t"'> -->
-<!-- 					AND a.board_title like '%' || #{keyword} || '%' -->
-<!-- 				</when> -->
-<!-- 				<when test='searchType == "w"'> -->
-<!-- 					AND (f.user_nick like '%' || #{keyword} || '%' -->
-<!-- 					or  a.user_id like '%' || #{keyword} || '%') -->
-<!-- 				</when> -->
-<!-- 				<when test='searchType == "p"'> -->
-<!-- 					AND (g.place_name like '%' || #{keyword} || '%' -->
-<!-- 					or  g.place_address like '%' || #{keyword} || '%') -->
-<!-- 				</when> -->
-<!-- 			</choose> -->
-<!-- 		</if> -->
-		ORDER BY a.board_no desc
-	</sql>
 	
 	<!-- 댓글전체 개수 -->
  	<select id="getCommentListCount" resultType="int">
  		SELECT count(*)
 	    FROM tbl_comment a
-	    JOIN tbl_board b ON a.b_no = b.board_no
-	    JOIN tbl_sort_local c ON b.sort_local = c.sort_no
-	    JOIN tbl_member d ON a.user_id = d.user_id
-	    WHERE a.is_del = 'N' AND a.user_id = #{user_id}
+	   	JOIN tbl_board b ON a.b_no = b.board_no
+		JOIN tbl_sort_local c ON b.sort_local = c.sort_no
+		JOIN tbl_sort_local d ON b.sub_local = d.sort_no
+		JOIN tbl_sort_board e ON b.sort_board = e.sort_no
+		LEFT OUTER JOIN tbl_sort_place f ON b.sort_place = f.sort_no 
+		JOIN tbl_member g ON b.user_id = g.user_id
+	    WHERE c.is_del = 'N' AND d.is_del = 'N' AND e.is_del = 'N'  AND f.is_del = 'N'
+ 		AND a.is_del = 'N' AND a.user_id = #{user_id}
 	    ORDER BY a.c_no desc
  	</select>
  	
  	<select id="selectCommentList" resultType="Comment">
  		SELECT * 
 		FROM (SELECT ROWNUM rnum, A.*
-				 FROM ( SELECT a.*, b.board_title boardTitle, b.query boardQuery, 
-					    c.eng_name sortLocalEngName, d.user_nick user_nick
+				 FROM ( SELECT a.*, b.board_title boardTitle, b.query boardQuery, b.is_del boardDel, 
+					    c.eng_name sortLocalEngName, g.user_nick user_nick
 					    FROM tbl_comment a
 					    JOIN tbl_board b ON a.b_no = b.board_no
-					    JOIN tbl_sort_local c ON b.sort_local = c.sort_no
-					    JOIN tbl_member d ON a.user_id = d.user_id
-					    WHERE a.is_del = 'N' AND a.user_id = #{user_id}
-					    ORDER BY a.c_no desc) A )
+						JOIN tbl_sort_local c ON b.sort_local = c.sort_no
+						JOIN tbl_sort_local d ON b.sub_local = d.sort_no
+						JOIN tbl_sort_board e ON b.sort_board = e.sort_no
+						LEFT OUTER JOIN tbl_sort_place f ON b.sort_place = f.sort_no 
+						JOIN tbl_member g ON b.user_id = g.user_id
+					   	WHERE c.is_del = 'N' AND d.is_del = 'N' AND e.is_del = 'N'  AND f.is_del = 'N'
+ 						AND a.is_del = 'N' AND a.user_id = #{user_id}
+				 		ORDER BY a.c_no desc) A )
 		WHERE rnum BETWEEN #{startRow} AND #{endRow} 
  	</select>
  	
@@ -156,7 +144,9 @@
 		JOIN tbl_sort_board e ON b.sort_board = e.sort_no
 		LEFT OUTER JOIN tbl_sort_place f ON b.sort_place = f.sort_no 
 		JOIN tbl_member g ON b.user_id = g.user_id
- 		<include refid="search"></include>
+ 		WHERE c.is_del = 'N' AND d.is_del = 'N' AND e.is_del = 'N'  AND f.is_del = 'N'
+ 		AND b.is_del = 'N' AND a.user_id = #{user_id}
+ 		ORDER BY b.board_no desc
  	</select>
  	
  	<select id="selectBookmarkList" resultType="Board">
@@ -172,7 +162,9 @@
 						JOIN tbl_sort_board e ON b.sort_board = e.sort_no
 						LEFT OUTER JOIN tbl_sort_place f ON b.sort_place = f.sort_no 
 						JOIN tbl_member g ON b.user_id = g.user_id
-				 		<include refid="search"></include> ) A )
+			 			WHERE c.is_del = 'N' AND d.is_del = 'N' AND e.is_del = 'N' AND f.is_del = 'N'
+ 						AND b.is_del = 'N' AND a.user_id = #{user_id}
+ 						ORDER BY b.board_no desc ) A )
 		WHERE rnum BETWEEN #{startRow} AND #{endRow} 
  	</select>
 <!-- ************UPDATE************ -->

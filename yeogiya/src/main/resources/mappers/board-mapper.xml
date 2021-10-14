@@ -161,19 +161,22 @@
 <!-- 2.카테고리 -->
 	<select id="selectSortLocal" resultType="Sort">
  		SELECT * FROM tbl_sort_local
+ 		WHERE is_del = 'N'
  		order by sort_name asc
  	</select>
 	<select id="selectSortBoard" resultType="Sort">
  		SELECT * FROM tbl_sort_board
+ 		WHERE is_del = 'N'
  		order by has_sort_place desc, sort_no asc
  	</select>
 	<select id="selectSortPlace" resultType="Sort">
  		SELECT * FROM tbl_sort_place
+ 		WHERE is_del = 'N'
  		order by sort_name asc
  	</select>
  	<select id="selectSortLocalPByEngName" resultType="Sort">
  		SELECT * FROM tbl_sort_local
- 		where eng_name = #{eng_name}
+ 		where eng_name = #{eng_name} and is_del = 'N'
  	</select>
  <!-- 3. tag 비동기 자동완성 -->
  	<select id="searchTag" resultType="BoardTag">
@@ -229,7 +232,8 @@
  	</select>
  	
  	<sql id="search">
- 		WHERE is_del = 'N' AND is_notice = 'N' AND b.eng_name = #{sortLocalEngName}
+ 		WHERE b.is_del = 'N' AND c.is_del = 'N' AND d.is_del = 'N' AND e.is_del = 'N'
+ 		AND a.is_del = 'N' AND a.is_notice = 'N' AND b.eng_name = #{sortLocalEngName}
  		<!-- 검색 -->
  		<if test="searchType != null">
 			<choose>
@@ -318,7 +322,8 @@
 		LEFT OUTER JOIN tbl_like bl ON bl.user_id = #{login_id} AND bl.board_no = #{board_no}
 		LEFT OUTER JOIN tbl_bookmark bm ON bm.user_id = #{login_id} AND bm.board_no = #{board_no}
 		</if>
- 		WHERE is_del = 'N' AND is_notice = 'Y' AND b.eng_name = #{sortLocalEngName}
+ 		WHERE a.is_del = 'N' AND is_notice = 'Y' AND b.eng_name = #{sortLocalEngName}
+ 		AND b.is_del = 'N' AND c.is_del = 'N' AND d.is_del = 'N' AND e.is_del = 'N'
  		<if test="sortBoard != null and sortBoard != 'all'">
 			AND a.sort_board = #{sortBoard}
 		</if>
@@ -354,7 +359,8 @@
 						LEFT OUTER JOIN tbl_like bl ON bl.user_id = #{user_id} AND bl.board_no = a.board_no
 						LEFT OUTER JOIN tbl_bookmark bm ON bm.user_id = #{user_id} AND bm.board_no = a.board_no
 						</if>
-				 		WHERE is_del = 'N' AND is_notice = 'N' AND b.sort_no = #{sort_local} AND a.sort_place is not null
+				 		WHERE a.is_del = 'N' AND b.sort_no = #{sort_local} AND a.sort_place is not null
+				 		AND b.is_del = 'N' AND c.is_del = 'N' AND d.is_del = 'N' AND e.is_del = 'N'
 				 		AND to_char(reg_date, 'mm') = to_char(sysdate, 'mm')
 						ORDER BY a.view_cnt DESC, a.like_cnt DESC, a.cmt_cnt DESC, a.board_no DESC  ) A )
 		WHERE rnum BETWEEN 1 AND 10
