@@ -1,4 +1,11 @@
 # 💘PrivateProject-yeogiya
+
+<br>
+
+<img src="https://user-images.githubusercontent.com/85017704/137257500-fec763cf-fea3-4cd0-99c2-b2594bab6b19.png"  height="200" title="메인"/> <img src="https://user-images.githubusercontent.com/85017704/137258307-4e677c08-c8e4-448a-a437-8b4d107e7b53.png"  height="200" title="글목록"/> <img src="https://user-images.githubusercontent.com/85017704/137258309-3ddca527-a496-499f-a655-1192c51b1b09.png"  height="200" title="글상세보기"/> <img src="https://user-images.githubusercontent.com/85017704/137258310-eb63a9ea-7768-4b36-99b2-818b5279d169.png"  height="200" title="글작성"/> <img src="https://user-images.githubusercontent.com/85017704/137258315-7a3b4796-00dd-48b3-bea3-fc8cff839a59.png"  height="200" title="프로필"/> 
+
+<br>
+
 <details open="open">
   <summary>목차</summary>
   <ol>
