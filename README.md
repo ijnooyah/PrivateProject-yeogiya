@@ -1,4 +1,26 @@
-# 💘PrivateProject-yeogiya
+# 💗 여기야 | 지역별 장소 공유 커뮤니티
+
+## 어떤 곳을 가야할까? 여기야!
+
+> 어떤 곳을 갈까 고민될 때 찾아볼 수 있는 사이트 
+
+‘여기야’는 지역 장소의 데이터화 목적으로 제작했습니다.
+
+지역 인증이 필요 없기 때문에 여행객들 또한 사용이 가능합니다.
+
+다른 포털 사이트에서 검색할 필요 없이 이곳에서 가고 싶은 곳이나 궁금한 곳을 찾아 보세요! 🥳
+
+<br>
+
+![메인](https://user-images.githubusercontent.com/85017704/137292044-6e58b788-384a-47fd-9e5c-0ebb79df583a.gif)
+
+
+<br>
+
+***
+
+<br>
+
 <details open="open">
   <summary>목차</summary>
   <ol>
@@ -44,6 +66,7 @@
     </li>
     <li><a href="#특별한-기능">특별한 기능</a></li>
     <li><a href="#고민과-기능">고민과 해결</a></li>
+    <li><a href="#추가중인-기능들">추가중인 기능들</a></li>
   </ol>
 </details>
 
@@ -72,13 +95,9 @@
   - 카카오 지도 API를 이용하여 사용자가 편리하게 이용할 수 있게 할 것.
 
 * DB 설계<br>
-![Yeogiya](https://user-images.githubusercontent.com/85017704/136155526-69773015-6bf4-4219-953c-d6fe54b9c012.png)
+![Yeogiya](https://user-images.githubusercontent.com/85017704/137287741-323265fe-4dfd-4f5f-bc55-8d35b5c1be6e.png)
 
-<br>
-
-***
-
-<br>
+<br><br>
 
 # 📝구현 기능
 
@@ -112,7 +131,7 @@
     - 마우스오버시 지역이 펼쳐짐
     - 지역에 마우스 오버시 각지역의 게시판이 펼쳐짐
     - 지역을 클릭하면 지역 사이트로 이동
-    - 게시판을 클릭하면 지역의 게시판 글목록으로 이동 <br><br> ![메뉴배속](https://user-images.githubusercontent.com/85017704/136786054-a6d92475-94b6-4a7a-a006-44e7962e7694.gif) <br><br><br><br>
+    - 게시판을 클릭하면 지역의 게시판 글목록으로 이동 <br><br> ![녹화_2021_10_14_18_05_09_179](https://user-images.githubusercontent.com/85017704/137286646-4b52aa21-a93e-4c23-b6af-c4f038df805b.gif) <br><br><br><br>
 
     
     </div>
@@ -254,7 +273,6 @@
   <summary><b>구현 기능 설명</b></summary>
   <div markdown="1">
       
-  - 말머리(장소 게시판)와 장소(장소 게시판)를 수정할 수 있다.
   - 사진을 삭제하거나 추가할 수 있다.
   - 해시태그를 삭제하거나 추가할 수 있다.
   - 글작성과 마찬가지로 필수정보에대한 유효성 검사를 한다.
@@ -267,7 +285,7 @@
    <div markdown="1">
 
      
-- 장소 말머리가 있는 게시판 글 수정 <br><br> ![ezgif-3-b735c3036f73](https://user-images.githubusercontent.com/85017704/137090549-d4cbca92-fc7d-4e34-8a4f-947ec7aa980c.gif) <br><br><br><br>
+- 글 수정 <br><br> ![ezgif-1-17bb3531f23f](https://user-images.githubusercontent.com/85017704/137328691-72ef8fd8-6de7-463b-ae94-ef295de44fd1.gif) <br><br><br><br>
 
  
 
@@ -731,6 +749,114 @@
 
 <br><br>
 
+# 🛠특별한 기능
+
+<details>
+  <summary><b>장소의 데이터화</b></summary>
+   <div markdown="1">
+	   
+- 관리자가 해당 지역의 핫플레이스를 파악할 수 있게함
+- 장소 말머리가 있는 게시판인 경우 장소 선택이 필수 <a href="#boardInsert">참고</a>
+- 장소로 글을 검색할 수 있으며 정렬, 페이징이 가능함 ![녹화_2021_10_14_23_17_19_330](https://user-images.githubusercontent.com/85017704/137335933-d96973a1-153c-4bc1-aeff-b45fd0001899.gif)
+- 글이 등록될 때 장소를 판단 이미 등록된 장소면 언급수를 증가시킴 
+	- 처음 언급되는 장소 ![장소 새로 등록](https://user-images.githubusercontent.com/85017704/137333664-ca5d3dfe-22c2-4a5c-8b86-57ca3894b87b.gif)
+	- 이미 언급된 장소  ![장소 등록](https://user-images.githubusercontent.com/85017704/137334556-c1247bd7-980a-4cc9-bddb-512c0037b8b3.gif)
+- 글이 삭제될 경우 장소의 언급수를 감소시킴 ![장소 삭제](https://user-images.githubusercontent.com/85017704/137334855-107d1492-74e8-44fa-9fdf-3929194fe70c.gif) 
+- 신고수를 파악해 홍보를 판단(추가예정) 
+
+	   
+   </div>
+</details>
+
+<details>
+  <summary><b>해시태그</b></summary>
+   <div markdown="1">
+
+- 이미 언급된 해시태그일 경우
+
+   </div>
+</details>
+
+<details>
+  <summary><b>카테고리</b></summary>
+   <div markdown="1">
 
 
+
+   </div>
+</details>
+
+<details>
+  <summary><b>카카오 </b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<br><br>
+
+# ⁉고민과 해결
+
+<details>
+  <summary><b>장소 문제</b></summary>
+   <div markdown="1">
+
+- 사이트 특성상 홍보가 많을 것 같아 홍보 관련 문제를 고려하는 생각을 많이했는데 
+	   처음에는 수정할때 장소말머리와 장소를 수정할 수 있게 했는데 이부분이 잘못 사용하면 악용이 될 것 같아 
+	   수정 불가능으로 바꾸었다.
+	   그리고 처음엔 글을 삭제해도 언급수는 그대로 두게 했는데 (언급수는 이 장소가 얼마나 많은 사람들이 언급한게 중요한거지 
+	   삭제를 한 글이라고 해도 언급했다는 사실은 변하지 않아 그대로 두려고 했는데 막바지에 다시 생각해보니
+	   글작성후 삭제를 반복하면 그만큼 언급수는 증가하는데 악용이될것같아 
+	   글을 삭제하면 해당 장소 언급수도 줄어들게 했다)
+
+
+   </div>
+</details>
+
+<details>
+  <summary><b>해시태그</b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<details>
+  <summary><b>카테고리</b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<details>
+  <summary><b></b></summary>
+   <div markdown="1">
+
+
+
+   </div>
+</details>
+
+<br><br>
+
+# 💨추가중인 기능들
+
+* 관리자
+  - 게시판, 카테고리 CRUD
+  - 회원관리
+  - 신고관리
+  - 데이터 시각화
+
+* 회원등급 자동 변경
+
+* websocket을 이용한 실시간 알림
+
+* sns를 통한 로그인 기능
+
+* 실시간 해시태그
 
