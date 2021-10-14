@@ -201,27 +201,24 @@ span.modalMapToggle::after {
 							<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-geo-alt-fill text-pink my-auto mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								<path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 							</svg>
-							<span class="modalMapToggle" data-toggle="modal" data-target="#modalMap" data-backdrop="static" data-keyboard="false">
-								장소 선택
-							</span>
 							<small class="text-muted my-auto" id="resultPlace" data-isexist="Y">
 						    	${board.place.place_name} (${board.place.place_address})
 					    	</small>
 				    	</c:if>
 					</div>
-					<!--셀렉트박스 -->
-					<div class="row mb-2">
-						<c:if test="${not empty board.sort_place}">
-							<select class="form-control mr-1" name="sort_place" id="sortPlace">
-								<option value="0">말머리</option>
-								<c:forEach var="sortPlace" items="${sortPlaceArr}">
-									<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == board.sort_place ? 'selected' : ''}>
-									${sortPlace.sort_name}
-									</option>
-								</c:forEach>
-							</select>
-						</c:if>
-					</div>
+<!-- 					셀렉트박스 -->
+<!-- 					<div class="row mb-2"> -->
+<%-- 						<c:if test="${not empty board.sort_place}"> --%>
+<!-- 							<select class="form-control mr-1" name="sort_place" id="sortPlace"> -->
+<!-- 								<option value="0">말머리</option> -->
+<%-- 								<c:forEach var="sortPlace" items="${sortPlaceArr}"> --%>
+<%-- 									<option value="${sortPlace.sort_no}" ${sortPlace.sort_no == board.sort_place ? 'selected' : ''}> --%>
+<%-- 									${sortPlace.sort_name} --%>
+<!-- 									</option> -->
+<%-- 								</c:forEach> --%>
+<!-- 							</select> -->
+<%-- 						</c:if> --%>
+<!-- 					</div> -->
 					<!-- 제목 -->
 					<div class="row mb-2 border-0">
 						<input class="form-control" placeholder="제목을 입력해 주세요." name="board_title" id="board_title" maxlength="70" value="${board.board_title}" autocomplete="off" spellcheck="false"></input>
@@ -260,60 +257,6 @@ span.modalMapToggle::after {
 			</form>
 		</div>
 	</div>
-	<!-- The Modal -->
-	  <div class="modal fade" id="modalMap">
-	    <div class="modal-dialog modal-lg">
-	      <div class="modal-content">
-	      
-	        <!-- Modal Header -->
-	        <div class="modal-header">
-	          <span class="font-weight-500">
-					<svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-map" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-					  <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98l4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/>
-					</svg>
-					지도에서 장소 선택	
-				</span>	
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        </div>
-	        <!-- Modal body -->
-	        <div class="modal-body p-4">
-				<div class="row ml-1 text-gray9">
-					<span class="fa fa-info-circle my-auto mr-1"></span>
-					<span class="font-size-075 font-weight-500" style="letter-spacing: 1px;">
-						장소 선택 후 완료 버튼까지 눌러야 변경사항이 적용됩니다!</span>
-				</div>
-				<div class="row mx-3 mb-3">
-					<span class="pt-1 mr-1">선택한 장소
-						<svg width="16" height="16" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-						  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
-						  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
-						</svg>
-					</span>
-					<span id="selectedPlace" class="text-muted pt-1">${board.place.place_name} (${board.place.place_address})</span>
-					<button class="btn btn-pink btn-sm ml-2 mt-auto font-size-085" style="padding:.1rem .3rem; height:23px; line-height:.7;" onclick="doComplete();">완료</button>
-				</div>
-	       		 <!--지도 -->
-				<div class="map_wrap">
-				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-				
-				    <div id="menu_wrap" class="bg_white">
-				        <div class="option">
-				            <div>
-				                    키워드 : <input type="text" id="keyword" size="15" autocomplete="off" spellcheck="false"
-				                   		 value="${sortLocalP.sort_name} ${board.subLocalName} ${board.place.place_name}"> 
-				                  <input type="button" id="btnSearch" onclick="searchPlaces()" value="검색">
-				            </div>
-				        </div>
-				        <hr>
-				        <ul id="placesList"></ul>
-				        <div id="pagination"></div>
-				    </div>
-				</div>
-				<!-- 지도끝 -->
-	        </div>
-	      </div>
-	    </div>
-	  </div>			
 	   
 	<jsp:include page="../common/footer.jsp" flush="false"/>
 	<%@ include file="../cdn/js.jsp" %>
@@ -501,34 +444,18 @@ span.modalMapToggle::after {
 	function validate() {
 		let msg = null;
 		// 1. 카테고리
-		if (document.querySelector('#sortPlace') != null && $('#sortPlace').val() == 0) {
-			Swal.fire({
-	        	title: '말머리를 선택해주세요.',
-				allowOutsideClick: false,
-				icon: 'error', 
-				confirmButtonText: "확인",
-				didClose: function() {
-					$('#sortPlace').focus();
-				}
-			});
-			return false;
-		}
-		// 2. 장소
-		if (document.querySelector('#sortPlace') != null && $("#resultPlace").data('isexist') == 'N') {
-			console.log($("#resultPlace").data('isexist'));
-			Swal.fire({
-	        	title: '장소를 선택해주세요.',
-				allowOutsideClick: false,
-				icon: 'error', 
-				confirmButtonText: "확인",
-				didClose: function() {
-					document.querySelector('#resultPlace').scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-					document.querySelector('#resultPlace').classList.replace('text-muted', 'text-pink');
-					setTimeout(function() { $("#resultPlace").removeClass("text-pink").addClass("text-muted") },3000);
-				}
-			});
-			return false;
-		} 
+// 		if (document.querySelector('#sortPlace') != null && $('#sortPlace').val() == 0) {
+// 			Swal.fire({
+// 	        	title: '말머리를 선택해주세요.',
+// 				allowOutsideClick: false,
+// 				icon: 'error', 
+// 				confirmButtonText: "확인",
+// 				didClose: function() {
+// 					$('#sortPlace').focus();
+// 				}
+// 			});
+// 			return false;
+// 		}
 		
 		// 3. 제목
 		if ($('#board_title').val() == null || $('#board_title').val().trim() == '') {
@@ -578,325 +505,6 @@ span.modalMapToggle::after {
 		}
 		form.submit();
 	}
-	</script>
-	<!-- kakaoMap -->
-	<script>
-	
-	var isShown = false; 
-	$(document).ready(function() {
-	    // 카카오맵 잘림 현상 해결
-	    $('#modalMap').on('shown.bs.modal', function (e) {
-	    	$("#keyword").focus();
-	    	map.relayout();
-	    	
-	    	if(!isShown) {
-	    		searchPlaces();
-	    		isShown = true;
-	    	}
-	    	
-	    	// 키워드 검색창에서 엔터 칠 경우 키워드 검색하기
-	    	$("#keyword").on("keydown", function(e) {
-	    		if (e.keyCode == 13) {
-	    	        e.preventDefault();
-	    	        searchPlaces();
-	    	    }
-	    	});
-		});
-	    
-	});
-	
-	
-	var isChange = false; // 장소선택여부
-	var isClick = false; // 완료버튼 클릭 여부
-	//원래 클릭여부에 따라 닫기 창 누르는 상황 다르게 했는데 사용자를 
-	// 너무 귀찮게 하는것 같아서 없앰
-	
-	//카카오 지도
-	function selectPlace(place) {
-		//장소 표시될 span
-		isChange = true;
-		isClick = false; // 장소 선택할때마다 완료버튼 누른거 초기화
-    	var selectedPlace = document.getElementById('selectedPlace');
-    	setPlace(place);
-    	selectedPlace.innerHTML = place.place_name + ' (' + place.address_name + ')';
-	}
-	let finalPlace = null;
-	function setPlace(place) {
-		finalPlace = place;
-	}
-	function doComplete() {
-		console.log('doComplete',finalPlace);
-		isClick = true;
-		if(!isChange) {
-			Swal.fire({
-	        	title: '장소를 선택하지 않으셨어요!',
-				allowOutsideClick: false,
-				icon: 'error', 
-				confirmButtonText: "확인",
-				didClose: function() {
-					console.log("isChange", isChange);
-				}
-			});
-		} else {
-			Swal.fire({
-	        	title: '장소 선택 완료',
-				allowOutsideClick: false,
-				icon: 'success', 
-				confirmButtonText: "확인",
-				didClose: function() {
-					$("#place_name").val(finalPlace.place_name);
-			    	$("#place_address").val(finalPlace.address_name);
-			    	$("#place_lat").val(finalPlace.y);
-			    	$("#place_long").val(finalPlace.x);
-			    	$("#place_id").val(finalPlace.id);
-					$("#resultPlace").data('isexist', 'Y');
-					$("#resultPlace").text($("#selectedPlace").text());
-				}
-			});
-		}
-		
-	}
-	
-	// 마커를 담을 배열입니다
-	var markers = [];
-	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = {
-	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };  
-	
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-	// 장소 검색 객체를 생성합니다
-	var ps = new kakao.maps.services.Places();  
-	
-	// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-	
-	// 키워드로 장소를 검색합니다
-	searchPlaces();
-	
-	// 키워드 검색을 요청하는 함수입니다
-	function searchPlaces() {
-	
-	    var keyword = document.getElementById('keyword').value;
-	
-	    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-	        alert('키워드를 입력해주세요!');
-	        return false;
-	    }
-	
-	    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-	    ps.keywordSearch( keyword, placesSearchCB); 
-	}
-	
-	// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-	function placesSearchCB(data, status, pagination) {
-	    if (status === kakao.maps.services.Status.OK) {
-	
-	        // 정상적으로 검색이 완료됐으면
-	        // 검색 목록과 마커를 표출합니다
-	        displayPlaces(data);
-	
-	        // 페이지 번호를 표출합니다
-	        displayPagination(pagination);
-	
-	    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-	
-	        alert('검색 결과가 존재하지 않습니다.');
-	        return;
-	
-	    } else if (status === kakao.maps.services.Status.ERROR) {
-	
-	        alert('검색 결과 중 오류가 발생했습니다.');
-	        return;
-	
-	    }
-	}
-	
-	// 검색 결과 목록과 마커를 표출하는 함수입니다
-	function displayPlaces(places) {
-	
-	    var listEl = document.getElementById('placesList'), 
-	    menuEl = document.getElementById('menu_wrap'),
-	    fragment = document.createDocumentFragment(), 
-	    bounds = new kakao.maps.LatLngBounds(), 
-	    listStr = '';
-	    
-	    // 검색 결과 목록에 추가된 항목들을 제거합니다
-	    removeAllChildNods(listEl);
-	
-	    // 지도에 표시되고 있는 마커를 제거합니다
-	    removeMarker();
-	    
-	    for ( var i=0; i<places.length; i++ ) {
-	
-	        // 마커를 생성하고 지도에 표시합니다
-	        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
-	            marker = addMarker(placePosition, i), 
-	            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
-	
-	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-	        // LatLngBounds 객체에 좌표를 추가합니다
-	        bounds.extend(placePosition);
-
-	            
-	        // 마커와 검색결과 항목에 mouseover 했을때
-	        // 해당 장소에 인포윈도우에 장소명을 표시합니다
-	        // mouseout 했을 때는 인포윈도우를 닫습니다
-	        (function(marker, place) {
-	        	var title = place.place_name;
-	        	
-	        	
-	        	// 마커에 클릭 이벤트 설정
-	            kakao.maps.event.addListener(marker, 'click', (function(placePosition) {
-	                
-	                return function() {
-	                	selectPlace(place);
-	                }
-	                
-	            })(placePosition));
-				
-	            // 검색결과에 클릭 이벤트 설정
-	            itemEl.onclick =  (function(placePosition) {
-
-	            	return function() {
-	            		selectPlace(place);
-	                }
-	            	
-	            })(placePosition);
-	        	
-	            kakao.maps.event.addListener(marker, 'mouseover', function() {
-	                displayInfowindow(marker, title);
-	            });
-	            
-	            itemEl.onmouseover =  function () {
-	                displayInfowindow(marker, title);
-	            };
-	            
-	            kakao.maps.event.addListener(marker, 'mouseout', function() {
-	                infowindow.close();
-	            });
-	            
-	            itemEl.onmouseout =  function () {
-	                infowindow.close();
-	            };
-	            
-       		})(marker, places[i]);
-
-	        fragment.appendChild(itemEl);
-	    }
-	
-	    // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
-	    listEl.appendChild(fragment);
-	    menuEl.scrollTop = 0;
-	
-	    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-	    map.setBounds(bounds);
-	}
-	
-	// 검색결과 항목을 Element로 반환하는 함수입니다
-	function getListItem(index, places) {
-	
-	    var el = document.createElement('li'),
-	    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
-	                '<div class="info">' +
-	                '   <h5>' + places.place_name + '</h5>';
-	
-	    if (places.road_address_name) {
-	        itemStr += '    <span>' + places.road_address_name + '</span>' +
-	                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
-	    } else {
-	        itemStr += '    <span>' +  places.address_name  + '</span>'; 
-	    }
-	                 
-	      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-	                '</div>';           
-	
-	    el.innerHTML = itemStr;
-	    el.className = 'item';
-	
-	    return el;
-	}
-	
-	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-	function addMarker(position, idx, title) {
-	    var imageSrc = '${contextPath}/resources/image/marker.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-	        imageSize = new kakao.maps.Size(29, 42),  // 마커 이미지의 크기
-	        imgOptions =  {
-// 	            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-// 	            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-	            offset: new kakao.maps.Point(14, 39) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-	        },
-	        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-	            marker = new kakao.maps.Marker({
-	            position: position, // 마커의 위치
-	            image: markerImage 
-	        });
-	
-	    marker.setMap(map); // 지도 위에 마커를 표출합니다
-	    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
-	
-	    return marker;
-	}
-	
-	// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-	function removeMarker() {
-	    for ( var i = 0; i < markers.length; i++ ) {
-	        markers[i].setMap(null);
-	    }   
-	    markers = [];
-	}
-	
-	// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-	function displayPagination(pagination) {
-	    var paginationEl = document.getElementById('pagination'),
-	        fragment = document.createDocumentFragment(),
-	        i; 
-	
-	    // 기존에 추가된 페이지번호를 삭제합니다
-	    while (paginationEl.hasChildNodes()) {
-	        paginationEl.removeChild (paginationEl.lastChild);
-	    }
-	
-	    for (i=1; i<=pagination.last; i++) {
-	        var el = document.createElement('a');
-	        el.href = "#";
-	        el.innerHTML = i;
-	
-	        if (i===pagination.current) {
-	            el.className = 'on';
-	        } else {
-	            el.onclick = (function(i) {
-	                return function() {
-	                    pagination.gotoPage(i);
-	                }
-	            })(i);
-	        }
-	
-	        fragment.appendChild(el);
-	    }
-	    paginationEl.appendChild(fragment);
-	}
-	
-	// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
-	// 인포윈도우에 장소명을 표시합니다
-	function displayInfowindow(marker, title) {
-	    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-	
-	    infowindow.setContent(content);
-	    infowindow.open(map, marker);
-	}
-	
-	 // 검색결과 목록의 자식 Element를 제거하는 함수입니다
-	function removeAllChildNods(el) {   
-	    while (el.hasChildNodes()) {
-	        el.removeChild (el.lastChild);
-	    }
-	}	
-	 
 	</script>
 </body>
 </html>

@@ -195,6 +195,11 @@ span.modalMapToggle::after {
 		<jsp:include page="./sidebar.jsp" flush="false"/>
 		<div class="row card ml-auto">
 			<form action="insertRun" method="post" id="instFrm" name="instFrm">
+			<div class="row font-size-080 mb-3 font-weight-600 text-gray9">
+				<span class="fa fa-info-circle my-auto mr-1"></span>
+					<span class="font-size-075 font-weight-500" style="letter-spacing: 1px;">
+						게시판, 지역, 말머리, 장소는 작성 후 수정이 불가능하니 신중하게 입력 해주세요.</span>
+			</div>
 				<div class="inner_form">
 					<!--셀렉트박스 -->
 					<div class="row mb-2">

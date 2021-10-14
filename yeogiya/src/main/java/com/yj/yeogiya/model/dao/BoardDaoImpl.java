@@ -201,6 +201,11 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList(NAMESPACE + "selectNoticeList", bs);
 	}
 
+	@Override
+	public int decreasePlaceMentCnt(int board_no) {
+		return sqlSession.update(NAMESPACE + "decreasePlaceMentCnt", board_no);
+	}
+
 	
 
 }

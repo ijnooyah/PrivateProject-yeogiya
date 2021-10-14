@@ -83,6 +83,7 @@ public interface BoardDao {
 	//************DELETE************
 	// 1. 게시글
 	public int deleteBoard(int board_no);
+	public int decreasePlaceMentCnt(int board_no);
 	
 	//---- 좋아요,북마크-----
 	// 좋아요

@@ -172,12 +172,13 @@ public class BoardServiceImpl implements BoardService {
 		int board_no = board.getBoard_no();
 		
 		// 1. board
-		String query = "sortBoard=" + board.getSort_board()
-		+ "&subLocal=" +board.getSub_local();
-		if(board.getSort_place() != null) {
-			query += "&sortPlace=" + board.getSort_place();
-		}
-		board.setQuery(query);
+//		String query = "sortBoard=" + board.getSort_board()
+//		+ "&subLocal=" +board.getSub_local();
+//		if(board.getSort_place() != null) {
+//			query += "&sortPlace=" + board.getSort_place();
+//		}
+//		board.setQuery(query);
+		
 		int result = boardDao.updateBoard(board);
 		
 		if (result > 0) {
@@ -219,24 +220,24 @@ public class BoardServiceImpl implements BoardService {
 //				System.out.println("새로운 태그 없음");
 			}
 			
-			// 3. place 
-			BoardPlace place = board.getPlace();
-			if (board.getSort_place() != null) {
-				System.out.println("장소 있음");
-				place.setBoard_no(board_no);
-				place.setSort_place(board.getSort_place());
-				place.setSort_local(board.getSort_local());
-				place.setSub_local(board.getSub_local());
-				boardDao.insertPlace(place);
-				result = boardDao.updateBoardPlace(place);
-				if (result != 1) {
-//					System.out.println("장소 업데이트 실패");
-					result = 0;
-				}
-			} 
-			else {
-//				System.out.println("장소 없음");
-			}
+			// 3. place -> 수정 못하게 바꿈
+//			BoardPlace place = board.getPlace();
+//			if (board.getSort_place() != null) {
+//				System.out.println("장소 있음");
+//				place.setBoard_no(board_no);
+//				place.setSort_place(board.getSort_place());
+//				place.setSort_local(board.getSort_local());
+//				place.setSub_local(board.getSub_local());
+//				boardDao.insertPlace(place);
+//				result = boardDao.updateBoardPlace(place);
+//				if (result != 1) {
+////					System.out.println("장소 업데이트 실패");
+//					result = 0;
+//				}
+//			} 
+//			else {
+////				System.out.println("장소 없음");
+//			}
 			
 			
 			// 4. img
@@ -334,7 +335,14 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int deleteBoardArticle(int board_no) {
-		return boardDao.deleteBoard(board_no);
+		int result = boardDao.deleteBoard(board_no);
+		
+		if (result == 1) {
+			result = boardDao.decreasePlaceMentCnt(board_no);
+		} else {
+			result = 0;
+		}
+		return result;
 	}
 
 	@Override

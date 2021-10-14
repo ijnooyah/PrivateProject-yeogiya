@@ -366,12 +366,7 @@
  		UPDATE tbl_board
  		SET board_title = #{board_title},
  			board_content = #{board_content},
- 			sort_local = #{sort_local},
- 			sub_local = #{sub_local},
- 			sort_board = #{sort_board},
- 			sort_place = #{sort_place, jdbcType=VARCHAR},
  			has_img = #{has_img},
- 			query = #{query},
  			mod_date = sysdate
  		WHERE board_no = #{board_no}
 	</update>
@@ -427,7 +422,12 @@
 			del_date = sysdate
 		WHERE board_no = #{board_no}
 	</update>
-	
+	<!-- 글삭제시 place 언급수 감소 -->
+	<update id="decreasePlaceMentCnt">
+		UPDATE tbl_place
+		SET ment_cnt = ment_cnt - 1
+		WHERE place_no = (select place_no from tbl_board_place where board_no = #{board_no})
+	</update>
 <!-- 좋아요, 북마크 -->
 <!-- 좋아요 -->
 	<!-- 좋아요 테이블 -->
