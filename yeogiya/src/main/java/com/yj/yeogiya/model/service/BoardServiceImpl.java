@@ -123,7 +123,7 @@ public class BoardServiceImpl implements BoardService {
 			String img_name = null;
 			while (matcher.find()) {
 				src = matcher.group(1);
-				img_path = rootPath + "/" + src;
+				img_path = rootPath + "/" + src.substring(src.lastIndexOf("=") + 1);
 				img_name = src.substring(src.lastIndexOf("/") + 1);
 				BoardImg img = new BoardImg(board_no, img_path, img_name);
 				imgList.add(img);

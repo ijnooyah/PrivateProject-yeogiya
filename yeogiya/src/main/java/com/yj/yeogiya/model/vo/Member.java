@@ -17,11 +17,6 @@ public class Member {
 	private String user_intro;
 	private int user_grade;
 	private int user_warn;
-	private int post_cnt;
-	private int cmt_cnt;
-	private int msg_cnt;
-	private int like_cnt;
-	private int rp_cnt;
 	private String like_alert;
 	private String cmt_alert;
 	private String msg_alert;
@@ -133,36 +128,6 @@ public class Member {
 	}
 	public void setUser_warn(int user_warn) {
 		this.user_warn = user_warn;
-	}
-	public int getPost_cnt() {
-		return post_cnt;
-	}
-	public void setPost_cnt(int post_cnt) {
-		this.post_cnt = post_cnt;
-	}
-	public int getCmt_cnt() {
-		return cmt_cnt;
-	}
-	public void setCmt_cnt(int cmt_cnt) {
-		this.cmt_cnt = cmt_cnt;
-	}
-	public int getMsg_cnt() {
-		return msg_cnt;
-	}
-	public void setMsg_cnt(int msg_cnt) {
-		this.msg_cnt = msg_cnt;
-	}
-	public int getLike_cnt() {
-		return like_cnt;
-	}
-	public void setLike_cnt(int like_cnt) {
-		this.like_cnt = like_cnt;
-	}
-	public int getRp_cnt() {
-		return rp_cnt;
-	}
-	public void setRp_cnt(int rp_cnt) {
-		this.rp_cnt = rp_cnt;
 	}
 	public Timestamp getSign_date() {
 		return sign_date;
@@ -317,21 +282,6 @@ public class Member {
 		this.open_bmk = open_bmk;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Member [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_nick="
-				+ user_nick + ", user_phone=" + user_phone + ", user_email=" + user_email + ", sort_local=" + sort_local
-				+ ", sub_local=" + sub_local + ", user_gender=" + user_gender + ", user_img=" + user_img
-				+ ", user_intro=" + user_intro + ", user_grade=" + user_grade + ", user_warn=" + user_warn
-				+ ", post_cnt=" + post_cnt + ", cmt_cnt=" + cmt_cnt + ", msg_cnt=" + msg_cnt + ", like_cnt=" + like_cnt
-				+ ", rp_cnt=" + rp_cnt + ", like_alert=" + like_alert + ", cmt_alert=" + cmt_alert + ", msg_alert="
-				+ msg_alert + ", bmk_alert=" + bmk_alert + ", open_local=" + open_local + ", open_bmk=" + open_bmk
-				+ ", sign_date=" + sign_date + ", is_quit=" + is_quit + ", quit_date=" + quit_date + ", sortLocalName="
-				+ sortLocalName + ", subLocalName=" + subLocalName + ", userGradeName=" + userGradeName + ", saveId="
-				+ saveId + ", sortLocalEngName=" + sortLocalEngName + ", boardCnt=" + boardCnt + ", cmtCnt=" + cmtCnt
-				+ ", boardList=" + boardList + ", commentList=" + commentList + "]";
-	}
 
 
 
