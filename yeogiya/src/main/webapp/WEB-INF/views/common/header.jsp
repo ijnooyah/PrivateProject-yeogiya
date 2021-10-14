@@ -21,7 +21,7 @@
 		              	aria-expanded="false" class="dropdown-item dropdown-toggle">${slp.sort_name}</a>
 		              <ul aria-labelledby="" class="dropdown-menu">
 		              	<c:forEach var="sb" items="${sortBoardArr}">
-				             <li><a href="${contextPath}/${slp.eng_name}/list?sortBoard=${sb.sort_no}" class="dropdown-item">${sb.sort_name}</a></li>
+				             <li><a href="${contextPath}/${slp.eng_name}/list?sortBoard=${sb.sort_no}&subLocal=all${sb.has_sort_place == 'Y' ? '&sortPlace=all' : ''}" class="dropdown-item">${sb.sort_name}</a></li>
 		              	</c:forEach>
 		              </ul>
 		            </li>
