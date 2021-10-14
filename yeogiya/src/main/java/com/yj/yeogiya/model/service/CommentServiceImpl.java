@@ -28,6 +28,9 @@ public class CommentServiceImpl implements CommentService {
 			int result = commentDao.insertRecomment(cmt);
 			if (result == 1) {
 				commentDao.updateChildCnt(cmt.getParent_c_no(), 1);
+				if(cmt.getParent_c_no() != cmt.getRe_group()) { // 답댓글의 답댓글들 
+					commentDao.updateChildCnt(cmt.getRe_group(), 1);
+				}
 			}
 		}
 		boardDao.updateCmtCnt(cmt.getB_no(), 1);
@@ -63,6 +66,9 @@ public class CommentServiceImpl implements CommentService {
 			if (cmt.getParent_c_no() != 0) {
 				System.out.println("답댓글 -1");
 				commentDao.updateChildCnt(cmt.getParent_c_no(), -1);
+				if(cmt.getParent_c_no() != cmt.getRe_group()) { // 답댓글의 답댓글들 
+					commentDao.updateChildCnt(cmt.getRe_group(), -1);
+				}
 			} 
 		}
 		

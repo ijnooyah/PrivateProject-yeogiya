@@ -371,7 +371,6 @@
 			"success" : function(data) {
 				console.log(data)
 				if(data == "success") {
-					
 					selectCommentList();
 					$("#c_content").val("");
 				}
@@ -416,9 +415,6 @@
 			"success" : function(rData) {
 				console.log(rData);
 				if(rData == "success") {
-					var reply = '<div id="reply_div" style="display:none;">'+$('#reply_div').html()+'</div>';
-// 		           	console.log($('#commentContainer'));
-					$('#commentContainer').append(reply);
 					selectCommentList();
 				}
 			}
@@ -428,16 +424,15 @@
 	// 답글 버튼 누를때 
 	function doRecomment(c_no) {
 		var reply = '<div id="reply_div">'+$('#reply_div').html()+'</div>';
-		if ($("#reply_div").css("display") == "block") {
-	 		if($("#replyCommentDiv_"+ c_no).find("#reply_div").length == 0) {
-	  			$('#reply_div').remove();
-	     		$("#replyCommentDiv_"+ c_no).html(reply);
-			 } else {
-	  			$("#replyCommentDiv_"+ c_no).find("#reply_div").hide();
-	 		}
-		} else {
+		
+		if ($("#replyCommentDiv_"+ c_no).find("#reply_div").length == 0) { 
+			// 다른곳에 답댓양식이 가있음 -> 삭제하고 붙여야함
+			console.log('다른곳')
 			$('#reply_div').remove();
 			$("#replyCommentDiv_"+ c_no).html(reply);
+		} else {
+			console.log('눌렀던곳')
+			$('#reply_div').toggle();
 		}
 	    
 	    $("#parent_c_no").val(c_no);
@@ -447,6 +442,12 @@
 
 	// 댓글 리스트 조회
 	function selectCommentList() {
+		var reply = '<div id="reply_div" style="display:none;">'+$('#reply_div').html()+'</div>';
+			
+		if($("#commentContainer > .comment-row:gt(0)").length != 0) { // 맨처음 조회가 아닐때
+			$('#reply_div').remove();
+			$(".commentWrite-container").after(reply);
+		}
 		
 		$("#commentContainer > .comment-row:gt(0)").remove();
 		$("#moreViewDiv").empty();
@@ -464,7 +465,15 @@
 				$("#noCmtDiv").show();
 			}
 //	 		$("#comment_cnt").text(rData.length);
-			$(".cmt_cnt").text(rData.length);
+			console.log(rData);
+			var cnoArray = new Array();
+			for(var i=0; i<rData.length; i++) {
+				if(rData[i].is_del != 'Y') {
+					cnoArray.push(rData[i].c_no);
+				}
+			}
+			console.log(cnoArray);
+			$(".cmt_cnt").text(cnoArray.length);
 			$.each(rData, function(i) {
 				var cloneDiv = $("#commentContainer > .comment-row:eq(0)").clone();
 				if(this.is_del == 'Y') {
@@ -505,14 +514,14 @@
 				// 댓글 수정 취소
 				cloneDiv.find(".cancel").attr("href", "javascript:cancelUpdate(" + this.c_no + ")");
 				cloneDiv.find(".updateBtn").attr("onclick", "updateComment(" + this.c_no + ")");
-				cloneDiv.find(".deleteComment").attr("onclick", "deleteComment(" + this.c_no + "," +  this.parent_c_no + ")");
+				cloneDiv.find(".deleteComment").attr("onclick", "deleteComment(" + this.c_no + "," +  this.parent_c_no + "," +  this.re_group + ")");
 				cloneDiv.find(".doRecomment").attr("onclick", "doRecomment(" + this.c_no + ")");
 				cloneDiv.find(".c_parent_user_nick").text("@" + this.parent_user_nick);
 				cloneDiv.find(".c_content").html(this.c_content);
 				var reg_date = changeDateString(this.reg_date);
 				cloneDiv.find(".c_reg_date").text(reg_date);
 				cloneDiv.find(".replyCommentDiv").attr("id", "replyCommentDiv_" + this.c_no);
-				$("#commentContainer > .comment-row:eq(1)").css('border-top', 'none');
+// 				$("#commentContainer > .comment-row:eq(1)").css('border-top', 'none');
 				if(i > perPage - 1) {
 					$("#moreViewDiv").append(cloneDiv);
 //	 				console.log(i + "," + "moreview" +  cloneDiv.html());
@@ -578,7 +587,7 @@
 		});
 	}
 	// 댓글 삭제  
-	function deleteComment(c_no, parent_c_no) {
+	function deleteComment(c_no, parent_c_no, re_group) {
 		var url = "${contextPath}/comment/delete";
 		Swal.fire({
 			text: '삭제하시겠습니까?', 
@@ -592,7 +601,8 @@
 				var sendData = {
 						"b_no" : "${board.board_no}",
 						"c_no"	: c_no,
-						"parent_c_no" : parent_c_no
+						"parent_c_no" : parent_c_no,
+						"re_group" : re_group
 				}
 				
 				$.ajax({
