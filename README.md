@@ -1,4 +1,4 @@
-# 💗 여기야 | 지역별 장소 공유 커뮤니티
+# 🙋🏻‍♀️ 여기야 | 지역별 장소 공유 커뮤니티
 
 ## 어떤 곳을 가야할까? 여기야!
 
@@ -63,9 +63,14 @@
             <li><a href="#profileDelete">글, 댓글, 북마크삭제</a></li>
           </ul>
          </details>
+	 <details><summary><a href="#5-error">Error</a></summary>
+          <ul>
+            <li><a href="#notFound">404페이지</a></li>
+          </ul>
+         </details>
     </li>
     <li><a href="#특별한-기능">특별한 기능</a></li>
-    <li><a href="#고민과-기능">고민과 해결</a></li>
+    <li><a href="#고민과-해결">고민과 해결</a></li>
     <li><a href="#추가중인-기능들">추가중인 기능들</a></li>
   </ol>
 </details>
@@ -749,6 +754,32 @@
 
 <br><br>
 
+## 5. Error
+
+<h3 id="notFound"> 5-1. 404페이지</h2>
+
+<details open="open">
+  <summary><b>구현 기능 설명</b></summary>
+  <div markdown="1">
+      
+  - 404에러가 날 경우 에러페이지를 보여준다.
+  
+    </div>
+</details>
+
+<details>
+  <summary><b>구현 기능 시현 및 상세설명</b></summary>
+  <div markdown="1">
+
+- `@ControllerAdvice` 어노테이션 사용 <br><br>
+	  ![녹화_2021_10_18_15_28_42_971](https://user-images.githubusercontent.com/85017704/137680936-e54442f2-eeb1-4f3b-a7ac-46d044b6da3e.gif) <br><br><br><br>
+
+
+    </div>
+</details>
+
+<br><br>
+
 # 🛠특별한 기능
 
 <details>
@@ -758,10 +789,11 @@
 - 관리자가 해당 지역의 핫플레이스를 파악할 수 있게함
 - 장소 말머리가 있는 게시판인 경우 장소 선택이 필수 <a href="#boardInsert">참고</a>
 - 장소로 글을 검색할 수 있으며 정렬, 페이징이 가능함 ![녹화_2021_10_14_23_17_19_330](https://user-images.githubusercontent.com/85017704/137335933-d96973a1-153c-4bc1-aeff-b45fd0001899.gif)
-- 글이 등록될 때 장소를 판단 이미 등록된 장소면 언급수를 증가시킴 
+- 글이 등록될 때 장소를 판단 이미 등록된 장소면 언급수를 증가시킴 :pushpin:[코드 확인](https://github.com/ijnooyah/PrivateProject-yeogiya/blob/bbd218bd89ee5f6529e3d289ba0eb222913a49ed/yeogiya/src/main/java/com/yj/yeogiya/model/service/BoardServiceImpl.java#L95-L111) 
 	- 처음 언급되는 장소 ![장소 새로 등록](https://user-images.githubusercontent.com/85017704/137333664-ca5d3dfe-22c2-4a5c-8b86-57ca3894b87b.gif)
 	- 이미 언급된 장소  ![장소 등록](https://user-images.githubusercontent.com/85017704/137334556-c1247bd7-980a-4cc9-bddb-512c0037b8b3.gif)
-- 글이 삭제될 경우 장소의 언급수를 감소시킴 ![장소 삭제](https://user-images.githubusercontent.com/85017704/137334855-107d1492-74e8-44fa-9fdf-3929194fe70c.gif) 
+- 글이 삭제될 경우 장소의 언급수를 감소시킴 :pushpin:[코드 확인](https://github.com/ijnooyah/PrivateProject-yeogiya/blob/bbd218bd89ee5f6529e3d289ba0eb222913a49ed/yeogiya/src/main/java/com/yj/yeogiya/model/service/BoardServiceImpl.java#L337-L346)  
+	   ![장소 삭제](https://user-images.githubusercontent.com/85017704/137334855-107d1492-74e8-44fa-9fdf-3929194fe70c.gif) 
 - 신고수를 파악해 홍보를 판단(추가예정) 
 
 	   
@@ -772,7 +804,11 @@
   <summary><b>해시태그</b></summary>
    <div markdown="1">
 
-- 이미 언급된 해시태그일 경우
+- 해시태그로 글을 조회할 수 있으며 검색, 페이징, 정렬이 가능함 <a href="#boardView">참고</a>
+- 글이 등록될 때 해시태그를 판단 이미 등록된 해시태그일 경우 등록하지 않음 :pushpin:[코드 확인](https://github.com/ijnooyah/PrivateProject-yeogiya/blob/d40ef36d8901a9e8ca5db6e93f37a91d3a3aa27e/yeogiya/src/main/java/com/yj/yeogiya/model/service/BoardServiceImpl.java#L75-L93) 
+	   ![녹화_2021_10_14_23_33_47_812](https://user-images.githubusercontent.com/85017704/137339005-7f164ca0-e47a-4bcd-bef3-17d57d3ba83a.gif)
+- 글이 수정될 때 해시태그를 추가, 삭제할 수 있음 <a href="#boardUpdate">참고</a> :pushpin:[코드 확인](https://github.com/ijnooyah/PrivateProject-yeogiya/blob/d40ef36d8901a9e8ca5db6e93f37a91d3a3aa27e/yeogiya/src/main/java/com/yj/yeogiya/model/service/BoardServiceImpl.java#L185-L221) 
+- 실시간 트렌드 (추가예정)
 
    </div>
 </details>
@@ -781,16 +817,25 @@
   <summary><b>카테고리</b></summary>
    <div markdown="1">
 
-
+- 지역, 게시판, 말머리 모두 CRUD가 가능하며 반영결과가 프론트에 반영됨 :pushpin:[코드 확인](https://github.com/ijnooyah/PrivateProject-yeogiya/blob/d40ef36d8901a9e8ca5db6e93f37a91d3a3aa27e/yeogiya/src/main/webapp/WEB-INF/views/board/sidebar.jsp#L50-L115) 
+- 카테고리 수정 ![녹화_2021_10_15_00_50_41_669](https://user-images.githubusercontent.com/85017704/137353195-64c534f3-f0c0-4596-a0e2-7ef958d505a0.gif)
+- 카테고리 추가 ![카테고리 추가](https://user-images.githubusercontent.com/85017704/137353893-dc8e3f00-717e-43be-874c-018d7ea90da2.gif)
+- 카테고리 삭제 ![녹화_2021_10_15_01_00_34_141](https://user-images.githubusercontent.com/85017704/137354665-6367029d-5925-4c02-bc1e-5a91666754e9.gif)
+- 관리자에서 변경 가능 (추가예정)
 
    </div>
 </details>
 
 <details>
-  <summary><b>카카오 </b></summary>
+  <summary><b>카카오 지도</b></summary>
    <div markdown="1">
 
-
+- 상세보기 지도 :pushpin:[코드 확인](https://github.com/ijnooyah/PrivateProject-yeogiya/blob/d40ef36d8901a9e8ca5db6e93f37a91d3a3aa27e/yeogiya/src/main/webapp/WEB-INF/views/board/boardView.jsp#L279-L336) 
+	- 사용자가 등록한 장소가 지도에 표시되며 인포윈도우를 클릭하면 카카오맵으로 이동함 
+	   ![지도 상세보기](https://user-images.githubusercontent.com/85017704/137355874-67a36adf-7e22-48ca-b598-6ab3eecd4ac1.gif)
+- 글작성 지도 :pushpin:[코드 확인](https://github.com/ijnooyah/PrivateProject-yeogiya/blob/d40ef36d8901a9e8ca5db6e93f37a91d3a3aa27e/yeogiya/src/main/webapp/WEB-INF/views/board/boardInsert.jsp#L650-L967)
+	- 마커나 목록을 클릭하면 장소가 선택됨 
+	   ![글작성 지도](https://user-images.githubusercontent.com/85017704/137357022-ace2ca88-11a7-4948-a043-8420b4cf4fab.gif)
 
    </div>
 </details>
@@ -803,44 +848,38 @@
   <summary><b>장소 문제</b></summary>
    <div markdown="1">
 
-- 사이트 특성상 홍보가 많을 것 같아 홍보 관련 문제를 고려하는 생각을 많이했는데 
-	   처음에는 수정할때 장소말머리와 장소를 수정할 수 있게 했는데 이부분이 잘못 사용하면 악용이 될 것 같아 
-	   수정 불가능으로 바꾸었다.
-	   그리고 처음엔 글을 삭제해도 언급수는 그대로 두게 했는데 (언급수는 이 장소가 얼마나 많은 사람들이 언급한게 중요한거지 
-	   삭제를 한 글이라고 해도 언급했다는 사실은 변하지 않아 그대로 두려고 했는데 막바지에 다시 생각해보니
-	   글작성후 삭제를 반복하면 그만큼 언급수는 증가하는데 악용이될것같아 
-	   글을 삭제하면 해당 장소 언급수도 줄어들게 했다)
+- 사이트 특성상 홍보가 많을 것 같아 구상할때 홍보 문제에 관한 고민을 많이 했다.
+- 글수정시 장소 수정 문제
+	- 원래 수정할 때 장소 말머리와 장소를 수정할 수 있게 했는데 이 부분이 잘못 사용하면 악용이 될 것 같아 글수정할때 수정이 불가능 하도록 바꾸었다.
+- 글삭제시 장소 언급수 문제
+	- 언급수는 이 장소가 얼마나 많이 언급됐는가를 보기위한 거라 글이 삭제됐다고 해도 
+	  이 장소를 언급했던 건 변함없는 사실이기 때문에, 처음엔 글을 삭제해도 언급수는 그대로 두게 했는데 
+	- 막바지에 다시 생각해보니 글작성후 삭제를 반복하면 삭제는 계속 되는데 언급수는 증가되는 악용이 생길 것 같아 글을 삭제하면 해당 장소 언급수도 줄어들게 바꾸었다.
 
 
    </div>
 </details>
 
 <details>
-  <summary><b>해시태그</b></summary>
+  <summary><b>사진</b></summary>
    <div markdown="1">
 
-
-
+- 모든 사진 저장시 파일명이 display로 되는 문제
+	- 참고하기: <a href="https://mimidevelop.tistory.com/146">https://mimidevelop.tistory.com/146</a> 
+	- 이미지 출력 부분은 팀플때 썼던 방법을 들고 왔는데 다시 살펴보니 다른 이름으로 저장하기를 할 때 업로드한 이미지의 확장명과 이름이 반영 되지 않은 문제를 발견했다.
+	- header에 확장명에 따라 미디어 타입을 세팅해주고 content-disposition 헤더에 inline;filename=파일명을 설정해 해결했다. :pushpin:[코드 확인](https://github.com/ijnooyah/PrivateProject-yeogiya/blob/d40ef36d8901a9e8ca5db6e93f37a91d3a3aa27e/yeogiya/src/main/java/com/yj/yeogiya/controller/FileController.java#L48-L74) 
    </div>
 </details>
 
 <details>
-  <summary><b>카테고리</b></summary>
+  <summary><b>주소 설정</b></summary>
    <div markdown="1">
 
-
-
+- 참고하기: <a href="https://mimidevelop.tistory.com/141">https://mimidevelop.tistory.com/141</a> 
+	   
    </div>
 </details>
 
-<details>
-  <summary><b></b></summary>
-   <div markdown="1">
-
-
-
-   </div>
-</details>
 
 <br><br>
 
@@ -851,6 +890,11 @@
   - 회원관리
   - 신고관리
   - 데이터 시각화
+
+* 장소
+	- 현재 위치와 장소의 거리 계산
+* 지역
+	- 지역별 날씨 정보 보여주기
 
 * 회원등급 자동 변경
 
